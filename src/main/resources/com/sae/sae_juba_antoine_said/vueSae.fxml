@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.TilePane?>
+<BorderPane fx:id="borderPane" style="-fx-background-color: #0e52c6" maxHeight="-Infinity" maxWidth="-Infinity"
+            minHeight="-Infinity" minWidth="-Infinity"  prefWidth="140.0" prefHeight="77.0" styleClass="body"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.sae.sae_juba_antoine_said.Controlleur.Controlleur">
+    <children>
+        <Pane fx:id="pane" style="-fx-background-color: #129d0c">
+            <children>
+                <TilePane fx:id="tilePane" style="-fx-background-color: #9b340f" maxHeight="-Infinity" maxWidth="-Infinity"
+                          minHeight="-Infinity" minWidth="-Infinity">
+                </TilePane>
+            </children>
+        </Pane>
+    </children>
+</BorderPane>
