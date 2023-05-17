@@ -3,6 +3,7 @@ package com.sae.sae_juba_antoine_said.Vue;
 import com.sae.sae_juba_antoine_said.Modele.Acteur;
 import com.sae.sae_juba_antoine_said.Modele.Guerrier;
 import com.sae.sae_juba_antoine_said.Modele.Tour;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
@@ -33,14 +34,24 @@ public class VueTour {
             }
             if (t instanceof Tour) {
                 this.image = new Image(fichierTour);
+                int decalage = ((int) image.getHeight());
                 this.imageView = new ImageView(image);
                 this.pane.getChildren().add(imageView);
                 imageView.setLayoutX(t.getX());
-                imageView.setLayoutY(t.getY());
+                imageView.setLayoutY(t.getY()-decalage);
+
+
+
+
+
+
+
 
             }
 
+
         }
     }
+
 }
 

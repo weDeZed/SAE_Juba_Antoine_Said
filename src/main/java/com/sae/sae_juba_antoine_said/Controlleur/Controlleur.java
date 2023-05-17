@@ -67,7 +67,7 @@ public class Controlleur implements Initializable {
             environnement.ajouterActeur(new Guerrier(1,  28*16, 45*16));
         }
 
-        environnement.ajouterTour(new Tour(596,407,2,10));
+        environnement.ajouterTour(new Tour(838,405,2,10));
         vueGuerrier = new VueGuerrier(pane, environnement.getActeurs());
         vueTour = new VueTour(pane,environnement.getTours());
 
@@ -119,10 +119,16 @@ public class Controlleur implements Initializable {
     }
 
     public void coordoneeGetCoordSouris(){
+
+        /*
         pane.setOnMousePressed( mouseEvent -> {
             System.out.println("X de la souris :" + mouseEvent.getX());
             System.out.println( "Y de la souris : " + mouseEvent.getY());
 
+        });
+        */
+        pane.setOnMousePressed(mouseEvent -> {
+            System.out.println("x "+mouseEvent.getX()+" Y " +mouseEvent.getY() +" id "+environnement.getMap()[(int)mouseEvent.getX()/16][(int)mouseEvent.getY()/16]);
         });
     }
 
@@ -142,14 +148,14 @@ public class Controlleur implements Initializable {
 
         KeyFrame kf = new KeyFrame(
                 // on définit le FPS (nbre de frame par seconde)
-                Duration.seconds(0.7),
+                Duration.seconds(0.07),
                 // on définit ce qui se passe à chaque frame
                 // c'est un eventHandler d'ou le lambda
                 (ev -> {
                     if (temps == 100000) {
                         System.out.println("fini");
                         gameLoop.stop();
-                    } else if (temps % 20 == 0) {
+                    } else if (temps % 5 == 0) {
                         leCercle.setLayoutX(leCercle.getLayoutX() + 5);
                     }
                     temps++;
