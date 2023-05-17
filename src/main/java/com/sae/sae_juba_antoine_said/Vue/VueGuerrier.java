@@ -18,16 +18,15 @@ public class VueGuerrier {
     private static int x = 0;
     private static int y = 0;
     Circle circle;
-    AnimationG animationG;
+
     public VueGuerrier(Pane pane, ArrayList<Acteur> guerriers) {
         this.pane = pane;
         this.guerriers = guerriers;
-        this.animationG=new AnimationG();
 
         FileInputStream fichierGuerrier = null;
         for (Acteur g : this.guerriers) {
             try {
-                fichierGuerrier = new FileInputStream("/Users/saidkamalshinwari/Downloads/BUT-S1/S2/IHM/SAE_Juba_Antoine_Said/src/main/java/com/sae/sae_juba_antoine_said/Ressources/saidkamal.png");
+                fichierGuerrier = new FileInputStream("C:\\Users\\jubac\\OneDrive\\Documents\\BUT\\S2\\Java\\SAE_Juba_Antoine_Saidd\\src\\main\\java\\com\\sae\\sae_juba_antoine_said\\Ressources\\saidkamal.png");
             } catch (Exception e) {
                 e.printStackTrace();
             }

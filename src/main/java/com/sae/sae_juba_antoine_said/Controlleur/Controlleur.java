@@ -3,12 +3,15 @@ package com.sae.sae_juba_antoine_said.Controlleur;
 import com.sae.sae_juba_antoine_said.Modele.Acteur;
 import com.sae.sae_juba_antoine_said.Modele.Environnement;
 import com.sae.sae_juba_antoine_said.Modele.Guerrier;
+import com.sae.sae_juba_antoine_said.Modele.Tour;
 import com.sae.sae_juba_antoine_said.Vue.Vue;
 import com.sae.sae_juba_antoine_said.Vue.VueGuerrier;
+import com.sae.sae_juba_antoine_said.Vue.VueTour;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
@@ -34,6 +37,9 @@ public class Controlleur implements Initializable {
     private Circle leCercle;
     private Acteur guerrier1, guerrier2, guerrier3;
     private ArrayList<Acteur> listeActeurs;
+    private ArrayList<Tour> listeTours;
+
+    private VueTour vueTour;
     private VueGuerrier vueGuerrier;
 
     private Timeline gameLoop;
@@ -58,11 +64,13 @@ public class Controlleur implements Initializable {
 
         for (int i = 0; i < 10; i++) {
             int y = (int) (Math.random() *64);
-            environnement.ajouterActeur(new Guerrier(1,  16, 16));
+            environnement.ajouterActeur(new Guerrier(1,  28*16, 45*16));
         }
 
-
+        environnement.ajouterTour(new Tour(535,435,2,10));
         vueGuerrier = new VueGuerrier(pane, environnement.getActeurs());
+        vueTour = new VueTour(pane,environnement.getTours());
+
 
         pane.getChildren().add(leCercle);
         this.tilePane.setMinSize(environnement.getX() * 16, environnement.getY() * 16);
@@ -101,13 +109,21 @@ public class Controlleur implements Initializable {
             }
         });
 
-
+        coordoneeGetCoordSouris();
         gameLaunche();
         initAnimation();
 
         gameLoop.play();
 
 
+    }
+
+    public void coordoneeGetCoordSouris(){
+        pane.setOnMousePressed( mouseEvent -> {
+            System.out.println("X de la souris :" + mouseEvent.getX());
+            System.out.println( "Y de la souris : " + mouseEvent.getY());
+
+        });
     }
 
     public void gameLaunche() {

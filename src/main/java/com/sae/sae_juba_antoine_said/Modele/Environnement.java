@@ -14,6 +14,7 @@ public class Environnement {
     private int x, y;
     private int[][] map;
     private ArrayList<Acteur> acteurs;
+    private ArrayList<Tour> tours;
 
 
     public Environnement(int x, int y) {
@@ -21,10 +22,11 @@ public class Environnement {
         this.y = y;
         this.map = new int[x][y];
         this.acteurs = new ArrayList<>();
+        this.tours = new ArrayList<>();
     }
 
     public void readMap() throws IOException {
-        File file = new File("/Users/saidkamalshinwari/Downloads/BUT-S1/S2/IHM/GithubProject/src/main/java/com/sae/sae_juba_antoine_said/Ressources/map1");
+        File file = new File("C:\\Users\\jubac\\OneDrive\\Documents\\BUT\\S2\\Java\\SAE_Juba_Antoine_Saidd\\src\\main\\java\\com\\sae\\sae_juba_antoine_said\\Ressources\\map1");
         BufferedReader terrain = new BufferedReader(new FileReader(file));
         String ligne;
         String[] tout_ligne;
@@ -73,37 +75,18 @@ public class Environnement {
         this.acteurs.add(a);
     }
 
+    public void ajouterTour(Tour t){
+        this.tours.add(t);
+    }
+
+    public ArrayList<Tour> getTours() {
+        return tours;
+    }
+
     public boolean dansTerrain(int x, int y) {
         return getMap()[x][y]==1427;
     }
 
-    public void suivereLeChemin(){
-        List<Point> chemin = new ArrayList<>();
-        chemin.add(new Point(44*16, -32));
 
-        chemin.add(new Point(23*16, -32));
-
-
-        int[] indices = new int[getActeurs().size()];
-        for (int i = 0; i < getActeurs().size(); i++) {
-            Point positionActuelle = new Point(acteurs.get(i).getX(), acteurs.get(i).getY());
-            int indiceActuel = indices[i];
-            Point pointDestination = chemin.get(indiceActuel);
-            double dx = pointDestination.getX() - positionActuelle.getX();
-            double dy = pointDestination.getY() - positionActuelle.getY();
-            double distance = Math.sqrt(dx * dx + dy * dy);
-            if (distance <= 0) {
-                indices[i] = (indiceActuel + 1) % chemin.size();
-            } else {
-                double directionX = dx / distance;
-                double directionY = dy / distance;
-                double nouveauX = positionActuelle.getX() + directionX * 3;
-                double nouveauY = positionActuelle.getY() + directionY * 3;
-                acteurs.get(i).setX((int)nouveauX);
-                acteurs.get(i).setY((int)nouveauY);
-            }
-        }
-
-    }
 }
 
