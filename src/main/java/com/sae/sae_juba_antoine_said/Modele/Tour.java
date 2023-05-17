@@ -15,7 +15,18 @@ public class Tour {
         this.range = range;
     }
 
+    public void attaqueEnnemi(){
 
+    }
+
+    public void ennemiPlusProche (Acteur actProche) {
+
+        if ((this.x - range <= actProche.getY() && actProche.getY() <= this.y + range) &&
+                (this.x - range <= actProche.getX() && actProche.getX() <= this.x + range)) {
+            //return actProche;
+        }
+
+    }
     public int getX() {
         return x;
     }

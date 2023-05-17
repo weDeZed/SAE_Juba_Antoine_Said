@@ -67,7 +67,7 @@ public class Controlleur implements Initializable {
             environnement.ajouterActeur(new Guerrier(1,  28*16, 45*16));
         }
 
-        environnement.ajouterTour(new Tour(535,435,2,10));
+        environnement.ajouterTour(new Tour(596,407,2,10));
         vueGuerrier = new VueGuerrier(pane, environnement.getActeurs());
         vueTour = new VueTour(pane,environnement.getTours());
 
@@ -86,22 +86,22 @@ public class Controlleur implements Initializable {
 
             for (Acteur a : environnement.getActeurs()) {
                 if(!a.collisionDroitV(a,environnement)){
-                    System.out.println("droit");
+                   // System.out.println("droit");
                     a.setX(a.getX());
                     a.setY(a.getY());
-                    System.out.println("DrX "+a.getX()+" y "+a.getY());
+                 //   System.out.println("DrX "+a.getX()+" y "+a.getY());
                 }
                 if ((!a.collisionDevant(a,environnement))){
-                    System.out.println("devant");
+                    //System.out.println("devant");
                     a.setX(a.getX());
                     a.setY(a.getY()-16);
-                    System.out.println("DvX "+a.getX()+" y "+a.getY());
+                    //System.out.println("DvX "+a.getX()+" y "+a.getY());
                 }
                 if(!a.collisionGauche(a,environnement)){
-                    System.out.println("gauche");
+                 //   System.out.println("gauche");
                     a.setX(a.getX()-16);
                     a.setY(a.getY());
-                    System.out.println("GX "+a.getX()+" y "+a.getY());
+                   // System.out.println("GX "+a.getX()+" y "+a.getY());
                 }
                 a.collisionDroitH(a,environnement);
                 a.collisionGaucheH(a,environnement);
