@@ -81,7 +81,7 @@
                         <id>default-cli</id>
                         <configuration>
                             <mainClass>
-                                com.example.sae_juba_antoine_said/com.sae.sae_juba_antoine_said.HelloApplication
+                                com.example.sae_juba_antoine_said/com.sae.sae_juba_antoine_said.Lanceur
                             </mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>

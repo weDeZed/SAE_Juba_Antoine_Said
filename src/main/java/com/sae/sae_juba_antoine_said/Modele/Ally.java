@@ -9,9 +9,6 @@ public abstract class Ally extends Acteur  {
     }
 
 
-
-
-
     public  void agir(){
         this.setX(30);
         this.setY(50);

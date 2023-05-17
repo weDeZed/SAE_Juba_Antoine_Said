@@ -8,6 +8,11 @@ public class Archer extends Ally {
     }
 
     @Override
+    public void seDeplacer() {
+
+    }
+
+    @Override
     public void attaquer() {
 
     }

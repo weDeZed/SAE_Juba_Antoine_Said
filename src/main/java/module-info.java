@@ -12,4 +12,6 @@ module com.example.sae_juba_antoine_said {
     exports com.sae.sae_juba_antoine_said.Modele;
     opens com.sae.sae_juba_antoine_said.Controlleur to  javafx.fxml;
     exports com.sae.sae_juba_antoine_said.Controlleur;
+    opens com.sae.sae_juba_antoine_said.Vue to javafx.fxml;
+    exports com.sae.sae_juba_antoine_said.Vue;
 }

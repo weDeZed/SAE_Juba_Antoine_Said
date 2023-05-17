@@ -20,7 +20,7 @@ public class Vue {
     private ImageView imgV;
 
     private BorderPane borderPane;
-    private  String ch;
+    private String ch;
 
 
     public Vue(Environnement env, TilePane tileP) throws FileNotFoundException {
@@ -28,11 +28,10 @@ public class Vue {
         this.tilePane = tileP;
 
 
-
-
-iniTerrain();
+        iniTerrain();
     }
-    public Vue(){
+
+    public Vue() {
 
     }
 
@@ -59,25 +58,21 @@ iniTerrain();
         int y;
         x = id % ((int) imgTilep.getWidth() / 16);
         y = id / ((int) imgTilep.getWidth() / 16);
-
-
         x = (x * 16);
         y = (y * 16);
-
-
         img.setViewport(new Rectangle2D(x, y, 16, 16));
         this.tilePane.getChildren().add(img);
     }
 
-    public void refreshMap(ImageView img,int id) {
+    public void refreshMap(ImageView img, int id) {
         int x;
         int y;
-        x = id%((int)imgTilep.getWidth()/16);
-        y = id/((int)imgTilep.getHeight()/16);
-        x = (x*16)-16;
-        y = (y*16);
+        x = id % ((int) imgTilep.getWidth() / 16);
+        y = id / ((int) imgTilep.getHeight() / 16);
+        x = (x * 16) - 16;
+        y = (y * 16);
 
-        img.setViewport(new Rectangle2D(x,y, 16,16));
+        img.setViewport(new Rectangle2D(x, y, 16, 16));
     }
 
 

@@ -1,34 +1,36 @@
-package com.sae.sae_juba_antoine_said.Modele;
+package com.sae.sae_juba_antoine_said.Vue;
+
+
+
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.scene.shape.Circle;
+import javafx.scene.image.ImageView;
 import javafx.util.Duration;
 
-public class Animation {
+public class AnimationG {
     private int temps=0;
-
-    public Animation() {
+    private Timeline gameLoop;
+    public AnimationG() {
+        this.gameLoop=new Timeline();
     }
 
-    public void initAnimation(Timeline gameLoop, Circle leCercle) {
+    public void initAnimation(ImageView imageView) {
         gameLoop = new Timeline();
         temps=0;
         gameLoop.setCycleCount(Timeline.INDEFINITE);//combien de fois il doit répéter
 
         Timeline finalGameLoop = gameLoop;
         KeyFrame kf = new KeyFrame(
-
                 Duration.seconds(0.017),
                 (ev ->{
-                    if(temps==10000){
+                    if(temps==1000){
                         System.out.println("fini");
                         finalGameLoop.stop();
                     }
                     else if (temps%10==0){
-                        System.out.println("un tour");
-                        leCercle.setLayoutX(leCercle.getLayoutX()+1);
-                        leCercle.setLayoutY(leCercle.getLayoutY()+1);
+                        imageView.setLayoutX(imageView.getLayoutX()-2);
+                        imageView.setLayoutY(imageView.getLayoutY()-19);
                     }
                     temps++;
                 })
