@@ -11,9 +11,6 @@ public abstract class Acteur {
     private String id;
     public static int compteur = 0;
 
-    public abstract void seDeplacer();
-
-
     public Acteur(int pv, int x, int y, int vitesse, int range) {
         this.x = new SimpleIntegerProperty(x);
         this.y = new SimpleIntegerProperty(y);
@@ -24,7 +21,7 @@ public abstract class Acteur {
         compteur++;
     }
 
-    public abstract void attaquer();
+    public abstract Acteur attaquer();
 
     public abstract void agir();
 
@@ -56,7 +53,35 @@ public abstract class Acteur {
         this.y.set(y);
     }
 
-    public void seDeplacer(int destinationX, int destinationY) {
+    public boolean estVivant(){
+        return this.pv >0;
+    }
+
+    public void decrementationPv(int pv){
+        this.pv -= pv;
+    }
+
+    public int getPv(){
+        return this.pv;
+    }
+
+    public int getVitesse(){
+        return this.vitesse;
+    }
+
+    public void meurt(){
+        this.pv = 0;
+    }
+
+    public void setRange(int range){
+        this.range = range;
+    }
+
+    public int getRange(){
+        return this.range;
+    }
+
+    /*public void seDeplacer(int destinationX, int destinationY) {
         double dx = (destinationX - getX());
         double dy = (destinationY - getY());
         double distance = (Math.sqrt(dx * dx + dy * dy));
@@ -65,11 +90,9 @@ public abstract class Acteur {
         x.setValue(getX() + (directionX * vitesse));
         y.setValue(getY() + (directionY * vitesse));
 
-    }
+    }*/
 
-    public int getVitesse() {
-        return vitesse;
-    }
+    public abstract void seDeplacer();
 
     public boolean collisionDroitV(Acteur acteur, Environnement environnement) {
         //System.out.println("X "+acteur.getX()+" Y "+acteur.getY());

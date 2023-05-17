@@ -7,8 +7,7 @@ module com.example.sae_juba_antoine_said {
     requires org.kordamp.bootstrapfx.core;
 
     opens com.sae.sae_juba_antoine_said to javafx.fxml;
-    exports com.sae.sae_juba_antoine_said;
-    opens com.sae.sae_juba_antoine_said.Modele;
+    opens com.sae.sae_juba_antoine_said.Modele to javafx.fxml;
     exports com.sae.sae_juba_antoine_said.Modele;
     opens com.sae.sae_juba_antoine_said.Controlleur to  javafx.fxml;
     exports com.sae.sae_juba_antoine_said.Controlleur;

@@ -4,7 +4,7 @@ import com.sae.sae_juba_antoine_said.Modele.Acteur;
 import com.sae.sae_juba_antoine_said.Modele.Environnement;
 import com.sae.sae_juba_antoine_said.Modele.Guerrier;
 import com.sae.sae_juba_antoine_said.Vue.Vue;
-import com.sae.sae_juba_antoine_said.Vue.VueGuerrier;
+import com.sae.sae_juba_antoine_said.Vue.VueActeur;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
@@ -34,7 +34,7 @@ public class Controlleur implements Initializable {
     private Circle leCercle;
     private Acteur guerrier1, guerrier2, guerrier3;
     private ArrayList<Acteur> listeActeurs;
-    private VueGuerrier vueGuerrier;
+    private VueActeur vueGuerrier;
 
     private Timeline gameLoop;
     private int temps;
@@ -62,7 +62,7 @@ public class Controlleur implements Initializable {
         }
 
 
-        vueGuerrier = new VueGuerrier(pane, environnement.getActeurs());
+        vueGuerrier = new VueActeur(pane, environnement.getActeurs());
 
         pane.getChildren().add(leCercle);
         this.tilePane.setMinSize(environnement.getX() * 16, environnement.getY() * 16);

@@ -6,15 +6,14 @@ public class Archer extends Ally {
         super(pv, x, y, 30, 3);
 
     }
-
     @Override
     public void seDeplacer() {
 
     }
 
     @Override
-    public void attaquer() {
-
+    public Archer attaquer() {
+        return null;
     }
 
 }
