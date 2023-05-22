@@ -11,6 +11,7 @@ import java.util.*;
 
 
 public class Environnement {
+    BFS bfs;
 
     private int x, y;
 
@@ -19,6 +20,7 @@ public class Environnement {
     private ArrayList<Acteur> acteurs;
     private Map<Sommet, Set<Sommet>> listeAdj;
     private ObservableList<Sommet> obstacles;
+
 
 
     public Environnement(int x, int y) throws IOException {
@@ -32,10 +34,11 @@ public class Environnement {
         readMap();
         construit();
 
+
     }
 
     public void readMap() throws IOException {
-        File file = new File("/Users/saidkamalshinwari/Downloads/BUT-S1/S2/IHM/GithubProject/src/main/java/com/sae/sae_juba_antoine_said/Ressources/map1");
+        File file = new File("/home/etudiants/info/sshinwari/IdeaProjects/SAE_Juba_Antoine_Said2/src/main/java/com/sae/sae_juba_antoine_said/Ressources/map1");
         BufferedReader terrain = new BufferedReader(new FileReader(file));
         String ligne;
         String[] tout_ligne;
@@ -44,14 +47,21 @@ public class Environnement {
             int x = 0;
             while ((ligne = terrain.readLine()) != null) {
                 tout_ligne = ligne.split(",");
+               System.out.println(" Longeur : "+tout_ligne.length);
                 for (int y = 0; y < tout_ligne.length; y++) {
+
                     if (!tout_ligne[y].trim().isEmpty()) {
-                        map[x][y] = Integer.parseInt(tout_ligne[y].trim());
+
+
+                        map[y][x] = Integer.parseInt(tout_ligne[y].trim());
+
+                       // System.out.println(" Largeur  : "+x);
                         //System.out.print(" "+map[x][y]);
                     }
                 }
                 x++;
             }
+
         } catch (NumberFormatException | IOException e) {
             e.printStackTrace();
         }

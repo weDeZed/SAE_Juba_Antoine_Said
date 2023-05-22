@@ -56,16 +56,7 @@ public abstract class Acteur {
         this.y.set(y);
     }
 
-    public void seDeplacer(int destinationX, int destinationY) {
-        double dx = (destinationX - getX());
-        double dy = (destinationY - getY());
-        double distance = (Math.sqrt(dx * dx + dy * dy));
-        double directionX = dx / distance;
-        double directionY = dy / distance;
-        x.setValue(getX() + (directionX * vitesse));
-        y.setValue(getY() + (directionY * vitesse));
 
-    }
 
     public int getVitesse() {
         return vitesse;

@@ -41,15 +41,16 @@ public class Vue {
 
         FileInputStream fichierTileSet = null;
         try {
-            fichierTileSet = new FileInputStream("/Users/saidkamalshinwari/Downloads/BUT-S1/S2/IHM/SAE_Juba_Antoine_Said/src/main/java/com/sae/sae_juba_antoine_said/Ressources/tuileblock.jpg");
+            fichierTileSet = new FileInputStream("/home/etudiants/info/sshinwari/IdeaProjects/SAE_Juba_Antoine_Said2/src/main/java/com/sae/sae_juba_antoine_said/Ressources/tuileblock.jpg");
         } catch (Exception e) {
             e.printStackTrace();
         }
         this.imgTilep = new Image(fichierTileSet);
         for (int i = 0; i < env.getMap().length; i++) {
             for (int j = 0; j < env.getMap()[i].length; j++) {
+
                 imgV = new ImageView(this.imgTilep);
-                afficherMap(imgV, this.env.getMap()[i][j]);
+                afficherMap(imgV, this.env.getMap()[j][i]);
 
             }
         }

@@ -19,7 +19,7 @@ public class Lanceur extends Application {
         System.out.println();
         stage.setTitle("Tower Defense");
         stage.setScene(scene);
-        //stage.setResizable(false);
+        stage.setResizable(false);
         stage.show();
     }
 

@@ -28,14 +28,13 @@ public class Controlleur implements Initializable {
     @FXML
     private TilePane tilePane;
     private Vue vueMap;
-    @FXML
-    private BorderPane borderPane;
-    private Circle leCercle;
-    private Acteur guerrier1, guerrier2, guerrier3;
-    private ArrayList<Acteur> listeActeurs;
-    private VueGuerrier vueGuerrier;
 
-    private Timeline gameLoop;
+
+    private Acteur guerrier1, guerrier2, guerrier3;
+
+    private VueGuerrier vueGuerrier;
+    private  Timeline gameLoop;
+
     private int temps;
     @FXML
     private Pane pane;
@@ -49,6 +48,7 @@ public class Controlleur implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
 
+
         try {
             this.environnement = new Environnement(90, 90);
         } catch (IOException e) {
@@ -56,15 +56,12 @@ public class Controlleur implements Initializable {
         }
 
 
-        leCercle = new Circle(5, Color.RED);
 
 
-        for (int i = 0; i < 1; i++) {
-            int y = (int) (Math.random() * 64);
-        }
 
 
-        //pane.getChildren().add(leCercle);
+
+
 
         this.tilePane.setMinSize(environnement.getX() * 16, environnement.getY() * 16);
         this.tilePane.setMaxSize(environnement.getX() * 16, environnement.getY() * 16);
@@ -73,12 +70,9 @@ public class Controlleur implements Initializable {
         this.pane.setMaxSize(environnement.getX() * 16, environnement.getY() * 16);
         this.pane.setPrefSize(environnement.getX() * 16, environnement.getY() * 16);
 
-        //environnement.ajouterActeur(new Guerrier(1, 670, 24));
-
-        //environnement.ajouterActeur(new Guerrier(1, 49*16, 10*16));
 
         guerrier1 = new Guerrier(1, 42 * 16, 2 * 16);
-        guerrier2 = new Guerrier(1, 23 * 16, 2 * 16);
+        guerrier2 = new Guerrier(1, 28 * 16, 45 * 16);
 
         environnement.ajouterActeur(guerrier1);
         environnement.ajouterActeur(guerrier2);
@@ -86,20 +80,21 @@ public class Controlleur implements Initializable {
         vueGuerrier = new VueGuerrier(pane, environnement.getActeurs());
 
 
-        //environnement.getMapDeEnvironnement().parcourirMap();
+
 
         BFS bfs, bfs1;
-        source = environnement.getSommet(0, 0);
-        source2 = environnement.getSommet(89, 0);
-        bfs1 = new BFS(environnement, source2);
+        source = environnement.getSommet(28,45 );
+
+
+
         System.out.println("source sommet " + source);
 
 
         System.out.println("poid de sommet source " + source.getPoids());
 
 
-        cible = environnement.getSommet(40, 45);
-        Circle circle = new Circle(40 * 16, 45 * 16, 10, Color.BLACK);
+        cible = environnement.getSommet(50, 0);
+        Circle circle = new Circle(50 * 16, 0 * 16, 10, Color.BLACK);
         pane.getChildren().add(circle);
 
         System.out.println("sommet cible poid " + cible.getPoids());
@@ -107,15 +102,13 @@ public class Controlleur implements Initializable {
         bfs = new BFS(environnement, source);
 
         this.chemin = bfs.cheminVersSource(cible);
-        this.chemin2 = bfs1.cheminVersSource(cible);
+
         System.out.println("longeur chemin " + chemin + " longeur chemin2 " + chemin2);
 
         for (Sommet s : chemin) {
             pane.getChildren().add(new Circle(s.getX() * 16, s.getY() * 16, 5, Color.RED));
         }
-        for (Sommet s : chemin2) {
-            pane.getChildren().add(new Circle(s.getX() * 16, s.getY() * 16, 5, Color.BLACK));
-        }
+
 
         pane.setOnMousePressed(mouseEvent -> {
             System.out.println("x " + (int) mouseEvent.getX() / 16 + " Y " + (int) mouseEvent.getY() / 15 + " poid " + environnement.getMap()[(int) mouseEvent.getX() / 16][(int) mouseEvent.getY() / 16]);
@@ -123,11 +116,7 @@ public class Controlleur implements Initializable {
         });
 
 
-        AtomicInteger i = new AtomicInteger();
-        leCercle.layoutXProperty().addListener((obs, old, nouv) -> {
 
-
-        });
 
 
         gameLaunche();
@@ -166,15 +155,16 @@ public class Controlleur implements Initializable {
                         Sommet sommet = chemin.get(i.getAndIncrement());
                         guerrier1.setX(sommet.getX() * 16);
                         guerrier1.setY(sommet.getY() * 16);
-                       /* Sommet sommet1 = chemin2.get(k.getAndIncrement());
-                        guerrier2.setX(sommet1.getX() * 16);
-                        guerrier2.setY(sommet1.getY() * 16);
 
-                        */
+
+
                         //System.out.println(sommet);
-                        if (sommet.getY() == cible.getY() && sommet.getX() == cible.getX()) {
+                       if (sommet.getY() == cible.getY() && sommet.getX() == cible.getX()) {
                             gameLoop.stop();
                         }
+
+
+
                     }
 
                     temps++;
@@ -185,6 +175,64 @@ public class Controlleur implements Initializable {
 
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -211,3 +259,25 @@ for (Acteur a : environnement.getActeurs()) {
                 a.collisionBas(a,environnement);
           }
 */
+
+
+ /*
+        for (int i =0;i<environnement.getMap().length;i++){
+            for (int j=0;j<environnement.getMap()[i].length;j++){
+                if(environnement.getMap()[i][j]==1427){
+                    pane.getChildren().add(new Circle(i * 16, j * 16, 5, Color.RED));
+                }
+                if(environnement.getMap()[i][j]==688){
+                    pane.getChildren().add(new Circle(i * 16, j * 16, 5, Color.BLACK));
+                }
+            }
+        }
+        */
+
+/*
+        pane.setOnMousePressed(mouseEvent -> {
+            System.out.println("x " + (int) mouseEvent.getX() / 16 + " Y " + (int) mouseEvent.getY() / 15 + " poid " + environnement.getMap()[(int) mouseEvent.getX() / 16][(int) mouseEvent.getY() / 16]);
+
+        });
+
+         */
