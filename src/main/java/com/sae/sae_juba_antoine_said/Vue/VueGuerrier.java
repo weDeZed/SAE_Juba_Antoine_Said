@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 public class VueGuerrier {
     private Pane pane;
-    private ArrayList<Acteur> guerriers;
+    private  ObservableList<Acteur> guerriers;
     private Image image;
     private ImageView imageView;
     private static int x = 0;
@@ -22,12 +22,12 @@ public class VueGuerrier {
 
     public VueGuerrier(Pane pane, ObservableList<Acteur> acteurs) {
         this.pane = pane;
-        this.guerriers = guerriers;
+        this.guerriers = acteurs;
 
         FileInputStream fichierGuerrier = null;
         for (Acteur g : this.guerriers) {
             try {
-                fichierGuerrier = new FileInputStream("C:\\Users\\jubac\\OneDrive\\Documents\\BUT\\S2\\Java\\SAE_Juba_Antoine_Saidd\\src\\main\\java\\com\\sae\\sae_juba_antoine_said\\Ressources\\saidkamal.png");
+                fichierGuerrier = new FileInputStream("C:\\Users\\jubac\\Desktop\\Programmation\\S2\\TP JAVA\\SAE_Juba_Antoine_Said\\src\\main\\java\\com\\sae\\sae_juba_antoine_said\\Ressources\\saidkamal.png");
             } catch (Exception e) {
                 e.printStackTrace();
             }

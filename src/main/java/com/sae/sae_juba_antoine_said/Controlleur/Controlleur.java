@@ -4,12 +4,12 @@ import com.sae.sae_juba_antoine_said.Modele.*;
 import com.sae.sae_juba_antoine_said.Vue.Vue;
 import com.sae.sae_juba_antoine_said.Vue.VueGuerrier;
 import com.sae.sae_juba_antoine_said.Vue.VueTour;
+import com.sae.sae_juba_antoine_said.Modele.Environnement;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.collections.ListChangeListener;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
@@ -45,12 +45,18 @@ public class Controlleur implements Initializable {
     @FXML
     private Pane pane;
     ListChangeListener<Acteur> listenerListeActeurs;
+    ListChangeListener<Tour> listenerListeTours;
+
 
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        this.environnement = new Environnement(90, 90);
+        try {
+            this.environnement = new Environnement(90, 90);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
 
         leCercle = new Circle(5, Color.RED);
 
@@ -67,12 +73,22 @@ public class Controlleur implements Initializable {
             environnement.ajouterActeur(new Guerrier(1,  28*16, 45*16));
         }
 
-        listenerListeActeurs = new ListObs(pane);
-        environnement.getActeurs().addListener(listenerListeActeurs);
+        listenerListeActeurs = new ListObsActeur(pane);
+        listenerListeTours = new ListObsTour(pane);
+        //nvironnement.getActeurs().addListener(listenerListeActeurs);
 
         environnement.ajouterTour(new Tour(838,405,2,10));
-       vueGuerrier = new VueGuerrier(pane, environnement.getActeurs());
-        vueTour = new VueTour(pane,environnement.getTours());
+        environnement.ajouterActeur(new Guerrier(1,200,200));
+
+
+        //vueGuerrier = new VueGuerrier(pane, environnement.getActeurs());
+        //vueTour = new VueTour(pane,environnement.getTours());
+
+        environnement.getActeurs().addListener(listenerListeActeurs);
+        environnement.getTours().addListener(listenerListeTours);
+
+
+
 
 
         pane.getChildren().add(leCercle);
@@ -83,9 +99,10 @@ public class Controlleur implements Initializable {
         this.pane.setMaxSize(environnement.getX() * 16, environnement.getY() * 16);
         this.pane.setPrefSize(environnement.getX() * 16, environnement.getY() * 16);
 
-
+   /*
         leCercle.layoutXProperty().addListener((obs, old, nouv) -> {
-            //environnement.suivereLeChemin();
+                    //environnement.suivereLeChemin();
+
 
             for (Acteur a : environnement.getActeurs()) {
                 if(!a.collisionDroitV(a,environnement)){
@@ -112,6 +129,7 @@ public class Controlleur implements Initializable {
             }
         });
 
+*/
 
 
         coordoneeGetCoordSouris();
@@ -123,6 +141,7 @@ public class Controlleur implements Initializable {
 
     }
 
+
     public void coordoneeGetCoordSouris(){
 
         /*
@@ -133,8 +152,13 @@ public class Controlleur implements Initializable {
         });
         */
         pane.setOnMousePressed(mouseEvent -> {
+
+            environnement.ajouterActeur(new Guerrier(1,(int) mouseEvent.getX(),(int ) mouseEvent.getY()));
+            environnement.ajouterTour(new Tour((int) mouseEvent.getX(),(int ) mouseEvent.getY(),10,10));
             System.out.println("x "+mouseEvent.getX()+" Y " +mouseEvent.getY() +" id "+environnement.getMap()[(int)mouseEvent.getX()/16][(int)mouseEvent.getY()/16]);
         });
+
+
     }
 
     public void gameLaunche() {

@@ -10,11 +10,13 @@ import javafx.scene.layout.TilePane;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 
 
 public class Vue {
 
     private Environnement env;
+
     private TilePane tilePane;
     private Image imgTilep;
     private ImageView imgV;
@@ -26,8 +28,6 @@ public class Vue {
     public Vue(Environnement env, TilePane tileP) throws FileNotFoundException {
         this.env = env;
         this.tilePane = tileP;
-
-
         iniTerrain();
     }
 
@@ -39,19 +39,25 @@ public class Vue {
 
         FileInputStream fichierTileSet = null;
         try {
-            fichierTileSet = new FileInputStream("C:\\Users\\jubac\\OneDrive\\Documents\\BUT\\S2\\Java\\SAE_Juba_Antoine_Saidd\\src\\main\\java\\com\\sae\\sae_juba_antoine_said\\Ressources\\tuileblock.jpg");
+            fichierTileSet = new FileInputStream("C:\\Users\\jubac\\Desktop\\Programmation\\S2\\TP JAVA\\SAE_Juba_Antoine_Said\\src\\main\\java\\com\\sae\\sae_juba_antoine_said\\Ressources\\tuileblock.jpg");
         } catch (Exception e) {
             e.printStackTrace();
         }
         this.imgTilep = new Image(fichierTileSet);
         for (int i = 0; i < env.getMap().length; i++) {
             for (int j = 0; j < env.getMap()[i].length; j++) {
+
                 imgV = new ImageView(this.imgTilep);
-                afficherMap(imgV, this.env.getMap()[i][j]);
+                afficherMap(imgV, this.env.getMap()[j][i]);
 
             }
         }
     }
+
+
+
+
+
 
     public void afficherMap(ImageView img, int id) {
         int x;

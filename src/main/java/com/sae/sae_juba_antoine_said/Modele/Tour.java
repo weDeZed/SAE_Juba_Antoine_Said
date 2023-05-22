@@ -5,12 +5,12 @@ import javafx.beans.property.SimpleIntegerProperty;
 
 public class Tour {
 
- int x,y;
+ IntegerProperty x,y;
  int degatsParSeconde,range;
 
     public Tour(int x, int y, int degats,int range) {
-        this.x = x;
-        this.y = y;
+        this.x = new SimpleIntegerProperty(x);
+        this.y = new SimpleIntegerProperty(y);
         this.degatsParSeconde = degats;
         this.range = range;
     }
@@ -21,26 +21,35 @@ public class Tour {
 
     public void ennemiPlusProche (Acteur actProche) {
 
-        if ((this.x - range <= actProche.getY() && actProche.getY() <= this.y + range) &&
-                (this.x - range <= actProche.getX() && actProche.getX() <= this.x + range)) {
+        if ((this.getX() - range <= actProche.getY() && actProche.getY() <= this.getY() + range) &&
+                (this.getX() - range <= actProche.getX() && actProche.getX() <= this.getY()+ range)) {
             //return actProche;
         }
 
     }
+
     public int getX() {
+        return x.get();
+    }
+
+    public IntegerProperty xProperty() {
         return x;
     }
 
     public void setX(int x) {
-        this.x = x;
+        this.x.set(x);
     }
 
     public int getY() {
+        return y.get();
+    }
+
+    public IntegerProperty yProperty() {
         return y;
     }
 
     public void setY(int y) {
-        this.y = y;
+        this.y.set(y);
     }
 
     public int getDegatsParSeconde() {
