@@ -1,8 +1,5 @@
 package com.sae.sae_juba_antoine_said.Controlleur;
-
-import com.sae.sae_juba_antoine_said.Modele.Acteur;
-import com.sae.sae_juba_antoine_said.Modele.Environnement;
-import com.sae.sae_juba_antoine_said.Modele.Guerrier;
+import com.sae.sae_juba_antoine_said.Modele.*;
 import com.sae.sae_juba_antoine_said.Vue.Vue;
 import com.sae.sae_juba_antoine_said.Vue.VueGuerrier;
 import javafx.animation.KeyFrame;
@@ -15,12 +12,14 @@ import javafx.scene.layout.TilePane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.util.Duration;
-
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.util.concurrent.atomic.AtomicInteger;
+
+
 
 
 public class Controlleur implements Initializable {
@@ -40,31 +39,33 @@ public class Controlleur implements Initializable {
     private int temps;
     @FXML
     private Pane pane;
+    private BFS bfs;
+
+    Sommet source, cible, source2;
+    ArrayList<Sommet> chemin, chemin2;
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        this.environnement = new Environnement(90, 90);
+
+
+        try {
+            this.environnement = new Environnement(90, 90);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
 
         leCercle = new Circle(5, Color.RED);
 
 
-        try {
-            environnement.readMap();
-        } catch (IOException e) {
-            e.printStackTrace();
+        for (int i = 0; i < 1; i++) {
+            int y = (int) (Math.random() * 64);
         }
 
 
-        for (int i = 0; i < 10; i++) {
-            int y = (int) (Math.random() *64);
-            environnement.ajouterActeur(new Guerrier(1,  16, 16));
-        }
+        //pane.getChildren().add(leCercle);
 
-
-        vueGuerrier = new VueGuerrier(pane, environnement.getActeurs());
-
-        pane.getChildren().add(leCercle);
         this.tilePane.setMinSize(environnement.getX() * 16, environnement.getY() * 16);
         this.tilePane.setMaxSize(environnement.getX() * 16, environnement.getY() * 16);
         this.tilePane.setPrefSize(environnement.getX() * 16, environnement.getY() * 16);
@@ -72,33 +73,60 @@ public class Controlleur implements Initializable {
         this.pane.setMaxSize(environnement.getX() * 16, environnement.getY() * 16);
         this.pane.setPrefSize(environnement.getX() * 16, environnement.getY() * 16);
 
+        //environnement.ajouterActeur(new Guerrier(1, 670, 24));
 
+        //environnement.ajouterActeur(new Guerrier(1, 49*16, 10*16));
+
+        guerrier1 = new Guerrier(1, 42 * 16, 2 * 16);
+        guerrier2 = new Guerrier(1, 23 * 16, 2 * 16);
+
+        environnement.ajouterActeur(guerrier1);
+        environnement.ajouterActeur(guerrier2);
+
+        vueGuerrier = new VueGuerrier(pane, environnement.getActeurs());
+
+
+        //environnement.getMapDeEnvironnement().parcourirMap();
+
+        BFS bfs, bfs1;
+        source = environnement.getSommet(0, 0);
+        source2 = environnement.getSommet(89, 0);
+        bfs1 = new BFS(environnement, source2);
+        System.out.println("source sommet " + source);
+
+
+        System.out.println("poid de sommet source " + source.getPoids());
+
+
+        cible = environnement.getSommet(40, 45);
+        Circle circle = new Circle(40 * 16, 45 * 16, 10, Color.BLACK);
+        pane.getChildren().add(circle);
+
+        System.out.println("sommet cible poid " + cible.getPoids());
+
+        bfs = new BFS(environnement, source);
+
+        this.chemin = bfs.cheminVersSource(cible);
+        this.chemin2 = bfs1.cheminVersSource(cible);
+        System.out.println("longeur chemin " + chemin + " longeur chemin2 " + chemin2);
+
+        for (Sommet s : chemin) {
+            pane.getChildren().add(new Circle(s.getX() * 16, s.getY() * 16, 5, Color.RED));
+        }
+        for (Sommet s : chemin2) {
+            pane.getChildren().add(new Circle(s.getX() * 16, s.getY() * 16, 5, Color.BLACK));
+        }
+
+        pane.setOnMousePressed(mouseEvent -> {
+            System.out.println("x " + (int) mouseEvent.getX() / 16 + " Y " + (int) mouseEvent.getY() / 15 + " poid " + environnement.getMap()[(int) mouseEvent.getX() / 16][(int) mouseEvent.getY() / 16]);
+
+        });
+
+
+        AtomicInteger i = new AtomicInteger();
         leCercle.layoutXProperty().addListener((obs, old, nouv) -> {
-            //environnement.suivereLeChemin();
 
-            for (Acteur a : environnement.getActeurs()) {
-                if(!a.collisionDroitV(a,environnement)){
-                    System.out.println("droit");
-                    a.setX(a.getX());
-                    a.setY(a.getY());
-                    System.out.println("DrX "+a.getX()+" y "+a.getY());
-                }
-                if ((!a.collisionDevant(a,environnement))){
-                    System.out.println("devant");
-                    a.setX(a.getX());
-                    a.setY(a.getY()-16);
-                    System.out.println("DvX "+a.getX()+" y "+a.getY());
-                }
-                if(!a.collisionGauche(a,environnement)){
-                    System.out.println("gauche");
-                    a.setX(a.getX()-16);
-                    a.setY(a.getY());
-                    System.out.println("GX "+a.getX()+" y "+a.getY());
-                }
-                a.collisionDroitH(a,environnement);
-                a.collisionGaucheH(a,environnement);
 
-            }
         });
 
 
@@ -123,19 +151,32 @@ public class Controlleur implements Initializable {
         gameLoop = new Timeline();
         temps = 0;
         gameLoop.setCycleCount(Timeline.INDEFINITE);
+        AtomicInteger i = new AtomicInteger();
+        AtomicInteger k = new AtomicInteger();
+
 
         KeyFrame kf = new KeyFrame(
-                // on définit le FPS (nbre de frame par seconde)
-                Duration.seconds(0.7),
-                // on définit ce qui se passe à chaque frame
-                // c'est un eventHandler d'ou le lambda
+
+                Duration.seconds(0.17),
+
                 (ev -> {
-                    if (temps == 100000) {
-                        System.out.println("fini");
+                    if (temps == 10000) {
                         gameLoop.stop();
-                    } else if (temps % 20 == 0) {
-                        leCercle.setLayoutX(leCercle.getLayoutX() + 5);
+                    } else if (temps % 2 == 0) {
+                        Sommet sommet = chemin.get(i.getAndIncrement());
+                        guerrier1.setX(sommet.getX() * 16);
+                        guerrier1.setY(sommet.getY() * 16);
+                       /* Sommet sommet1 = chemin2.get(k.getAndIncrement());
+                        guerrier2.setX(sommet1.getX() * 16);
+                        guerrier2.setY(sommet1.getY() * 16);
+
+                        */
+                        //System.out.println(sommet);
+                        if (sommet.getY() == cible.getY() && sommet.getX() == cible.getX()) {
+                            gameLoop.stop();
+                        }
                     }
+
                     temps++;
                 })
         );
@@ -144,3 +185,29 @@ public class Controlleur implements Initializable {
 
 
 }
+
+
+
+/*
+for (Acteur a : environnement.getActeurs()) {
+                if(!a.collisionDroit(a,environnement)){
+                    System.out.println("droit");
+                    a.setX(a.getX()+16);
+                    a.setY(a.getY());
+                    System.out.println("DrX "+a.getX()+" y "+a.getY());
+                }
+                if ((!a.collisionHaut(a,environnement))){
+                    System.out.println("devant");
+                    a.setX(a.getX());
+                    a.setY(a.getY()-16);
+                    System.out.println("DvX "+a.getX()+" y "+a.getY());
+                }
+                if(!a.collisionGauche(a,environnement)){
+                    System.out.println("gauche");
+                    a.setX(a.getX()-16);
+                    a.setY(a.getY());
+                    System.out.println("GX "+a.getX()+" y "+a.getY());
+                }
+                a.collisionBas(a,environnement);
+          }
+*/

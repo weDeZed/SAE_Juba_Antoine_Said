@@ -2,6 +2,8 @@ package com.sae.sae_juba_antoine_said.Vue;
 
 
 import com.sae.sae_juba_antoine_said.Modele.Environnement;
+import com.sae.sae_juba_antoine_said.Modele.MapDeEnvironnement;
+import com.sae.sae_juba_antoine_said.Modele.Sommet;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -10,11 +12,13 @@ import javafx.scene.layout.TilePane;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 
 
 public class Vue {
 
     private Environnement env;
+    private MapDeEnvironnement mapDeEnvironnement;
     private TilePane tilePane;
     private Image imgTilep;
     private ImageView imgV;
@@ -26,8 +30,6 @@ public class Vue {
     public Vue(Environnement env, TilePane tileP) throws FileNotFoundException {
         this.env = env;
         this.tilePane = tileP;
-
-
         iniTerrain();
     }
 
@@ -52,6 +54,11 @@ public class Vue {
             }
         }
     }
+
+
+
+
+
 
     public void afficherMap(ImageView img, int id) {
         int x;

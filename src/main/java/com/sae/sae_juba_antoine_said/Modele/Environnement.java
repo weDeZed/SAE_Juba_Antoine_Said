@@ -1,26 +1,37 @@
 package com.sae.sae_juba_antoine_said.Modele;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 
 public class Environnement {
 
     private int x, y;
+
+    MapDeEnvironnement mapDeEnvironnement;
     private int[][] map;
     private ArrayList<Acteur> acteurs;
+    private Map<Sommet, Set<Sommet>> listeAdj;
+    private ObservableList<Sommet> obstacles;
 
 
-    public Environnement(int x, int y) {
+    public Environnement(int x, int y) throws IOException {
         this.x = x;
         this.y = y;
+        //this.map = new MapDeEnvironnement(x,y);
         this.map = new int[x][y];
         this.acteurs = new ArrayList<>();
+        this.listeAdj = new HashMap();
+        this.obstacles = FXCollections.observableArrayList();
+        readMap();
+        construit();
+
     }
 
     public void readMap() throws IOException {
@@ -35,7 +46,8 @@ public class Environnement {
                 tout_ligne = ligne.split(",");
                 for (int y = 0; y < tout_ligne.length; y++) {
                     if (!tout_ligne[y].trim().isEmpty()) {
-                        this.map[x][y] = Integer.parseInt(tout_ligne[y].trim());
+                        map[x][y] = Integer.parseInt(tout_ligne[y].trim());
+                        //System.out.print(" "+map[x][y]);
                     }
                 }
                 x++;
@@ -53,17 +65,121 @@ public class Environnement {
 
     }
 
-    public int[][] getMap() {
-        return map;
+
+    public void parcourTerrain() {
+        for (int i = 0; i < map.length; i++) {
+            for (int j = 0; j < map[i].length; j++) {
+                System.out.print(map[i][j]);
+            }
+            System.out.println();
+        }
+    }
+
+    public void construit() {
+        int i;
+        int j;
+        for (i = 0; i < this.x; ++i) {
+            for (j = 0; j < this.y; ++j) {
+
+                if (map[i][j] == 1427) {
+                    Sommet s = new Sommet(i, j,1427);
+                    //System.out.println("dans case 1427 ");
+                    this.listeAdj.put(s, new HashSet());
+
+                } else {
+                    Sommet s = new Sommet(i, j,688);
+                    this.listeAdj.put(s, new HashSet());
+                    s.setPoids(688);
+
+                }
+                //System.out.print(map[i][j]);
+            }
+
+        }
+        for (Sommet key : this.listeAdj.keySet()) {
+            //System.out.println(" key dans coustruit " + key);
+        }
+        System.out.println("-------------------------------------------------");
+        for (i = 0; i < this.x; ++i) {
+            for (j = 0; j < this.y; ++j) {
+                Sommet s = this.getSommet(i, j);
+                if (this.dansMap(i - 1, j)) {
+                    ((Set) this.listeAdj.get(s)).add(this.getSommet(i - 1, j));
+                }
+                if (this.dansMap(i + 1, j)) {
+                    ((Set) this.listeAdj.get(s)).add(this.getSommet(i + 1, j));
+                }
+                if (this.dansMap(i, j + 1)) {
+                    ((Set) this.listeAdj.get(s)).add(this.getSommet(i, j + 1));
+                }
+                if (this.dansMap(i, j - 1)) {
+                    ((Set) this.listeAdj.get(s)).add(this.getSommet(i, j - 1));
+                }
+
+            }
+        }
+
+    }
+
+    public boolean dansMap(int x, int y) {
+        return x >= 0 && x < this.getX() && y >= 0 && y < this.getY();
+    }
+
+    public Sommet getSommet(int x, int y) {
+        for (Sommet sommet : this.listeAdj.keySet()) {
+            if (sommet.getX() == x && sommet.getY() == y) {
+                return sommet;
+            }
+        }
+        return null;
+    }
+
+
+    public MapDeEnvironnement getMapDeEnvironnement() {
+        return mapDeEnvironnement;
+    }
+
+    public boolean estDeconnecte(Sommet s) {
+        return this.obstacles.contains(s);
+    }
+
+    /*public Set<Sommet> adjacents(Sommet s) {
+        return (Set) (!this.estDeconnecte(s) ? (Set) this.listeAdj.get(s) : new HashSet());
+    }
+    */
+
+
+    public Set<Sommet> adjacents(Sommet s) {
+        if (this.estDeconnecte(s)) {
+            return new HashSet<>();
+        } else {
+            Set<Sommet> adjacents = new HashSet<>(this.listeAdj.get(s));//il prends tous les sommets adjacents de sommet s
+            adjacents.removeIf(adjacent -> adjacent.getPoids() != s.getPoids());//il suprime tous les sommet que les poids ne sont pas égale
+            //System.out.println(" "+adjacents);
+            return adjacents;
+        }
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public void setX(int x) {
+        this.x = x;
     }
 
     public int getY() {
         return y;
     }
 
-    public int getX() {
-        return x;
+    public void setY(int y) {
+        this.y = y;
     }
+
+    public int[][] getMap() {
+        return map;
+    }
+
 
     public ArrayList<Acteur> getActeurs() {
         return acteurs;
@@ -74,36 +190,12 @@ public class Environnement {
     }
 
     public boolean dansTerrain(int x, int y) {
-        return getMap()[x][y]==1427;
+        return getMap()[x][y] == 1427;
     }
 
-    public void suivereLeChemin(){
-        List<Point> chemin = new ArrayList<>();
-        chemin.add(new Point(44*16, -32));
-
-        chemin.add(new Point(23*16, -32));
-
-
-        int[] indices = new int[getActeurs().size()];
-        for (int i = 0; i < getActeurs().size(); i++) {
-            Point positionActuelle = new Point(acteurs.get(i).getX(), acteurs.get(i).getY());
-            int indiceActuel = indices[i];
-            Point pointDestination = chemin.get(indiceActuel);
-            double dx = pointDestination.getX() - positionActuelle.getX();
-            double dy = pointDestination.getY() - positionActuelle.getY();
-            double distance = Math.sqrt(dx * dx + dy * dy);
-            if (distance <= 0) {
-                indices[i] = (indiceActuel + 1) % chemin.size();
-            } else {
-                double directionX = dx / distance;
-                double directionY = dy / distance;
-                double nouveauX = positionActuelle.getX() + directionX * 3;
-                double nouveauY = positionActuelle.getY() + directionY * 3;
-                acteurs.get(i).setX((int)nouveauX);
-                acteurs.get(i).setY((int)nouveauY);
-            }
-        }
-
-    }
 }
+
+
+
+
 

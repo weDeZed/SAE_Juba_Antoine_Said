@@ -15,14 +15,10 @@ public class VueGuerrier {
     private ArrayList<Acteur> guerriers;
     private Image image;
     private ImageView imageView;
-    private static int x = 0;
-    private static int y = 0;
-    Circle circle;
-    AnimationG animationG;
+
     public VueGuerrier(Pane pane, ArrayList<Acteur> guerriers) {
         this.pane = pane;
         this.guerriers = guerriers;
-        this.animationG=new AnimationG();
 
         FileInputStream fichierGuerrier = null;
         for (Acteur g : this.guerriers) {

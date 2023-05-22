@@ -71,7 +71,7 @@ public abstract class Acteur {
         return vitesse;
     }
 
-    public boolean collisionDroitV(Acteur acteur, Environnement environnement) {
+    public boolean collisionDroit(Acteur acteur, Environnement environnement) {
         //System.out.println("X "+acteur.getX()+" Y "+acteur.getY());
         if (environnement.getMap()[acteur.getX() / 16 + 16][acteur.getY() / 16] != CHEMIN) {
             System.out.println("CollisionDroit " + environnement.getMap()[acteur.getX() / 16 + 16][acteur.getY() / 16]);
@@ -82,41 +82,36 @@ public abstract class Acteur {
         return false;
     }
 
-    public boolean collisionDroitH(Acteur acteur, Environnement environnement) {
-        if (environnement.getMap()[acteur.getX() / 16][acteur.getY() /16 + 16] != CHEMIN) {
-            System.out.println("collision droith" + environnement.getMap()[acteur.getX() / 16][acteur.getY() / 16 + 16]);
-            return true;
-        }
-        return false;
-    }
 
     public boolean collisionGauche(Acteur acteur, Environnement environnement) {
+
         if (environnement.getMap()[acteur.getX() / 16 - 16][getY() / 16] != CHEMIN) {
             //System.out.println("X "+acteur.getX()+" Y "+acteur.getY());
             System.out.println("collision Gauch " + environnement.getMap()[acteur.getX() / 16 - 16][getY() / 16]);
             return true;
         }
         System.out.println("X " + acteur.getX() + " Y " + acteur.getY());
-        System.out.println("pas collisionGauche " + environnement.getMap()[acteur.getX() / 16 - 16][getY() / 16]);
+        System.out.println("pas collision Gauche " + environnement.getMap()[acteur.getX() / 16 - 16][getY() / 16]);
         return false;
     }
 
-    public boolean collisionGaucheH(Acteur acteur, Environnement environnement) {
-        if (environnement.getMap()[acteur.getX() / 16][acteur.getY() / 16 - 16] != CHEMIN) {
-            System.out.println("CollisionGaucheH " + environnement.getMap()[acteur.getX() / 16][acteur.getY() / 16 - 16]);
+    public boolean collisionBas(Acteur acteur, Environnement environnement) {
+        if (environnement.getMap()[acteur.getX() / 16][acteur.getY() / 16 + 16] != CHEMIN) {
+            System.out.println("collision bas" + environnement.getMap()[acteur.getX() / 16][acteur.getY() / 16 + 16]);
             return true;
         }
         return false;
     }
 
-    public boolean collisionDevant(Acteur acteur, Environnement environnement) {
+
+    public boolean collisionHaut(Acteur acteur, Environnement environnement) {
         if (environnement.getMap()[acteur.getX() / 16][acteur.getY() / 16 - 16] != CHEMIN) {
             //System.out.println("X "+acteur.getX()+" Y "+acteur.getY());
-            System.out.println("collision devant " + environnement.getMap()[acteur.getX() / 16][acteur.getY() / 16 - 16]);
+            System.out.println("collision haut " + environnement.getMap()[acteur.getX() / 16][acteur.getY() / 16 - 16]);
             return true;
         }
         System.out.println("X " + acteur.getX() + " Y " + acteur.getY());
-        System.out.println("pas collision devant " + environnement.getMap()[acteur.getX() / 16][acteur.getY() / 16 - 16]);
+        System.out.println("pas collision haut " + environnement.getMap()[acteur.getX() / 16][acteur.getY() / 16 - 16]);
         return false;
     }
 
