@@ -1,6 +1,9 @@
 package com.sae.sae_juba_antoine_said.Modele;
 
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -13,7 +16,7 @@ public class Environnement {
 
     private int x, y;
     private int[][] map;
-    private ArrayList<Acteur> acteurs;
+    private ObservableList<Acteur> acteurs;
     private ArrayList<Tour> tours;
 
 
@@ -21,7 +24,7 @@ public class Environnement {
         this.x = x;
         this.y = y;
         this.map = new int[x][y];
-        this.acteurs = new ArrayList<>();
+        this.acteurs= FXCollections.observableArrayList();
         this.tours = new ArrayList<>();
     }
 
@@ -37,7 +40,7 @@ public class Environnement {
                 tout_ligne = ligne.split(",");
                 for (int y = 0; y < tout_ligne.length; y++) {
                     if (!tout_ligne[y].trim().isEmpty()) {
-                        this.map[x][y] = Integer.parseInt(tout_ligne[y].trim());
+                        this.map[y][x] = Integer.parseInt(tout_ligne[y].trim());
                     }
                 }
                 x++;
@@ -67,9 +70,7 @@ public class Environnement {
         return x;
     }
 
-    public ArrayList<Acteur> getActeurs() {
-        return acteurs;
-    }
+
 
     public void ajouterActeur(Acteur a) {
         this.acteurs.add(a);
@@ -87,6 +88,8 @@ public class Environnement {
         return getMap()[x][y]==1427;
     }
 
-
+    public ObservableList<Acteur> getActeurs() {
+        return acteurs;
+    }
 }
 

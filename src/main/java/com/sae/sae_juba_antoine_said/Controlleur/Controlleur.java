@@ -1,14 +1,12 @@
 package com.sae.sae_juba_antoine_said.Controlleur;
 
-import com.sae.sae_juba_antoine_said.Modele.Acteur;
-import com.sae.sae_juba_antoine_said.Modele.Environnement;
-import com.sae.sae_juba_antoine_said.Modele.Guerrier;
-import com.sae.sae_juba_antoine_said.Modele.Tour;
+import com.sae.sae_juba_antoine_said.Modele.*;
 import com.sae.sae_juba_antoine_said.Vue.Vue;
 import com.sae.sae_juba_antoine_said.Vue.VueGuerrier;
 import com.sae.sae_juba_antoine_said.Vue.VueTour;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.collections.ListChangeListener;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.input.MouseEvent;
@@ -46,6 +44,8 @@ public class Controlleur implements Initializable {
     private int temps;
     @FXML
     private Pane pane;
+    ListChangeListener<Acteur> listenerListeActeurs;
+
 
 
     @Override
@@ -67,8 +67,11 @@ public class Controlleur implements Initializable {
             environnement.ajouterActeur(new Guerrier(1,  28*16, 45*16));
         }
 
+        listenerListeActeurs = new ListObs(pane);
+        environnement.getActeurs().addListener(listenerListeActeurs);
+
         environnement.ajouterTour(new Tour(838,405,2,10));
-        vueGuerrier = new VueGuerrier(pane, environnement.getActeurs());
+       vueGuerrier = new VueGuerrier(pane, environnement.getActeurs());
         vueTour = new VueTour(pane,environnement.getTours());
 
 
@@ -108,6 +111,8 @@ public class Controlleur implements Initializable {
 
             }
         });
+
+
 
         coordoneeGetCoordSouris();
         gameLaunche();

@@ -2,6 +2,7 @@ package com.sae.sae_juba_antoine_said.Vue;
 
 import com.sae.sae_juba_antoine_said.Modele.Acteur;
 import com.sae.sae_juba_antoine_said.Modele.Guerrier;
+import javafx.collections.ObservableList;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
@@ -19,7 +20,7 @@ public class VueGuerrier {
     private static int y = 0;
     Circle circle;
 
-    public VueGuerrier(Pane pane, ArrayList<Acteur> guerriers) {
+    public VueGuerrier(Pane pane, ObservableList<Acteur> acteurs) {
         this.pane = pane;
         this.guerriers = guerriers;
 
