@@ -12,12 +12,15 @@ import java.util.*;
 
 public class Environnement {
 
+    BFS bfs;
 
     private int x, y;
 
     private int[][] map;
     private ObservableList<Acteur> acteurs;
     private ObservableList<Tour> tours;
+    private Map<Sommet, Set<Sommet>> listeAdj;
+    private ObservableList<Sommet> obstacles;
 
 
 
@@ -29,6 +32,10 @@ public class Environnement {
         this.map = new int[x][y];
         this.acteurs = FXCollections.observableArrayList();
         this.tours = FXCollections.observableArrayList();
+        this.listeAdj = new HashMap();
+        this.obstacles = FXCollections.observableArrayList();
+        readMap();
+        construit();
 
 
 
@@ -36,7 +43,7 @@ public class Environnement {
     }
 
     public void readMap() throws IOException {
-        File file = new File("C:\\Users\\jubac\\Desktop\\Programmation\\S2\\TP JAVA\\SAE_Juba_Antoine_Said\\src\\main\\java\\com\\sae\\sae_juba_antoine_said\\Ressources\\map1");
+        File file = new File("C:\\Users\\jubac\\OneDrive\\Documents\\BUT\\S2\\Java\\SAE_Juba_Antoine_Saidd\\src\\main\\java\\com\\sae\\sae_juba_antoine_said\\Ressources\\map1");
         BufferedReader terrain = new BufferedReader(new FileReader(file));
         String ligne;
         String[] tout_ligne;
@@ -129,6 +136,76 @@ public class Environnement {
 }
     public boolean dansTerrain(int x, int y) {
         return getMap()[x][y] == 1427;
+    }
+
+    public void construit() {
+        int i;
+        int j;
+        for (i = 0; i < this.x; ++i) {
+            for (j = 0; j < this.y; ++j) {
+
+                if (map[i][j] == 1427) {
+                    Sommet s = new Sommet(i, j,1427);
+                    //System.out.println("dans case 1427 ");
+                    this.listeAdj.put(s, new HashSet());
+
+                } else {
+                    Sommet s = new Sommet(i, j,688);
+                    this.listeAdj.put(s, new HashSet());
+                    s.setPoids(688);
+
+                }
+                //System.out.print(map[i][j]);
+            }
+
+        }  for (Sommet key : this.listeAdj.keySet()) {
+            //System.out.println(" key dans coustruit " + key);
+        }
+        System.out.println("-------------------------------------------------");
+        for (i = 0; i < this.x; ++i) {
+            for (j = 0; j < this.y; ++j) {
+                Sommet s = this.getSommet(i, j);
+                if (this.dansMap(i - 1, j)) {
+                    ((Set) this.listeAdj.get(s)).add(this.getSommet(i - 1, j));
+                }
+                if (this.dansMap(i + 1, j)) {
+                    ((Set) this.listeAdj.get(s)).add(this.getSommet(i + 1, j));
+                }
+                if (this.dansMap(i, j + 1)) {
+                    ((Set) this.listeAdj.get(s)).add(this.getSommet(i, j + 1));
+                }
+                if (this.dansMap(i, j - 1)) {
+                    ((Set) this.listeAdj.get(s)).add(this.getSommet(i, j - 1));
+                }
+
+            }
+        }
+
+    }
+
+    public Sommet getSommet(int x, int y) {
+        for (Sommet sommet : this.listeAdj.keySet()) {
+            if (sommet.getX() == x && sommet.getY() == y) {
+                return sommet;
+            }
+        }
+        return null;
+    }
+
+
+    public boolean estDeconnecte(Sommet s) {
+        return this.obstacles.contains(s);
+    }
+
+    public Set<Sommet> adjacents(Sommet s) {
+        if (this.estDeconnecte(s)) {
+            return new HashSet<>();
+        } else {
+            Set<Sommet> adjacents = new HashSet<>(this.listeAdj.get(s));//il prends tous les sommets adjacents de sommet s
+            adjacents.removeIf(adjacent -> adjacent.getPoids() != s.getPoids());//il suprime tous les sommet que les poids ne sont pas égale
+            //System.out.println(" "+adjacents);
+            return adjacents;
+        }
     }
 
 }

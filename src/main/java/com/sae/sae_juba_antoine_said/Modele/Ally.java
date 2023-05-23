@@ -12,5 +12,6 @@ public abstract class Ally extends Acteur  {
     }
 
 
+
     public abstract Acteur attaquer();
 }

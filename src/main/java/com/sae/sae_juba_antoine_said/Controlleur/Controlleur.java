@@ -4,6 +4,7 @@ import com.sae.sae_juba_antoine_said.Vue.Vue;
 import com.sae.sae_juba_antoine_said.Vue.VueGuerrier;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.collections.ListChangeListener;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.BorderPane;
@@ -39,6 +40,9 @@ public class Controlleur implements Initializable {
     @FXML
     private Pane pane;
     private BFS bfs;
+
+    ListChangeListener<Acteur> listenerListeActeurs;
+    ListChangeListener<Tour> listenerListeTours;
 
     Sommet source, cible, source2;
     ArrayList<Sommet> chemin, chemin2;
@@ -109,8 +113,17 @@ public class Controlleur implements Initializable {
             pane.getChildren().add(new Circle(s.getX() * 16, s.getY() * 16, 5, Color.RED));
         }
 
+        listenerListeActeurs = new ListObsActeur(pane);
+        listenerListeTours = new ListObsTour(pane);
+
+
+        environnement.getActeurs().addListener(listenerListeActeurs);
+        environnement.getTours().addListener(listenerListeTours);
+
 
         pane.setOnMousePressed(mouseEvent -> {
+          //  environnement.ajouterActeur(new Guerrier(1,(int) mouseEvent.getX(),(int ) mouseEvent.getY()));
+            environnement.ajouterTour(new Tour((int) mouseEvent.getX(),(int ) mouseEvent.getY(),10,10));
             System.out.println("x " + (int) mouseEvent.getX() / 16 + " Y " + (int) mouseEvent.getY() / 15 + " poid " + environnement.getMap()[(int) mouseEvent.getX() / 16][(int) mouseEvent.getY() / 16]);
 
         });

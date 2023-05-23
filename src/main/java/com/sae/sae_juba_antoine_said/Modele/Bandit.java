@@ -1,9 +1,11 @@
 package com.sae.sae_juba_antoine_said.Modele;
 
+import java.io.IOException;
+
 public class Bandit extends Acteur{
 
     private Environnement ev;
-    public Bandit(int x, int y, int vitesse) {
+    public Bandit(int x, int y, int vitesse) throws IOException {
         super(90, x, y, vitesse, 4);
         this.ev = new Environnement(x,y);
     }
