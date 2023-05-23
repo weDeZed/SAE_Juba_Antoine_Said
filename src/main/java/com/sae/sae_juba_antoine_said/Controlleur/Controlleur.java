@@ -59,14 +59,6 @@ public class Controlleur implements Initializable {
             throw new RuntimeException(e);
         }
 
-
-
-
-
-
-
-
-
         this.tilePane.setMinSize(environnement.getX() * 16, environnement.getY() * 16);
         this.tilePane.setMaxSize(environnement.getX() * 16, environnement.getY() * 16);
         this.tilePane.setPrefSize(environnement.getX() * 16, environnement.getY() * 16);

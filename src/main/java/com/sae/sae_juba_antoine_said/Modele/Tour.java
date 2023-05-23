@@ -1,7 +1,9 @@
 package com.sae.sae_juba_antoine_said.Modele;
 
+import javafx.beans.Observable;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.collections.ObservableList;
 
 public class Tour {
 
@@ -17,14 +19,23 @@ public class Tour {
 
     public void attaqueEnnemi(){
 
+
     }
 
-    public void ennemiPlusProche (Acteur actProche) {
 
-        if ((this.getX() - range <= actProche.getY() && actProche.getY() <= this.getY() + range) &&
-                (this.getX() - range <= actProche.getX() && actProche.getX() <= this.getY()+ range)) {
-            //return actProche;
+    public void lancerProjectile (){
+
+    }
+    public Acteur ennemiPlusProche (ObservableList<Acteur> act) {
+        Acteur acteur = null;
+        for (int i = 0; i < act.size(); i++) {
+            if ((this.getX() - range <= act.get(i).getY() && act.get(i).getY() <= this.getY() + range) &&
+                    (this.getX() - range <= act.get(i).getX() && act.get(i).getX() <= this.getY()+ range)) {
+               return act.get(i);
+            }
         }
+
+        return acteur;
 
     }
 
