@@ -13,8 +13,8 @@ public class Guerrier extends Ally {
     }
 
     @Override
-    public void attaquer() {
-        System.out.println("attaque");
+    public Acteur attaquer() {
+      return null;
     }
 
 }
