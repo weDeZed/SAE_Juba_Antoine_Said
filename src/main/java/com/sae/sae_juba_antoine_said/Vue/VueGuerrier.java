@@ -31,6 +31,7 @@ public class VueGuerrier {
         }
         this.image = new Image(fichierGuerrier);
         this.imageView = new ImageView(image);
+        this.imageView.setId(g.getId());
         imageView.xProperty().bind(g.xProperty());
         imageView.yProperty().bind(g.yProperty());
         this.pane.getChildren().add(imageView);
