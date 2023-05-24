@@ -21,6 +21,7 @@ public class Environnement {
     private ObservableList<Tour> tours;
     private Map<Sommet, Set<Sommet>> listeAdj;
     private ObservableList<Sommet> obstacles;
+    private ObservableList<Projectile> projectiles;
 
 
 
@@ -34,6 +35,8 @@ public class Environnement {
         this.tours = FXCollections.observableArrayList();
         this.listeAdj = new HashMap();
         this.obstacles = FXCollections.observableArrayList();
+        this.projectiles = FXCollections.observableArrayList();
+
         readMap();
         construit();
 
@@ -138,6 +141,15 @@ public class Environnement {
         return getMap()[x][y] == 1427;
     }
 
+    public void ajouterProjectile(Projectile p) {
+        this.projectiles.add(p);
+    }
+
+    public ObservableList<Projectile> getProjectiles() {
+        return projectiles;
+    }
+
+
     public void construit() {
         int i;
         int j;
@@ -207,6 +219,8 @@ public class Environnement {
             return adjacents;
         }
     }
+
+
 
 }
 

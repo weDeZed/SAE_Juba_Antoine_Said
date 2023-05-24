@@ -2,6 +2,7 @@ package com.sae.sae_juba_antoine_said.Controlleur;
 import com.sae.sae_juba_antoine_said.Modele.*;
 import com.sae.sae_juba_antoine_said.Vue.Vue;
 import com.sae.sae_juba_antoine_said.Vue.VueGuerrier;
+import com.sae.sae_juba_antoine_said.Vue.VueProjectile;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.collections.ListChangeListener;
@@ -46,7 +47,10 @@ public class Controlleur implements Initializable {
 
     Sommet source, cible, source2;
     ArrayList<Sommet> chemin, chemin2;
+    Projectile p ;
+    TourAProjectile tourAProjectile;
 
+    VueProjectile vueProjectile;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -73,7 +77,14 @@ public class Controlleur implements Initializable {
         environnement.ajouterActeur(guerrier1);
         environnement.ajouterActeur(guerrier2);
 
+
+        p = new Projectile(50,30,10);
+        environnement.ajouterProjectile(p);
         vueGuerrier = new VueGuerrier(pane, environnement.getActeurs());
+        vueProjectile = new VueProjectile(pane, environnement.getProjectiles());
+
+
+
 
 
 
@@ -105,6 +116,8 @@ public class Controlleur implements Initializable {
             pane.getChildren().add(new Circle(s.getX() * 16, s.getY() * 16, 5, Color.RED));
         }
 
+
+
         listenerListeActeurs = new ListObsActeur(pane);
         listenerListeTours = new ListObsTour(pane);
 
@@ -113,9 +126,10 @@ public class Controlleur implements Initializable {
         environnement.getTours().addListener(listenerListeTours);
 
 
+
         pane.setOnMousePressed(mouseEvent -> {
           //  environnement.ajouterActeur(new Guerrier(1,(int) mouseEvent.getX(),(int ) mouseEvent.getY()));
-            environnement.ajouterTour(new Tour((int) mouseEvent.getX(),(int ) mouseEvent.getY(),10,10));
+            //environnement.ajouterTour(new TourAProjectile((int) mouseEvent.getX(), (int) mouseEvent.getY(), 10, 10,new Projectile((int) mouseEvent.getX(), (int) mouseEvent.getY(),10)));
             System.out.println("x " + (int) mouseEvent.getX() / 16 + " Y " + (int) mouseEvent.getY() / 15 + " poid " + environnement.getMap()[(int) mouseEvent.getX() / 16][(int) mouseEvent.getY() / 16]);
 
         });

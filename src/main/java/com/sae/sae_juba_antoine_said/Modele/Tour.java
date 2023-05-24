@@ -5,10 +5,12 @@ import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.ObservableList;
 
-public class Tour {
+public abstract class  Tour {
 
  IntegerProperty x,y;
  int degatsParSeconde,range;
+ private Environnement env;
+
 
     public Tour(int x, int y, int degats,int range) {
         this.x = new SimpleIntegerProperty(x);
@@ -17,15 +19,9 @@ public class Tour {
         this.range = range;
     }
 
-    public void attaqueEnnemi(){
+    public abstract void attaqueEnnemi();
 
 
-    }
-
-
-    public void lancerProjectile (){
-
-    }
     public Acteur ennemiPlusProche (ObservableList<Acteur> act) {
         Acteur acteur = null;
         for (int i = 0; i < act.size(); i++) {
