@@ -1,8 +1,9 @@
 package com.sae.sae_juba_antoine_said.Modele;
 
 public class Golem extends Acteur{
-    public Golem(int x, int y, int vitesse) {
-        super(120, x, y, vitesse,0);
+    public Golem(int x, int y, int vitesse,Environnement ev) {
+
+        super(120, x, y, vitesse,0,ev);
     }
 
     @Override

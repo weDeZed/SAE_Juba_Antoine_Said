@@ -39,7 +39,7 @@ public class Vue {
 
         FileInputStream fichierTileSet = null;
         try {
-            fichierTileSet = new FileInputStream("C:\\Users\\jubac\\OneDrive\\Documents\\BUT\\S2\\Java\\SAE_Juba_Antoine_Saidd\\src\\main\\java\\com\\sae\\sae_juba_antoine_said\\Ressources\\tuileblock.jpg");
+            fichierTileSet = new FileInputStream("src/main/java/com/sae/sae_juba_antoine_said/Ressources/tuileblock.jpg");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -53,11 +53,6 @@ public class Vue {
             }
         }
     }
-
-
-
-
-
 
     public void afficherMap(ImageView img, int id) {
         int x;

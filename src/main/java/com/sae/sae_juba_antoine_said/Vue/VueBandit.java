@@ -1,6 +1,7 @@
 package com.sae.sae_juba_antoine_said.Vue;
 
 import com.sae.sae_juba_antoine_said.Modele.Acteur;
+import com.sae.sae_juba_antoine_said.Modele.Bandit;
 import com.sae.sae_juba_antoine_said.Modele.Guerrier;
 import javafx.collections.ObservableList;
 import javafx.scene.image.Image;
@@ -11,7 +12,7 @@ import javafx.scene.shape.Circle;
 import java.io.FileInputStream;
 import java.util.ArrayList;
 
-public class VueGuerrier {
+public class VueBandit {
     private Pane pane;
     private ObservableList<Acteur> guerriers;
     private Image image;
@@ -20,12 +21,12 @@ public class VueGuerrier {
     private static int y = 0;
     Circle circle;
 
-    public VueGuerrier(Pane pane, Acteur g) {
+    public VueBandit(Pane pane, Acteur g) {
         this.pane = pane;
 
         FileInputStream fichierGuerrier = null;
         try {
-            fichierGuerrier = new FileInputStream("src/main/java/com/sae/sae_juba_antoine_said/Ressources/saidkamal.png");
+            fichierGuerrier = new FileInputStream("src/main/java/com/sae/sae_juba_antoine_said/Ressources/bandit.png");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -37,4 +38,5 @@ public class VueGuerrier {
 
     }
 }
+
 

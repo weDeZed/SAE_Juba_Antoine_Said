@@ -18,6 +18,7 @@ public class Environnement {
 
     private int[][] map;
     private ObservableList<Acteur> acteurs;
+
     private ObservableList<Tour> tours;
     private Map<Sommet, Set<Sommet>> listeAdj;
     private ObservableList<Sommet> obstacles;
@@ -36,14 +37,10 @@ public class Environnement {
         this.obstacles = FXCollections.observableArrayList();
         readMap();
         construit();
-
-
-
-
     }
 
     public void readMap() throws IOException {
-        File file = new File("C:\\Users\\jubac\\OneDrive\\Documents\\BUT\\S2\\Java\\SAE_Juba_Antoine_Saidd\\src\\main\\java\\com\\sae\\sae_juba_antoine_said\\Ressources\\map1");
+        File file = new File("src/main/java/com/sae/sae_juba_antoine_said/Ressources/map1");
         BufferedReader terrain = new BufferedReader(new FileReader(file));
         String ligne;
         String[] tout_ligne;
@@ -95,9 +92,6 @@ public class Environnement {
     }
 
 
-
-
-
     public int getX() {
         return x;
     }
@@ -119,6 +113,9 @@ public class Environnement {
     }
 
 
+    public void suppActeur (Acteur acteur){
+        acteurs.remove(acteur);
+    }
     public ObservableList<Acteur> getActeurs() {
         return acteurs;
     }
@@ -161,7 +158,6 @@ public class Environnement {
         }  for (Sommet key : this.listeAdj.keySet()) {
             //System.out.println(" key dans coustruit " + key);
         }
-        System.out.println("-------------------------------------------------");
         for (i = 0; i < this.x; ++i) {
             for (j = 0; j < this.y; ++j) {
                 Sommet s = this.getSommet(i, j);

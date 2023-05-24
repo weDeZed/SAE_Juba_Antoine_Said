@@ -17,39 +17,21 @@ public class ListObsActeur implements ListChangeListener<Acteur> {
         this.panneauDeJeu = panneauDeJeu;
     }
 
+    private void enleverActeur (Acteur m){
+
+        this.panneauDeJeu.getChildren().remove(this.panneauDeJeu.lookup("#"+ m.getId()));
+    }
+
     @Override
     public void onChanged(Change<? extends Acteur> a) {
 
-        Image image;
-        ImageView imageView;
-
-
-
-        while (a.next()) {
-
-
-            FileInputStream fichierGuerrier = null;
-            for (Acteur act : a.getAddedSubList()) {
-
-
-                try {
-                    String cheminJ = "C:\\Users\\jubac\\OneDrive\\Documents\\BUT\\S2\\Java\\SAE_Juba_Antoine_Saidd\\src\\main\\java\\com\\sae\\sae_juba_antoine_said\\Ressources\\saidkamal.png";
-                    fichierGuerrier = new FileInputStream(cheminJ);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                System.out.println("CHANGEMENT");
-
-                if (act instanceof Guerrier) {
-                    image = new Image(fichierGuerrier);
-                    imageView = new ImageView(image);
-                    imageView.xProperty().bind(act.xProperty());
-                    imageView.yProperty().bind(act.yProperty());
-                    this.panneauDeJeu.getChildren().add(imageView);
-                }
-
-
-            }
+          while (a.next()) {
+              for (Acteur m : a.getRemoved()) {
+                  System.out.println("mort");
+                  enleverActeur(m);
+              }
+          }
+    }
 
 /*
             for (Acteur act : a.getAddedSubList()) {
@@ -69,8 +51,8 @@ public class ListObsActeur implements ListChangeListener<Acteur> {
                 }
             }
 */
-        }
-    }
-    }
+}
+
+
 
 

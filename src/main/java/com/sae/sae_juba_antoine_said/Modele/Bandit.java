@@ -1,19 +1,16 @@
 package com.sae.sae_juba_antoine_said.Modele;
 
-import java.io.IOException;
 
-public class Bandit extends Acteur{
+public class Bandit extends Acteur {
 
-    private Environnement ev;
-    public Bandit(int x, int y, int vitesse) throws IOException {
-        super(90, x, y, vitesse, 4);
-        this.ev = new Environnement(x,y);
+    public Bandit(int x, int y, int vitesse, Environnement ev) {
+        super(90, x, y, vitesse, 10, ev);
     }
 
 
     @Override
     public Acteur attaquer() {
-        for (Acteur a : ev.getActeurs()) {
+        for (Acteur a : this.ev.getActeurs()) {
             if (a instanceof Ally && a.estVivant()) {
                 if (this.getY() - this.getRange() <= a.getY() && a.getY() <= this.getY() + this.getRange() &&
                         this.getX() - this.getRange() <= a.getX() && a.getX() <= this.getX() + this.getRange()) {
@@ -29,12 +26,16 @@ public class Bandit extends Acteur{
         //test
         Acteur a = this.attaquer();
         this.seDeplacer();
-        if (a.getPv() <= 10){
-            a.meurt();
-        }else {
+
+        while (a.estVivant()) {
             a.decrementationPv(10);
+            System.out.println("il n'est pas mort");
+
         }
-        this.decrementationPv(1);
+        System.out.println("il est mort ");
+        a.meurt();
+        ev.suppActeur(a);
+        System.out.println(a.getPv());
     }
 
     @Override
@@ -60,15 +61,12 @@ public class Bandit extends Acteur{
                 dy = distanceY - (distanceY-1);
             }
 
-            while (a.estVivant()) {
+            while (a.getX() != this.getX() && a.getY() != this.getY()) {
                 int newposX = this.getX() + (this.getVitesse()*dx);
                 int newposY = this.getY() + (this.getVitesse()*dy);
                 this.setX(newposX);
                 this.setY(newposY);
             }
-        }else {
-
-            this.setX(this.getX()+this.getVitesse());
         }
     }
 }

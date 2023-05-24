@@ -30,10 +30,8 @@ public class ListObsTour implements ListChangeListener<Tour> {
 
             FileInputStream fichierGuerrier = null;
             for (Tour tour : t.getAddedSubList()) {
-
-
                 try {
-                    String chemin = "C:\\Users\\jubac\\OneDrive\\Documents\\BUT\\S2\\Java\\SAE_Juba_Antoine_Saidd\\src\\main\\java\\com\\sae\\sae_juba_antoine_said\\Ressources\\tour.png";
+                    String chemin = "src/main/java/com/sae/sae_juba_antoine_said/Ressources/tour.png";
                     fichierGuerrier = new FileInputStream(chemin);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -48,8 +46,6 @@ public class ListObsTour implements ListChangeListener<Tour> {
 
                     this.panneauDeJeu.getChildren().add(imageView);
                 }
-
-
             }
         }
     }
