@@ -10,15 +10,16 @@ public abstract class Acteur {
 
     private String id;
     public static int compteur = 0;
+    private Environnement env;
 
 
-
-    public Acteur(int pv, int x, int y, int vitesse, int range) {
+    public Acteur(int pv, int x, int y, int vitesse, int range,Environnement env) {
         this.x = new SimpleIntegerProperty(x);
         this.y = new SimpleIntegerProperty(y);
         this.vitesse = vitesse;
         this.range = range;
         this.pv = pv;
+        this.env=env;
         this.id = "A" + compteur;
         compteur++;
     }
@@ -130,4 +131,7 @@ public abstract class Acteur {
 
     public abstract void seDeplacer();
 
+    public Environnement getEnv() {
+        return env;
+    }
 }

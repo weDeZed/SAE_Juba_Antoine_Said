@@ -17,41 +17,34 @@ public class VueTour {
 
 
     private Pane pane;
-    private ObservableList<Tour> tours;
+    private Tour tours;
     private Image image;
     private ImageView imageView;
 
 
-    public VueTour(Pane pane,  ObservableList<Tour> tours) {
+    public VueTour(Pane pane,  Tour tour) {
         this.pane = pane;
         this.tours = tours;
 
         FileInputStream fichierTour = null;
-        for (Tour t : this.tours) {
+
             try {
-                fichierTour = new FileInputStream("C:\\Users\\jubac\\OneDrive\\Documents\\BUT\\S2\\Java\\SAE_Juba_Antoine_Saidd\\src\\main\\java\\com\\sae\\sae_juba_antoine_said\\Ressources\\tour.png");
+                fichierTour = new FileInputStream("src/main/java/com/sae/sae_juba_antoine_said/Ressources/tour.png");
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            if (t instanceof Tour) {
+            if (tour instanceof Tour) {
                 this.image = new Image(fichierTour);
                 int decalage = ((int) image.getHeight());
                 this.imageView = new ImageView(image);
+                imageView.setLayoutX(tour.getX());
+                imageView.setLayoutY(tour.getY());
                 this.pane.getChildren().add(imageView);
-                imageView.setLayoutX(t.getX()+decalage);
-
-
-
-
-
-
-
-
-
+                imageView.setLayoutX(tour.getX()+decalage);
             }
 
 
-        }
+
     }
 
 }

@@ -5,8 +5,8 @@ import java.io.IOException;
 public class Bandit extends Acteur{
 
     private Environnement ev;
-    public Bandit(int x, int y, int vitesse) throws IOException {
-        super(90, x, y, vitesse, 4);
+    public Bandit(int x, int y, int vitesse,Environnement env) throws IOException {
+        super(90, x, y, vitesse, 4,env);
         this.ev = new Environnement(x,y);
     }
 
@@ -23,7 +23,6 @@ public class Bandit extends Acteur{
         }
         return null;
     }
-
     @Override
     public void agir() {
         //test

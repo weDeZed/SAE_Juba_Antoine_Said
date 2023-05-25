@@ -9,12 +9,14 @@ public class Tour {
 
  IntegerProperty x,y;
  int degatsParSeconde,range;
+ Environnement environnement;
 
-    public Tour(int x, int y, int degats,int range) {
+    public Tour(int x, int y, int degats,int range ,Environnement environnement) {
         this.x = new SimpleIntegerProperty(x);
         this.y = new SimpleIntegerProperty(y);
         this.degatsParSeconde = degats;
         this.range = range;
+        this.environnement=environnement;
     }
 
     public void attaqueEnnemi(){

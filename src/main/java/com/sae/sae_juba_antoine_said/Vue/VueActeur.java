@@ -28,14 +28,14 @@ public class VueActeur {
 
             try {
                 if (g instanceof Guerrier) {
-                    fichierActeur = new FileInputStream("C:\\Users\\jubac\\OneDrive\\Documents\\BUT\\S2\\Java\\SAE_Juba_Antoine_Saidd\\src\\main\\java\\com\\sae\\sae_juba_antoine_said\\Ressources\\saidkamal.png");
+                    fichierActeur = new FileInputStream("src/main/java/com/sae/sae_juba_antoine_said/Ressources/saidkamal.png");
                 }
                 else if (g instanceof Golem){
-                    fichierActeur = new FileInputStream("");
+                    fichierActeur = new FileInputStream("src/main/java/com/sae/sae_juba_antoine_said/Ressources/saidkamal.png");
                 }
 
                 else if (g instanceof Bandit){
-                    fichierActeur = new FileInputStream("C:\\Users\\jubac\\OneDrive\\Documents\\BUT\\S2\\Java\\SAE_Juba_Antoine_Saidd\\src\\main\\java\\com\\sae\\sae_juba_antoine_said\\Ressources\\bandit.png");
+                    fichierActeur = new FileInputStream("src/main/java/com/sae/sae_juba_antoine_said/Ressources/saidkamal.png");
                 }
 
                 else if (g instanceof Archer){
