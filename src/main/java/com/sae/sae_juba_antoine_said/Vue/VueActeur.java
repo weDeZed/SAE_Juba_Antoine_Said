@@ -1,58 +1,68 @@
 package com.sae.sae_juba_antoine_said.Vue;
 
-import com.sae.sae_juba_antoine_said.Modele.*;
+import com.sae.sae_juba_antoine_said.Modele.Acteur;
+import com.sae.sae_juba_antoine_said.Modele.Archer;
+import com.sae.sae_juba_antoine_said.Modele.Bandit;
+import com.sae.sae_juba_antoine_said.Modele.Guerrier;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+import javafx.scene.shape.Circle;
 
 import java.io.FileInputStream;
-import java.util.ArrayList;
 
 public class VueActeur {
     private Pane pane;
-    private ArrayList<Acteur> acteurs;
+    private  Acteur acteur;
     private Image image;
     private ImageView imageView;
     private static int x = 0;
     private static int y = 0;
+    Circle circle;
 
-
-
-    public VueActeur(Pane pane, ArrayList<Acteur> acteurs) {
+    public VueActeur(Pane pane, Acteur acteur) {
         this.pane = pane;
-        this.acteurs = acteurs;
+        this.acteur = acteur;
 
-        FileInputStream fichierActeur = null;
+        FileInputStream fichierGuerrier = null;
 
-        for (Acteur g : this.acteurs) {
-
-            try {
-                if (g instanceof Guerrier) {
-                    fichierActeur = new FileInputStream("src/main/java/com/sae/sae_juba_antoine_said/Ressources/saidkamal.png");
+            if(acteur instanceof Guerrier ){
+                try {
+                    fichierGuerrier = new FileInputStream("src/main/java/com/sae/sae_juba_antoine_said/Ressources/saidkamal.png");
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
-                else if (g instanceof Golem){
-                    fichierActeur = new FileInputStream("src/main/java/com/sae/sae_juba_antoine_said/Ressources/saidkamal.png");
-                }
-
-                else if (g instanceof Bandit){
-                    fichierActeur = new FileInputStream("src/main/java/com/sae/sae_juba_antoine_said/Ressources/saidkamal.png");
-                }
-
-                else if (g instanceof Archer){
-                    fichierActeur = new FileInputStream("");
-                }
-
-            } catch (Exception e) {
-                e.printStackTrace();
+                    this.image = new Image(fichierGuerrier);
+                    this.imageView = new ImageView(image);
+                    imageView.xProperty().bind(acteur.xProperty());
+                    imageView.yProperty().bind(acteur.yProperty());
             }
-
-            this.image = new Image(fichierActeur);
-            this.imageView = new ImageView(image);
-            imageView.xProperty().bind(g.xProperty());
-            imageView.yProperty().bind(g.yProperty());
-            ;
+            if (acteur instanceof Bandit){
+                try {
+                    fichierGuerrier = new FileInputStream("src/main/java/com/sae/sae_juba_antoine_said/Ressources/bandit.png");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                this.image = new Image(fichierGuerrier);
+                this.imageView = new ImageView(image);
+                imageView.xProperty().bind(acteur.xProperty());
+                imageView.yProperty().bind(acteur.yProperty());
+            }
+            if (acteur instanceof Archer){
+                try {
+                    fichierGuerrier = new FileInputStream("src/main/java/com/sae/sae_juba_antoine_said/Ressources/saidkamal.png");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                System.out.println("Archer ");
+                this.image = new Image(fichierGuerrier);
+                this.imageView = new ImageView(image);
+                imageView.xProperty().bind(acteur.xProperty());
+                imageView.yProperty().bind(acteur.yProperty());
+            }
             this.pane.getChildren().add(imageView);
+
         }
-    }
+
 
 }

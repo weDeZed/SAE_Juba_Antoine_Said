@@ -10,10 +10,9 @@ import javafx.scene.layout.TilePane;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
 
 
-public class Vue {
+public class VueEnvironnement {
 
     private Environnement env;
 
@@ -25,13 +24,13 @@ public class Vue {
     private String ch;
 
 
-    public Vue(Environnement env, TilePane tileP) throws FileNotFoundException {
+    public VueEnvironnement(Environnement env, TilePane tileP) throws FileNotFoundException {
         this.env = env;
         this.tilePane = tileP;
         iniTerrain();
     }
 
-    public Vue() {
+    public VueEnvironnement() {
 
     }
 

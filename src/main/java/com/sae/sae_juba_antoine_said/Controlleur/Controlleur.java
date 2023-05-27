@@ -1,14 +1,13 @@
 package com.sae.sae_juba_antoine_said.Controlleur;
 import com.sae.sae_juba_antoine_said.Modele.*;
-import com.sae.sae_juba_antoine_said.Vue.Vue;
-import com.sae.sae_juba_antoine_said.Vue.VueGuerrier;
+import com.sae.sae_juba_antoine_said.Vue.VueActeur;
+import com.sae.sae_juba_antoine_said.Vue.VueEnvironnement;
 import com.sae.sae_juba_antoine_said.Vue.VueTour;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.collections.ListChangeListener;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
 import javafx.scene.paint.Color;
@@ -29,12 +28,12 @@ public class Controlleur implements Initializable {
     private Environnement environnement;
     @FXML
     private TilePane tilePane;
-    private Vue vueMap;
+    private VueEnvironnement vueEnvironnementMap;
 
 
-    private Acteur guerrier1, guerrier2, guerrier3;
+    private Acteur bandit, guerrier2, guerrier3;
 
-    private VueGuerrier vueGuerrier;
+    private VueActeur vueActeur;
     private  Timeline gameLoop;
 
     private int temps;
@@ -71,14 +70,31 @@ public class Controlleur implements Initializable {
         this.pane.setPrefSize(environnement.getX() * 16, environnement.getY() * 16);
 
 
-        guerrier1 = new Guerrier(1, 42 * 16, 2 * 16,environnement);
+       /* for (int i = 0; i < environnement.getMap().length;i++){
+            for (int j = 0; j<environnement.getMap()[i].length;j++){
+               if(environnement.getMap()[i][j]==1427){
+                   Circle circle=new Circle(i*16,j*16,7,Color.RED);
+                   pane.getChildren().add(circle);
+               }
+            }
+        }
+
+        */
+
+
+        try {
+            bandit = new Bandit(42*16, 2 * 16,  3,environnement);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         guerrier2 = new Guerrier(1, 28 * 16, 45 * 16,environnement);
 
-        environnement.ajouterActeur(guerrier1);
-        environnement.ajouterActeur(guerrier2);
-        vueGuerrier = new VueGuerrier(pane, environnement.getActeurs());
+        environnement.ajouterActeur(bandit);
+        //environnement.ajouterActeur(guerrier2);
+        //vueActeur =new VueActeur(pane,guerrier1);
+        vueActeur =new VueActeur(pane,bandit);
 
-        troopTours =new TroopTour(50*16,20*16,20,10,environnement);
+        troopTours =new TroopTour(56*16,27*16,20,10,environnement);
         vueTour =new VueTour(pane,troopTours);
 
 
@@ -104,9 +120,9 @@ public class Controlleur implements Initializable {
 
 
         pane.setOnMousePressed(mouseEvent -> {
-          //  environnement.ajouterActeur(new Guerrier(1,(int) mouseEvent.getX(),(int ) mouseEvent.getY()));
+          // environnement.ajouterActeur(new Guerrier(1,(int) mouseEvent.getX(),(int ) mouseEvent.getY()));
             //environnement.ajouterTour(new Tour((int) mouseEvent.getX(),(int ) mouseEvent.getY(),10,10,environnement));
-            System.out.println("x " + (int) mouseEvent.getX() / 16 + " Y " + (int) mouseEvent.getY() / 15 + " poid " + environnement.getMap()[(int) mouseEvent.getX() / 16][(int) mouseEvent.getY() / 16]);
+            System.out.println("x " + (int)mouseEvent.getX() / 16 + " Y " +  (int)mouseEvent.getY() / 15 + " poid " + environnement.getMap()[(int) mouseEvent.getX() / 16][(int) mouseEvent.getY() / 16]);
 
         });
 
@@ -124,7 +140,7 @@ public class Controlleur implements Initializable {
 
     public void gameLaunche() {
         try {
-            this.vueMap = new Vue(environnement, tilePane);
+            this.vueEnvironnementMap = new VueEnvironnement(environnement, tilePane);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -148,8 +164,8 @@ public class Controlleur implements Initializable {
                         gameLoop.stop();
                     } else if (temps % 2 == 0) {
                         Sommet sommet = chemin.get(i.getAndIncrement());
-                        guerrier1.setX(sommet.getX() * 16);
-                        guerrier1.setY(sommet.getY() * 16);
+                        bandit.setX(sommet.getX() * 16-8);
+                        bandit.setY(sommet.getY() * 16-8);
                        if (sommet.getY() == cible.getY() && sommet.getX() == cible.getX()) {
                             gameLoop.stop();
                         }
@@ -157,8 +173,15 @@ public class Controlleur implements Initializable {
 
 
                     }
-                    if(temps%20==0){
+                    if(temps==1){
                         troopTours.attaqueEnnemi();
+                    }
+                    if(temps%20==0){
+                        for (Acteur a:environnement.getActeurs()) {
+                            if (a instanceof Guerrier){
+                                a.agir();
+                            }
+                        }
                     }
                     temps++;
                 })

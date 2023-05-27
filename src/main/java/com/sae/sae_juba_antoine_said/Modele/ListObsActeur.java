@@ -1,6 +1,8 @@
 package com.sae.sae_juba_antoine_said.Modele;
 
 
+import com.sae.sae_juba_antoine_said.Vue.VueActeur;
+import com.sae.sae_juba_antoine_said.Vue.VueActeur;
 import javafx.collections.ListChangeListener;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -19,58 +21,13 @@ public class ListObsActeur implements ListChangeListener<Acteur> {
 
     @Override
     public void onChanged(Change<? extends Acteur> a) {
-
-        Image image;
-        ImageView imageView;
-
-
-
         while (a.next()) {
-
-
-            FileInputStream fichierGuerrier = null;
             for (Acteur act : a.getAddedSubList()) {
-
-
-                try {
-                    String cheminJ = "src/main/java/com/sae/sae_juba_antoine_said/Ressources/saidkamal.png";
-                    fichierGuerrier = new FileInputStream(cheminJ);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                System.out.println("CHANGEMENT");
-
-                if (act instanceof Guerrier) {
-                    image = new Image(fichierGuerrier);
-                    imageView = new ImageView(image);
-                    imageView.xProperty().bind(act.xProperty());
-                    imageView.yProperty().bind(act.yProperty());
-                    this.panneauDeJeu.getChildren().add(imageView);
-                }
-
-
+                //System.out.println("x "+act.getX()/16+" y "+ act.getY()/16);
+                VueActeur VueActeur = new VueActeur(panneauDeJeu, act);
             }
-
-/*
-            for (Acteur act : a.getAddedSubList()) {
-                try {
-                    fichierGuerrier = new FileInputStream("C:\\Users\\jubac\\OneDrive\\Documents\\BUT\\S2\\Java\\SAE_Juba_Antoine_Saidd\\src\\main\\java\\com\\sae\\sae_juba_antoine_said\\Ressources\\saidkamal.png");
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                if (act instanceof Acteur) {
-                    System.out.println("CHAGEMENT");
-                    image = new Image(fichierGuerrier);
-                    imageView = new ImageView(image);
-                    panneauDeJeu.getChildren().add(imageView);
-                    imageView.xProperty().bind(act.xProperty());
-                    imageView.yProperty().bind(act.yProperty());
-
-                }
-            }
-*/
         }
     }
-    }
+}
 
 

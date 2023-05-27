@@ -129,7 +129,7 @@ public abstract class Acteur {
         return this.range;
     }
 
-    public abstract void seDeplacer();
+    public abstract void seDeplacer(Acteur a);
 
     public Environnement getEnv() {
         return env;

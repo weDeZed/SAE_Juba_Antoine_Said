@@ -1,9 +1,5 @@
 package com.sae.sae_juba_antoine_said.Modele;
 
-
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-
 import java.util.*;
 
 public class BFS {
@@ -55,12 +51,11 @@ public class BFS {
             courant = predecesseurs.get(courant);
         }
         Collections.reverse(chemin);
-        System.out.println(" le chemin dans class BFS ");
-        for (Sommet s : chemin) {
+        /*for (Sommet s : chemin) {
             System.out.print(" " + s);
         }
 
-
+         */
 
         return chemin;
     }

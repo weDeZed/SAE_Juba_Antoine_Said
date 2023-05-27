@@ -56,7 +56,6 @@ public class Environnement {
 
                     if (!tout_ligne[y].trim().isEmpty()) {
 
-
                         map[y][x] = Integer.parseInt(tout_ligne[y].trim());
 
                        // System.out.println(" Largeur  : "+x);

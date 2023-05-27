@@ -12,12 +12,13 @@ public class Golem extends Acteur{
 
     @Override
     public void agir() {
-        this.seDeplacer();
+        Acteur a=attaquer();
+        this.seDeplacer(a);
         this.decrementationPv(1);
     }
 
     @Override
-    public void seDeplacer() {
+    public void seDeplacer(Acteur a) {
         this.setX(this.getX()+1);
     }
 }
