@@ -1,4 +1,5 @@
 package com.sae.sae_juba_antoine_said.Controlleur;
+
 import com.sae.sae_juba_antoine_said.Modele.*;
 import com.sae.sae_juba_antoine_said.Vue.VueActeur;
 import com.sae.sae_juba_antoine_said.Vue.VueEnvironnement;
@@ -13,14 +14,13 @@ import javafx.scene.layout.TilePane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.util.Duration;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.concurrent.atomic.AtomicInteger;
-
-
 
 
 public class Controlleur implements Initializable {
@@ -34,13 +34,13 @@ public class Controlleur implements Initializable {
     private Acteur bandit, guerrier2, guerrier3;
 
     private VueActeur vueActeur;
-    private  Timeline gameLoop;
+    private Timeline gameLoop;
 
     private int temps;
     @FXML
     private Pane pane;
     private BFS bfs;
-    private  Tour troopTours;
+    private Tour troopTours;
     private VueTour vueTour;
 
 
@@ -51,9 +51,9 @@ public class Controlleur implements Initializable {
     ArrayList<Sommet> chemin, chemin2;
 
 
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
 
 
         try {
@@ -70,48 +70,10 @@ public class Controlleur implements Initializable {
         this.pane.setPrefSize(environnement.getX() * 16, environnement.getY() * 16);
 
 
-       /* for (int i = 0; i < environnement.getMap().length;i++){
-            for (int j = 0; j<environnement.getMap()[i].length;j++){
-               if(environnement.getMap()[i][j]==1427){
-                   Circle circle=new Circle(i*16,j*16,7,Color.RED);
-                   pane.getChildren().add(circle);
-               }
-            }
-        }
 
-        */
+        troopTours = new TroopTour(56 * 16, 27 * 16, 20, 10, environnement);
+        vueTour = new VueTour(pane, troopTours);
 
-
-        try {
-            bandit = new Bandit(42*16, 2 * 16,  3,environnement);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        guerrier2 = new Guerrier(1, 28 * 16, 45 * 16,environnement);
-
-        environnement.ajouterActeur(bandit);
-        //environnement.ajouterActeur(guerrier2);
-        //vueActeur =new VueActeur(pane,guerrier1);
-        vueActeur =new VueActeur(pane,bandit);
-
-        troopTours =new TroopTour(56*16,27*16,20,10,environnement);
-        vueTour =new VueTour(pane,troopTours);
-
-
-
-
-        BFS bfs;
-        source = environnement.getSommet(28,45 );
-        cible = environnement.getSommet(50, 0);
-        Circle circle = new Circle(50 * 16, 0 * 16, 10, Color.BLACK);
-        pane.getChildren().add(circle);
-        bfs = new BFS(environnement, source);
-        this.chemin = bfs.cheminVersSource(cible);
-
-
-        for (Sommet s : chemin) {
-            pane.getChildren().add(new Circle(s.getX() * 16, s.getY() * 16, 5, Color.RED));
-        }
 
         listenerListeActeurs = new ListObsActeur(pane);
         listenerListeTours = new ListObsTour(pane);
@@ -119,20 +81,8 @@ public class Controlleur implements Initializable {
         environnement.getTours().addListener(listenerListeTours);
 
 
-        pane.setOnMousePressed(mouseEvent -> {
-          // environnement.ajouterActeur(new Guerrier(1,(int) mouseEvent.getX(),(int ) mouseEvent.getY()));
-            //environnement.ajouterTour(new Tour((int) mouseEvent.getX(),(int ) mouseEvent.getY(),10,10,environnement));
-            System.out.println("x " + (int)mouseEvent.getX() / 16 + " Y " +  (int)mouseEvent.getY() / 15 + " poid " + environnement.getMap()[(int) mouseEvent.getX() / 16][(int) mouseEvent.getY() / 16]);
-
-        });
-
-
-
-
-
         gameLaunche();
         initAnimation();
-
         gameLoop.play();
 
 
@@ -148,40 +98,48 @@ public class Controlleur implements Initializable {
     }
 
     private void initAnimation() {
+
         gameLoop = new Timeline();
         temps = 1;
         gameLoop.setCycleCount(Timeline.INDEFINITE);
         AtomicInteger i = new AtomicInteger();
-        AtomicInteger k = new AtomicInteger();
 
 
         KeyFrame kf = new KeyFrame(
 
+
                 Duration.seconds(0.17),
 
                 (ev -> {
+                    if(temps%10==0){
+                       environnement.ajouterActeur(new Bandit(52,24,3,environnement));
+                    }
                     if (temps == 10000) {
                         gameLoop.stop();
                     } else if (temps % 2 == 0) {
-                        Sommet sommet = chemin.get(i.getAndIncrement());
-                        bandit.setX(sommet.getX() * 16-8);
-                        bandit.setY(sommet.getY() * 16-8);
-                       if (sommet.getY() == cible.getY() && sommet.getX() == cible.getX()) {
-                            gameLoop.stop();
+                        for (Acteur acteur : environnement.getActeurs()) {
+                            if (acteur instanceof Ennemi){
+                                ((Ennemi)acteur).move();
+                            }
+                            if (acteur instanceof Guerrier){
+                                ((Guerrier) acteur).marcherSurChemin();
+                                if(acteur.attaquer()!=null){
+                                    ((Guerrier) acteur).agir();
+                                }
+                            }
                         }
-
-
-
                     }
-                    if(temps==1){
+                    if (temps %100==0) {
                         troopTours.attaqueEnnemi();
                     }
 
-                    if(temps%20==0){
-                        for (Acteur a:environnement.getActeurs()) {
-                            if (a instanceof Guerrier){
-                                if(a.attaquer()!=null){
+
+                    if (temps % 100 == 0) {
+                        for (Acteur a : environnement.getActeurs()){
+                            if (a instanceof Guerrier) {
+                                if (a.attaquer() != null) {
                                     a.agir();
+                                    //((Guerrier) a).move();
                                 }
                             }
                         }
@@ -189,6 +147,8 @@ public class Controlleur implements Initializable {
                     temps++;
                 })
         );
+
+
         gameLoop.getKeyFrames().add(kf);
     }
 
@@ -243,12 +203,29 @@ public class Controlleur implements Initializable {
 
 
 
+       /* for (int i = 0; i < environnement.getMap().length;i++){
+            for (int j = 0; j<environnement.getMap()[i].length;j++){
+               if(environnement.getMap()[i][j]==1427){
+                   Circle circle=new Circle(i*16,j*16,7,Color.RED);
+                   pane.getChildren().add(circle);
+               }
+            }
+        }
+
+        */
 
 
 
 
 
+/*
+pane.setOnMousePressed(mouseEvent -> {
+            // environnement.ajouterActeur(new Guerrier(1,(int) mouseEvent.getX(),(int ) mouseEvent.getY()));
+            //environnement.ajouterTour(new Tour((int) mouseEvent.getX(),(int ) mouseEvent.getY(),10,10,environnement));
+            System.out.println("x " + (int) mouseEvent.getX() / 16 + " Y " + (int) mouseEvent.getY() / 15 + " poid " + environnement.getMap()[(int) mouseEvent.getX() / 16][(int) mouseEvent.getY() / 16]);
 
+        });
+ */
 
 
 

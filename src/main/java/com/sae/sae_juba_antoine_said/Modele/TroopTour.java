@@ -35,7 +35,7 @@ public class TroopTour extends Tour {
                 break;
             }
 
-            placement += 2;
+            placement += 1+1/2;
             environnement.ajouterActeur(new Guerrier(20, x * 16, y * 16, environnement));
         }
 

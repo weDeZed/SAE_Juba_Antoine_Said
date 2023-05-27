@@ -54,12 +54,10 @@ public class BFS {
         /*for (Sommet s : chemin) {
             System.out.print(" " + s);
         }
-
-         */
+        */
 
         return chemin;
     }
-
 
 
 }

@@ -1,20 +1,25 @@
 package com.sae.sae_juba_antoine_said.Modele;
 
 public class Guerrier extends Ally {
+    private static int direction;
+    private int startX ;
+    private int startY;
 
 
     public Guerrier(int pv, int x, int y, Environnement env) {
-        super(pv, x, y, 20, 200, env);
+        super(pv, x, y, 20, 10, env);
+        direction = 1;
+        this.startX = x / 16;
+        this.startY = y / 16;
     }
 
     @Override
     public void seDeplacer(Acteur a) {
-        //Acteur a = this.attaquer();
         int dx, dy;
         int distanceX, distanceY;
 
         if (a != null) {
-            System.out.println("attrapé ennemie ");
+
             distanceX = a.getX() - this.getX();
             distanceY = a.getY() - this.getY();
 
@@ -29,16 +34,13 @@ public class Guerrier extends Ally {
             } else {
                 dy = distanceY - (distanceY - 1);
             }
-            while (a.estVivant() && getPv() > 0) {
-                System.out.println(" pv " + getPv());
-                System.out.println(" bandit est vivant ");
+
+            while (a.getX() != this.getX() && a.getY() != this.getY()) {
                 int newposX = this.getX() + (this.getVitesse() * dx);
                 int newposY = this.getY() + (this.getVitesse() * dy);
                 this.setX(newposX);
                 this.setY(newposY);
             }
-        } else {
-            this.setX(this.getX() - this.getVitesse());
         }
     }
 
@@ -53,7 +55,6 @@ public class Guerrier extends Ally {
                 }
             }
         }
-        System.out.println("pas des ennemie ");
         return null;
     }
 
@@ -66,9 +67,43 @@ public class Guerrier extends Ally {
         } else {
             a.decrementationPv(10);
         }
-
-
         this.decrementationPv(1);
     }
 
+
+    public void marcherSurChemin() {
+        int x = getX() / 16;
+        int y = getY() / 16;
+        boolean peutDeplacer = false;
+
+        if (direction == 1) { // marcher droit/en bas
+            if (x < startX + getRange() && getEnv().getMap()[x + 1][y] == 1427) {
+                x = x + 1;
+                peutDeplacer = true;
+            } else if (y < startY + getRange() && getEnv().getMap()[x][y + 1] == 1427) {
+                y = y + 1;
+                peutDeplacer = true;
+            } else {
+                direction = -1; // change la direction
+            }
+        } else if (direction == -1) { // déplacer gauche / haut
+            if (x > startX - getRange() && getEnv().getMap()[x - 1][y] == 1427) {
+                x = x - 1;
+                peutDeplacer = true;
+            } else if (y > startY - getRange() && getEnv().getMap()[x][y - 1] == 1427) {
+                y = y - 1;
+                peutDeplacer = true;
+            } else {
+                direction = 1; //cnage la direction
+            }
+        }
+
+        if (peutDeplacer) {
+            setX(x * 16);
+            setY(y * 16);
+        }
+    }
+
+
 }
+

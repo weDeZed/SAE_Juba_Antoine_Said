@@ -3,6 +3,8 @@ package com.sae.sae_juba_antoine_said.Modele;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
+import java.util.ArrayList;
+
 public abstract class Acteur {
     private final int CHEMIN = 1427;
     private int vitesse, range, pv;
@@ -11,6 +13,9 @@ public abstract class Acteur {
     private String id;
     public static int compteur = 0;
     private Environnement env;
+
+    BFS bfs;
+    Sommet sommet;
 
 
     public Acteur(int pv, int x, int y, int vitesse, int range,Environnement env) {
@@ -134,4 +139,16 @@ public abstract class Acteur {
     public Environnement getEnv() {
         return env;
     }
+
+/*
+    public void move() {
+        if (indiceCheminActuel < chemin.size() - 1) {
+            indiceCheminActuel++;
+            this.setX(chemin.get(indiceCheminActuel).getX()*16);
+            this.setY(chemin.get(indiceCheminActuel).getY()*16);
+        }
+
+    }
+
+ */
 }

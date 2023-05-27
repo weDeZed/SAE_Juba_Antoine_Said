@@ -160,7 +160,6 @@ public class Environnement {
         }  for (Sommet key : this.listeAdj.keySet()) {
             //System.out.println(" key dans coustruit " + key);
         }
-        System.out.println("-------------------------------------------------");
         for (i = 0; i < this.x; ++i) {
             for (j = 0; j < this.y; ++j) {
                 Sommet s = this.getSommet(i, j);

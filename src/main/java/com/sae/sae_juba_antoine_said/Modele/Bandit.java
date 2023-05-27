@@ -6,8 +6,8 @@ public class Bandit extends Ennemi {
 
     private Environnement ev;
 
-    public Bandit(int x, int y, int vitesse, Environnement env) throws IOException {
-        super(90, x, y, vitesse, 4, env);
+    public Bandit(int x, int y, int vitesse, Environnement env)  {
+        super(90, x, y, vitesse, 30, env);
         this.ev = env;
     }
 
@@ -35,7 +35,6 @@ public class Bandit extends Ennemi {
         int distanceX, distanceY;
 
         if (a != null) {
-
             distanceX = a.getX() - this.getX();
             distanceY = a.getY() - this.getY();
 

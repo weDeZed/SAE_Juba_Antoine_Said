@@ -33,23 +33,18 @@ public class ListObsTour implements ListChangeListener<Tour> {
 
 
                 try {
-                    String chemin = "src/main/java/com/sae/sae_juba_antoine_said/Ressources/tour.png";
-                    fichierGuerrier = new FileInputStream(chemin);
+                    fichierGuerrier = new FileInputStream("src/main/java/com/sae/sae_juba_antoine_said/Ressources/tour.png");
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
                 System.out.println("CHANGEMENT");
-
                 if (tour instanceof Tour) {
                     image = new Image(fichierGuerrier);
                     imageView = new ImageView(image);
                     imageView.xProperty().bind(tour.xProperty());
                     imageView.yProperty().bind(tour.yProperty());
-
                     this.panneauDeJeu.getChildren().add(imageView);
                 }
-
-
             }
         }
     }
