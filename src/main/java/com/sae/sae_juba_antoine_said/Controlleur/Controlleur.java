@@ -176,10 +176,13 @@ public class Controlleur implements Initializable {
                     if(temps==1){
                         troopTours.attaqueEnnemi();
                     }
+
                     if(temps%20==0){
                         for (Acteur a:environnement.getActeurs()) {
                             if (a instanceof Guerrier){
-                                a.agir();
+                                if(a.attaquer()!=null){
+                                    a.agir();
+                                }
                             }
                         }
                     }

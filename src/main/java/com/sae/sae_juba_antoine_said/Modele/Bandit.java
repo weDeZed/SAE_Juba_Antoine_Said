@@ -26,21 +26,7 @@ public class Bandit extends Ennemi {
         return null;
     }
 
-    @Override
-    public void agir() {
-        //test
-        Acteur a = this.attaquer();
-        this.seDeplacer(a);
-        if (a != null) {
-            if (a.getPv() <= 10) {
-                System.out.println("bandit a teué G");
-                a.meurt();
-            } else {
-                a.decrementationPv(10);
-            }
-        }
-        this.decrementationPv(1);
-    }
+
 
     @Override
     public void seDeplacer(Acteur a) {
@@ -78,6 +64,20 @@ public class Bandit extends Ennemi {
 
             this.setX(this.getX() + this.getVitesse());
         }
+    }
+    @Override
+    public void agir() {
+        //test
+        Acteur a = this.attaquer();
+        this.seDeplacer(a);
+
+            if (a.getPv() <= 10) {
+                System.out.println("bandit a teué G");
+                a.meurt();
+            } else {
+                a.decrementationPv(10);
+            }
+            this.decrementationPv(1);
     }
 }
 

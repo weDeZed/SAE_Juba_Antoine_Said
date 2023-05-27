@@ -4,7 +4,7 @@ public class Guerrier extends Ally {
 
 
     public Guerrier(int pv, int x, int y, Environnement env) {
-        super(pv, x, y, 20, 100, env);
+        super(pv, x, y, 20, 200, env);
     }
 
     @Override
@@ -29,8 +29,8 @@ public class Guerrier extends Ally {
             } else {
                 dy = distanceY - (distanceY - 1);
             }
-            while (a.estVivant() && getPv()>0) {
-                System.out.println( " pv "+getPv());
+            while (a.estVivant() && getPv() > 0) {
+                System.out.println(" pv " + getPv());
                 System.out.println(" bandit est vivant ");
                 int newposX = this.getX() + (this.getVitesse() * dx);
                 int newposY = this.getY() + (this.getVitesse() * dy);
@@ -45,7 +45,7 @@ public class Guerrier extends Ally {
     public Acteur attaquer() {
         for (Acteur a : getEnv().getActeurs()) {
             if (a instanceof Ennemi && a.estVivant()) {
-                System.out.println("x " + getX() + "  y " + getY());
+                //System.out.println("x " + getX() + "  y " + getY());
                 if (this.getY() - this.getRange() <= a.getY() && a.getY() <= this.getY() + this.getRange() &&
                         this.getX() - this.getRange() <= a.getX() && a.getX() <= this.getX() + this.getRange()) {
                     System.out.println("un ennemie ");
@@ -61,13 +61,12 @@ public class Guerrier extends Ally {
     public void agir() {
         Acteur a = this.attaquer();
         this.seDeplacer(a);
-        if(a!=null){
-            if (a.getPv() <= 10) {
-                a.meurt();
-            } else {
-                a.decrementationPv(10);
-            }
+        if (a.getPv() <= 10) {
+            a.meurt();
+        } else {
+            a.decrementationPv(10);
         }
+
 
         this.decrementationPv(1);
     }

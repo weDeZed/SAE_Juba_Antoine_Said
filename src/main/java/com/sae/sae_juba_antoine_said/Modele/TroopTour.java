@@ -20,16 +20,16 @@ public class TroopTour extends Tour {
             int y = getY()/16;
             if (x > 0 && map[x - 1][y] == 1427) {
                 x = x - 1;
-                //y = 27 + placement;
+                y = 27 + placement;
             } else if (x < map.length - 1 && map[x + 1][y] == 1427) {
                 x = x + 1;
-                //y = 27 + placement;
+                y = 27 + placement;
             } else if (y > 0 && map[x][y - 1] == 1427) {
                 y = y - 1;
-                //x = 56 + placement;
+                x = 56 + placement;
             } else if (y < map[0].length - 1 && map[x][y + 1] == 1427) {
                 y = y + 1;
-                //x = 56 + placement;
+                x = 56 + placement;
             } else {
                 System.out.println("case pas trouvé");
                 break;
