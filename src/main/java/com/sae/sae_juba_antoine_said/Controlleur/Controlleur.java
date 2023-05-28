@@ -81,7 +81,10 @@ public class Controlleur implements Initializable {
         p = new Projectile(50,30,10);
         environnement.ajouterProjectile(p);
         vueGuerrier = new VueGuerrier(pane, environnement.getActeurs());
+
         vueProjectile = new VueProjectile(pane, environnement.getProjectiles());
+
+
 
 
 
@@ -138,6 +141,8 @@ public class Controlleur implements Initializable {
 
 
 
+        p.deplacerVers(guerrier1);
+
         gameLaunche();
         initAnimation();
 
@@ -174,6 +179,7 @@ public class Controlleur implements Initializable {
                         Sommet sommet = chemin.get(i.getAndIncrement());
                         guerrier1.setX(sommet.getX() * 16);
                         guerrier1.setY(sommet.getY() * 16);
+
 
 
 

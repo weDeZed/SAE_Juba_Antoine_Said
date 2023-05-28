@@ -22,12 +22,12 @@ public abstract class  Tour {
     public abstract void attaqueEnnemi();
 
 
-    public Acteur ennemiPlusProche (ObservableList<Acteur> act) {
+    public Acteur ennemiPlusProche () {
         Acteur acteur = null;
-        for (int i = 0; i < act.size(); i++) {
-            if ((this.getX() - range <= act.get(i).getY() && act.get(i).getY() <= this.getY() + range) &&
-                    (this.getX() - range <= act.get(i).getX() && act.get(i).getX() <= this.getY()+ range)) {
-               return act.get(i);
+        for (int i = 0; i < env.getActeurs().size(); i++) {
+            if ((this.getX() - range <= env.getActeurs().get(i).getY() && env.getActeurs().get(i).getY() <= this.getY() + range) &&
+                    (this.getX() - range <= env.getActeurs().get(i).getX() && env.getActeurs().get(i).getX() <= this.getY()+ range)) {
+               return env.getActeurs().get(i);
             }
         }
 

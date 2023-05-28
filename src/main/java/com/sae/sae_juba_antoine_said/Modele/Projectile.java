@@ -62,26 +62,60 @@ public class Projectile {
         double distance = calculerDistance(getX(), getY(), a.getX(), a.getY());
         System.out.println("Distance à parcourir : " + distance);
 
-        // Déplacer l'objet jusqu'à la destination
-        while (getX() != a.getX() || getY()!= a.getY()) {
-            // Calculer le vecteur de déplacement
+
+        while (getX() != a.getX() && getY()!= a.getY()) {
+
+
             double verteurX = a.getX() - getX();
             double verteurY = a.getY() - getY();
 
             // Calculer le rapport entre la distance à parcourir et la distance totale
             double ratio = distance / calculerDistance(getX(), getY(), a.getX(), a.getY());
 
-            // Mettre à jour les coordonnées de l'objet
-           // x += verteurX * ratio;
-           // y += verteurY * ratio;
+
+           setX((int) (verteurX * ratio));
+           setY( (int) (verteurY * ratio));
 
 
 
-            // Afficher les nouvelles coordonnées de l'objet
-            System.out.println("Nouvelles coordonnées : (" + x + ", " + y + ")");
+            System.out.println("Nouvelles coordonnées : (" + getX() + ", " + getY() + ")");
         }
 
         System.out.println("Objet arrivé à la destination !");
+    }
+
+    public void seDeplacer() {
+        Acteur a = this.tourAProjectile.ennemiPlusProche();
+        int dx, dy;
+        int distanceX,distanceY;
+
+        if (a != null){
+
+            distanceX = a.getX() - this.getX();
+            distanceY = a.getY() - this.getY();
+
+            if (distanceX < 0){
+                dx = distanceX +(distanceX-1);
+            }else {
+                dx = distanceX - (distanceX-1);
+            }
+
+            if (distanceY < 0){
+                dy = distanceY +(distanceY-1);
+            }else {
+                dy = distanceY - (distanceY-1);
+            }
+
+            while (a.estVivant()) {
+                int newposX = this.getX() + (this.getVitesse()*dx);
+                int newposY = this.getY() + (this.getVitesse()*dy);
+                this.setX(newposX);
+                this.setY(newposY);
+            }
+        }else {
+
+            this.setX(this.getX()+this.getVitesse());
+        }
     }
 
     private double calculerDistance(double x1, double y1, double x2, double y2) {

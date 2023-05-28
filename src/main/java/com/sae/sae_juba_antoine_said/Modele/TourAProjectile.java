@@ -19,7 +19,7 @@ public class TourAProjectile extends Tour{
     }
 
     public void lancerProjectile(Acteur a){
-
+        this.projectile.deplacerVers(a);
 
     }
 
