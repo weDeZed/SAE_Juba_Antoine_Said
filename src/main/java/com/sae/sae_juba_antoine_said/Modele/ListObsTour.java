@@ -4,8 +4,7 @@ import javafx.collections.ListChangeListener;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
+
 
 import java.io.FileInputStream;
 
@@ -33,7 +32,7 @@ public class ListObsTour implements ListChangeListener<Tour> {
 
 
                 try {
-                    String chemin = "C:\\Users\\jubac\\OneDrive\\Documents\\BUT\\S2\\Java\\SAE_Juba_Antoine_Saidd\\src\\main\\java\\com\\sae\\sae_juba_antoine_said\\Ressources\\tour.png";
+                    String chemin = "C:\\Users\\jubac\\Desktop\\Programmation\\S2\\TP JAVA\\SAE_Juba_Antoine_Said\\src\\main\\java\\com\\sae\\sae_juba_antoine_said\\Ressources\\tour.png";
                     fichierGuerrier = new FileInputStream(chemin);
                 } catch (Exception e) {
                     e.printStackTrace();

@@ -23,6 +23,7 @@ public abstract class  Tour {
 
 
     public Acteur ennemiPlusProche () {
+
         Acteur acteur = null;
         for (int i = 0; i < env.getActeurs().size(); i++) {
             if ((this.getX() - range <= env.getActeurs().get(i).getY() && env.getActeurs().get(i).getY() <= this.getY() + range) &&

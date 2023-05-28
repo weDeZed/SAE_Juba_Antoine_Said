@@ -33,7 +33,7 @@ public class ListObsActeur implements ListChangeListener<Acteur> {
 
 
                 try {
-                    String cheminJ = "C:\\Users\\jubac\\OneDrive\\Documents\\BUT\\S2\\Java\\SAE_Juba_Antoine_Saidd\\src\\main\\java\\com\\sae\\sae_juba_antoine_said\\Ressources\\saidkamal.png";
+                    String cheminJ = "C:\\Users\\jubac\\Desktop\\Programmation\\S2\\TP JAVA\\SAE_Juba_Antoine_Said\\src\\main\\java\\com\\sae\\sae_juba_antoine_said\\Ressources\\saidkamal.png";
                     fichierGuerrier = new FileInputStream(cheminJ);
                 } catch (Exception e) {
                     e.printStackTrace();

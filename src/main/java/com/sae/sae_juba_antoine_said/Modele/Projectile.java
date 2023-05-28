@@ -1,7 +1,9 @@
 package com.sae.sae_juba_antoine_said.Modele;
 
+import javafx.animation.TranslateTransition;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.util.Duration;
 
 public class Projectile {
 
@@ -59,35 +61,34 @@ public class Projectile {
 
 
     public void deplacerVers(Acteur a) {
-        double distance = calculerDistance(getX(), getY(), a.getX(), a.getY());
-        System.out.println("Distance à parcourir : " + distance);
 
 
-        while (getX() != a.getX() && getY()!= a.getY()) {
-
-
-            double verteurX = a.getX() - getX();
-            double verteurY = a.getY() - getY();
-
-            // Calculer le rapport entre la distance à parcourir et la distance totale
-            double ratio = distance / calculerDistance(getX(), getY(), a.getX(), a.getY());
-
-
-           setX((int) (verteurX * ratio));
-           setY( (int) (verteurY * ratio));
+        System.out.println("Coordonnées  Depart : (" + getX() + ", " + getY() + ")");
+        double startX = this.tourAProjectile.getX();
+        double startY =this.tourAProjectile.getY();
+        double endX = tourAProjectile.ennemiPlusProche().getX();
+        double endY = tourAProjectile.ennemiPlusProche().getY();
 
 
 
-            System.out.println("Nouvelles coordonnées : (" + getX() + ", " + getY() + ")");
-        }
+        TranslateTransition transition = new TranslateTransition(Duration.seconds(1));
+        transition.setFromX(startX);
+        transition.setFromY(startY);
+        transition.setToX(endX);
+        transition.setToY(endY);
 
-        System.out.println("Objet arrivé à la destination !");
+
+        transition.play();
+
+        System.out.println("Nouvelles coordonnées : (" + getX() + ", " + getY() + ")");
+
     }
 
-    public void seDeplacer() {
-        Acteur a = this.tourAProjectile.ennemiPlusProche();
+    public void seDeplacer(Acteur a) {
+        //Acteur a = this.tourAProjectile.ennemiPlusProche();
         int dx, dy;
         int distanceX,distanceY;
+        System.out.println("Coordonnées  départ : (" + getX() + ", " + getY() + ")");
 
         if (a != null){
 
@@ -106,16 +107,14 @@ public class Projectile {
                 dy = distanceY - (distanceY-1);
             }
 
-            while (a.estVivant()) {
+
                 int newposX = this.getX() + (this.getVitesse()*dx);
                 int newposY = this.getY() + (this.getVitesse()*dy);
                 this.setX(newposX);
                 this.setY(newposY);
             }
-        }else {
+        System.out.println("Nouvelles coordonnées : (" + getX() + ", " + getY() + ")");
 
-            this.setX(this.getX()+this.getVitesse());
-        }
     }
 
     private double calculerDistance(double x1, double y1, double x2, double y2) {

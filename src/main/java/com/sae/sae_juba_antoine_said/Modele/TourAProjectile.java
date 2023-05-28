@@ -7,8 +7,7 @@ public class TourAProjectile extends Tour{
     public TourAProjectile(int x, int y, int degats, int range,Projectile projectile ) {
         super(x, y, degats, range);
         this.projectile = projectile;
-        this.projectile.setX(x);
-        this.projectile.setY(y);
+
 
     }
 

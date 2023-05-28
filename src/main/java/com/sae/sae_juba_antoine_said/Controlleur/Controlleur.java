@@ -3,8 +3,10 @@ import com.sae.sae_juba_antoine_said.Modele.*;
 import com.sae.sae_juba_antoine_said.Vue.Vue;
 import com.sae.sae_juba_antoine_said.Vue.VueGuerrier;
 import com.sae.sae_juba_antoine_said.Vue.VueProjectile;
+import com.sae.sae_juba_antoine_said.Vue.VueTour;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.animation.TranslateTransition;
 import javafx.collections.ListChangeListener;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -49,8 +51,8 @@ public class Controlleur implements Initializable {
     ArrayList<Sommet> chemin, chemin2;
     Projectile p ;
     TourAProjectile tourAProjectile;
-
     VueProjectile vueProjectile;
+    VueTour vueTour;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -71,18 +73,26 @@ public class Controlleur implements Initializable {
         this.pane.setPrefSize(environnement.getX() * 16, environnement.getY() * 16);
 
 
-        guerrier1 = new Guerrier(1, 42 * 16, 2 * 16);
-        guerrier2 = new Guerrier(1, 28 * 16, 45 * 16);
-
-        environnement.ajouterActeur(guerrier1);
-        environnement.ajouterActeur(guerrier2);
-
 
         p = new Projectile(50,30,10);
-        environnement.ajouterProjectile(p);
-        vueGuerrier = new VueGuerrier(pane, environnement.getActeurs());
+        tourAProjectile = new TourAProjectile(72,47,20,200,p);
 
+        guerrier1 = new Guerrier(1, 72 , 47 );
+
+
+        environnement.ajouterTour(tourAProjectile);
+        environnement.ajouterProjectile(p);
+        environnement.ajouterActeur(guerrier1);
+
+        vueGuerrier = new VueGuerrier(pane, environnement.getActeurs());
+        vueTour = new VueTour(pane, environnement.getTours());
         vueProjectile = new VueProjectile(pane, environnement.getProjectiles());
+
+        System.out.println("Coord projectile avant = " + p.getX()+" " + p.getY());
+
+        System.out.println("Coord projectile apres= " + p.getX()+" " + p.getY());
+
+
 
 
 
@@ -97,23 +107,20 @@ public class Controlleur implements Initializable {
 
 
 
-        System.out.println("source sommet " + source);
 
-
-        System.out.println("poid de sommet source " + source.getPoids());
 
 
         cible = environnement.getSommet(50, 0);
         Circle circle = new Circle(50 * 16, 0 * 16, 10, Color.BLACK);
         pane.getChildren().add(circle);
 
-        System.out.println("sommet cible poid " + cible.getPoids());
+
 
         bfs = new BFS(environnement, source);
 
         this.chemin = bfs.cheminVersSource(cible);
 
-        System.out.println("longeur chemin " + chemin + " longeur chemin2 " + chemin2);
+
 
         for (Sommet s : chemin) {
             pane.getChildren().add(new Circle(s.getX() * 16, s.getY() * 16, 5, Color.RED));
@@ -124,14 +131,13 @@ public class Controlleur implements Initializable {
         listenerListeActeurs = new ListObsActeur(pane);
         listenerListeTours = new ListObsTour(pane);
 
-
         environnement.getActeurs().addListener(listenerListeActeurs);
         environnement.getTours().addListener(listenerListeTours);
 
 
 
         pane.setOnMousePressed(mouseEvent -> {
-          //  environnement.ajouterActeur(new Guerrier(1,(int) mouseEvent.getX(),(int ) mouseEvent.getY()));
+           environnement.ajouterActeur(new Guerrier(1,(int) mouseEvent.getX(),(int ) mouseEvent.getY()));
             //environnement.ajouterTour(new TourAProjectile((int) mouseEvent.getX(), (int) mouseEvent.getY(), 10, 10,new Projectile((int) mouseEvent.getX(), (int) mouseEvent.getY(),10)));
             System.out.println("x " + (int) mouseEvent.getX() / 16 + " Y " + (int) mouseEvent.getY() / 15 + " poid " + environnement.getMap()[(int) mouseEvent.getX() / 16][(int) mouseEvent.getY() / 16]);
 
@@ -141,7 +147,7 @@ public class Controlleur implements Initializable {
 
 
 
-        p.deplacerVers(guerrier1);
+       // p.seDeplacer(guerrier1);
 
         gameLaunche();
         initAnimation();
