@@ -1,5 +1,6 @@
 package com.sae.sae_juba_antoine_said.Modele;
 
+import com.sae.sae_juba_antoine_said.Vue.VueTour;
 import javafx.collections.ListChangeListener;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -13,6 +14,7 @@ public class ListObsTour implements ListChangeListener<Tour> {
 
 
     private Pane panneauDeJeu;
+    VueTour vueTour;
 
     public ListObsTour(Pane panneauDeJeu) {
         this.panneauDeJeu = panneauDeJeu;
@@ -26,26 +28,10 @@ public class ListObsTour implements ListChangeListener<Tour> {
 
 
         while (t.next()) {
-
-
-            FileInputStream fichierGuerrier = null;
             for (Tour tour : t.getAddedSubList()) {
-
-
-                try {
-                    fichierGuerrier = new FileInputStream("src/main/java/com/sae/sae_juba_antoine_said/Ressources/tour.png");
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                System.out.println("CHANGEMENT");
-                if (tour instanceof Tour) {
-                    image = new Image(fichierGuerrier);
-                    imageView = new ImageView(image);
-                    imageView.xProperty().bind(tour.xProperty());
-                    imageView.yProperty().bind(tour.yProperty());
-                    this.panneauDeJeu.getChildren().add(imageView);
-                }
+                vueTour=new VueTour(panneauDeJeu,tour);
             }
         }
     }
+
 }

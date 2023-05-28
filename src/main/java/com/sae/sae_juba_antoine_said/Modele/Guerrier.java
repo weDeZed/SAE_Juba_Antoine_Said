@@ -1,7 +1,7 @@
 package com.sae.sae_juba_antoine_said.Modele;
 
 public class Guerrier extends Ally {
-    private static int direction;
+    private  int direction;
     private int startX ;
     private int startY;
 
@@ -47,7 +47,6 @@ public class Guerrier extends Ally {
     public Acteur attaquer() {
         for (Acteur a : getEnv().getActeurs()) {
             if (a instanceof Ennemi && a.estVivant()) {
-                //System.out.println("x " + getX() + "  y " + getY());
                 if (this.getY() - this.getRange() <= a.getY() && a.getY() <= this.getY() + this.getRange() &&
                         this.getX() - this.getRange() <= a.getX() && a.getX() <= this.getX() + this.getRange()) {
                     System.out.println("un ennemie ");
@@ -103,7 +102,5 @@ public class Guerrier extends Ally {
             setY(y * 16);
         }
     }
-
-
 }
 

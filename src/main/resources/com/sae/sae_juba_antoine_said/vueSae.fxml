@@ -1,19 +1,57 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.TilePane?>
-<BorderPane fx:id="borderPane" style="-fx-background-color: #407de3" maxHeight="-Infinity" maxWidth="-Infinity"
-            minHeight="-Infinity" minWidth="-Infinity" prefWidth="140.0" prefHeight="77.0" styleClass="body"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.sae.sae_juba_antoine_said.Controlleur.Controlleur">
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1400.0" style="-fx-background-color: #407de3" styleClass="body" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sae.sae_juba_antoine_said.Controlleur.Controlleur">
     <children>
         <Pane fx:id="pane" style="-fx-background-color: #129d0c">
             <children>
-                <TilePane fx:id="tilePane" style="-fx-background-color: #9b340f" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity">
+                <TilePane fx:id="tilePane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" style="-fx-background-color: #9b340f">
                 </TilePane>
             </children>
         </Pane>
     </children>
+    <right>
+        <GridPane fx:id="gridpane" style="-fx-background-color: #28ddee;" BorderPane.alignment="CENTER">
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints fx:id="tour1" minHeight="10.0" prefHeight="10.0" vgrow="SOMETIMES" />
+                <RowConstraints fx:id="tour2" minHeight="10.0" prefHeight="10.0" vgrow="SOMETIMES" />
+                <RowConstraints fx:id="tour3" minHeight="10.0" prefHeight="10.0" vgrow="SOMETIMES" />
+                <RowConstraints fx:id="tour4" minHeight="10.0" prefHeight="10.0" vgrow="SOMETIMES" />
+            </rowConstraints>
+            <children>
+                <Pane onMouseClicked="#tour1" style="-fx-background-color: #b65b5b; -fx-border-color: black; -fx-border-width: 1px;" GridPane.rowIndex="0" />
+                <Pane onMouseClicked="#tour2" style="-fx-background-color: #36368a; -fx-border-color: black; -fx-border-width: 1px;" GridPane.rowIndex="1" />
+                <Pane onMouseClicked="#tour3" style="-fx-background-color: #297929; -fx-border-color: black; -fx-border-width: 1px;" GridPane.rowIndex="2" />
+                <Pane onMouseClicked="#tour4" style="-fx-background-color: #9b9b39; -fx-border-color: black; -fx-border-width: 1px;" GridPane.rowIndex="3" />
+            </children>
+        </GridPane>
+    </right>
+    <left>
+        <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+            <children>
+                <ToggleButton fx:id="tourB1" mnemonicParsing="false" prefHeight="186.0" prefWidth="100.0" text="ToggleButton">
+                    <toggleGroup>
+                        <ToggleGroup fx:id="tourButton" />
+                    </toggleGroup>
+                </ToggleButton>
+                <ToggleButton fx:id="tourB2" mnemonicParsing="false" prefHeight="197.0" prefWidth="100.0" text="ToggleButton" toggleGroup="$tourButton" />
+                <ToggleButton fx:id="tourB3" mnemonicParsing="false" prefHeight="211.0" prefWidth="100.0" text="ToggleButton" toggleGroup="$tourButton" />
+                <ToggleButton fx:id="tourB4" mnemonicParsing="false" prefHeight="213.0" prefWidth="100.0" text="ToggleButton" toggleGroup="$tourButton" />
+            </children>
+        </VBox>
+    </left>
+
+
 </BorderPane>
