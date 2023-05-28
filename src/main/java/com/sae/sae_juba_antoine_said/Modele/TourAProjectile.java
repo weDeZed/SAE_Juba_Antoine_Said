@@ -14,11 +14,14 @@ public class TourAProjectile extends Tour{
     @Override
     public void attaqueEnnemi() {
 
-
     }
 
     public void lancerProjectile(Acteur a){
-        this.projectile.deplacerVers(a);
+
+        int startX = this.getX();
+        int startY = this.getY();
+
+        this.projectile.deplacerVers(a,startX,startY);
 
     }
 

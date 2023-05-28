@@ -73,11 +73,10 @@ public class Controlleur implements Initializable {
         this.pane.setPrefSize(environnement.getX() * 16, environnement.getY() * 16);
 
 
+        p = new Projectile(30,25);
+        tourAProjectile = new TourAProjectile(30,25,20,400,p);
 
-        p = new Projectile(50,30,10);
-        tourAProjectile = new TourAProjectile(72,47,20,200,p);
-
-        guerrier1 = new Guerrier(1, 72 , 47 );
+        guerrier1 = new Guerrier(1, 72*16 , 47*16 );
 
 
         environnement.ajouterTour(tourAProjectile);
@@ -88,9 +87,7 @@ public class Controlleur implements Initializable {
         vueTour = new VueTour(pane, environnement.getTours());
         vueProjectile = new VueProjectile(pane, environnement.getProjectiles());
 
-        System.out.println("Coord projectile avant = " + p.getX()+" " + p.getY());
 
-        System.out.println("Coord projectile apres= " + p.getX()+" " + p.getY());
 
 
 
@@ -103,17 +100,11 @@ public class Controlleur implements Initializable {
 
 
         BFS bfs, bfs1;
-        source = environnement.getSommet(28,45 );
+        source = environnement.getSommet(0,0 );
 
-
-
-
-
-
-        cible = environnement.getSommet(50, 0);
-        Circle circle = new Circle(50 * 16, 0 * 16, 10, Color.BLACK);
-        pane.getChildren().add(circle);
-
+        cible = environnement.getSommet(15, 20);
+        //  Circle circle = new Circle(50 * 16, 0 * 16, 10, Color.BLACK);
+       // pane.getChildren().add(circle);
 
 
         bfs = new BFS(environnement, source);
@@ -121,10 +112,11 @@ public class Controlleur implements Initializable {
         this.chemin = bfs.cheminVersSource(cible);
 
 
-
         for (Sommet s : chemin) {
             pane.getChildren().add(new Circle(s.getX() * 16, s.getY() * 16, 5, Color.RED));
         }
+
+
 
 
 
@@ -168,7 +160,7 @@ public class Controlleur implements Initializable {
 
     private void initAnimation() {
         gameLoop = new Timeline();
-        temps = 0;
+        temps = 1;
         gameLoop.setCycleCount(Timeline.INDEFINITE);
         AtomicInteger i = new AtomicInteger();
         AtomicInteger k = new AtomicInteger();
@@ -182,18 +174,28 @@ public class Controlleur implements Initializable {
                     if (temps == 10000) {
                         gameLoop.stop();
                     } else if (temps % 2 == 0) {
-                        Sommet sommet = chemin.get(i.getAndIncrement());
-                        guerrier1.setX(sommet.getX() * 16);
-                        guerrier1.setY(sommet.getY() * 16);
+                       //Sommet sommet = chemin.get(i.getAndIncrement());
+                        //guerrier1.setX(sommet.getX() * 16);
+                        //guerrier1.setY(sommet.getY() * 16);
 
 
 
+                            p.setX(16*i.getAndIncrement());
+                            p.setY(16*i.getAndIncrement());
 
+
+
+                        System.out.println("Coord projectile avant = " + p.getX()+" " + p.getY());
+                       // tourAProjectile.lancerProjectile(guerrier1);
+                        System.out.println("Coord projectile apres= " + p.getX()+" " + p.getY());
+
+
+/*
                         //System.out.println(sommet);
                        if (sommet.getY() == cible.getY() && sommet.getX() == cible.getX()) {
                             gameLoop.stop();
                         }
-
+*/
 
 
                     }

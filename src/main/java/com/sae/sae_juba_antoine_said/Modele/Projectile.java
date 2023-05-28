@@ -9,23 +9,24 @@ public class Projectile {
 
     IntegerProperty x,y;
     int vitesse;
-    private TourAProjectile tourAProjectile;
 
-    public Projectile(int x, int y,int v,TourAProjectile tourAProjectile) {
+
+
+    public Projectile(int x, int y) {
         this.x = new SimpleIntegerProperty(x);
         this.y = new SimpleIntegerProperty(y);
-        this.vitesse = v;
+        this.vitesse = 10;
+    }
+    public void deplacerVers(Acteur a,int startX,int startY) {
+
+
+
     }
 
-    public Projectile(int x, int y,int v) {
-        this.x = new SimpleIntegerProperty(x);
-        this.y = new SimpleIntegerProperty(y);
-        this.vitesse = v;
+
+    private double calculerDistance(double x1, double y1, double x2, double y2) {
+        return Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
     }
-
-
-
-
 
     public int getVitesse() {
         return vitesse;
@@ -34,6 +35,7 @@ public class Projectile {
     public void setVitesse(int vitesse) {
         this.vitesse = vitesse;
     }
+
 
     public int getX() {
         return x.get();
@@ -57,67 +59,5 @@ public class Projectile {
 
     public void setY(int y) {
         this.y.set(y);
-    }
-
-
-    public void deplacerVers(Acteur a) {
-
-
-        System.out.println("Coordonnées  Depart : (" + getX() + ", " + getY() + ")");
-        double startX = this.tourAProjectile.getX();
-        double startY =this.tourAProjectile.getY();
-        double endX = tourAProjectile.ennemiPlusProche().getX();
-        double endY = tourAProjectile.ennemiPlusProche().getY();
-
-
-
-        TranslateTransition transition = new TranslateTransition(Duration.seconds(1));
-        transition.setFromX(startX);
-        transition.setFromY(startY);
-        transition.setToX(endX);
-        transition.setToY(endY);
-
-
-        transition.play();
-
-        System.out.println("Nouvelles coordonnées : (" + getX() + ", " + getY() + ")");
-
-    }
-
-    public void seDeplacer(Acteur a) {
-        //Acteur a = this.tourAProjectile.ennemiPlusProche();
-        int dx, dy;
-        int distanceX,distanceY;
-        System.out.println("Coordonnées  départ : (" + getX() + ", " + getY() + ")");
-
-        if (a != null){
-
-            distanceX = a.getX() - this.getX();
-            distanceY = a.getY() - this.getY();
-
-            if (distanceX < 0){
-                dx = distanceX +(distanceX-1);
-            }else {
-                dx = distanceX - (distanceX-1);
-            }
-
-            if (distanceY < 0){
-                dy = distanceY +(distanceY-1);
-            }else {
-                dy = distanceY - (distanceY-1);
-            }
-
-
-                int newposX = this.getX() + (this.getVitesse()*dx);
-                int newposY = this.getY() + (this.getVitesse()*dy);
-                this.setX(newposX);
-                this.setY(newposY);
-            }
-        System.out.println("Nouvelles coordonnées : (" + getX() + ", " + getY() + ")");
-
-    }
-
-    private double calculerDistance(double x1, double y1, double x2, double y2) {
-        return Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
     }
 }

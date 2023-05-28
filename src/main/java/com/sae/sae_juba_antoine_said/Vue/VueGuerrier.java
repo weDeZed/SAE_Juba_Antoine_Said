@@ -27,7 +27,7 @@ public class VueGuerrier {
         FileInputStream fichierGuerrier = null;
         for (Acteur g : this.guerriers) {
             try {
-                fichierGuerrier = new FileInputStream("C:\\Users\\jubac\\Desktop\\Programmation\\S2\\TP JAVA\\SAE_Juba_Antoine_Said\\src\\main\\java\\com\\sae\\sae_juba_antoine_said\\Ressources\\saidkamal.png");
+                fichierGuerrier = new FileInputStream("src/main/java/com/sae/sae_juba_antoine_said/Ressources/saidkamal.png");
             } catch (Exception e) {
                 e.printStackTrace();
             }

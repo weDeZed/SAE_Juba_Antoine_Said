@@ -15,7 +15,7 @@ public class Lanceur extends Application {
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Lanceur.class.getResource("vueSae.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 1440, 800);
-        stage.setTitle("Tour De Defance");
+        stage.setTitle("Tour De Defense");
         stage.setScene(scene);
         stage.setResizable(false);
         stage.show();

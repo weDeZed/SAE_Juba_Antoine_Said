@@ -34,7 +34,7 @@ public class VueProjectile {
             if (p instanceof Projectile) {
                 this.image = new Image(fichierProjectile);
                 this.imageView = new ImageView(image);
-                imageView.xProperty().bind(p.xProperty());
+               imageView.xProperty().bind(p.xProperty());
                 imageView.yProperty().bind(p.yProperty());
             }
             this.pane.getChildren().add(imageView);
