@@ -42,8 +42,11 @@ public class ListObsTour implements ListChangeListener<Tour> {
                 if (tour instanceof Tour) {
                     image = new Image(fichierGuerrier);
                     imageView = new ImageView(image);
+                    int decalage = ((int) image.getHeight());
                     imageView.xProperty().bind(tour.xProperty());
                     imageView.yProperty().bind(tour.yProperty());
+
+
 
                     this.panneauDeJeu.getChildren().add(imageView);
                 }
