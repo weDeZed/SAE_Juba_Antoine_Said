@@ -1,19 +1,18 @@
 package com.sae.sae_juba_antoine_said.Controlleur;
 
 import com.sae.sae_juba_antoine_said.Modele.*;
-import com.sae.sae_juba_antoine_said.Vue.InventairTour;
+import com.sae.sae_juba_antoine_said.Vue.InventairDesTours;
 import com.sae.sae_juba_antoine_said.Vue.VueActeur;
 import com.sae.sae_juba_antoine_said.Vue.VueEnvironnement;
 import com.sae.sae_juba_antoine_said.Vue.VueTour;
+import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.collections.ListChangeListener;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
 import javafx.scene.control.ToggleButton;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
@@ -21,12 +20,13 @@ import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.TilePane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import javafx.scene.shape.Line;
+import javafx.scene.transform.Rotate;
 import javafx.util.Duration;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -47,13 +47,13 @@ public class Controlleur implements Initializable {
     private int temps;
     @FXML
     private Pane pane;
-    private BFS bfs;
+
     private Tour troopTours;
     private VueTour vueTour;
 
     @FXML
     GridPane gridpane;
-    InventairTour inventairTour;
+    InventairDesTours inventairDesTours;
     @FXML
     private RowConstraints tour1;
 
@@ -72,6 +72,7 @@ public class Controlleur implements Initializable {
     ListChangeListener<Acteur> listenerListeActeurs;
     ListChangeListener<Tour> listenerListeTours;
 
+    Line arrow;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -91,6 +92,20 @@ public class Controlleur implements Initializable {
         troopTours = new TroopTour(56 * 16, 27 * 16, 20, 10, environnement);
         vueTour = new VueTour(pane, troopTours);
 
+        arrow = new Line(0, 0, 0, -troopTours.getRange());
+        arrow.setStroke(Color.BLACK);
+        arrow.setStrokeWidth(2);
+        arrow.setEndY(-2 * troopTours.getRange() * 8);
+
+
+// Positionner la flèche au centre de la tour
+        arrow.setLayoutX(troopTours.getX());
+        arrow.setLayoutY(troopTours.getY());
+
+        pane.getChildren().add(arrow);
+
+
+
         /*Image image1 = new Image("src/main/java/com/sae/sae_juba_antoine_said/Ressources/tour.png"); // Spécifiez le chemin d'accès à l'image 1
         ImageView imageView1 = new ImageView(image1);
         tourB1.setGraphic(imageView1);
@@ -100,21 +115,23 @@ public class Controlleur implements Initializable {
         pane.setOnMousePressed(mouseEvent -> {
             if (tourB1.isSelected()) {
                 System.out.println("b1");
-                TroopTour troopTour = new TroopTour((int) mouseEvent.getX(), (int) mouseEvent.getY(), 0, 23, environnement);
+                TroopTour troopTour = new TroopTour((int) mouseEvent.getX(), (int) mouseEvent.getY(), 0, 10, environnement);
                 environnement.ajouterTour(troopTour);
                 ;
             } else if (tourB2.isSelected()) {
                 System.out.println("b2");
-                TondreTour tondreTour = new TondreTour((int) mouseEvent.getX(), (int) mouseEvent.getY(), 0, 23, environnement);
+                TondreTour tondreTour = new TondreTour((int) mouseEvent.getX(), (int) mouseEvent.getY(), 0, 10, environnement);
                 environnement.ajouterTour(tondreTour);
                 ;
             } else if (tourB3.isSelected()) {
                 System.out.println("b3");
-                LaserTour laserTour=new LaserTour((int) mouseEvent.getX(), (int) mouseEvent.getY(), 0, 23, environnement);
-                environnement.ajouterTour(laserTour);;
+                LaserTour laserTour = new LaserTour((int) mouseEvent.getX(), (int) mouseEvent.getY(), 0, 10, environnement);
+                environnement.ajouterTour(laserTour);
+                ;
             } else {
-                ArcTour arcTour=new ArcTour((int) mouseEvent.getX(), (int) mouseEvent.getY(), 0, 23, environnement);
-                environnement.ajouterTour(arcTour);;
+                ArcTour arcTour = new ArcTour((int) mouseEvent.getX(), (int) mouseEvent.getY(), 0, 10, environnement);
+                environnement.ajouterTour(arcTour);
+                ;
             }
             //System.out.println("x " + (int) mouseEvent.getX() / 16 + " Y " + (int) mouseEvent.getY() / 15 + " poid " + environnement.getMap()[(int) mouseEvent.getX() / 16][(int) mouseEvent.getY() / 16]);
         });
@@ -127,7 +144,7 @@ public class Controlleur implements Initializable {
 
         //ImageView imageView1 = (ImageView) gridpane.getChildren().get(1);
 
-        inventairTour = new InventairTour(gridpane, tourB1, tourB2, tourB3, tourB4);
+        inventairDesTours = new InventairDesTours(gridpane, tourB1, tourB2, tourB3, tourB4);
         //inventairTour.mettreImg();
         //gridpane.getChildren().add(imageView1);
         gameLaunche();
@@ -192,8 +209,6 @@ public class Controlleur implements Initializable {
                     temps++;
                 })
         );
-
-
         gameLoop.getKeyFrames().add(kf);
     }
 
@@ -346,4 +361,4 @@ for (Acteur a : environnement.getActeurs()) {
 
         });
 
-         */
+*/

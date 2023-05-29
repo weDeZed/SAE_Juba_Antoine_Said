@@ -1,7 +1,5 @@
 package com.sae.sae_juba_antoine_said.Vue;
 
-import com.sae.sae_juba_antoine_said.Modele.TroopTour;
-import javafx.fxml.FXML;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -9,11 +7,11 @@ import javafx.scene.layout.GridPane;
 
 import java.io.FileInputStream;
 
-public class InventairTour {
+public class InventairDesTours {
     private ToggleButton tourB1, tourB2, tourB3, tourB4;
     GridPane gridPane;
 
-    public InventairTour(GridPane gridPane, ToggleButton tourB1, ToggleButton tourB2, ToggleButton tourB3, ToggleButton tourB4) {
+    public InventairDesTours(GridPane gridPane, ToggleButton tourB1, ToggleButton tourB2, ToggleButton tourB3, ToggleButton tourB4) {
         this.gridPane = gridPane;
         this.tourB1 = tourB1;
         this.tourB2 = tourB2;
@@ -53,8 +51,8 @@ public class InventairTour {
         }
         image = new Image(fichierTour);
         imageView = new ImageView(image);
-        imageView.setFitHeight(100);
-        imageView.setFitWidth(100);
+        //imageView.setFitHeight(100);
+        //imageView.setFitWidth(100);
         return imageView;
     }
 
