@@ -30,7 +30,6 @@ public abstract class Ennemi extends Acteur {
             this.setX(this.getEnv().getChemin().get(indiceCheminActuel).getX() * 16);
             this.setY(this.getEnv().getChemin().get(indiceCheminActuel).getY() * 16);
         }
-
     }
 
 

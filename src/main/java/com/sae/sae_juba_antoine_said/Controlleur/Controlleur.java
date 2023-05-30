@@ -10,14 +10,22 @@ import javafx.collections.ListChangeListener;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ToggleButton;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.ClipboardContent;
+import javafx.scene.input.Dragboard;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.input.TransferMode;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.TilePane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.util.Duration;
 
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
@@ -33,26 +41,25 @@ public class Controlleur implements Initializable {
     private VueEnvironnement vueEnvironnementMap;
 
 
-
-
-
     private Timeline gameLoop;
 
     private int temps;
     @FXML
     private Pane pane;
 
-    private Tour troopTours;
+    private Tour troopTours, troopTours1;
     private VueTour vueTour;
 
     @FXML
     GridPane gridpane;
     InventairDesTours inventairDesTours;
     @FXML
-    private RowConstraints tour1,tour2,tour3,tour4;
+    private RowConstraints tour1, tour2, tour3, tour4;
 
     @FXML
     private ToggleButton tourB1, tourB2, tourB3, tourB4;
+
+    private PoserTour dragDropSetup;
 
     ListChangeListener<Acteur> listenerListeActeurs;
     ListChangeListener<Tour> listenerListeTours;
@@ -75,7 +82,16 @@ public class Controlleur implements Initializable {
 
 
         troopTours = new TroopTour(56 * 16, 27 * 16, 20, 10, environnement);
+        troopTours1 = new TroopTour(47 * 16, 10 * 16, 20, 10, environnement);
         vueTour = new VueTour(pane, troopTours);
+        vueTour = new VueTour(pane, troopTours1);
+
+        environnement.ajouterTour(troopTours);
+        environnement.ajouterTour(troopTours1);
+
+
+
+
 
        /* arrow = new Line(0, 0, 0, -troopTours.getRange());
         arrow.setStroke(Color.BLACK);
@@ -92,7 +108,7 @@ public class Controlleur implements Initializable {
 
 
 
-        pane.setOnMousePressed(mouseEvent -> {
+       /* pane.setOnMousePressed(mouseEvent -> {
             if (tourB1.isSelected()) {
                 System.out.println("b1");
                 TroopTour troopTour = new TroopTour((int) mouseEvent.getX(), (int) mouseEvent.getY(), 0, 10, environnement);
@@ -116,19 +132,24 @@ public class Controlleur implements Initializable {
             //System.out.println("x " + (int) mouseEvent.getX() / 16 + " Y " + (int) mouseEvent.getY() / 15 + " poid " + environnement.getMap()[(int) mouseEvent.getX() / 16][(int) mouseEvent.getY() / 16]);
         });
 
+        */
+
         inventairDesTours = new InventairDesTours(gridpane, tourB1, tourB2, tourB3, tourB4);
+
+
+        dragDropSetup = new PoserTour(environnement);
+        dragDropSetup.setupDraggableTower(tourB1, TroopTour.class, dragDropSetup.envoiImage(0));
+        dragDropSetup.setupDraggableTower(tourB2, TourFoudre.class, dragDropSetup.envoiImage(1));
+        dragDropSetup.setupDraggableTower(tourB3, LaserTour.class, dragDropSetup.envoiImage(2));
+        dragDropSetup.setupDraggableTower(tourB4, ArcTour.class, dragDropSetup.envoiImage(3));
+
+        dragDropSetup.setupDropPane(pane);
 
 
         listenerListeActeurs = new ListObsActeur(pane);
         listenerListeTours = new ListObsTour(pane);
         environnement.getActeurs().addListener(listenerListeActeurs);
         environnement.getTours().addListener(listenerListeTours);
-
-
-
-
-
-
 
 
         gameLaunche();
@@ -179,7 +200,7 @@ public class Controlleur implements Initializable {
                             }
                         }
                     }
-                    if (temps % 50 == 0) {
+                    if (temps % 10 == 0) {
                         for (Tour t : environnement.getTours()) {
                             if (t instanceof TroopTour) {
                                 t.attaqueEnnemi();
@@ -189,31 +210,13 @@ public class Controlleur implements Initializable {
                     }
                     if (temps == 120) {
                         troopTours.attaqueEnnemi();
+                        troopTours1.attaqueEnnemi();
                     }
                     temps++;
                 })
         );
         gameLoop.getKeyFrames().add(kf);
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     @FXML
@@ -282,15 +285,13 @@ public class Controlleur implements Initializable {
 
 
 
+/*  for (int i = 0; i <environnement.getChemin().size(); i++){
+            //System.out.println("dans chemin");
+            Circle circle =new Circle(environnement.getChemin().get(i).getX()*16,environnement.getChemin().get(i).getY()*16,5, Color.RED);
+            pane.getChildren().add(circle);
+        }
 
-
-
-
-
-
-
-
-
+       */
 
 
 

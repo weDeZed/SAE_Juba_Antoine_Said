@@ -23,21 +23,19 @@ public class MainGrille extends Application {
 		primaryStage.setTitle("Sprite Animation Example");
 
 		final ImageView imageView = new ImageView(envoiImage());
-		imageView.setViewport(new Rectangle2D(0, 0, 64, 64));
-		int i=0;
-
+		imageView.setViewport(new Rectangle2D(0, 0, 48, 48));
 		final Sprite animation = new Sprite(
 
 				imageView,
 				Duration.millis(500),
-				3, 3,
-				0, 16,
-				64, 64
+				2, 2,
+				0, 90,
+				60, 48
 		);
 		animation.setCycleCount(Animation.INDEFINITE);
 		animation.play();
 
-		primaryStage.setScene(new Scene(new Group(imageView), 300, 300));
+		primaryStage.setScene(new Scene(new Group(imageView), 800, 450));
 		primaryStage.show();
 	}
 

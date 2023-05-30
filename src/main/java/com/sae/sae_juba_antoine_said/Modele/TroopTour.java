@@ -14,22 +14,22 @@ public class TroopTour extends Tour {
             }
         }
         int placement = 0;
-        //System.out.println("TOUR getX "+getX() +" Tour GetY "+getY());
+        //System.out.println("TOUR getX "+getX()/16 +" Tour GetY "+getY()/16);
         for (int i = 0; i < 1; i++) {
             int x = getX()/16;
             int y = getY()/16;
             if (x > 0 && map[x - 1][y] == 1427) {
                 x = x - 1;
-                y = 27 + placement;
+                y = y + placement;
             } else if (x < map.length - 1 && map[x + 1][y] == 1427) {
                 x = x + 1;
-                y = 27 + placement;
+                y = y + placement;
             } else if (y > 0 && map[x][y - 1] == 1427) {
                 y = y - 1;
-                x = 56 + placement;
+                x = x + placement;
             } else if (y < map[0].length - 1 && map[x][y + 1] == 1427) {
                 y = y + 1;
-                x = 56 + placement;
+                x = x + placement;
             } else {
                 System.out.println("case pas trouvé");
                 break;
