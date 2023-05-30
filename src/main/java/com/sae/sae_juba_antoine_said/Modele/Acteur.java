@@ -14,8 +14,7 @@ public abstract class Acteur {
     public static int compteur = 0;
     private Environnement env;
 
-    BFS bfs;
-    Sommet sommet;
+
 
 
     public Acteur(int pv, int x, int y, int vitesse, int range,Environnement env) {

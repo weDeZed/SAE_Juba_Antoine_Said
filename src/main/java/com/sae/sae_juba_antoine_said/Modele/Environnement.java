@@ -21,6 +21,7 @@ public class Environnement {
     private ObservableList<Tour> tours;
     private Map<Sommet, Set<Sommet>> listeAdj;
     private ObservableList<Sommet> obstacles;
+    private ArrayList<Sommet>chemin;
 
 
 
@@ -36,9 +37,8 @@ public class Environnement {
         this.obstacles = FXCollections.observableArrayList();
         readMap();
         construit();
-
-
-
+        bfs =new BFS(this,getSommet(28,45));
+        chemin=bfs.cheminVersSource(getSommet(50,0));
 
     }
 
@@ -206,6 +206,9 @@ public class Environnement {
         }
     }
 
+    public ArrayList<Sommet> getChemin() {
+        return chemin;
+    }
 }
 
 

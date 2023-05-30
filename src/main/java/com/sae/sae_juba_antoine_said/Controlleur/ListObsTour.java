@@ -1,5 +1,6 @@
-package com.sae.sae_juba_antoine_said.Modele;
+package com.sae.sae_juba_antoine_said.Controlleur;
 
+import com.sae.sae_juba_antoine_said.Modele.Tour;
 import com.sae.sae_juba_antoine_said.Vue.VueTour;
 import javafx.collections.ListChangeListener;
 import javafx.scene.image.Image;

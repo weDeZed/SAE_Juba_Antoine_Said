@@ -1,27 +1,61 @@
 package com.sae.sae_juba_antoine_said;
 
+import com.sae.sae_juba_antoine_said.Modele.Sprite;
+import javafx.animation.Animation;
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
+import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.layout.BorderPane;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+import javafx.util.Duration;
+import javafx.geometry.Rectangle2D;
+
+import java.io.FileInputStream;
 
 public class MainGrille extends Application {
+
+
+	//private static final String IMAGE_URL = "enemy/e4/dir.png";
+
 	@Override
 	public void start(Stage primaryStage) {
-		try {
-			BorderPane root = FXMLLoader.load(getClass().getResource("grille.fxml"));
-			Scene scene = new Scene(root, 930, 695);
-			primaryStage.setTitle("Arbres couvrants et chemins dans un graphe");
-			primaryStage.setResizable(false);
-			primaryStage.setScene(scene);
-			primaryStage.show();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		primaryStage.setTitle("Sprite Animation Example");
+
+		final ImageView imageView = new ImageView(envoiImage());
+		imageView.setViewport(new Rectangle2D(0, 0, 64, 64));
+		int i=0;
+
+		final Sprite animation = new Sprite(
+
+				imageView,
+				Duration.millis(500),
+				3, 3,
+				0, 16,
+				64, 64
+		);
+		animation.setCycleCount(Animation.INDEFINITE);
+		animation.play();
+
+		primaryStage.setScene(new Scene(new Group(imageView), 300, 300));
+		primaryStage.show();
 	}
 
 	public static void main(String[] args) {
 		launch(args);
+	}
+
+	public Image envoiImage(){
+		Image image;
+
+		FileInputStream fichierTour = null;
+		try {
+			fichierTour = new FileInputStream("src/main/java/com/sae/sae_juba_antoine_said/Ressources/enemy/e4/dir.png");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		image = new Image(fichierTour);
+
+		return image;
 	}
 }

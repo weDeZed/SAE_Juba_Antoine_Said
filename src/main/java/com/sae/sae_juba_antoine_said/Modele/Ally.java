@@ -4,17 +4,15 @@ import java.util.ArrayList;
 
 public abstract class Ally extends Acteur  {
     private int indiceCheminActuel = 0;
-    private ArrayList<Sommet> chemin;
 
     public Ally(int pv, int x, int y, int vitesse, int range,Environnement env) {
         super(pv,x,y,vitesse,range,env);
-        sommet=env.getSommet(x/16,y/16);
-        bfs=new BFS(env,sommet);
-        chemin =bfs.cheminVersSource(env.getSommet(28,45));
+
     }
 
     public  abstract void agir();
     public abstract Acteur attaquer();
+    /*
     public void move() {
         //System.out.println("dans ally "+chemin);
         if (indiceCheminActuel < chemin.size() - 1) {
@@ -23,5 +21,7 @@ public abstract class Ally extends Acteur  {
             this.setY(chemin.get(indiceCheminActuel).getY()*16);
         }
     }
+
+     */
 
 }
