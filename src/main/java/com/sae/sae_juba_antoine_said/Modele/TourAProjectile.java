@@ -17,11 +17,7 @@ public class TourAProjectile extends Tour{
     }
 
     public void lancerProjectile(Acteur a){
-
-        int startX = this.getX();
-        int startY = this.getY();
-
-        this.projectile.deplacerVers(a,startX,startY);
+        this.projectile.deplacerVers(a);
 
     }
 

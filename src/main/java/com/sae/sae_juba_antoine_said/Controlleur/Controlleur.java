@@ -73,10 +73,10 @@ public class Controlleur implements Initializable {
         this.pane.setPrefSize(environnement.getX() * 16, environnement.getY() * 16);
 
 
-        p = new Projectile(30,25);
-        tourAProjectile = new TourAProjectile(30,25,20,400,p);
+       p = new Projectile(44*16,23*16,environnement);
+        tourAProjectile = new TourAProjectile(43*16,23*16,20,400,p);
 
-        guerrier1 = new Guerrier(1, 72*16 , 47*16 );
+        guerrier1 = new Guerrier(1, 49*16 , 29*16 );
 
 
         environnement.ajouterTour(tourAProjectile);
@@ -86,6 +86,7 @@ public class Controlleur implements Initializable {
         vueGuerrier = new VueGuerrier(pane, environnement.getActeurs());
         vueTour = new VueTour(pane, environnement.getTours());
         vueProjectile = new VueProjectile(pane, environnement.getProjectiles());
+
 
 
 
@@ -111,11 +112,22 @@ public class Controlleur implements Initializable {
 
         this.chemin = bfs.cheminVersSource(cible);
 
-
+/*
         for (Sommet s : chemin) {
             pane.getChildren().add(new Circle(s.getX() * 16, s.getY() * 16, 5, Color.RED));
         }
 
+ */
+        for (int i =0;i<environnement.getMap().length;i++){
+            for (int j=0;j<environnement.getMap()[i].length;j++){
+                if(environnement.getMap()[i][j]==1427){
+                    pane.getChildren().add(new Circle(i * 16, j * 16, 5, Color.RED));
+                }
+                if(environnement.getMap()[i][j]==688){
+                    pane.getChildren().add(new Circle(i * 16, j * 16, 5, Color.BLACK));
+                }
+            }
+        }
 
 
 
@@ -129,9 +141,9 @@ public class Controlleur implements Initializable {
 
 
         pane.setOnMousePressed(mouseEvent -> {
-           environnement.ajouterActeur(new Guerrier(1,(int) mouseEvent.getX(),(int ) mouseEvent.getY()));
-            //environnement.ajouterTour(new TourAProjectile((int) mouseEvent.getX(), (int) mouseEvent.getY(), 10, 10,new Projectile((int) mouseEvent.getX(), (int) mouseEvent.getY(),10)));
-            System.out.println("x " + (int) mouseEvent.getX() / 16 + " Y " + (int) mouseEvent.getY() / 15 + " poid " + environnement.getMap()[(int) mouseEvent.getX() / 16][(int) mouseEvent.getY() / 16]);
+          // environnement.ajouterActeur(new Guerrier(1,(int) mouseEvent.getX(),(int ) mouseEvent.getY()));
+            environnement.ajouterTour(new TourAProjectile((int) mouseEvent.getX(), (int) mouseEvent.getY(), 10, 10,new Projectile((int) mouseEvent.getX(), (int) mouseEvent.getY(),environnement)));
+            System.out.println("x " + (int) mouseEvent.getX() / 16 + " Y " + (int) mouseEvent.getY() / 16 + " poid " + environnement.getMap()[(int) mouseEvent.getX() / 16][(int) mouseEvent.getY() / 16]);
 
         });
 
@@ -173,30 +185,12 @@ public class Controlleur implements Initializable {
                 (ev -> {
                     if (temps == 10000) {
                         gameLoop.stop();
-                    } else if (temps % 2 == 0) {
-                       //Sommet sommet = chemin.get(i.getAndIncrement());
-                        //guerrier1.setX(sommet.getX() * 16);
-                        //guerrier1.setY(sommet.getY() * 16);
-
-
-
-                            p.setX(16*i.getAndIncrement());
-                            p.setY(16*i.getAndIncrement());
-
+                    } else if (temps % 1 == 0) {
 
 
                         System.out.println("Coord projectile avant = " + p.getX()+" " + p.getY());
-                       // tourAProjectile.lancerProjectile(guerrier1);
+                        tourAProjectile.lancerProjectile(guerrier1);
                         System.out.println("Coord projectile apres= " + p.getX()+" " + p.getY());
-
-
-/*
-                        //System.out.println(sommet);
-                       if (sommet.getY() == cible.getY() && sommet.getX() == cible.getX()) {
-                            gameLoop.stop();
-                        }
-*/
-
 
                     }
 

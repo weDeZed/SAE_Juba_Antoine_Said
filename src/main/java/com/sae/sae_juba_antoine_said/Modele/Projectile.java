@@ -9,24 +9,47 @@ public class Projectile {
 
     IntegerProperty x,y;
     int vitesse;
+    Environnement env;
 
 
-
-    public Projectile(int x, int y) {
+    public Projectile(int x, int y,Environnement environnement) {
         this.x = new SimpleIntegerProperty(x);
         this.y = new SimpleIntegerProperty(y);
-        this.vitesse = 10;
+        this.env = environnement;
+        this.vitesse = 5;
     }
-    public void deplacerVers(Acteur a,int startX,int startY) {
+    public void deplacerVers(Acteur a) {
+
+        int dx, dy;
+        int distanceX,distanceY;
+
+
+            distanceX = a.getX() - this.getX();
+            distanceY = a.getY() - this.getY();
+
+            if (distanceX < 0){
+                dx = distanceX +(distanceX-1);
+            }else {
+                dx = distanceX - (distanceX-1);
+            }
+
+            if (distanceY < 0){
+                dy = distanceY +(distanceY-1);
+            }else {
+                dy = distanceY - (distanceY-1);
+            }
+            //double length = Math.sqrt(dx*dx+dy*dy);
+            //dx /=length;
+            //dy /=length;
+                int newposX = this.getX() + (this.getVitesse()*dx);
+                int newposY = this.getY() + (this.getVitesse()*dy);
 
 
 
-    }
+                this.setX(newposX);
+                this.setY(newposY);
+            }
 
-
-    private double calculerDistance(double x1, double y1, double x2, double y2) {
-        return Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
-    }
 
     public int getVitesse() {
         return vitesse;
