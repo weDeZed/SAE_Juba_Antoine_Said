@@ -2,29 +2,20 @@ package com.sae.sae_juba_antoine_said.Controlleur;
 
 import com.sae.sae_juba_antoine_said.Modele.*;
 import com.sae.sae_juba_antoine_said.Vue.InventairDesTours;
-import com.sae.sae_juba_antoine_said.Vue.VueActeur;
 import com.sae.sae_juba_antoine_said.Vue.VueEnvironnement;
 import com.sae.sae_juba_antoine_said.Vue.VueTour;
-import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
-import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.collections.ListChangeListener;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ToggleButton;
-import javafx.scene.input.ClipboardContent;
-import javafx.scene.input.Dragboard;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.input.TransferMode;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.TilePane;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
-import javafx.scene.transform.Rotate;
 import javafx.util.Duration;
 
 import java.io.FileNotFoundException;
@@ -109,8 +100,8 @@ public class Controlleur implements Initializable {
                 ;
             } else if (tourB2.isSelected()) {
                 System.out.println("b2");
-                TondreTour tondreTour = new TondreTour((int) mouseEvent.getX(), (int) mouseEvent.getY(), 0, 10, environnement);
-                environnement.ajouterTour(tondreTour);
+                TourFoudre tourFoudre = new TourFoudre((int) mouseEvent.getX(), (int) mouseEvent.getY(), 0, 10, environnement);
+                environnement.ajouterTour(tourFoudre);
                 ;
             } else if (tourB3.isSelected()) {
                 System.out.println("b3");

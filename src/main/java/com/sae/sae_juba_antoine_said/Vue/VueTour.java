@@ -5,8 +5,6 @@ import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
-import javafx.collections.ObservableList;
-import javafx.geometry.Rectangle2D;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
@@ -17,7 +15,6 @@ import javafx.scene.transform.Rotate;
 import javafx.util.Duration;
 
 import java.io.FileInputStream;
-import java.util.ArrayList;
 
 public class VueTour {
 
@@ -43,7 +40,7 @@ public class VueTour {
             }
 
         }
-        if (tour instanceof TondreTour){
+        if (tour instanceof TourFoudre){
             try {
                 fichierTour = new FileInputStream("src/main/java/com/sae/sae_juba_antoine_said/Ressources/tourInventair/tour1.png");
             } catch (Exception e) {
@@ -78,20 +75,20 @@ public class VueTour {
         rangeCircle.setStrokeWidth(2);
         pane.getChildren().add(rangeCircle);
 
-        /*
+
         fléche = new Line(0, 0, 0, -tour.getRange());
         fléche.setStroke(Color.BLACK);
         fléche.setStrokeWidth(2);
         fléche.setEndY(-2 * tour.getRange()*8);
 
 
-// Positionner la flèche au centre de la tour
+      //Positionner la flèche au centre de la tour
         fléche.setLayoutX(tour.getX());
         fléche.setLayoutY(tour.getY());
         pane.getChildren().add(fléche);
-        //initAnimation();
+        initAnimation();
 
-         */
+
 
     }
 
