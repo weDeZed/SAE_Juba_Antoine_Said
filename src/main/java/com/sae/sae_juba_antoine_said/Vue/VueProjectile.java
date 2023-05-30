@@ -27,7 +27,7 @@ public class VueProjectile {
 
         for (Projectile p : this.projectiles) {
             try {
-                fichierProjectile = new FileInputStream("C:\\Users\\jubac\\Desktop\\Programmation\\S2\\TP JAVA\\SAE_Juba_Antoine_Said\\src\\main\\java\\com\\sae\\sae_juba_antoine_said\\Ressources\\laser.png");
+                fichierProjectile = new FileInputStream("src/main/java/com/sae/sae_juba_antoine_said/Ressources/laser.png");
             } catch (Exception e) {
                 e.printStackTrace();
             }

@@ -29,7 +29,7 @@ public class VueTour {
         FileInputStream fichierTour = null;
         for (Tour t : this.tours) {
             try {
-                fichierTour = new FileInputStream("C:\\Users\\jubac\\Desktop\\Programmation\\S2\\TP JAVA\\SAE_Juba_Antoine_Said\\src\\main\\java\\com\\sae\\sae_juba_antoine_said\\Ressources\\tour.png");
+                fichierTour = new FileInputStream("src/main/java/com/sae/sae_juba_antoine_said/Ressources/tour.png");
             } catch (Exception e) {
                 e.printStackTrace();
             }
