@@ -77,6 +77,8 @@ public class VueTour {
         rangeCircle.setStroke(Color.RED); // bordure rouge
         rangeCircle.setStrokeWidth(2);
         pane.getChildren().add(rangeCircle);
+
+        /*
         fléche = new Line(0, 0, 0, -tour.getRange());
         fléche.setStroke(Color.BLACK);
         fléche.setStrokeWidth(2);
@@ -87,7 +89,9 @@ public class VueTour {
         fléche.setLayoutX(tour.getX());
         fléche.setLayoutY(tour.getY());
         pane.getChildren().add(fléche);
-        initAnimation();
+        //initAnimation();
+
+         */
 
     }
 

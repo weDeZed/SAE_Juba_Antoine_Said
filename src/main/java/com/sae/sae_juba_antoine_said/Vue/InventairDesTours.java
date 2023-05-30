@@ -51,8 +51,8 @@ public class InventairDesTours {
         }
         image = new Image(fichierTour);
         imageView = new ImageView(image);
-        //imageView.setFitHeight(100);
-        //imageView.setFitWidth(100);
+        imageView.setFitHeight(100);
+        imageView.setFitWidth(100);
         return imageView;
     }
 

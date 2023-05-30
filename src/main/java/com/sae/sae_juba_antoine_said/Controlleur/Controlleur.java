@@ -13,7 +13,10 @@ import javafx.collections.ListChangeListener;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ToggleButton;
+import javafx.scene.input.ClipboardContent;
+import javafx.scene.input.Dragboard;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.input.TransferMode;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.RowConstraints;
@@ -39,9 +42,9 @@ public class Controlleur implements Initializable {
     private VueEnvironnement vueEnvironnementMap;
 
 
-    private Acteur bandit, guerrier2, guerrier3;
 
-    private VueActeur vueActeur;
+
+
     private Timeline gameLoop;
 
     private int temps;
@@ -55,16 +58,7 @@ public class Controlleur implements Initializable {
     GridPane gridpane;
     InventairDesTours inventairDesTours;
     @FXML
-    private RowConstraints tour1;
-
-    @FXML
-    private RowConstraints tour2;
-
-    @FXML
-    private RowConstraints tour3;
-
-    @FXML
-    private RowConstraints tour4;
+    private RowConstraints tour1,tour2,tour3,tour4;
 
     @FXML
     private ToggleButton tourB1, tourB2, tourB3, tourB4;
@@ -92,25 +86,20 @@ public class Controlleur implements Initializable {
         troopTours = new TroopTour(56 * 16, 27 * 16, 20, 10, environnement);
         vueTour = new VueTour(pane, troopTours);
 
-        arrow = new Line(0, 0, 0, -troopTours.getRange());
+       /* arrow = new Line(0, 0, 0, -troopTours.getRange());
         arrow.setStroke(Color.BLACK);
         arrow.setStrokeWidth(2);
         arrow.setEndY(-2 * troopTours.getRange() * 8);
 
-
-// Positionner la flèche au centre de la tour
         arrow.setLayoutX(troopTours.getX());
         arrow.setLayoutY(troopTours.getY());
-
         pane.getChildren().add(arrow);
 
+        */
 
 
-        /*Image image1 = new Image("src/main/java/com/sae/sae_juba_antoine_said/Ressources/tour.png"); // Spécifiez le chemin d'accès à l'image 1
-        ImageView imageView1 = new ImageView(image1);
-        tourB1.setGraphic(imageView1);
 
-         */
+
 
         pane.setOnMousePressed(mouseEvent -> {
             if (tourB1.isSelected()) {
@@ -136,17 +125,21 @@ public class Controlleur implements Initializable {
             //System.out.println("x " + (int) mouseEvent.getX() / 16 + " Y " + (int) mouseEvent.getY() / 15 + " poid " + environnement.getMap()[(int) mouseEvent.getX() / 16][(int) mouseEvent.getY() / 16]);
         });
 
+        inventairDesTours = new InventairDesTours(gridpane, tourB1, tourB2, tourB3, tourB4);
+
 
         listenerListeActeurs = new ListObsActeur(pane);
         listenerListeTours = new ListObsTour(pane);
         environnement.getActeurs().addListener(listenerListeActeurs);
         environnement.getTours().addListener(listenerListeTours);
 
-        //ImageView imageView1 = (ImageView) gridpane.getChildren().get(1);
 
-        inventairDesTours = new InventairDesTours(gridpane, tourB1, tourB2, tourB3, tourB4);
-        //inventairTour.mettreImg();
-        //gridpane.getChildren().add(imageView1);
+
+
+
+
+
+
         gameLaunche();
         initAnimation();
         gameLoop.play();
@@ -212,6 +205,26 @@ public class Controlleur implements Initializable {
         gameLoop.getKeyFrames().add(kf);
     }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     @FXML
     public void tour1(MouseEvent mouseEvent) {
         //tour1.setFillHeight(false);
@@ -238,6 +251,8 @@ public class Controlleur implements Initializable {
         tour4.setFillHeight(false);
         System.out.println("tour 4 " + tour4);
     }
+
+
 }
 
 
