@@ -10,13 +10,18 @@ public class Projectile {
     IntegerProperty x,y;
     int vitesse;
     Environnement env;
+    String id;
+    static int compteur = 0;
 
 
     public Projectile(int x, int y,Environnement environnement) {
+
         this.x = new SimpleIntegerProperty(x);
         this.y = new SimpleIntegerProperty(y);
         this.env = environnement;
         this.vitesse = 5;
+        id="P"+ compteur;
+        compteur++;
     }
     public void deplacerVers(Acteur a) {
 
@@ -48,8 +53,25 @@ public class Projectile {
 
                 this.setX(newposX);
                 this.setY(newposY);
+
+                atteintActeur(a);
             }
 
+
+
+            public void atteintActeur(Acteur a) {
+
+                System.out.println(" p X " + getX() +" p Y " + "" +getY());
+             //   System.out.println("a X " + a.getX() +"" + " a Y" +a.getY());
+                    for(int i = 0; i <=16;i++){
+                        if(getX()+i == a.getX() && getY()+i == a.getY()){
+
+                            env.getProjectiles().remove(this);
+                            System.out.println("Projectile removed");
+                        }
+                     }
+
+            }
 
     public int getVitesse() {
         return vitesse;

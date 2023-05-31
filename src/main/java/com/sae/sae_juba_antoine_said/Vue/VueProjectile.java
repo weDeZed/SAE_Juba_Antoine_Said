@@ -1,44 +1,43 @@
 package com.sae.sae_juba_antoine_said.Vue;
 
 import com.sae.sae_juba_antoine_said.Modele.*;
-import javafx.collections.ObservableList;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+import javafx.scene.shape.Circle;
 
 import java.io.FileInputStream;
-import java.util.ArrayList;
 
 public class VueProjectile {
     private Pane pane;
-    private ObservableList<Projectile> projectiles;
+
     private Image image;
     private ImageView imageView;
     private static int x = 0;
     private static int y = 0;
+    Circle circle;
+    Projectile projectile;
 
-
-
-    public VueProjectile(Pane pane, ObservableList<Projectile> projectiles) {
+    public VueProjectile(Pane pane, Projectile projectile) {
         this.pane = pane;
-        this.projectiles = projectiles;
+        this.projectile = projectile;
 
-        FileInputStream fichierProjectile = null;
+        FileInputStream fichierGuerrier = null;
 
-        for (Projectile p : this.projectiles) {
+        if(projectile instanceof Projectile ){
             try {
-                fichierProjectile = new FileInputStream("src/main/java/com/sae/sae_juba_antoine_said/Ressources/laser.png");
+                fichierGuerrier = new FileInputStream("src/main/java/com/sae/sae_juba_antoine_said/Ressources/laser.png");
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            if (p instanceof Projectile) {
-                this.image = new Image(fichierProjectile);
-                this.imageView = new ImageView(image);
-               imageView.xProperty().bind(p.xProperty());
-                imageView.yProperty().bind(p.yProperty());
-            }
-            this.pane.getChildren().add(imageView);
+
         }
+
+        this.image = new Image(fichierGuerrier);
+        this.imageView = new ImageView(image);
+        imageView.xProperty().bind(projectile.xProperty());
+        imageView.yProperty().bind(projectile.yProperty());
+        this.pane.getChildren().add(imageView);
 
     }
 

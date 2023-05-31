@@ -17,6 +17,9 @@ public class TourAProjectile extends Tour{
     }
 
     public void lancerProjectile(Acteur a){
+        if (ennemiPlusProche()!= null){
+
+        }
         this.projectile.deplacerVers(a);
 
     }

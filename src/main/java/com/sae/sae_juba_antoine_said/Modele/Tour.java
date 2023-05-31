@@ -22,6 +22,7 @@ public abstract class  Tour {
     public abstract void attaqueEnnemi();
 
 
+
     public Acteur ennemiPlusProche () {
 
         Acteur acteur = null;

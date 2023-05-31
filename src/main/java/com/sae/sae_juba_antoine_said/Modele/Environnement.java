@@ -130,6 +130,9 @@ public class Environnement {
         this.acteurs.add(a);
     }
 
+    public void tuerActeur(Acteur a) {
+        this.acteurs.remove(a);
+    }
     public ObservableList<Tour> getTours() {
         return tours;
     }
