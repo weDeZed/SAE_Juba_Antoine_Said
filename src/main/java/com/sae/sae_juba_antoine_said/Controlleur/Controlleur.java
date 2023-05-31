@@ -81,7 +81,7 @@ public class Controlleur implements Initializable {
         System.out.println("Liste obs taille : " + environnement.getProjectiles().get(0).getId());
 
 
-        guerrier1 = new Guerrier(1, 15*16 , 15*16 );
+        guerrier1 = new Guerrier(1, 15*16 , 12*16 );
         environnement.ajouterActeur(guerrier1);
         vueAct=new VueActeur(pane,guerrier1);
 
@@ -153,7 +153,8 @@ public class Controlleur implements Initializable {
 
 
                      //   System.out.println("Coord projectile avant = " + p.getX()+" " + p.getY());
-                        p.deplacerVers(guerrier1);
+                       p.deplacerVers(guerrier1);
+                        //tourAProjectile.lancerProjectile();
                     //    System.out.println("Coord projectile apres= " + p.getX()+" " + p.getY());
 
 

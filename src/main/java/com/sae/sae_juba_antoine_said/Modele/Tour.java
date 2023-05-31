@@ -3,6 +3,7 @@ package com.sae.sae_juba_antoine_said.Modele;
 import javafx.beans.Observable;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 public abstract class  Tour {
@@ -23,17 +24,20 @@ public abstract class  Tour {
 
 
 
-    public Acteur ennemiPlusProche () {
+    public ObservableList<Acteur> ennemiPlusProche () {
 
-        Acteur acteur = null;
+        ObservableList<Acteur> result = FXCollections.observableArrayList();
+
+
         for (int i = 0; i < env.getActeurs().size(); i++) {
             if ((this.getX() - range <= env.getActeurs().get(i).getY() && env.getActeurs().get(i).getY() <= this.getY() + range) &&
                     (this.getX() - range <= env.getActeurs().get(i).getX() && env.getActeurs().get(i).getX() <= this.getY()+ range)) {
-               return env.getActeurs().get(i);
+                    result.add(env.getActeurs().get(i));
+
             }
         }
 
-        return acteur;
+        return result;
 
     }
 

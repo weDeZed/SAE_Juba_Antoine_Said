@@ -66,11 +66,7 @@ public class Projectile {
                 //System.out.println("a X " + a.getX() +"" + " a Y" +a.getY());
                // System.out.println("Projectile x : " + getX() + " Projectile y : " + getY());
                // System.out.println("Acteur x : " + a.getX() + " Acteur x + 32 : " + (a.getX()+32));
-
-
-
                 //System.out.println("Acteur Y : " + a.getY() + " Acteur Y + 32 : " + (a.getY()+32));
-
                 if ((getX() >= a.getX()) && getX() <= a.getX()+32) {
                    // System.out.println("Position correct en X ");
                 }
@@ -79,8 +75,8 @@ public class Projectile {
                 }
                         if(((getX()+38 >= a.getX()) && getX() <= a.getX()+32) && (getY() >= a.getY()) && (getY()+13 <= a.getY()+32)){
                             env.removeProjectile(this);
-                            System.out.println("Projectile removed");
-                            System.out.println("ID Proj : " + getId());
+                            //System.out.println("Projectile removed");
+                           // System.out.println("ID Proj : " + getId());
                         }
 
 

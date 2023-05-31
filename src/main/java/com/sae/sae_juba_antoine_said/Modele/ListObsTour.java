@@ -11,7 +11,7 @@ import javafx.scene.shape.Circle;
 
 import java.io.FileInputStream;
 
-public class ListObsTour implements ListChangeListener<Tour> {
+public class   ListObsTour implements ListChangeListener<Tour> {
 
 
     private Pane panneauDeJeu;
