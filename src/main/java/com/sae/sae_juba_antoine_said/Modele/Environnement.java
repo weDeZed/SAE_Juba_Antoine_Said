@@ -198,6 +198,9 @@ public class Environnement {
 
     }
 
+  public void removeProjectile(Projectile p ){
+        this.projectiles.remove(p);
+  }
     public Sommet getSommet(int x, int y) {
         for (Sommet sommet : this.listeAdj.keySet()) {
             if (sommet.getX() == x && sommet.getY() == y) {

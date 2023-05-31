@@ -78,6 +78,7 @@ public class Controlleur implements Initializable {
        p = new Projectile(44,23,environnement);
        environnement.ajouterProjectile(p);
        vueProjectile = new VueProjectile(pane,p);
+        System.out.println("Liste obs taille : " + environnement.getProjectiles().get(0).getId());
 
 
         guerrier1 = new Guerrier(1, 15*16 , 15*16 );

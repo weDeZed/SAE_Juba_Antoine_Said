@@ -27,6 +27,7 @@ public class VueProjectile {
         if(projectile instanceof Projectile ){
             try {
                 fichierGuerrier = new FileInputStream("src/main/java/com/sae/sae_juba_antoine_said/Ressources/laser.png");
+
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -35,6 +36,7 @@ public class VueProjectile {
 
         this.image = new Image(fichierGuerrier);
         this.imageView = new ImageView(image);
+        this.imageView.setId(projectile.getId());
         imageView.xProperty().bind(projectile.xProperty());
         imageView.yProperty().bind(projectile.yProperty());
         this.pane.getChildren().add(imageView);

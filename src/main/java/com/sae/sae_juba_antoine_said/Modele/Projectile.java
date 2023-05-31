@@ -14,6 +14,7 @@ public class Projectile {
     static int compteur = 0;
 
 
+
     public Projectile(int x, int y,Environnement environnement) {
 
         this.x = new SimpleIntegerProperty(x);
@@ -43,9 +44,7 @@ public class Projectile {
             }else {
                 dy = distanceY - (distanceY-1);
             }
-            //double length = Math.sqrt(dx*dx+dy*dy);
-            //dx /=length;
-            //dy /=length;
+
                 int newposX = this.getX() + (this.getVitesse()*dx);
                 int newposY = this.getY() + (this.getVitesse()*dy);
 
@@ -54,22 +53,36 @@ public class Projectile {
                 this.setX(newposX);
                 this.setY(newposY);
 
-                atteintActeur(a);
+               atteintActeur(a);
             }
 
+    public String getId() {
+        return id;
+    }
+
+    public void atteintActeur(Acteur a) {
+
+                //System.out.println(" p X " + getX() +" p Y " + "" +getY());
+                //System.out.println("a X " + a.getX() +"" + " a Y" +a.getY());
+               // System.out.println("Projectile x : " + getX() + " Projectile y : " + getY());
+               // System.out.println("Acteur x : " + a.getX() + " Acteur x + 32 : " + (a.getX()+32));
 
 
-            public void atteintActeur(Acteur a) {
 
-                System.out.println(" p X " + getX() +" p Y " + "" +getY());
-             //   System.out.println("a X " + a.getX() +"" + " a Y" +a.getY());
-                    for(int i = 0; i <=16;i++){
-                        if(getX()+i == a.getX() && getY()+i == a.getY()){
+                //System.out.println("Acteur Y : " + a.getY() + " Acteur Y + 32 : " + (a.getY()+32));
 
-                            env.getProjectiles().remove(this);
+                if ((getX() >= a.getX()) && getX() <= a.getX()+32) {
+                   // System.out.println("Position correct en X ");
+                }
+                if((getY() >= a.getY()) && (getY() <= a.getY()+32)){
+                   // System.out.println("Position correct en Y ");
+                }
+                        if(((getX()+38 >= a.getX()) && getX() <= a.getX()+32) && (getY() >= a.getY()) && (getY()+13 <= a.getY()+32)){
+                            env.removeProjectile(this);
                             System.out.println("Projectile removed");
+                            System.out.println("ID Proj : " + getId());
                         }
-                     }
+
 
             }
 

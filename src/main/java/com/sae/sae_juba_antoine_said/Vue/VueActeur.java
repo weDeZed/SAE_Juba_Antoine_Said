@@ -28,6 +28,7 @@ public class VueActeur {
 
         if(acteur instanceof Guerrier ){
             try {
+
                 fichierGuerrier = new FileInputStream("src/main/java/com/sae/sae_juba_antoine_said/Ressources/saidkamal.png");
             } catch (Exception e) {
                 e.printStackTrace();
@@ -53,6 +54,7 @@ public class VueActeur {
         }
         this.image = new Image(fichierGuerrier);
         this.imageView = new ImageView(image);
+        System.out.println(" Height" + image.getHeight()+" Width "+ image.getWidth());
         imageView.xProperty().bind(acteur.xProperty());
         imageView.yProperty().bind(acteur.yProperty());
         this.pane.getChildren().add(imageView);

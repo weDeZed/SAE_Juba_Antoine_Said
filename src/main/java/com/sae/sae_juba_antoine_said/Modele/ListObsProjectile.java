@@ -23,12 +23,24 @@ public class ListObsProjectile implements ListChangeListener<Projectile> {
 
     @Override
     public void onChanged(Change<? extends Projectile> p) {
+        System.out.println("CHANGEMENT PROJECTILE");
+
         while (p.next()) {
             for (Projectile proj : p.getAddedSubList()) {
 
                 VueProjectile vueProjectile = new VueProjectile(panneauDeJeu, proj);
             }
+            for (Projectile proj : p.getRemoved()) {
+                System.out.println("mort");
+                enleverProjectile(proj);
+            }
         }
+        }
+
+    private void enleverProjectile (Projectile p){
+        System.out.println("projectile id "+  p.getId());
+
+        this.panneauDeJeu.getChildren().remove(this.panneauDeJeu.lookup("#"+ p.getId()));
     }
 }
 
