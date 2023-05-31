@@ -15,12 +15,13 @@ public class Environnement {
     BFS bfs;
 
     private int x, y;
-
     private int[][] map;
     private ObservableList<Acteur> acteurs;
     private ObservableList<Tour> tours;
     private Map<Sommet, Set<Sommet>> listeAdj;
     private ObservableList<Sommet> obstacles;
+    private ObservableList<Projectile> projectiles;
+    private ArrayList<Sommet>chemin;
 
 
 
@@ -34,11 +35,14 @@ public class Environnement {
         this.tours = FXCollections.observableArrayList();
         this.listeAdj = new HashMap();
         this.obstacles = FXCollections.observableArrayList();
+        this.projectiles = FXCollections.observableArrayList();
+
         readMap();
         construit();
 
 
-
+        bfs =new BFS(this,getSommet(28,45));
+        chemin=bfs.cheminVersSource(getSommet(50,0));
 
     }
 

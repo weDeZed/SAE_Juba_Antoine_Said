@@ -1,6 +1,6 @@
 package com.sae.sae_juba_antoine_said.Modele;
 
-public class Golem extends Acteur{
+public class Golem extends Ennemi{
     public Golem(int x, int y, int vitesse,Environnement env) {
         super(120, x, y, vitesse,0,env);
     }
@@ -17,7 +17,6 @@ public class Golem extends Acteur{
         this.decrementationPv(1);
     }
 
-    @Override
     public void seDeplacer(Acteur a) {
         this.setX(this.getX()+1);
     }

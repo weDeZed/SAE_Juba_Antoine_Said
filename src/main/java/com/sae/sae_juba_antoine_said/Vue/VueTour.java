@@ -73,12 +73,12 @@ public class VueTour {
         this.pane.getChildren().add(imageView);
 
 
-        Circle rangeCircle = new Circle(tour.getX(), tour.getY(), tour.getRange() * 16);
+    /*    Circle rangeCircle = new Circle(tour.getX(), tour.getY(), tour.getRange() * 16);
         rangeCircle.setFill(Color.TRANSPARENT); // transparent à l'intérieur
         rangeCircle.setStroke(Color.RED); // bordure rouge
         rangeCircle.setStrokeWidth(2);
         pane.getChildren().add(rangeCircle);
-/*
+
 
         fléche = new Line(0, 0, 0, -tours.getRange());
         fléche.setStroke(Color.BLACK);

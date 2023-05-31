@@ -14,7 +14,8 @@ public class Guerrier extends Ally {
     }
 
     @Override
-    public void seDeplacer(Acteur a) {
+    public void seDeplacer() {
+        Acteur a = this.attaquer();
         int dx, dy;
         int distanceX, distanceY;
 
@@ -46,7 +47,7 @@ public class Guerrier extends Ally {
     }
 
     public Acteur attaquer() {
-        for (Acteur a : getEnv().getActeurs()) {
+        for (Acteur a : this.ev.getActeurs()) {
             if (a instanceof Ennemi && a.estVivant()) {
                 if (this.getY() - this.getRange() <= a.getY() && a.getY() <= this.getY() + this.getRange() &&
                         this.getX() - this.getRange() <= a.getX() && a.getX() <= this.getX() + this.getRange()) {
@@ -61,7 +62,7 @@ public class Guerrier extends Ally {
     @Override
     public void agir() {
         Acteur a = this.attaquer();
-        this.seDeplacer(a);
+        this.seDeplacer();
         if (a.getPv() <= 10) {
             a.meurt();
         } else {
@@ -77,20 +78,20 @@ public class Guerrier extends Ally {
         boolean peutDeplacer = false;
 
         if (direction == 1) { // marcher droit/en bas
-            if (x < startX + getRange() && getEnv().getMap()[x + 1][y] == 1427) {
+            if (x < startX + getRange() &&  this.ev.getMap()[x + 1][y] == 1427) {
                 x = x + 1;
                 peutDeplacer = true;
-            } else if (y < startY + getRange() && getEnv().getMap()[x][y + 1] == 1427) {
+            } else if (y < startY + getRange() &&  this.ev.getMap()[x][y + 1] == 1427) {
                 y = y + 1;
                 peutDeplacer = true;
             } else {
                 direction = -1; // change la direction
             }
         } else if (direction == -1) { // déplacer gauche / haut
-            if (x > startX - getRange() && getEnv().getMap()[x - 1][y] == 1427) {
+            if (x > startX - getRange() &&  this.ev.getMap()[x - 1][y] == 1427) {
                 x = x - 1;
                 peutDeplacer = true;
-            } else if (y > startY - getRange() && getEnv().getMap()[x][y - 1] == 1427) {
+            } else if (y > startY - getRange() &&  this.ev.getMap()[x][y - 1] == 1427) {
                 y = y - 1;
                 peutDeplacer = true;
             } else {
