@@ -21,7 +21,6 @@ import java.util.ArrayList;
 
 public class VueTour {
 
-
     private Pane pane;
     private Tour tours;
     private Image image;

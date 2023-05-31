@@ -3,8 +3,6 @@ package com.sae.sae_juba_antoine_said.Modele;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
-import java.util.ArrayList;
-
 public abstract class Acteur {
     private final int CHEMIN = 1427;
     private int vitesse, range, pv;
@@ -12,20 +10,18 @@ public abstract class Acteur {
 
     private String id;
     public static int compteur = 0;
-    private Environnement env;
+    Environnement ev;
 
 
-
-
-    public Acteur(int pv, int x, int y, int vitesse, int range,Environnement env) {
+    public Acteur(int pv, int x, int y, int vitesse, int range,Environnement ev ) {
         this.x = new SimpleIntegerProperty(x);
         this.y = new SimpleIntegerProperty(y);
         this.vitesse = vitesse;
         this.range = range;
         this.pv = pv;
-        this.env=env;
         this.id = "A" + compteur;
         compteur++;
+        this.ev = ev;
     }
 
     public abstract Acteur attaquer();
@@ -133,21 +129,6 @@ public abstract class Acteur {
         return this.range;
     }
 
-    public abstract void seDeplacer(Acteur a);
+    public abstract void seDeplacer();
 
-    public Environnement getEnv() {
-        return env;
-    }
-
-/*
-    public void move() {
-        if (indiceCheminActuel < chemin.size() - 1) {
-            indiceCheminActuel++;
-            this.setX(chemin.get(indiceCheminActuel).getX()*16);
-            this.setY(chemin.get(indiceCheminActuel).getY()*16);
-        }
-
-    }
-
- */
 }

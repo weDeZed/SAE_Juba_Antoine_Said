@@ -7,7 +7,7 @@ public class Archer extends Ally {
 
     }
     @Override
-    public void seDeplacer(Acteur a) {
+    public void seDeplacer() {
 
     }
 

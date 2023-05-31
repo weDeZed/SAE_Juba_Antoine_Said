@@ -21,8 +21,7 @@ public class Environnement {
     private ObservableList<Tour> tours;
     private Map<Sommet, Set<Sommet>> listeAdj;
     private ObservableList<Sommet> obstacles;
-    private ObservableList<Projectile> projectiles;
-    private ArrayList<Sommet>chemin;
+
 
 
 
@@ -35,12 +34,11 @@ public class Environnement {
         this.tours = FXCollections.observableArrayList();
         this.listeAdj = new HashMap();
         this.obstacles = FXCollections.observableArrayList();
-        this.projectiles = FXCollections.observableArrayList();
-
         readMap();
         construit();
-        bfs =new BFS(this,getSommet(28,45));
-        chemin=bfs.cheminVersSource(getSommet(50,0));
+
+
+
 
     }
 
@@ -57,6 +55,7 @@ public class Environnement {
                 for (int y = 0; y < tout_ligne.length; y++) {
 
                     if (!tout_ligne[y].trim().isEmpty()) {
+
 
                         map[y][x] = Integer.parseInt(tout_ligne[y].trim());
 
@@ -120,16 +119,15 @@ public class Environnement {
     }
 
 
+    public void suppActeur (Acteur acteur){
+        acteurs.remove(acteur);
+    }
     public ObservableList<Acteur> getActeurs() {
         return acteurs;
     }
 
     public void ajouterActeur(Acteur a) {
         this.acteurs.add(a);
-    }
-
-    public void tuerActeur(Acteur a) {
-        this.acteurs.remove(a);
     }
     public ObservableList<Tour> getTours() {
         return tours;

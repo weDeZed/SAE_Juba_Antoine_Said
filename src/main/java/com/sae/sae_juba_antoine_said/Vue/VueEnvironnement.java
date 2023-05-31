@@ -53,11 +53,6 @@ public class VueEnvironnement {
         }
     }
 
-
-
-
-
-
     public void afficherMap(ImageView img, int id) {
         int x;
         int y;

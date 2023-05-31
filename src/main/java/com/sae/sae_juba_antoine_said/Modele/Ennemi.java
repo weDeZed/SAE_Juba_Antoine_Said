@@ -12,7 +12,7 @@ public abstract class Ennemi extends Acteur {
     }
 
     @Override
-    public void seDeplacer(Acteur a) {
+    public void seDeplacer() {
 
     }
 
