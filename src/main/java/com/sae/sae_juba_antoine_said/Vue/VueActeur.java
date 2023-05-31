@@ -8,8 +8,10 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
 import javafx.util.Duration;
+import javafx.scene.shape.Circle;
 
 import java.io.FileInputStream;
+import java.util.ArrayList;
 
 public class VueActeur {
     private Pane pane;

@@ -21,8 +21,8 @@ public class Environnement {
     private ObservableList<Tour> tours;
     private Map<Sommet, Set<Sommet>> listeAdj;
     private ObservableList<Sommet> obstacles;
+    private ObservableList<Projectile> projectiles;
     private ArrayList<Sommet>chemin;
-
 
 
 
@@ -35,6 +35,8 @@ public class Environnement {
         this.tours = FXCollections.observableArrayList();
         this.listeAdj = new HashMap();
         this.obstacles = FXCollections.observableArrayList();
+        this.projectiles = FXCollections.observableArrayList();
+
         readMap();
         construit();
         bfs =new BFS(this,getSommet(28,45));
@@ -43,7 +45,7 @@ public class Environnement {
     }
 
     public void readMap() throws IOException {
-        File file = new File("src/main/java/com/sae/sae_juba_antoine_said/Ressources/map1");
+        File file = new File("C:\\Users\\jubac\\OneDrive\\Documents\\BUT\\S2\\Java\\SAE_Juba_Antoine_Saidd\\src\\main\\java\\com\\sae\\sae_juba_antoine_said\\Ressources\\map1");
         BufferedReader terrain = new BufferedReader(new FileReader(file));
         String ligne;
         String[] tout_ligne;
@@ -126,6 +128,9 @@ public class Environnement {
         this.acteurs.add(a);
     }
 
+    public void tuerActeur(Acteur a) {
+        this.acteurs.remove(a);
+    }
     public ObservableList<Tour> getTours() {
         return tours;
     }
@@ -136,6 +141,15 @@ public class Environnement {
     public boolean dansTerrain(int x, int y) {
         return getMap()[x][y] == 1427;
     }
+
+    public void ajouterProjectile(Projectile p) {
+        this.projectiles.add(p);
+    }
+
+    public ObservableList<Projectile> getProjectiles() {
+        return projectiles;
+    }
+
 
     public void construit() {
         int i;
@@ -160,6 +174,7 @@ public class Environnement {
         }  for (Sommet key : this.listeAdj.keySet()) {
             //System.out.println(" key dans coustruit " + key);
         }
+        System.out.println("-------------------------------------------------");
         for (i = 0; i < this.x; ++i) {
             for (j = 0; j < this.y; ++j) {
                 Sommet s = this.getSommet(i, j);
@@ -181,6 +196,9 @@ public class Environnement {
 
     }
 
+  public void removeProjectile(Projectile p ){
+        this.projectiles.remove(p);
+  }
     public Sommet getSommet(int x, int y) {
         for (Sommet sommet : this.listeAdj.keySet()) {
             if (sommet.getX() == x && sommet.getY() == y) {

@@ -9,14 +9,14 @@ public class Tour {
 
  IntegerProperty x,y;
  int degatsParSeconde,range;
- Environnement environnement;
+ private Environnement env;
 
-    public Tour(int x, int y, int degats,int range ,Environnement environnement) {
+
+    public Tour(int x, int y, int degats,int range) {
         this.x = new SimpleIntegerProperty(x);
         this.y = new SimpleIntegerProperty(y);
         this.degatsParSeconde = degats;
         this.range = range;
-        this.environnement=environnement;
     }
 
     public void attaqueEnnemi(){
@@ -24,8 +24,11 @@ public class Tour {
 
     }
 
+    public ObservableList<Acteur> ennemiPlusProche () {
 
     public void lancerProjectile (){
+        ObservableList<Acteur> result = FXCollections.observableArrayList();
+
 
     }
     public Acteur ennemiPlusProche (ObservableList<Acteur> act) {

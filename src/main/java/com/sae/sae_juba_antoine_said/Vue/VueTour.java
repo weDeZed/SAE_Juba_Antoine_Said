@@ -1,10 +1,10 @@
 package com.sae.sae_juba_antoine_said.Vue;
 
-import com.sae.sae_juba_antoine_said.Modele.*;
-import javafx.animation.Animation;
-import javafx.animation.KeyFrame;
-import javafx.animation.KeyValue;
-import javafx.animation.Timeline;
+import com.sae.sae_juba_antoine_said.Modele.Acteur;
+import com.sae.sae_juba_antoine_said.Modele.Guerrier;
+import com.sae.sae_juba_antoine_said.Modele.Tour;
+import javafx.collections.ObservableList;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
@@ -15,6 +15,7 @@ import javafx.scene.transform.Rotate;
 import javafx.util.Duration;
 
 import java.io.FileInputStream;
+import java.util.ArrayList;
 
 public class VueTour {
 
@@ -70,7 +71,7 @@ public class VueTour {
         imageView.setLayoutY(tour.getY() - decalageH);
         this.pane.getChildren().add(imageView);
 
-        /*
+
         Circle rangeCircle = new Circle(tour.getX(), tour.getY(), tour.getRange()*16);
         rangeCircle.setFill(Color.TRANSPARENT); // transparent à l'intérieur
         rangeCircle.setStroke(Color.RED); // bordure rouge
@@ -78,24 +79,36 @@ public class VueTour {
         pane.getChildren().add(rangeCircle);
 
 
-        fléche = new Line(0, 0, 0, -tour.getRange());
+        fléche = new Line(0, 0, 0, -tours.getRange());
         fléche.setStroke(Color.BLACK);
         fléche.setStrokeWidth(2);
-        fléche.setEndY(-2 * tour.getRange()*8);
+        fléche.setEndY(-2 * tours.getRange()*8);
 
 
-      //Positionner la flèche au centre de la tour
-        fléche.setLayoutX(tour.getX());
-        fléche.setLayoutY(tour.getY());
+        //Positionner la flèche au centre de la tour
+        fléche.setLayoutX(tours.getX());
+        fléche.setLayoutY(tours.getY());
         pane.getChildren().add(fléche);
         initAnimation();
 
-         */
 
 
+            }
 
+    public Line getFléche() {
+        return fléche;
     }
+    public  void initAnimation() {
+        Rotate rotation = new Rotate();
+        fléche.getTransforms().add(rotation);
 
+// Créer une timeline pour animer la rotation
+        Timeline timeline = new Timeline(
+                new KeyFrame(Duration.seconds(0), new KeyValue(rotation.angleProperty(), 0)),
+                new KeyFrame(Duration.seconds(2), new KeyValue(rotation.angleProperty(), 360))
+        );
+        timeline.setCycleCount(Animation.INDEFINITE);
+        timeline.play();
     public Line getFléche() {
         return fléche;
     }

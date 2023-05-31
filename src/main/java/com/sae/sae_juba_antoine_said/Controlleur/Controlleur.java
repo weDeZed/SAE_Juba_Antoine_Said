@@ -1,11 +1,14 @@
 package com.sae.sae_juba_antoine_said.Controlleur;
-
 import com.sae.sae_juba_antoine_said.Modele.*;
 import com.sae.sae_juba_antoine_said.Vue.InventairDesTours;
 import com.sae.sae_juba_antoine_said.Vue.VueEnvironnement;
 import com.sae.sae_juba_antoine_said.Vue.VueTour;
+import com.sae.sae_juba_antoine_said.Vue.Vue;
+import com.sae.sae_juba_antoine_said.Vue.VueActeur;
+import com.sae.sae_juba_antoine_said.Vue.VueProjectile;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.animation.TranslateTransition;
 import javafx.collections.ListChangeListener;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -29,8 +32,11 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.concurrent.atomic.AtomicInteger;
+
+
 
 
 public class Controlleur implements Initializable {
@@ -41,7 +47,10 @@ public class Controlleur implements Initializable {
     private VueEnvironnement vueEnvironnementMap;
 
 
-    private Timeline gameLoop;
+    private Acteur guerrier1, guerrier2, guerrier3;
+    VueActeur vueAct;
+
+    private  Timeline gameLoop;
 
     private int temps;
     @FXML
@@ -60,14 +69,26 @@ public class Controlleur implements Initializable {
     ListChangeListener<Acteur> listenerListeActeurs;
     ListChangeListener<Tour> listenerListeTours;
 
+    ListChangeListener<Projectile> listnerListeProjectiles;
+
+    Sommet source, cible, source2;
+    ArrayList<Sommet> chemin, chemin2;
+    Projectile p ;
+    TourAProjectile tourAProjectile;
+    VueProjectile vueProjectile;
+    VueTour vueTour;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
+
+
         try {
             this.environnement = new Environnement(90, 90);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+
         this.tilePane.setMinSize(environnement.getX() * 16, environnement.getY() * 16);
         this.tilePane.setMaxSize(environnement.getX() * 16, environnement.getY() * 16);
         this.tilePane.setPrefSize(environnement.getX() * 16, environnement.getY() * 16);
@@ -116,12 +137,37 @@ public class Controlleur implements Initializable {
 
         listenerListeActeurs = new ListObsActeur(pane);
         listenerListeTours = new ListObsTour(pane);
+        listnerListeProjectiles = new ListObsProjectile(pane);
+
+
         environnement.getActeurs().addListener(listenerListeActeurs);
         environnement.getTours().addListener(listenerListeTours);
+        environnement.getProjectiles().addListener(listnerListeProjectiles);
 
+
+
+
+        pane.setOnMousePressed(mouseEvent -> {
+
+
+
+            //System.out.println("Acteur ajouté");
+          // environnement.ajouterTour(new TourAProjectile((int) mouseEvent.getX(), (int) mouseEvent.getY(), 10, 10,new Projectile((int) mouseEvent.getX(),(int) mouseEvent.getY(),environnement)));
+            System.out.println("x " + (int) mouseEvent.getX() / 16 + " Y " + (int) mouseEvent.getY() / 16 + " poid " + environnement.getMap()[(int) mouseEvent.getX() / 16][(int) mouseEvent.getY() / 16]);
+          //  environnement.ajouterProjectile(new Projectile((int) mouseEvent.getX(),(int) mouseEvent.getY(),environnement));
+            //environnement.ajouterActeur(new Guerrier(1,(int) mouseEvent.getX()+15*16,(int ) mouseEvent.getY()+15*16));
+
+        });
+
+
+
+
+
+       // p.seDeplacer(guerrier1);
 
         gameLaunche();
         initAnimation();
+
         gameLoop.play();
 
 
@@ -129,7 +175,7 @@ public class Controlleur implements Initializable {
 
     public void gameLaunche() {
         try {
-            this.vueEnvironnementMap = new VueEnvironnement(environnement, tilePane);
+            this.vueMap = new Vue(environnement, tilePane);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -137,15 +183,14 @@ public class Controlleur implements Initializable {
     }
 
     private void initAnimation() {
-
         gameLoop = new Timeline();
-        temps = 1;
+        temps = 0;
         gameLoop.setCycleCount(Timeline.INDEFINITE);
         AtomicInteger i = new AtomicInteger();
+        AtomicInteger k = new AtomicInteger();
 
 
         KeyFrame kf = new KeyFrame(
-
 
                 Duration.seconds(0.17),
 
@@ -156,6 +201,7 @@ public class Controlleur implements Initializable {
                     if (temps == 10000) {
                         gameLoop.stop();
                     } else if (temps % 2 == 0) {
+                        p.deplacerVers(guerrier1);
                         for (Acteur acteur : environnement.getActeurs()) {
                             if (acteur instanceof Ennemi) {
                                 ((Ennemi) acteur).move();
@@ -180,6 +226,7 @@ public class Controlleur implements Initializable {
                         troopTours.attaqueEnnemi();
                         troopTours1.attaqueEnnemi();
                     }
+
                     temps++;
                 })
         );
@@ -225,39 +272,24 @@ public class Controlleur implements Initializable {
 
 
 
-/*  for (int i = 0; i <environnement.getChemin().size(); i++){
-            //System.out.println("dans chemin");
-            Circle circle =new Circle(environnement.getChemin().get(i).getX()*16,environnement.getChemin().get(i).getY()*16,5, Color.RED);
-            pane.getChildren().add(circle);
-        }
-
-       */
-
-
-
-       /* for (int i = 0; i < environnement.getMap().length;i++){
-            for (int j = 0; j<environnement.getMap()[i].length;j++){
-               if(environnement.getMap()[i][j]==1427){
-                   Circle circle=new Circle(i*16,j*16,7,Color.RED);
-                   pane.getChildren().add(circle);
-               }
-            }
-        }
-
-        */
 
 
 
 
 
-/*
-pane.setOnMousePressed(mouseEvent -> {
-            // environnement.ajouterActeur(new Guerrier(1,(int) mouseEvent.getX(),(int ) mouseEvent.getY()));
-            //environnement.ajouterTour(new Tour((int) mouseEvent.getX(),(int ) mouseEvent.getY(),10,10,environnement));
-            System.out.println("x " + (int) mouseEvent.getX() / 16 + " Y " + (int) mouseEvent.getY() / 15 + " poid " + environnement.getMap()[(int) mouseEvent.getX() / 16][(int) mouseEvent.getY() / 16]);
 
-        });
- */
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -307,19 +339,5 @@ for (Acteur a : environnement.getActeurs()) {
             System.out.println("x " + (int) mouseEvent.getX() / 16 + " Y " + (int) mouseEvent.getY() / 15 + " poid " + environnement.getMap()[(int) mouseEvent.getX() / 16][(int) mouseEvent.getY() / 16]);
 
         });
-
-*/
-
-
-
-
-     /*
-        dragDropSetup = new PoserTour(environnement);
-        dragDropSetup.setupDraggableTower(tourB1, TroopTour.class, dragDropSetup.envoiImage(0));
-        dragDropSetup.setupDraggableTower(tourB2, TourFoudre.class, dragDropSetup.envoiImage(1));
-        dragDropSetup.setupDraggableTower(tourB3, LaserTour.class, dragDropSetup.envoiImage(2));
-        dragDropSetup.setupDraggableTower(tourB4, ArcTour.class, dragDropSetup.envoiImage(3));
-
-        dragDropSetup.setupDropPane(pane);
 
          */
