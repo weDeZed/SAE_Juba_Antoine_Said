@@ -47,7 +47,7 @@ public class Environnement {
     }
 
     public void readMap() throws IOException {
-        File file = new File("C:\\Users\\jubac\\OneDrive\\Documents\\BUT\\S2\\Java\\SAE_Juba_Antoine_Saidd\\src\\main\\java\\com\\sae\\sae_juba_antoine_said\\Ressources\\map1");
+        File file = new File("src/main/java/com/sae/sae_juba_antoine_said/Ressources/map1");
         BufferedReader terrain = new BufferedReader(new FileReader(file));
         String ligne;
         String[] tout_ligne;
