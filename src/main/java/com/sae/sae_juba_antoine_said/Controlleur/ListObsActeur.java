@@ -25,7 +25,7 @@ public class ListObsActeur implements ListChangeListener<Acteur> {
         while (a.next()) {
             for (Acteur act : a.getAddedSubList()) {
                 //System.out.println("changement dans list acteur");
-                VueActeur VueActeur = new VueActeur(panneauDeJeu, act);
+                VueActeur vueActeur = new VueActeur(panneauDeJeu, act);
             }
         }
     }

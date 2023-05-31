@@ -19,25 +19,6 @@
             </children>
         </Pane>
     </children>
-    <right>
-        <GridPane fx:id="gridpane" style="-fx-background-color: #28ddee;" BorderPane.alignment="CENTER">
-            <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            </columnConstraints>
-            <rowConstraints>
-                <RowConstraints fx:id="tour1" minHeight="10.0" prefHeight="10.0" vgrow="SOMETIMES" />
-                <RowConstraints fx:id="tour2" minHeight="10.0" prefHeight="10.0" vgrow="SOMETIMES" />
-                <RowConstraints fx:id="tour3" minHeight="10.0" prefHeight="10.0" vgrow="SOMETIMES" />
-                <RowConstraints fx:id="tour4" minHeight="10.0" prefHeight="10.0" vgrow="SOMETIMES" />
-            </rowConstraints>
-            <children>
-                <Pane onMouseClicked="#tour1" style="-fx-background-color: #b65b5b; -fx-border-color: black; -fx-border-width: 1px;" GridPane.rowIndex="0" />
-                <Pane onMouseClicked="#tour2" style="-fx-background-color: #36368a; -fx-border-color: black; -fx-border-width: 1px;" GridPane.rowIndex="1" />
-                <Pane onMouseClicked="#tour3" style="-fx-background-color: #297929; -fx-border-color: black; -fx-border-width: 1px;" GridPane.rowIndex="2" />
-                <Pane onMouseClicked="#tour4" style="-fx-background-color: #9b9b39; -fx-border-color: black; -fx-border-width: 1px;" GridPane.rowIndex="3" />
-            </children>
-        </GridPane>
-    </right>
     <left>
         <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
             <children>

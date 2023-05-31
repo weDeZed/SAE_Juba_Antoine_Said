@@ -36,6 +36,7 @@ public class Guerrier extends Ally {
             }
 
             while (a.getX() != this.getX() && a.getY() != this.getY()) {
+                System.out.println("pas ");
                 int newposX = this.getX() + (this.getVitesse() * dx);
                 int newposY = this.getY() + (this.getVitesse() * dy);
                 this.setX(newposX);

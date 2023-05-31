@@ -66,9 +66,11 @@ public class VueTour {
         int decalageH = ((int) image.getHeight());
         int decalageL = (int) image.getWidth();
         this.imageView = new ImageView(image);
-        imageView.setLayoutX(tour.getX() - decalageL);
+        imageView.setLayoutX(tour.getX());
         imageView.setLayoutY(tour.getY() - decalageH);
         this.pane.getChildren().add(imageView);
+
+        /*
         Circle rangeCircle = new Circle(tour.getX(), tour.getY(), tour.getRange()*16);
         rangeCircle.setFill(Color.TRANSPARENT); // transparent à l'intérieur
         rangeCircle.setStroke(Color.RED); // bordure rouge
@@ -87,6 +89,8 @@ public class VueTour {
         fléche.setLayoutY(tour.getY());
         pane.getChildren().add(fléche);
         initAnimation();
+
+         */
 
 
 

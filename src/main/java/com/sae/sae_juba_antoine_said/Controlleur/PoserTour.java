@@ -22,7 +22,9 @@ public class PoserTour {
         button.setOnDragDetected(event -> {
             Dragboard db = button.startDragAndDrop(TransferMode.ANY);
             db.setDragView(image);
+
             ClipboardContent content = new ClipboardContent();
+            //content.putString(tourtype.getName() + "," + range);
             content.putString(tourtype.getName());
             db.setContent(content);
             event.consume();
