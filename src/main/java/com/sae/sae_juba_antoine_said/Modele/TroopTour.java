@@ -6,9 +6,9 @@ public class TroopTour extends Tour {
     }
 
     public void attaqueEnnemi() {
-        int[][] map = environnement.getMap();
+        int[][] map = this.env.getMap();
         int nbEnnemi = 0;
-        for (Acteur a : environnement.getActeurs()) {
+        for (Acteur a : env.getActeurs()) {
             if (a instanceof Ennemi) {
                 nbEnnemi++;
             }
@@ -36,7 +36,7 @@ public class TroopTour extends Tour {
             }
 
             placement += 1+1/2;
-            environnement.ajouterActeur(new Guerrier(20, x * 16, y * 16, environnement));
+            env.ajouterActeur(new Guerrier(20, x * 16, y * 16, env));
         }
 
 

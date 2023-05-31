@@ -227,6 +227,8 @@ public class Environnement {
     public ArrayList<Sommet> getChemin() {
         return chemin;
     }
+
+
 }
 
 

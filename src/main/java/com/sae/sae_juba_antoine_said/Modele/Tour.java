@@ -3,20 +3,22 @@ package com.sae.sae_juba_antoine_said.Modele;
 import javafx.beans.Observable;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 public class Tour {
 
  IntegerProperty x,y;
  int degatsParSeconde,range;
- private Environnement env;
+  Environnement env;
 
 
-    public Tour(int x, int y, int degats,int range) {
+    public Tour(int x, int y, int degats,int range,Environnement env) {
         this.x = new SimpleIntegerProperty(x);
         this.y = new SimpleIntegerProperty(y);
         this.degatsParSeconde = degats;
         this.range = range;
+        this.env=env;
     }
 
     public void attaqueEnnemi(){
@@ -24,23 +26,27 @@ public class Tour {
 
     }
 
-    public ObservableList<Acteur> ennemiPlusProche () {
+
 
     public void lancerProjectile (){
         ObservableList<Acteur> result = FXCollections.observableArrayList();
 
 
     }
-    public Acteur ennemiPlusProche (ObservableList<Acteur> act) {
-        Acteur acteur = null;
-        for (int i = 0; i < act.size(); i++) {
-            if ((this.getX() - range <= act.get(i).getY() && act.get(i).getY() <= this.getY() + range) &&
-                    (this.getX() - range <= act.get(i).getX() && act.get(i).getX() <= this.getY()+ range)) {
-               return act.get(i);
+    public ObservableList<Acteur> ennemiPlusProche () {
+
+        ObservableList<Acteur> result = FXCollections.observableArrayList();
+
+
+        for (int i = 0; i < env.getActeurs().size(); i++) {
+            if ((this.getX() - range <= env.getActeurs().get(i).getY() && env.getActeurs().get(i).getY() <= this.getY() + range) &&
+                    (this.getX() - range <= env.getActeurs().get(i).getX() && env.getActeurs().get(i).getX() <= this.getY()+ range)) {
+                result.add(env.getActeurs().get(i));
+
             }
         }
 
-        return acteur;
+        return result;
 
     }
 

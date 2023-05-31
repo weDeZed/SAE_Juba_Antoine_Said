@@ -8,8 +8,8 @@ public class TourAProjectile extends Tour{
     Environnement environment;
 
     public TourAProjectile(int x, int y, int degats, int range,Environnement environment ) {
-        super(x, y, degats, range);
-        this.environment = environment;
+        super(x, y, degats, range,environment);
+        
 
 
 

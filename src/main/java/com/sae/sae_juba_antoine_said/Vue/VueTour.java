@@ -1,8 +1,10 @@
 package com.sae.sae_juba_antoine_said.Vue;
 
-import com.sae.sae_juba_antoine_said.Modele.Acteur;
-import com.sae.sae_juba_antoine_said.Modele.Guerrier;
-import com.sae.sae_juba_antoine_said.Modele.Tour;
+import com.sae.sae_juba_antoine_said.Modele.*;
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
 import javafx.collections.ObservableList;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.image.Image;
@@ -41,21 +43,21 @@ public class VueTour {
             }
 
         }
-        if (tour instanceof TourFoudre){
+        if (tour instanceof TourFoudre) {
             try {
                 fichierTour = new FileInputStream("src/main/java/com/sae/sae_juba_antoine_said/Ressources/tourInventair/tour1.png");
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
-        if (tour instanceof LaserTour){
+        if (tour instanceof LaserTour) {
             try {
                 fichierTour = new FileInputStream("src/main/java/com/sae/sae_juba_antoine_said/Ressources/tourInventair/tour2.png");
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
-        if (tour instanceof ArcTour){
+        if (tour instanceof ArcTour) {
             try {
                 fichierTour = new FileInputStream("src/main/java/com/sae/sae_juba_antoine_said/Ressources/tourInventair/tour3.png");
             } catch (Exception e) {
@@ -72,17 +74,19 @@ public class VueTour {
         this.pane.getChildren().add(imageView);
 
 
-        Circle rangeCircle = new Circle(tour.getX(), tour.getY(), tour.getRange()*16);
+        Circle rangeCircle = new Circle(tour.getX(), tour.getY(), tour.getRange() * 16);
         rangeCircle.setFill(Color.TRANSPARENT); // transparent à l'intérieur
         rangeCircle.setStroke(Color.RED); // bordure rouge
         rangeCircle.setStrokeWidth(2);
         pane.getChildren().add(rangeCircle);
-
+/*
 
         fléche = new Line(0, 0, 0, -tours.getRange());
         fléche.setStroke(Color.BLACK);
         fléche.setStrokeWidth(2);
-        fléche.setEndY(-2 * tours.getRange()*8);
+        fléche.setEndY(-2 * tours.getRange() * 8);
+
+
 
 
         //Positionner la flèche au centre de la tour
@@ -91,14 +95,14 @@ public class VueTour {
         pane.getChildren().add(fléche);
         initAnimation();
 
-
-
-            }
+ */
+    }
 
     public Line getFléche() {
         return fléche;
     }
-    public  void initAnimation() {
+
+    public void initAnimation() {
         Rotate rotation = new Rotate();
         fléche.getTransforms().add(rotation);
 
@@ -109,20 +113,10 @@ public class VueTour {
         );
         timeline.setCycleCount(Animation.INDEFINITE);
         timeline.play();
-    public Line getFléche() {
-        return fléche;
-    }
-    public  void initAnimation() {
-        Rotate rotation = new Rotate();
-        fléche.getTransforms().add(rotation);
 
-// Créer une timeline pour animer la rotation
-        Timeline timeline = new Timeline(
-                new KeyFrame(Duration.seconds(0), new KeyValue(rotation.angleProperty(), 0)),
-                new KeyFrame(Duration.seconds(2), new KeyValue(rotation.angleProperty(), 360))
-        );
-        timeline.setCycleCount(Animation.INDEFINITE);
-        timeline.play();
     }
+
+
 }
+
 
