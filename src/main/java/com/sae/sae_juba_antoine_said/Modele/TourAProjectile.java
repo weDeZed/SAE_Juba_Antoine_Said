@@ -4,8 +4,7 @@ import javafx.collections.ObservableList;
 
 public class TourAProjectile extends Tour{
 
-    private Projectile projectile;
-    Environnement environment;
+
 
     public TourAProjectile(int x, int y, int degats, int range,Environnement environment ) {
         super(x, y, degats, range,environment);
@@ -23,14 +22,26 @@ public class TourAProjectile extends Tour{
     public void lancerProjectile(){
         ObservableList<Acteur>a = this.ennemiPlusProche();
 
-        for(int i = 0; i<a.size(); i++){
-            this.environment.ajouterProjectile(new Projectile(this.getX(),this.getY(),environment));
-            environment.getProjectiles().get(i).deplacerVers(a.get(i));
+
+        System.out.println("x "+getX()+" y "+getY());
+
+        for(int i = 0; i<=5; i++){
+
+            this.env.ajouterProjectile(new Projectile(this.getX()+10,this.getY()-10,env));
+            System.out.println("projectile cree");
+
+            /*
+            for(int j = 0; j<env.getProjectiles().size(); j++){
+                System.out.println("id acteur" + a.get(i).getId());
+                env.getProjectiles().get(j).deplacerVers(a.get(i));
+                System.out.println("id proj" + env.getProjectiles().get(i).getId());
+                System.out.println("Projectile lancé");
+            }
+            */
         }
+
+        System.out.println("sort du for");
     }
-
-
-
 
 
 }

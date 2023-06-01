@@ -56,7 +56,7 @@ public class VueTour {
                 e.printStackTrace();
             }
         }
-        if (tour instanceof ArcTour) {
+        if (tour instanceof TourAProjectile) {
             try {
                 fichierTour = new FileInputStream("src/main/java/com/sae/sae_juba_antoine_said/Ressources/tourInventair/tour3.png");
             } catch (Exception e) {

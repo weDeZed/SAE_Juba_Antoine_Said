@@ -30,6 +30,12 @@ public class Tour {
 
     public void lancerProjectile (){
         ObservableList<Acteur> result = FXCollections.observableArrayList();
+        result = ennemiPlusProche();
+
+        for(int i=0; i<result.size(); i++){
+            env.ajouterProjectile(new Projectile(getX(),getY(),env));
+            env.getProjectiles().get(i).deplacerVers(result.get(i));
+        }
 
 
     }
@@ -88,5 +94,8 @@ public class Tour {
 
     public void setRange(int range) {
         this.range = range;
+    }
+    public Environnement getEnvironment() {
+        return env;
     }
 }

@@ -26,7 +26,9 @@ public class VueProjectile {
 
         if(projectile instanceof Projectile ){
             try {
+                System.out.println("image laser");
                 fichierGuerrier = new FileInputStream("src/main/java/com/sae/sae_juba_antoine_said/Ressources/laser.png");
+                System.out.println(fichierGuerrier);
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -40,6 +42,7 @@ public class VueProjectile {
         imageView.xProperty().bind(projectile.xProperty());
         imageView.yProperty().bind(projectile.yProperty());
         this.pane.getChildren().add(imageView);
+        System.out.println("image id"+ imageView.getId());
 
     }
 

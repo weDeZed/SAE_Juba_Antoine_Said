@@ -20,11 +20,13 @@ public class Projectile {
         this.x = new SimpleIntegerProperty(x);
         this.y = new SimpleIntegerProperty(y);
         this.env = environnement;
-        this.vitesse = 5;
+        this.vitesse = 10;
         id="P"+ compteur;
         compteur++;
     }
     public void deplacerVers(Acteur a) {
+        //System.out.println("pro x "+getX()+" pro y "+ getY());
+        //System.out.println("pro A "+a.getX()+" pro y "+ a.getY());
 
         int dx, dy;
         int distanceX,distanceY;
@@ -34,13 +36,13 @@ public class Projectile {
             distanceY = a.getY() - this.getY();
 
             if (distanceX < 0){
-                dx = distanceX +(distanceX-1);
+                dx = distanceX -(distanceX+1);
             }else {
                 dx = distanceX - (distanceX-1);
             }
 
             if (distanceY < 0){
-                dy = distanceY +(distanceY-1);
+                dy = distanceY -(distanceY+1);
             }else {
                 dy = distanceY - (distanceY-1);
             }
@@ -53,34 +55,30 @@ public class Projectile {
                 this.setX(newposX);
                 this.setY(newposY);
 
-               atteintActeur(a);
+        System.out.println("projectile bouge");
+
+        System.out.println("PV guerrier : " + a.getPv());
+               if (atteintActeur(a) == true){
+                   a.decrementationPv(10);
+               }
+        System.out.println("PV guerrier : " + a.getPv());
+
             }
 
     public String getId() {
         return id;
     }
 
-    public void atteintActeur(Acteur a) {
+    public boolean atteintActeur(Acteur a) {
+        boolean atteint = false;
 
-                //System.out.println(" p X " + getX() +" p Y " + "" +getY());
-                //System.out.println("a X " + a.getX() +"" + " a Y" +a.getY());
-               // System.out.println("Projectile x : " + getX() + " Projectile y : " + getY());
-               // System.out.println("Acteur x : " + a.getX() + " Acteur x + 32 : " + (a.getX()+32));
-                //System.out.println("Acteur Y : " + a.getY() + " Acteur Y + 32 : " + (a.getY()+32));
-                if ((getX() >= a.getX()) && getX() <= a.getX()+32) {
-                   // System.out.println("Position correct en X ");
-                }
-                if((getY() >= a.getY()) && (getY() <= a.getY()+32)){
-                   // System.out.println("Position correct en Y ");
-                }
-                        if(((getX()+38 >= a.getX()) && getX() <= a.getX()+32) && (getY() >= a.getY()) && (getY()+13 <= a.getY()+32)){
-                            env.removeProjectile(this);
-                            //System.out.println("Projectile removed");
-                           // System.out.println("ID Proj : " + getId());
-                        }
-
-
-            }
+        if(((getX()+38 >= a.getX()) && getX() <= a.getX()+32) && (getY() >= a.getY()) && (getY()+13 <= a.getY()+32)){
+            env.removeProjectile(this);
+            System.out.println("Acteur atteint");
+            atteint= true;
+        }
+        return  atteint;
+    }
 
     public int getVitesse() {
         return vitesse;

@@ -55,6 +55,7 @@ public class Controlleur implements Initializable {
     private Acteur guerrier1, guerrier2, guerrier3;
 
     VueActeur vueAct;
+    TourAProjectile tourAProjectile;
 
 
     @FXML
@@ -83,12 +84,17 @@ public class Controlleur implements Initializable {
         this.pane.setPrefSize(environnement.getX() * 16, environnement.getY() * 16);
 
 
-        p = new Projectile(44,23,environnement);
-        environnement.ajouterProjectile(p);
-        vueProjectile = new VueProjectile(pane,p);
+       //p = new Projectile(20,30,environnement);
+        //environnement.ajouterProjectile(p);
+        //vueProjectile = new VueProjectile(pane,p);
 
 
-        guerrier1 = new Guerrier(1, 15*16 , 12*16,environnement);
+        tourAProjectile = new TourAProjectile(30*16,34*16,10,200,environnement);
+        environnement.ajouterTour(tourAProjectile);
+        vueTour = new VueTour(pane,tourAProjectile);
+
+
+        guerrier1 = new Guerrier(100, 30*16 , 24*16,environnement);
         environnement.ajouterActeur(guerrier1);
         vueAct=new VueActeur(pane,guerrier1);
 
@@ -130,15 +136,22 @@ public class Controlleur implements Initializable {
 
 
 
-
         listenerListeActeurs = new ListObsActeur(pane);
         listenerListeTours = new ListObsTour(pane);
         listnerListeProjectiles = new ListObsProjectile(pane);
+
+
+
         environnement.getActeurs().addListener(listenerListeActeurs);
         environnement.getTours().addListener(listenerListeTours);
         environnement.getProjectiles().addListener(listnerListeProjectiles);
 
 
+
+
+
+
+     // tourAProjectile.lancerProjectile();
 
         gameLaunche();
         initAnimation();
@@ -175,8 +188,13 @@ public class Controlleur implements Initializable {
                     }
                     if (temps == 10000) {
                         gameLoop.stop();
-                    } else if (temps % 1 == 0) {
-                        p.deplacerVers(guerrier1);
+                    } else if (temps == 1) {
+
+                        //p.deplacerVers(guerrier1);
+
+                         tourAProjectile.lancerProjectile();
+
+
                         /*
                         for (Acteur acteur : environnement.getActeurs()) {
                             if (acteur instanceof Ennemi) {
@@ -205,6 +223,22 @@ public class Controlleur implements Initializable {
 
                     }
                     */
+                    /*
+                    if(temps%20==0){
+                        environnement.ajouterProjectile(new Projectile(20,30,environnement));
+                    }
+                    */
+
+                    if(temps %2==0){
+                        for (Projectile pro: environnement.getProjectiles()) {
+                            System.out.println("dans boucle pro");
+                            pro.deplacerVers(guerrier1);
+                        }
+                       //vueProjectile = new VueProjectile(pane,p);
+
+                    }
+
+
 
                     temps++;
                 })
