@@ -1,9 +1,7 @@
 package com.sae.sae_juba_antoine_said.Controlleur;
 
 import com.sae.sae_juba_antoine_said.Modele.*;
-import com.sae.sae_juba_antoine_said.Vue.InventairDesTours;
-import com.sae.sae_juba_antoine_said.Vue.VueEnvironnement;
-import com.sae.sae_juba_antoine_said.Vue.VueTour;
+import com.sae.sae_juba_antoine_said.Vue.*;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.collections.ListChangeListener;
@@ -51,6 +49,13 @@ public class Controlleur implements Initializable {
     private VueTour vueTour;
     InventairDesTours inventairDesTours;
 
+    Projectile p;
+
+    VueProjectile vueProjectile;
+    private Acteur guerrier1, guerrier2, guerrier3;
+
+    VueActeur vueAct;
+
 
     @FXML
     private ToggleButton tourB1, tourB2, tourB3, tourB4;
@@ -59,6 +64,8 @@ public class Controlleur implements Initializable {
 
     ListChangeListener<Acteur> listenerListeActeurs;
     ListChangeListener<Tour> listenerListeTours;
+
+    ListObsProjectile listnerListeProjectiles;
 
 
     @Override
@@ -76,6 +83,16 @@ public class Controlleur implements Initializable {
         this.pane.setPrefSize(environnement.getX() * 16, environnement.getY() * 16);
 
 
+        p = new Projectile(44,23,environnement);
+        environnement.ajouterProjectile(p);
+        vueProjectile = new VueProjectile(pane,p);
+
+
+        guerrier1 = new Guerrier(1, 15*16 , 12*16,environnement);
+        environnement.ajouterActeur(guerrier1);
+        vueAct=new VueActeur(pane,guerrier1);
+
+/*
         troopTours = new TroopTour(56 * 16, 27 * 16, 20, 10, environnement);
         troopTours1 = new TroopTour(47 * 16, 10 * 16, 20, 10, environnement);
         vueTour = new VueTour(pane, troopTours);
@@ -107,17 +124,20 @@ public class Controlleur implements Initializable {
                 ;
             }
         });
+*/
 
-
-        inventairDesTours = new InventairDesTours(tourB1, tourB2, tourB3, tourB4);
+    //    inventairDesTours = new InventairDesTours(tourB1, tourB2, tourB3, tourB4);
 
 
 
 
         listenerListeActeurs = new ListObsActeur(pane);
         listenerListeTours = new ListObsTour(pane);
+        listnerListeProjectiles = new ListObsProjectile(pane);
         environnement.getActeurs().addListener(listenerListeActeurs);
         environnement.getTours().addListener(listenerListeTours);
+        environnement.getProjectiles().addListener(listnerListeProjectiles);
+
 
 
         gameLaunche();
@@ -155,7 +175,9 @@ public class Controlleur implements Initializable {
                     }
                     if (temps == 10000) {
                         gameLoop.stop();
-                    } else if (temps % 2 == 0) {
+                    } else if (temps % 1 == 0) {
+                        p.deplacerVers(guerrier1);
+                        /*
                         for (Acteur acteur : environnement.getActeurs()) {
                             if (acteur instanceof Ennemi) {
                                 ((Ennemi) acteur).move();
@@ -167,19 +189,23 @@ public class Controlleur implements Initializable {
                                 }
                             }
                         }
+                        */
+
                     }
+                    /*
                     if (temps % 10 == 0) {
+
                         for (Tour t : environnement.getTours()) {
                             if (t instanceof TroopTour) {
                                 t.attaqueEnnemi();
                             }
                         }
 
+
+
                     }
-                    if (temps == 120) {
-                        troopTours.attaqueEnnemi();
-                        troopTours1.attaqueEnnemi();
-                    }
+                    */
+
                     temps++;
                 })
         );
