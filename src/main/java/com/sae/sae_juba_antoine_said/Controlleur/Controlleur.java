@@ -10,22 +10,9 @@ import javafx.collections.ListChangeListener;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ToggleButton;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.input.ClipboardContent;
-import javafx.scene.input.Dragboard;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.input.TransferMode;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.TilePane;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
-import javafx.scene.shape.Line;
 import javafx.util.Duration;
-
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
@@ -60,6 +47,8 @@ public class Controlleur implements Initializable {
     ListChangeListener<Acteur> listenerListeActeurs;
     ListChangeListener<Tour> listenerListeTours;
 
+    BFS bfs;
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -84,6 +73,11 @@ public class Controlleur implements Initializable {
         environnement.ajouterTour(troopTours);
         environnement.ajouterTour(troopTours1);
 
+        //bfs = new BFS(environnement, new Sommet(28, 45,1427));
+        //chemin = bfs.cheminVersSource(getSommet(50, 0));
+
+
+
 
         pane.setOnMousePressed(mouseEvent -> {
             if (tourB1.isSelected()) {
@@ -95,7 +89,7 @@ public class Controlleur implements Initializable {
                 System.out.println("b2");
                 TourFoudre tourFoudre = new TourFoudre((int) mouseEvent.getX(), (int) mouseEvent.getY(), 0, 10, environnement);
                 environnement.ajouterTour(tourFoudre);
-                ;
+
             } else if (tourB3.isSelected()) {
                 System.out.println("b3");
                 LaserTour laserTour = new LaserTour((int) mouseEvent.getX(), (int) mouseEvent.getY(), 0, 10, environnement);
@@ -110,7 +104,6 @@ public class Controlleur implements Initializable {
 
 
         inventairDesTours = new InventairDesTours(tourB1, tourB2, tourB3, tourB4);
-
 
 
 
@@ -145,40 +138,20 @@ public class Controlleur implements Initializable {
 
 
         KeyFrame kf = new KeyFrame(
-
-
                 Duration.seconds(0.17),
-
                 (ev -> {
-                    if (temps % 10 == 0) {
+                    if (temps==1){
                         environnement.ajouterActeur(new Bandit(52, 24, 3, environnement));
+                    }
+                    if (temps %5==1) {
+                        environnement.tour();
+                    }
+                    if (temps == 10) {
+                        troopTours.attaqueEnnemi();
+                        troopTours1.attaqueEnnemi();
                     }
                     if (temps == 10000) {
                         gameLoop.stop();
-                    } else if (temps % 2 == 0) {
-                        for (Acteur acteur : environnement.getActeurs()) {
-                            if (acteur instanceof Ennemi) {
-                                ((Ennemi) acteur).move();
-                            }
-                            if (acteur instanceof Guerrier) {
-                                ((Guerrier) acteur).marcherSurChemin();
-                                if (acteur.attaquer() != null) {
-                                    acteur.agir();
-                                }
-                            }
-                        }
-                    }
-                    if (temps % 10 == 0) {
-                        for (Tour t : environnement.getTours()) {
-                            if (t instanceof TroopTour) {
-                                t.attaqueEnnemi();
-                            }
-                        }
-
-                    }
-                    if (temps == 120) {
-                        troopTours.attaqueEnnemi();
-                        troopTours1.attaqueEnnemi();
                     }
                     temps++;
                 })
@@ -189,6 +162,26 @@ public class Controlleur implements Initializable {
 
 }
 
+/*
+else if (temps % 2 == 0) {
+                       for (Acteur acteur : environnement.getActeurs()) {
+                            if (acteur instanceof Guerrier) {
+                                ((Guerrier) acteur).marcherSurChemin();
+                                if (acteur.attaquer() != null) {
+                                    acteur.agir();
+                                }
+                            }
+                        }
+
+                    }
+                    if (temps % 100 == 0) {
+                        for (Tour t : environnement.getTours()) {
+                            if (t instanceof TroopTour) {
+                                t.attaqueEnnemi();
+                            }
+                        }
+                    }
+*/
 
 
 
@@ -221,7 +214,15 @@ public class Controlleur implements Initializable {
 
 
 
+/*   System.out.println("dans terrain-------------------------------------------------------");
+            for (int i = 0; i < environnement.getMap().length; i++) {
+                for (int j = 0; j < environnement.getMap()[i].length; j++) {
+                    System.out.print(environnement.getMap()[i][j]);
+                }
+                System.out.println();
+            }
 
+          */
 
 
 

@@ -1,7 +1,7 @@
 package com.sae.sae_juba_antoine_said.Modele;
 
 
-public class Bandit extends Acteur {
+public class Bandit extends Ennemi {
 
     public Bandit(int x, int y, int vitesse, Environnement ev) {
         super(90, x, y, vitesse, 10, ev);
@@ -26,7 +26,6 @@ public class Bandit extends Acteur {
         //test
         Acteur a = this.attaquer();
         this.seDeplacer();
-
         while (a.estVivant()) {
             a.decrementationPv(10);
             System.out.println("il n'est pas mort");

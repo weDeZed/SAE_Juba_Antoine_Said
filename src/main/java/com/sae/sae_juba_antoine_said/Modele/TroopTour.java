@@ -1,8 +1,10 @@
 package com.sae.sae_juba_antoine_said.Modele;
 
 public class TroopTour extends Tour {
+    private  int chemin;
     public TroopTour(int x, int y, int degats, int range, Environnement environnement) {
         super(x, y, degats, range, environnement);
+        chemin=1427;
     }
 
     public void attaqueEnnemi() {
@@ -18,16 +20,16 @@ public class TroopTour extends Tour {
         for (int i = 0; i < 1; i++) {
             int x = getX()/16;
             int y = getY()/16;
-            if (x > 0 && map[x - 1][y] == 1427) {
+            if (x > 0 && map[x - 1][y] == chemin) {
                 x = x - 1;
                 y = y + placement;
-            } else if (x < map.length - 1 && map[x + 1][y] == 1427) {
+            } else if (x < map.length - 1 && map[x + 1][y] == chemin) {
                 x = x + 1;
                 y = y + placement;
-            } else if (y > 0 && map[x][y - 1] == 1427) {
+            } else if (y > 0 && map[x][y - 1] == chemin) {
                 y = y - 1;
                 x = x + placement;
-            } else if (y < map[0].length - 1 && map[x][y + 1] == 1427) {
+            } else if (y < map[0].length - 1 && map[x][y + 1] == chemin) {
                 y = y + 1;
                 x = x + placement;
             } else {
