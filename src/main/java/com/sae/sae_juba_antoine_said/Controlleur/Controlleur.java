@@ -39,6 +39,7 @@ public class Controlleur implements Initializable {
     InventairDesTours inventairDesTours;
 
     Projectile p;
+    VueActeur vueActeur2;
 
     VueProjectile vueProjectile;
     private Acteur guerrier1, guerrier2, guerrier3;
@@ -81,8 +82,12 @@ public class Controlleur implements Initializable {
 
 
         guerrier1 = new Guerrier(100, 10*16 , 30*16,environnement);
+        guerrier2 = new Guerrier(100, 40*16 , 30*16,environnement);
         environnement.ajouterActeur(guerrier1);
+        environnement.ajouterActeur(guerrier2);
         vueAct=new VueActeur(pane,guerrier1);
+        vueActeur2 = new VueActeur(pane,guerrier2);
+
 
 
         troopTours = new TroopTour(56 * 16, 27 * 16, 20, 10, environnement);
