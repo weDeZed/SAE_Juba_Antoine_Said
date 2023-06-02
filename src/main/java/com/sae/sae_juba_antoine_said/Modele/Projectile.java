@@ -51,13 +51,10 @@ public class Projectile {
                 this.setX(newposX);
                 this.setY(newposY);
 
-        System.out.println("projectile bouge");
 
-        System.out.println("PV guerrier : " + a.getPv());
                if (atteintActeur(a) == true){
                    a.decrementationPv(10);
                }
-        System.out.println("PV guerrier : " + a.getPv());
 
             }
 
@@ -70,7 +67,6 @@ public class Projectile {
 
         if(((getX()+38 >= a.getX()) && getX() <= a.getX()+32) && (getY() >= a.getY()) && (getY()+13 <= a.getY()+32)){
             env.removeProjectile(this);
-            System.out.println("Acteur atteint");
             atteint= true;
         }
         return  atteint;

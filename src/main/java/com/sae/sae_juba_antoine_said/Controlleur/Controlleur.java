@@ -94,17 +94,17 @@ public class Controlleur implements Initializable {
 
         pane.setOnMousePressed(mouseEvent -> {
             if (tourB1.isSelected()) {
-                System.out.println("b1");
+                //System.out.println("b1");
                 TroopTour troopTour = new TroopTour((int) mouseEvent.getX(), (int) mouseEvent.getY(), 0, 10, environnement);
                 environnement.ajouterTour(troopTour);
                 ;
             } else if (tourB2.isSelected()) {
-                System.out.println("b2");
+                //System.out.println("b2");
                 TourFoudre tourFoudre = new TourFoudre((int) mouseEvent.getX(), (int) mouseEvent.getY(), 0, 10, environnement);
                 environnement.ajouterTour(tourFoudre);
                 ;
             } else if (tourB3.isSelected()) {
-                System.out.println("b3");
+                //System.out.println("b3");
                 LaserTour laserTour = new LaserTour((int) mouseEvent.getX(), (int) mouseEvent.getY(), 0, 10, environnement);
                 environnement.ajouterTour(laserTour);
                 ;

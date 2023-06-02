@@ -24,7 +24,6 @@ public class PoserTour {
             db.setDragView(image);
 
             ClipboardContent content = new ClipboardContent();
-            //content.putString(tourtype.getName() + "," + range);
             content.putString(tourtype.getName());
             db.setContent(content);
             event.consume();
