@@ -19,13 +19,13 @@ public class TourAProjectile extends Tour{
 
     }
 
-    public void lancerProjectile(){
+    public void creeProjectile(){
         ObservableList<Acteur>a = this.ennemiPlusProche();
 
 
         System.out.println("x "+getX()+" y "+getY());
 
-        for(int i = 0; i<=5; i++){
+        for(int i = 0; i<1; i++){
 
             this.env.ajouterProjectile(new Projectile(this.getX()+10,this.getY()-10,env));
             System.out.println("projectile cree");

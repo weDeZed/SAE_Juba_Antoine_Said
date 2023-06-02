@@ -1,9 +1,7 @@
 package com.sae.sae_juba_antoine_said.Modele;
 
-import javafx.animation.TranslateTransition;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
-import javafx.util.Duration;
 
 public class Projectile {
 
@@ -24,9 +22,7 @@ public class Projectile {
         id="P"+ compteur;
         compteur++;
     }
-    public void deplacerVers(Acteur a) {
-        //System.out.println("pro x "+getX()+" pro y "+ getY());
-        //System.out.println("pro A "+a.getX()+" pro y "+ a.getY());
+    public void lancerProjectile(Acteur a) {
 
         int dx, dy;
         int distanceX,distanceY;
