@@ -3,6 +3,7 @@ package com.sae.sae_juba_antoine_said.Vue;
 import com.sae.sae_juba_antoine_said.Modele.*;
 import javafx.animation.Animation;
 import javafx.geometry.Rectangle2D;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
@@ -18,13 +19,12 @@ public class VueActeur {
     private Acteur acteur;
     private Image image;
     private ImageView imageView;
-    private static int x = 0;
-    private static int y = 0;
-    Circle circle;
 
+    private ProgressBar progressBar;
     public VueActeur(Pane pane, Acteur acteur) {
         this.pane = pane;
         this.acteur = acteur;
+        this.progressBar = new ProgressBar();
 
         FileInputStream fichierGuerrier = null;
 
@@ -38,7 +38,7 @@ public class VueActeur {
         }
         if (acteur instanceof Bandit) {
             try {
-                fichierGuerrier = new FileInputStream("src/main/java/com/sae/sae_juba_antoine_said/Ressources/bandit.png");
+                fichierGuerrier = new FileInputStream("src/main/java/com/sae/sae_juba_antoine_said/Ressources/enemy/e4/dir.png");
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -55,28 +55,52 @@ public class VueActeur {
         }
 
         this.image = new Image(fichierGuerrier);
-        //final ImageView imageView = new ImageView(image);
         this.imageView = new ImageView(image);
-        imageView.xProperty().bind(acteur.xProperty());
-        imageView.yProperty().bind(acteur.yProperty());
+
+        //Bar de vie
+        progressBar.translateYProperty().bind(acteur.yProperty());
+        progressBar.translateXProperty().bind(acteur.xProperty());
+        progressBar.setPrefWidth(30);
+        progressBar.setPrefHeight(10);
+        if (acteur.getPv() > 20 ) {
+            progressBar.progressProperty().bind(acteur.getPvProperty().divide(80.0));
+            String barColor = "-fx-accent: red;";
+            String trackColor = "-fx-control-inner-background: white;";
+            progressBar.setStyle(barColor + trackColor);
+        }else {
+            progressBar.setStyle("-fx-accent: red;");
+        }
+
+
+        imageView.xProperty().bind(acteur.xProperty().subtract(3));
+        imageView.yProperty().bind(acteur.yProperty().add(7));
+        progressBar.setId(acteur.getId());
+        this.pane.getChildren().add(progressBar);
         this.pane.getChildren().add(imageView);
 
-
-        /*if(acteur instanceof Bandit){
+        if(acteur instanceof Bandit){
             imageView.setViewport(new Rectangle2D(0, 0, 48, 48));
-            final Sprite animation = new Sprite(
-                    imageView,
-                    Duration.millis(500),
-                    2, 2,
-                    16, 136,
-                    48, 64
-            );
-            animation.setCycleCount(Animation.INDEFINITE);
-            animation.play();
+
+           /*     final Sprite animation = new Sprite(
+                        imageView,
+                        Duration.millis(500),
+                        2, 2,
+                        0, 87,
+                        58, 52
+                );
+                animation.setCycleCount(Animation.INDEFINITE);
+                animation.play();
+                */
+                final Sprite animation = new Sprite(
+                        imageView,
+                        Duration.millis(500),
+                        2, 2,
+                        16, 136,
+                        58, 52
+                );
+                animation.setCycleCount(Animation.INDEFINITE);
+                animation.play();
+            }
+
         }
-       */
-
-    }
-
-
 }

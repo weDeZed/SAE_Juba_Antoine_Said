@@ -5,8 +5,8 @@ import javafx.beans.property.SimpleIntegerProperty;
 
 public abstract class Acteur {
     private final int CHEMIN = 1427;
-    private int vitesse, range, pv;
-    private IntegerProperty x, y;
+    private int vitesse, range;
+    private IntegerProperty x, y,pv;
 
     private String id;
     public static int compteur = 0;
@@ -18,7 +18,7 @@ public abstract class Acteur {
         this.y = new SimpleIntegerProperty(y);
         this.vitesse = vitesse;
         this.range = range;
-        this.pv = pv;
+        this.pv = new SimpleIntegerProperty(pv);
         this.id = "A" + compteur;
         compteur++;
         this.ev = ev;
@@ -102,23 +102,26 @@ public abstract class Acteur {
     }
 
     public boolean estVivant(){
-        return this.pv >0;
+        return this.pv.getValue() > 0;
     }
 
     public void decrementationPv(int pv){
-        this.pv -= pv;
+        this.pv.subtract(pv);
     }
 
     public int getPv(){
-        return this.pv;
+        return this.pv.getValue();
     }
 
+    public IntegerProperty getPvProperty (){
+        return this.pv;
+    }
     public int getVitesse(){
         return this.vitesse;
     }
 
     public void meurt(){
-        this.pv = 0;
+        this.pv.equals(0);
     }
 
     public void setRange(int range){

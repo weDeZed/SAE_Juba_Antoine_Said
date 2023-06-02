@@ -1,15 +1,29 @@
 package com.sae.sae_juba_antoine_said.Controlleur;
 
 import com.sae.sae_juba_antoine_said.Modele.*;
-import com.sae.sae_juba_antoine_said.Vue.*;
+import com.sae.sae_juba_antoine_said.Vue.InventairDesTours;
+import com.sae.sae_juba_antoine_said.Vue.VueEnvironnement;
+import com.sae.sae_juba_antoine_said.Vue.VueTour;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.collections.ListChangeListener;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.ClipboardContent;
+import javafx.scene.input.Dragboard;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.input.TransferMode;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.TilePane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
+import javafx.scene.shape.Line;
 import javafx.util.Duration;
 
 import java.io.FileInputStream;
@@ -25,6 +39,9 @@ public class Controlleur implements Initializable {
     private Environnement environnement;
     @FXML
     private TilePane tilePane;
+
+    @FXML
+    private Label nbPiece;
     private VueEnvironnement vueEnvironnementMap;
 
 
@@ -181,19 +198,10 @@ public class Controlleur implements Initializable {
                     if (temps %5==1) {
                         environnement.tour();
                     }
-                    if (temps == 10) {
-                        troopTours.attaqueEnnemi();
-                        troopTours1.attaqueEnnemi();
-                    }
                     if (temps == 10000) {
                         gameLoop.stop();
-                    } else if (temps == 1) {
+                    } else if (temps % 2 == 0) {
 
-                        tourAProjectile.creeProjectile();
-
-
-                    }
-                    else if (temps % 2 == 0) {
                         for (Acteur acteur : environnement.getActeurs()) {
                             if (acteur instanceof Ennemi) {
                                 ((Ennemi) acteur).move();
@@ -205,6 +213,12 @@ public class Controlleur implements Initializable {
                                 }
                             }
                         }
+                    }
+                    else if (temps == 1) {
+
+                        tourAProjectile.creeProjectile();
+
+
                     }
                     if (temps % 10 == 0) {
                         for (Tour t : environnement.getTours()) {

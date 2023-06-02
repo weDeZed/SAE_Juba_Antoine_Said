@@ -1,5 +1,6 @@
 package com.sae.sae_juba_antoine_said.Modele;
 
+import javafx.beans.Observable;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
@@ -21,20 +22,6 @@ public class Tour {
     }
 
     public void attaqueEnnemi(){
-
-
-    }
-
-
-
-    public void creeProjectile(){
-        ObservableList<Acteur> result = FXCollections.observableArrayList();
-        result = ennemiPlusProche();
-
-        for(int i=0; i<result.size(); i++){
-            env.ajouterProjectile(new Projectile(getX(),getY(),env));
-            env.getProjectiles().get(i).lancerProjectile(result.get(i));
-        }
 
 
     }

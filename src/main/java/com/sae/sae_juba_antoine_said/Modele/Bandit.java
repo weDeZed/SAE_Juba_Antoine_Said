@@ -4,6 +4,7 @@ package com.sae.sae_juba_antoine_said.Modele;
 public class Bandit extends Ennemi {
 
     public Bandit(int x, int y, int vitesse, Environnement ev) {
+
         super(90, x, y, vitesse, 10, ev);
     }
 
@@ -26,16 +27,12 @@ public class Bandit extends Ennemi {
         //test
         Acteur a = this.attaquer();
         this.seDeplacer();
-        while (a.estVivant()) {
+
+        if (a.estVivant()) {
             a.decrementationPv(10);
             System.out.println("il n'est pas mort");
-
         }
-        System.out.println("il est mort ");
-        a.meurt();
-        ev.suppActeur(a);
-        System.out.println(a.getPv());
-    }
+}
 
     @Override
     public void seDeplacer() {
@@ -49,23 +46,21 @@ public class Bandit extends Ennemi {
             distanceY = a.getY() - this.getY();
 
             if (distanceX < 0){
-                dx = distanceX +(distanceX-1);
+                dx = distanceX -(distanceX+1);
             }else {
                 dx = distanceX - (distanceX-1);
             }
 
             if (distanceY < 0){
-                dy = distanceY +(distanceY-1);
+                dy = distanceY - (distanceY+1);
             }else {
                 dy = distanceY - (distanceY-1);
             }
 
-            while (a.getX() != this.getX() && a.getY() != this.getY()) {
-                int newposX = this.getX() + (this.getVitesse()*dx);
-                int newposY = this.getY() + (this.getVitesse()*dy);
-                this.setX(newposX);
-                this.setY(newposY);
-            }
+            int newposX = this.getX() + (this.getVitesse()*dx);
+            int newposY = this.getY() + (this.getVitesse()*dy);
+            this.setX(newposX);
+            this.setY(newposY);
         }
     }
 }

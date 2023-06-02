@@ -5,6 +5,8 @@ public class Golem extends Ennemi{
         super(120, x, y, vitesse,0,env);
     }
 
+
+
     @Override
     public void seDeplacer() {
 
