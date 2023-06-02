@@ -22,9 +22,11 @@ public class Projectile {
         id="P"+ compteur;
         compteur++;
     }
+
+    /*
     public void lancerProjectile(Acteur a) {
 
-        int dx, dy;
+        int directionX, directionY;
         int distanceX,distanceY;
 
 
@@ -32,19 +34,19 @@ public class Projectile {
             distanceY = a.getY() - this.getY();
 
             if (distanceX < 0){
-                dx = distanceX -(distanceX+1);
+                directionX = distanceX -(distanceX+1);
             }else {
-                dx = distanceX - (distanceX-1);
+                directionX = distanceX - (distanceX-1);
             }
 
             if (distanceY < 0){
-                dy = distanceY -(distanceY+1);
+                directionY = distanceY -(distanceY+1);
             }else {
-                dy = distanceY - (distanceY-1);
+                directionY = distanceY - (distanceY-1);
             }
 
-                int newposX = this.getX() + (this.getVitesse()*dx);
-                int newposY = this.getY() + (this.getVitesse()*dy);
+                int newposX = this.getX() + (this.getVitesse()*directionX);
+                int newposY = this.getY() + (this.getVitesse()*directionY);
 
 
 
@@ -57,6 +59,34 @@ public class Projectile {
                }
 
             }
+
+
+     */
+
+    public void lancerProjectile(Acteur a) {
+
+        double distanceX = a.getX() - this.getX();
+        double distanceY = a.getY() - this.getY();
+
+        // Calcule la distance total
+        double totalDistance = Math.sqrt(distanceX * distanceX + distanceY * distanceY);
+
+
+        double directionX = distanceX / totalDistance;
+        double directionY = distanceY / totalDistance;
+
+        // Calculer les nouvelles positions
+        double newposX = this.getX() + (this.getVitesse() * directionX);
+        double newposY = this.getY() + (this.getVitesse() * directionY);
+
+
+        this.setX((int) newposX);
+        this.setY((int) newposY);
+
+        if (atteintActeur(a) == true){
+            a.decrementationPv(10);
+        }
+    }
 
     public String getId() {
         return id;
