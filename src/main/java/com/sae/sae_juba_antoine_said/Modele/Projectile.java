@@ -83,9 +83,15 @@ public class Projectile {
         this.setX((int) newposX);
         this.setY((int) newposY);
 
+
+
         if (atteintActeur(a) == true){
-            a.decrementationPv(10);
+          //  System.out.println("PV ACT AVANT " + a.getPv());
+            a.decrementationPv(50);
+            //System.out.println("C BON");
+           // System.out.println("PV ACT APRES "+a.getPv());
         }
+
     }
 
     public String getId() {

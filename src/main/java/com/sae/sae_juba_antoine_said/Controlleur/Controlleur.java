@@ -100,8 +100,8 @@ public class Controlleur implements Initializable {
         guerrier2 = new Guerrier(100, 40*16 , 30*16,environnement);
         environnement.ajouterActeur(guerrier1);
         environnement.ajouterActeur(guerrier2);
-        vueAct=new VueActeur(pane,guerrier1);
-        vueActeur2 = new VueActeur(pane,guerrier2);
+        //vueAct=new VueActeur(pane,guerrier1);
+        //vueActeur2 = new VueActeur(pane,guerrier2);
 
 
 
@@ -191,7 +191,8 @@ public class Controlleur implements Initializable {
 
                 (ev -> {
                     if (temps  == 1) {
-                        environnement.ajouterActeur(new Bandit(52, 24, 3, environnement));
+                        vueAct=new VueActeur(pane,guerrier1);
+                        //environnement.ajouterActeur(new Bandit(52, 24, 3, environnement));
                     }
                     if (temps %5==1) {
                         environnement.tour();
@@ -226,13 +227,19 @@ public class Controlleur implements Initializable {
                         try {
 
                             for (Projectile pro: environnement.getProjectiles()) {
-                                System.out.println("dans boucle pro");
-                                pro.lancerProjectile(guerrier1);
 
+                             //   for(int ennemi = 0; ennemi < tourAProjectile.ennemiPlusProche().size(); ennemi++) {
+                                    if (guerrier1.estVivant()) {
+                                        pro.lancerProjectile(guerrier1);
 
-                            }
+                                    } else {
+                                      //  environnement.suppActeur(tourAProjectile.ennemiPlusProche().get(ennemi));
+                                        environnement.getProjectiles().remove(pro);
+                                    }
 
+                                }
 
+//                            }
 
                         }catch(Exception e){
 

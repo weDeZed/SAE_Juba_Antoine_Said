@@ -114,7 +114,7 @@ public class Environnement {
     }
 
     public void ajoutePiece (int piece){
-        this.piece.add(piece);
+        this.piece.setValue(this.piece.getValue()+piece);
     }
 
 
@@ -184,6 +184,11 @@ public class Environnement {
 
     public void tour(){
         for (int i = 0; i < acteurs.size(); i++){
+
+            if (!acteurs.get(i).estVivant()){
+                suppActeur(acteurs.get(i));
+            }
+
             if (acteurs.get(i) instanceof Ennemi) {
                 ((Ennemi) acteurs.get(i)).move();
             }

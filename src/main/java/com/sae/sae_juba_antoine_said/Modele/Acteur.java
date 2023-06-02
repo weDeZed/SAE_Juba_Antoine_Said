@@ -106,7 +106,7 @@ public abstract class Acteur {
     }
 
     public void decrementationPv(int pv){
-        this.pv.subtract(pv);
+        this.pv.setValue(this.getPv() - pv) ;
     }
 
     public int getPv(){

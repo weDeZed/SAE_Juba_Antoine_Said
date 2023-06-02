@@ -74,7 +74,8 @@ public class VueActeur {
 
         imageView.xProperty().bind(acteur.xProperty().subtract(3));
         imageView.yProperty().bind(acteur.yProperty().add(7));
-        progressBar.setId(acteur.getId());
+        progressBar.setId(acteur.getId()+1);
+        imageView.setId(acteur.getId());
         this.pane.getChildren().add(progressBar);
         this.pane.getChildren().add(imageView);
 
