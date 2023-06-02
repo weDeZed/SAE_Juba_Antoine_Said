@@ -12,6 +12,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
 import javafx.util.Duration;
 
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
@@ -53,8 +54,9 @@ public class Controlleur implements Initializable {
 
     ListChangeListener<Acteur> listenerListeActeurs;
     ListChangeListener<Tour> listenerListeTours;
-
     ListObsProjectile listnerListeProjectiles;
+
+    BFS bfs;
 
 
     @Override
@@ -91,20 +93,25 @@ public class Controlleur implements Initializable {
         environnement.ajouterTour(troopTours);
         environnement.ajouterTour(troopTours1);
 
+        //bfs = new BFS(environnement, new Sommet(28, 45,1427));
+        //chemin = bfs.cheminVersSource(getSommet(50, 0));
+
+
+
 
         pane.setOnMousePressed(mouseEvent -> {
             if (tourB1.isSelected()) {
-                //System.out.println("b1");
+                System.out.println("b1");
                 TroopTour troopTour = new TroopTour((int) mouseEvent.getX(), (int) mouseEvent.getY(), 0, 10, environnement);
                 environnement.ajouterTour(troopTour);
                 ;
             } else if (tourB2.isSelected()) {
-                //System.out.println("b2");
+                System.out.println("b2");
                 TourFoudre tourFoudre = new TourFoudre((int) mouseEvent.getX(), (int) mouseEvent.getY(), 0, 10, environnement);
                 environnement.ajouterTour(tourFoudre);
                 ;
             } else if (tourB3.isSelected()) {
-                //System.out.println("b3");
+                System.out.println("b3");
                 LaserTour laserTour = new LaserTour((int) mouseEvent.getX(), (int) mouseEvent.getY(), 0, 10, environnement);
                 environnement.ajouterTour(laserTour);
                 ;
@@ -116,7 +123,8 @@ public class Controlleur implements Initializable {
         });
 
 
-    inventairDesTours = new InventairDesTours(tourB1, tourB2, tourB3, tourB4);
+        inventairDesTours = new InventairDesTours(tourB1, tourB2, tourB3, tourB4);
+
 
 
 
@@ -165,6 +173,13 @@ public class Controlleur implements Initializable {
                     if (temps % 10 == 0) {
                         environnement.ajouterActeur(new Bandit(52, 24, 3, environnement));
                     }
+                    if (temps %5==1) {
+                        environnement.tour();
+                    }
+                    if (temps == 10) {
+                        troopTours.attaqueEnnemi();
+                        troopTours1.attaqueEnnemi();
+                    }
                     if (temps == 10000) {
                         gameLoop.stop();
                     } else if (temps == 1) {
@@ -173,14 +188,33 @@ public class Controlleur implements Initializable {
 
 
                     }
-                    if(temps%10==0){
-                        tourAProjectile.creeProjectile();
+                    else if (temps % 2 == 0) {
+                        for (Acteur acteur : environnement.getActeurs()) {
+                            if (acteur instanceof Ennemi) {
+                                ((Ennemi) acteur).move();
+                            }
+                            if (acteur instanceof Guerrier) {
+                                ((Guerrier) acteur).marcherSurChemin();
+                                if (acteur.attaquer() != null) {
+                                    acteur.agir();
+                                }
+                            }
+                        }
                     }
+                    if (temps % 10 == 0) {
+                        for (Tour t : environnement.getTours()) {
+                            if (t instanceof TroopTour) {
+                                t.attaqueEnnemi();
+                            }
+                        }
 
+                        tourAProjectile.creeProjectile();
+
+                    }
                     if(temps %2==0){
                         try {
 
-                              for (Projectile pro: environnement.getProjectiles()) {
+                            for (Projectile pro: environnement.getProjectiles()) {
                                 System.out.println("dans boucle pro");
                                 pro.lancerProjectile(guerrier1);
 
@@ -196,9 +230,10 @@ public class Controlleur implements Initializable {
 
 
                     }
-
-
-
+                    if (temps == 120) {
+                        troopTours.attaqueEnnemi();
+                        troopTours1.attaqueEnnemi();
+                    }
                     temps++;
                 })
         );

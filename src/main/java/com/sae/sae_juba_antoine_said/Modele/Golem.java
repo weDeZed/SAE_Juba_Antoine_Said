@@ -6,6 +6,11 @@ public class Golem extends Ennemi{
     }
 
     @Override
+    public void seDeplacer() {
+
+    }
+
+    @Override
     public Acteur attaquer() {
         return null;
     }

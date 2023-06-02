@@ -12,21 +12,16 @@ public abstract class Ennemi extends Acteur {
     }
 
     @Override
-    public void seDeplacer() {
-
-    }
+    public  abstract void seDeplacer();
+    public abstract void agir();
 
     @Override
     public abstract Acteur attaquer();
 
-    @Override
-    public void agir() {
-
-    }
-
     public void move() {
         if (indiceCheminActuel < this.ev.getChemin().size() - 1) {
             indiceCheminActuel++;
+            //System.out.println("x "+this.ev.getChemin().get(indiceCheminActuel).getX()+"y "+this.ev.getChemin().get(indiceCheminActuel).getY());
             this.setX(this.ev.getChemin().get(indiceCheminActuel).getX() * 16);
             this.setY(this.ev.getChemin().get(indiceCheminActuel).getY() * 16);
         }
