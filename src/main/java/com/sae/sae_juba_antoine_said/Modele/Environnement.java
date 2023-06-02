@@ -1,5 +1,7 @@
 package com.sae.sae_juba_antoine_said.Modele;
 
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -28,25 +30,19 @@ public class Environnement {
 
 
 
+
     public Environnement(int x, int y) throws IOException {
         this.x = x;
         this.y = y;
-        //this.map = new MapDeEnvironnement(x,y);
         this.map = new int[x][y];
         this.acteurs = FXCollections.observableArrayList();
         this.tours = FXCollections.observableArrayList();
         this.listeAdj = new HashMap();
         this.obstacles = FXCollections.observableArrayList();
         this.projectiles = FXCollections.observableArrayList();
-        this.piece = new SimpleIntegerProperty(50);
+        readMap();
         bfs = new BFS(this);
         chemin = bfs.cheminVersSource();
-        readMap();
-        construit();
-
-
-        bfs =new BFS(this,getSommet(28,45));
-        chemin=bfs.cheminVersSource(getSommet(50,0));
 
     }
 
@@ -152,50 +148,7 @@ public class Environnement {
     }
 
 
-    public void construit() {
-        int i;
-        int j;
-        for (i = 0; i < this.x; ++i) {
-            for (j = 0; j < this.y; ++j) {
 
-                if (map[i][j] == 1427) {
-                    Sommet s = new Sommet(i, j,1427);
-                    //System.out.println("dans case 1427 ");
-                    this.listeAdj.put(s, new HashSet());
-
-                } else {
-                    Sommet s = new Sommet(i, j,688);
-                    this.listeAdj.put(s, new HashSet());
-                    s.setPoids(688);
-
-                }
-                //System.out.print(map[i][j]);
-            }
-
-        }  for (Sommet key : this.listeAdj.keySet()) {
-            //System.out.println(" key dans coustruit " + key);
-        }
-        System.out.println("-------------------------------------------------");
-        for (i = 0; i < this.x; ++i) {
-            for (j = 0; j < this.y; ++j) {
-                Sommet s = this.getSommet(i, j);
-                if (this.dansMap(i - 1, j)) {
-                    ((Set) this.listeAdj.get(s)).add(this.getSommet(i - 1, j));
-                }
-                if (this.dansMap(i + 1, j)) {
-                    ((Set) this.listeAdj.get(s)).add(this.getSommet(i + 1, j));
-                }
-                if (this.dansMap(i, j + 1)) {
-                    ((Set) this.listeAdj.get(s)).add(this.getSommet(i, j + 1));
-                }
-                if (this.dansMap(i, j - 1)) {
-                    ((Set) this.listeAdj.get(s)).add(this.getSommet(i, j - 1));
-                }
-
-            }
-        }
-
-    }
 
   public void removeProjectile(Projectile p ){
         this.projectiles.remove(p);

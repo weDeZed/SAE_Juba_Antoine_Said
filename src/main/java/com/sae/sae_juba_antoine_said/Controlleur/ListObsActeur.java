@@ -40,7 +40,7 @@ public class ListObsActeur implements ListChangeListener<Acteur> {
                 if (m instanceof Ennemi){
                     ev.ajoutePiece(10);
                 }
-                System.out.println("mort");
+
                 enleverActeur(m);
             }
         }

@@ -24,7 +24,7 @@ public class TourAProjectile extends Tour{
 
         for(int i = 0; i<1; i++){
 
-            this.env.ajouterProjectile(new Projectile(this.getX()+10,this.getY()-10,env));
+            this.env.ajouterProjectile(new Projectile(this.getX()+10,this.getY()-30,env));
 
         }
 

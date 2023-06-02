@@ -1,9 +1,7 @@
 package com.sae.sae_juba_antoine_said.Controlleur;
 
 import com.sae.sae_juba_antoine_said.Modele.*;
-import com.sae.sae_juba_antoine_said.Vue.InventairDesTours;
-import com.sae.sae_juba_antoine_said.Vue.VueEnvironnement;
-import com.sae.sae_juba_antoine_said.Vue.VueTour;
+import com.sae.sae_juba_antoine_said.Vue.*;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.collections.ListChangeListener;
@@ -150,7 +148,7 @@ public class Controlleur implements Initializable {
 
 
 
-        listenerListeActeurs = new ListObsActeur(pane);
+        listenerListeActeurs = new ListObsActeur(pane,environnement);
         listenerListeTours = new ListObsTour(pane);
         listnerListeProjectiles = new ListObsProjectile(pane);
 
@@ -192,7 +190,7 @@ public class Controlleur implements Initializable {
                 Duration.seconds(0.17),
 
                 (ev -> {
-                    if (temps % 10 == 0) {
+                    if (temps  == 1) {
                         environnement.ajouterActeur(new Bandit(52, 24, 3, environnement));
                     }
                     if (temps %5==1) {
@@ -214,16 +212,10 @@ public class Controlleur implements Initializable {
                             }
                         }
                     }
-                    else if (temps == 1) {
-
-                        tourAProjectile.creeProjectile();
-
-
-                    }
                     if (temps % 10 == 0) {
                         for (Tour t : environnement.getTours()) {
                             if (t instanceof TroopTour) {
-                                t.attaqueEnnemi();
+                               // t.attaqueEnnemi();
                             }
                         }
 
