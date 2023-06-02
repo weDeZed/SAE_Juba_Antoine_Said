@@ -27,7 +27,6 @@ public class ListObsTour implements ListChangeListener<Tour> {
         Image image;
         ImageView imageView;
 
-
         while (t.next()) {
             for (Tour tour : t.getAddedSubList()) {
                 vueTour=new VueTour(panneauDeJeu,tour);

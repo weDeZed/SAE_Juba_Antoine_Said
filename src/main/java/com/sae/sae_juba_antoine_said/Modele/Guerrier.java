@@ -46,6 +46,7 @@ public class Guerrier extends Ally {
         }
     }
 
+
     public Acteur attaquer() {
         for (Acteur a : this.ev.getActeurs()) {
             if (a instanceof Ennemi && a.estVivant()) {

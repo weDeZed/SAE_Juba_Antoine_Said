@@ -1,5 +1,7 @@
 package com.sae.sae_juba_antoine_said.Modele;
 
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -23,23 +25,24 @@ public class Environnement {
     private ObservableList<Projectile> projectiles;
     private ArrayList<Sommet>chemin;
 
+    private IntegerProperty piece;
+
 
 
 
     public Environnement(int x, int y) throws IOException {
         this.x = x;
         this.y = y;
-        //this.map = new MapDeEnvironnement(x,y);
         this.map = new int[x][y];
         this.acteurs = FXCollections.observableArrayList();
         this.tours = FXCollections.observableArrayList();
         this.listeAdj = new HashMap();
         this.obstacles = FXCollections.observableArrayList();
         this.projectiles = FXCollections.observableArrayList();
+        this.piece = new SimpleIntegerProperty(50);
 
         readMap();
         construit();
-
 
         bfs =new BFS(this,getSommet(28,45));
         chemin=bfs.cheminVersSource(getSommet(50,0));
@@ -63,7 +66,7 @@ public class Environnement {
 
                         map[y][x] = Integer.parseInt(tout_ligne[y].trim());
 
-                       // System.out.println(" Largeur  : "+x);
+                        // System.out.println(" Largeur  : "+x);
                         //System.out.print(" "+map[x][y]);
                     }
                 }
@@ -99,9 +102,6 @@ public class Environnement {
     }
 
 
-
-
-
     public int getX() {
         return x;
     }
@@ -122,6 +122,21 @@ public class Environnement {
         return map;
     }
 
+    public int getPiece(){
+        return this.piece.getValue();
+    }
+
+    public IntegerProperty getPieceProperty (){
+        return this.piece;
+    }
+    public void decrementationPiece (int piece){
+        this.piece.subtract(piece);
+    }
+
+    public void ajoutePiece (int piece){
+        this.piece.add(piece);
+    }
+
 
     public void suppActeur (Acteur acteur){
         acteurs.remove(acteur);
@@ -139,7 +154,7 @@ public class Environnement {
 
     public void ajouterTour(Tour t){
         this.tours.add(t);
-}
+    }
     public boolean dansTerrain(int x, int y) {
         return getMap()[x][y] == 1427;
     }
@@ -198,9 +213,9 @@ public class Environnement {
 
     }
 
-  public void removeProjectile(Projectile p ){
+    public void removeProjectile(Projectile p ){
         this.projectiles.remove(p);
-  }
+    }
     public Sommet getSommet(int x, int y) {
         for (Sommet sommet : this.listeAdj.keySet()) {
             if (sommet.getX() == x && sommet.getY() == y) {
@@ -230,10 +245,4 @@ public class Environnement {
         return chemin;
     }
 
-
 }
-
-
-
-
-

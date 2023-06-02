@@ -9,6 +9,7 @@ import javafx.animation.Timeline;
 import javafx.collections.ListChangeListener;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -38,6 +39,9 @@ public class Controlleur implements Initializable {
     private Environnement environnement;
     @FXML
     private TilePane tilePane;
+
+    @FXML
+    private Label nbPiece;
     private VueEnvironnement vueEnvironnementMap;
 
 
@@ -87,24 +91,35 @@ public class Controlleur implements Initializable {
 
         pane.setOnMousePressed(mouseEvent -> {
             if (tourB1.isSelected()) {
-                System.out.println("b1");
-                TroopTour troopTour = new TroopTour((int) mouseEvent.getX(), (int) mouseEvent.getY(), 0, 10, environnement);
-                environnement.ajouterTour(troopTour);
-                ;
+                if (environnement.getPiece() >= 20) {
+                    System.out.println("b1");
+                    TroopTour troopTour = new TroopTour((int) mouseEvent.getX(), (int) mouseEvent.getY(), 0, 10, environnement);
+                    environnement.ajouterTour(troopTour);
+                    environnement.decrementationPiece(20);
+                }
+
             } else if (tourB2.isSelected()) {
-                System.out.println("b2");
-                TourFoudre tourFoudre = new TourFoudre((int) mouseEvent.getX(), (int) mouseEvent.getY(), 0, 10, environnement);
-                environnement.ajouterTour(tourFoudre);
-                ;
+                if (environnement.getPiece() >= 30) {
+                    System.out.println("b2");
+                    TourFoudre tourFoudre = new TourFoudre((int) mouseEvent.getX(), (int) mouseEvent.getY(), 0, 10, environnement);
+                    environnement.ajouterTour(tourFoudre);
+                    environnement.decrementationPiece(30);
+                }
+
             } else if (tourB3.isSelected()) {
-                System.out.println("b3");
+                if (environnement.getPiece() >= 40){
+                    System.out.println("b3");
                 LaserTour laserTour = new LaserTour((int) mouseEvent.getX(), (int) mouseEvent.getY(), 0, 10, environnement);
                 environnement.ajouterTour(laserTour);
-                ;
+                environnement.decrementationPiece(40);
+            }
+
             } else {
-                ArcTour arcTour = new ArcTour((int) mouseEvent.getX(), (int) mouseEvent.getY(), 0, 10, environnement);
-                environnement.ajouterTour(arcTour);
-                ;
+                if (environnement.getPiece() >= 50 ) {
+                    ArcTour arcTour = new ArcTour((int) mouseEvent.getX(), (int) mouseEvent.getY(), 0, 10, environnement);
+                    environnement.ajouterTour(arcTour);
+                    environnement.decrementationPiece(50);
+                }
             }
         });
 
@@ -114,12 +129,10 @@ public class Controlleur implements Initializable {
 
 
 
-        listenerListeActeurs = new ListObsActeur(pane);
+        listenerListeActeurs = new ListObsActeur(pane,environnement);
         listenerListeTours = new ListObsTour(pane);
         environnement.getActeurs().addListener(listenerListeActeurs);
         environnement.getTours().addListener(listenerListeTours);
-
-
         gameLaunche();
         initAnimation();
         gameLoop.play();
@@ -146,13 +159,14 @@ public class Controlleur implements Initializable {
 
         KeyFrame kf = new KeyFrame(
 
-
                 Duration.seconds(0.17),
 
                 (ev -> {
-                    if (temps % 10 == 0) {
+                    //vargue Ennemi
+                   if (temps % 5 == 0 ) {
                         environnement.ajouterActeur(new Bandit(52, 24, 3, environnement));
                     }
+
                     if (temps == 10000) {
                         gameLoop.stop();
                     } else if (temps % 2 == 0) {
@@ -183,6 +197,7 @@ public class Controlleur implements Initializable {
                     temps++;
                 })
         );
+
         gameLoop.getKeyFrames().add(kf);
     }
 

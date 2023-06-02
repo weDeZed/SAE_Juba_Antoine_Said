@@ -26,8 +26,6 @@ public class Tour {
 
     }
 
-
-
     public void lancerProjectile (){
         ObservableList<Acteur> result = FXCollections.observableArrayList();
 
@@ -36,8 +34,6 @@ public class Tour {
     public ObservableList<Acteur> ennemiPlusProche () {
 
         ObservableList<Acteur> result = FXCollections.observableArrayList();
-
-
         for (int i = 0; i < env.getActeurs().size(); i++) {
             if ((this.getX() - range <= env.getActeurs().get(i).getY() && env.getActeurs().get(i).getY() <= this.getY() + range) &&
                     (this.getX() - range <= env.getActeurs().get(i).getX() && env.getActeurs().get(i).getX() <= this.getY()+ range)) {
