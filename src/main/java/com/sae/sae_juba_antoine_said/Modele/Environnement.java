@@ -43,6 +43,7 @@ public class Environnement {
         readMap();
         bfs = new BFS(this);
         chemin = bfs.cheminVersSource();
+        this.piece=new SimpleIntegerProperty();
 
     }
 
@@ -59,8 +60,6 @@ public class Environnement {
                 for (int y = 0; y < tout_ligne.length; y++) {
 
                     if (!tout_ligne[y].trim().isEmpty()) {
-
-
                         map[y][x] = Integer.parseInt(tout_ligne[y].trim());
 
                        // System.out.println(" Largeur  : "+x);

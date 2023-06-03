@@ -10,10 +10,10 @@ public abstract class Acteur {
 
     private String id;
     public static int compteur = 0;
-    Environnement ev;
+    Environnement env;
 
 
-    public Acteur(int pv, int x, int y, int vitesse, int range,Environnement ev ) {
+    public Acteur(int pv, int x, int y, int vitesse, int range,Environnement env) {
         this.x = new SimpleIntegerProperty(x);
         this.y = new SimpleIntegerProperty(y);
         this.vitesse = vitesse;
@@ -21,7 +21,7 @@ public abstract class Acteur {
         this.pv = new SimpleIntegerProperty(pv);
         this.id = "A" + compteur;
         compteur++;
-        this.ev = ev;
+        this.env = env;
     }
 
     public abstract Acteur attaquer();

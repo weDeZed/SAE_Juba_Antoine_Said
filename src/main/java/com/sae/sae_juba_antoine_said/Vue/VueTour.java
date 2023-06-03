@@ -58,18 +58,18 @@ public class VueTour {
         }
         if (tour instanceof TourAProjectile) {
             try {
-                fichierTour = new FileInputStream("src/main/java/com/sae/sae_juba_antoine_said/Ressources/tourInventair/tour2.png");
+                fichierTour = new FileInputStream("src/main/java/com/sae/sae_juba_antoine_said/Ressources/tourInventair/tour3.png");
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
 
         this.image = new Image(fichierTour);
-        int decalageH = ((int) image.getHeight());
-        int decalageL = (int) image.getWidth();
+        int decalageH = ((int) image.getHeight())/2;
+        int decalageL = (int) image.getWidth()/2;
         this.imageView = new ImageView(image);
-        imageView.setLayoutX(tour.getX());
-        imageView.setLayoutY(tour.getY() - decalageH);
+        imageView.setLayoutX(tour.getX()-decalageL);
+        imageView.setLayoutY(tour.getY()-decalageH);
         this.pane.getChildren().add(imageView);
 
 

@@ -11,17 +11,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.ClipboardContent;
-import javafx.scene.input.Dragboard;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.input.TransferMode;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.TilePane;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
-import javafx.scene.shape.Line;
 import javafx.util.Duration;
 
 import java.io.FileInputStream;
@@ -71,12 +62,15 @@ public class Controlleur implements Initializable {
     ListChangeListener<Acteur> listenerListeActeurs;
     ListChangeListener<Tour> listenerListeTours;
     ListObsProjectile listnerListeProjectiles;
-
-    BFS bfs;
-
+    @FXML
+    ImageView imageForTourB1,imageForTourB2,imageForTourB3,imageForTourB4;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
+
+        /************************** Environnement *********************************/
+
         try {
             this.environnement = new Environnement(90, 90);
         } catch (IOException e) {
@@ -91,73 +85,26 @@ public class Controlleur implements Initializable {
 
 
 
-        tourAProjectile = new TourAProjectile(30*16,34*16,10,200,environnement);
-        environnement.ajouterTour(tourAProjectile);
-        vueTour = new VueTour(pane,tourAProjectile);
+        /************************** Glisser et Poser les Tours *********************************/
+        inventairDesTours = new InventairDesTours(imageForTourB1,imageForTourB2,imageForTourB3,imageForTourB4);
+        dragDropSetup = new PoserTour(environnement);
+        dragDropSetup.MettreEnPlaceTourDeplacable(tourB1, TroopTour.class, dragDropSetup.envoiImage(0),10*16);
+        dragDropSetup.MettreEnPlaceTourDeplacable(tourB2, TourFoudre.class, dragDropSetup.envoiImage(1),10);
+        dragDropSetup.MettreEnPlaceTourDeplacable(tourB3, LaserTour.class, dragDropSetup.envoiImage(2),10);
+        dragDropSetup.MettreEnPlaceTourDeplacable(tourB4, TourAProjectile.class, dragDropSetup.envoiImage(3),10*16);
+        dragDropSetup.MettreEnPlaceZoneDepot(pane);
 
-
-        guerrier1 = new Guerrier(100, 10*16 , 30*16,environnement);
-        guerrier2 = new Guerrier(100, 40*16 , 30*16,environnement);
-        environnement.ajouterActeur(guerrier1);
-        environnement.ajouterActeur(guerrier2);
-        //vueAct=new VueActeur(pane,guerrier1);
-        //vueActeur2 = new VueActeur(pane,guerrier2);
-
-
-
-        troopTours = new TroopTour(56 * 16, 27 * 16, 20, 10, environnement);
-        troopTours1 = new TroopTour(47 * 16, 10 * 16, 20, 10, environnement);
-        vueTour = new VueTour(pane, troopTours);
-        vueTour = new VueTour(pane, troopTours1);
-
-        environnement.ajouterTour(troopTours);
-        environnement.ajouterTour(troopTours1);
-
-        //bfs = new BFS(environnement, new Sommet(28, 45,1427));
-        //chemin = bfs.cheminVersSource(getSommet(50, 0));
+        //imageForTourB1.setImage(createImageView());
 
 
 
-
-        pane.setOnMousePressed(mouseEvent -> {
-            if (tourB1.isSelected()) {
-                System.out.println("b1");
-                TroopTour troopTour = new TroopTour((int) mouseEvent.getX(), (int) mouseEvent.getY(), 0, 10, environnement);
-                environnement.ajouterTour(troopTour);
-                ;
-            } else if (tourB2.isSelected()) {
-                System.out.println("b2");
-                TourFoudre tourFoudre = new TourFoudre((int) mouseEvent.getX(), (int) mouseEvent.getY(), 0, 10, environnement);
-                environnement.ajouterTour(tourFoudre);
-                ;
-            } else if (tourB3.isSelected()) {
-                System.out.println("b3");
-                LaserTour laserTour = new LaserTour((int) mouseEvent.getX(), (int) mouseEvent.getY(), 0, 10, environnement);
-                environnement.ajouterTour(laserTour);
-                ;
-            } else {
-                ArcTour arcTour = new ArcTour((int) mouseEvent.getX(), (int) mouseEvent.getY(), 0, 10, environnement);
-                environnement.ajouterTour(arcTour);
-                ;
-            }
-        });
-
-
-        inventairDesTours = new InventairDesTours(tourB1, tourB2, tourB3, tourB4);
-
-
-
-
-        listenerListeActeurs = new ListObsActeur(pane,environnement);
+        /************************** les listes observablesc *********************************/
+        listenerListeActeurs = new ListObsActeur(pane, environnement);
         listenerListeTours = new ListObsTour(pane);
         listnerListeProjectiles = new ListObsProjectile(pane);
-
-
-
         environnement.getActeurs().addListener(listenerListeActeurs);
         environnement.getTours().addListener(listenerListeTours);
         environnement.getProjectiles().addListener(listnerListeProjectiles);
-
 
 
         gameLaunche();
@@ -181,27 +128,21 @@ public class Controlleur implements Initializable {
         gameLoop = new Timeline();
         temps = 1;
         gameLoop.setCycleCount(Timeline.INDEFINITE);
-        AtomicInteger i = new AtomicInteger();
-
 
         KeyFrame kf = new KeyFrame(
-
-
                 Duration.seconds(0.17),
-
                 (ev -> {
-                    if (temps  == 1) {
-                        vueAct=new VueActeur(pane,guerrier1);
-                        //environnement.ajouterActeur(new Bandit(52, 24, 3, environnement));
+                    if (temps % 15 == 0) {
+                        environnement.ajouterActeur(new Bandit(52, 24, 3, environnement));
                     }
-                    if (temps %5==1) {
+                    if (temps % 2 == 1) {
                         environnement.tour();
                     }
                     if (temps == 10000) {
                         gameLoop.stop();
                     } else if (temps % 2 == 0) {
 
-                        for (Acteur acteur : environnement.getActeurs()) {
+                      /*  for (Acteur acteur : environnement.getActeurs()) {
                             if (acteur instanceof Ennemi) {
                                 ((Ennemi) acteur).move();
                             }
@@ -211,51 +152,65 @@ public class Controlleur implements Initializable {
                                     acteur.agir();
                                 }
                             }
-                        }
+                        }*/
                     }
                     if (temps % 10 == 0) {
                         for (Tour t : environnement.getTours()) {
                             if (t instanceof TroopTour) {
-                               // t.attaqueEnnemi();
+                                // t.attaqueEnnemi();
                             }
                         }
-
-                        tourAProjectile.creeProjectile();
+                        //tourAProjectile.creeProjectile();
 
                     }
-                    if(temps %2==0){
+                    if (temps % 2 == 0) {
                         try {
 
-                            for (Projectile pro: environnement.getProjectiles()) {
+                            for (Projectile pro : environnement.getProjectiles()) {
 
-                             //   for(int ennemi = 0; ennemi < tourAProjectile.ennemiPlusProche().size(); ennemi++) {
-                                    if (guerrier1.estVivant()) {
-                                        pro.lancerProjectile(guerrier1);
+                                //   for(int ennemi = 0; ennemi < tourAProjectile.ennemiPlusProche().size(); ennemi++) {
+                                if (guerrier1.estVivant()) {
+                                    //pro.lancerProjectile(guerrier1);
 
-                                    } else {
-                                      //  environnement.suppActeur(tourAProjectile.ennemiPlusProche().get(ennemi));
-                                        environnement.getProjectiles().remove(pro);
-                                    }
-
+                                } else {
+                                    //  environnement.suppActeur(tourAProjectile.ennemiPlusProche().get(ennemi));
+                                    //environnement.getProjectiles().remove(pro);
                                 }
+
+                            }
 
 //                            }
 
-                        }catch(Exception e){
+                        } catch (Exception e) {
 
                         }
-
 
 
                     }
                     if (temps == 120) {
-                        troopTours.attaqueEnnemi();
-                        troopTours1.attaqueEnnemi();
+                        //troopTours.attaqueEnnemi();
+                        //troopTours1.attaqueEnnemi();
                     }
                     temps++;
                 })
         );
         gameLoop.getKeyFrames().add(kf);
+    }
+
+
+    private Image createImageView() {
+        System.out.println("dans imges view" );
+        Image image;
+        ImageView imageView;
+        FileInputStream fichierTour = null;
+        try {
+            fichierTour = new FileInputStream("src/main/java/com/sae/sae_juba_antoine_said/Ressources/tourInventair/tour3.png");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        image = new Image(fichierTour);
+
+        return image;
     }
 
 
@@ -294,6 +249,29 @@ public class Controlleur implements Initializable {
 
 
 
+/*
+        tourAProjectile = new TourAProjectile(30 * 16, 34 * 16, 10, 200, environnement);
+        environnement.ajouterTour(tourAProjectile);
+        vueTour = new VueTour(pane, tourAProjectile);
+
+
+        //guerrier1 = new Guerrier(100, 10 * 16, 30 * 16, environnement);
+        //guerrier2 = new Guerrier(100, 40 * 16, 30 * 16, environnement);
+        //environnement.ajouterActeur(guerrier1);
+        //environnement.ajouterActeur(guerrier2);
+        //vueAct=new VueActeur(pane,guerrier1);
+        //vueActeur2 = new VueActeur(pane,guerrier2);
+
+
+        troopTours = new TroopTour(56 * 16, 27 * 16, 20, 10, environnement);
+        troopTours1 = new TroopTour(47 * 16, 10 * 16, 20, 10, environnement);
+        vueTour = new VueTour(pane, troopTours);
+        vueTour = new VueTour(pane, troopTours1);
+
+        environnement.ajouterTour(troopTours);
+        environnement.ajouterTour(troopTours1);
+
+ */
 
 
 
@@ -391,7 +369,53 @@ for (Acteur a : environnement.getActeurs()) {
         dragDropSetup.setupDraggableTower(tourB2, TourFoudre.class, dragDropSetup.envoiImage(1));
         dragDropSetup.setupDraggableTower(tourB3, LaserTour.class, dragDropSetup.envoiImage(2));
         dragDropSetup.setupDraggableTower(tourB4, ArcTour.class, dragDropSetup.envoiImage(3));
-
         dragDropSetup.setupDropPane(pane);
+    */
 
-         */
+
+
+/*  pane.setOnMousePressed(mouseEvent -> {
+            if (tourB1.isSelected()) {
+                System.out.println("b1");
+                TroopTour troopTour = new TroopTour((int) mouseEvent.getX(), (int) mouseEvent.getY(), 0, 10, environnement);
+                environnement.ajouterTour(troopTour);
+
+           } else if (tourB2.isSelected()) {
+                System.out.println("b2");
+                TourFoudre tourFoudre = new TourFoudre((int) mouseEvent.getX(), (int) mouseEvent.getY(), 0, 10, environnement);
+                environnement.ajouterTour(tourFoudre);
+            } else if (tourB3.isSelected()) {
+                System.out.println("b3");
+                LaserTour laserTour = new LaserTour((int) mouseEvent.getX(), (int) mouseEvent.getY(), 0, 10, environnement);
+                environnement.ajouterTour(laserTour);
+            } else {
+                ArcTour arcTour = new ArcTour((int) mouseEvent.getX(), (int) mouseEvent.getY(), 0, 10, environnement);
+                environnement.ajouterTour(arcTour);
+            }
+        });
+
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

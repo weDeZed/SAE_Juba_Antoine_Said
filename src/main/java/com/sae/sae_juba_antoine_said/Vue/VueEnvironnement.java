@@ -45,7 +45,6 @@ public class VueEnvironnement {
         this.imgTilep = new Image(fichierTileSet);
         for (int i = 0; i < env.getMap().length; i++) {
             for (int j = 0; j < env.getMap()[i].length; j++) {
-
                 imgV = new ImageView(this.imgTilep);
                 afficherMap(imgV, this.env.getMap()[j][i]);
 

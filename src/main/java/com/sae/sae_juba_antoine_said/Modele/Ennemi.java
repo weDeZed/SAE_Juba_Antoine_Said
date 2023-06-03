@@ -36,20 +36,21 @@ public abstract class Ennemi extends Acteur {
     }
 
     public void move() {
-        if (indiceCheminActuel < this.ev.getChemin().size() - 1) {
+        if (indiceCheminActuel < this.env.getChemin().size() - 1) {
             indiceCheminActuel++;
 
-            if ( this.ev.getChemin().get(indiceCheminActuel).getX()*16 == this.getX() &&
-                    this.ev.getChemin().get(indiceCheminActuel).getY()*16 != this.getY()){
+            if ( this.env.getChemin().get(indiceCheminActuel).getX()*16 == this.getX() &&
+                    this.env.getChemin().get(indiceCheminActuel).getY()*16 != this.getY()){
                // System.out.println("1");
                 dA.equals(1);
             }else {
                // System.out.println("2");
                 dA.equals(2);
             }
-
-            this.setX(this.ev.getChemin().get(indiceCheminActuel).getX() * 16);
-            this.setY(this.ev.getChemin().get(indiceCheminActuel).getY() * 16);
+            this.setX(this.env.getChemin().get(indiceCheminActuel).getX() * 16);
+            this.setY(this.env.getChemin().get(indiceCheminActuel).getY() * 16);
+        }else {
+            this.env.suppActeur(this);
         }
     }
 
