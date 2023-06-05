@@ -132,8 +132,8 @@ public class Controlleur implements Initializable {
                 ;
             } else if (tourB3.isSelected()) {
                 System.out.println("b3");
-                LaserTour laserTour = new LaserTour((int) mouseEvent.getX(), (int) mouseEvent.getY(), 0, 10, environnement);
-                environnement.ajouterTour(laserTour);
+                TourAProjectile tourAProjectile1 = new TourAProjectile((int) mouseEvent.getX(), (int) mouseEvent.getY(), 0, 400, environnement);
+                environnement.ajouterTour(tourAProjectile1);
                 ;
             } else {
                 ArcTour arcTour = new ArcTour((int) mouseEvent.getX(), (int) mouseEvent.getY(), 0, 10, environnement);
@@ -190,7 +190,7 @@ public class Controlleur implements Initializable {
                 Duration.seconds(0.17),
 
                 (ev -> {
-                    if (temps  == 1) {
+                    if (temps%20  == 1) {
                         vueAct=new VueActeur(pane,guerrier1);
                         environnement.ajouterActeur(new Bandit(52, 24, 3, environnement));
                     }
@@ -220,25 +220,38 @@ public class Controlleur implements Initializable {
                             }
                         }
 
-                        tourAProjectile.creeProjectile();
+
+                        if (!tourAProjectile.ennemiPlusProche().isEmpty()){
+                            tourAProjectile.creeProjectile();
+                        }
+
 
                     }
                     if(temps %2==0){
                         try {
+                            for (Tour tourAP : environnement.getTours()){
+                                if (tourAP instanceof TourAProjectile){
 
-                            for (Projectile pro: environnement.getProjectiles()) {
-                                for(int ennemi = 0; ennemi < tourAProjectile.ennemiPlusProche().size(); ennemi++) {
-                                    if (tourAProjectile.ennemiPlusProche().get(ennemi).estVivant()) {
-                                        pro.lancerProjectile(tourAProjectile.ennemiPlusProche().get(ennemi));
+                                    for (Projectile pro: environnement.getProjectiles()) {
+                                        for(int k = 0; k < tourAProjectile.ennemiPlusProche().size(); k++) {
+                                            if (tourAProjectile.ennemiPlusProche().get(k).estVivant()) {
+                                                pro.lancerProjectile(tourAProjectile.ennemiPlusProche().get(k));
 
-                                    } else {
-                                        environnement.suppActeur(tourAProjectile.ennemiPlusProche().get(ennemi));
-                                        environnement.getProjectiles().remove(pro);
+                                            } else {
+                                                environnement.suppActeur(tourAProjectile.ennemiPlusProche().get(k));
+                                                environnement.getProjectiles().remove(pro);
+                                            }
+
+                                        }
+
+
                                     }
-
                                 }
 
                             }
+
+
+
                         }catch(Exception e){
 
                         }

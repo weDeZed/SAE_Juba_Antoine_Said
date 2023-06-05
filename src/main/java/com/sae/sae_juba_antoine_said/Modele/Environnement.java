@@ -188,10 +188,12 @@ public class Environnement {
             if (!acteurs.get(i).estVivant()){
                 suppActeur(acteurs.get(i));
             }
-
+/*
             if (acteurs.get(i) instanceof Ennemi) {
                 ((Ennemi) acteurs.get(i)).move();
             }
+
+ */
             //((Bandit) acteurs.get(i)).move();
             if(acteurs.get(i)instanceof Bandit){
                 if( acteurs.get(i).attaquer()!=null){

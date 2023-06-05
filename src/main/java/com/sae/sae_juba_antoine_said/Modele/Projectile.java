@@ -23,46 +23,6 @@ public class Projectile {
         compteur++;
     }
 
-    /*
-    public void lancerProjectile(Acteur a) {
-
-        int directionX, directionY;
-        int distanceX,distanceY;
-
-
-            distanceX = a.getX() - this.getX();
-            distanceY = a.getY() - this.getY();
-
-            if (distanceX < 0){
-                directionX = distanceX -(distanceX+1);
-            }else {
-                directionX = distanceX - (distanceX-1);
-            }
-
-            if (distanceY < 0){
-                directionY = distanceY -(distanceY+1);
-            }else {
-                directionY = distanceY - (distanceY-1);
-            }
-
-                int newposX = this.getX() + (this.getVitesse()*directionX);
-                int newposY = this.getY() + (this.getVitesse()*directionY);
-
-
-
-                this.setX(newposX);
-                this.setY(newposY);
-
-
-               if (atteintActeur(a) == true){
-                   a.decrementationPv(10);
-               }
-
-            }
-
-
-     */
-
     public void lancerProjectile(Acteur a) {
 
         double distanceX = a.getX() - this.getX();

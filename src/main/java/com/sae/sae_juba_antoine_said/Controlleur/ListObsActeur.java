@@ -44,7 +44,7 @@ public class ListObsActeur implements ListChangeListener<Acteur> {
             for (Acteur m : a.getRemoved()) {
                 //System.out.println(" dans removed");
                 if (m instanceof Ennemi){
-                    ev.ajoutePiece(10);
+                  //  ev.ajoutePiece(10);
                 }
             //    System.out.println("mort acteur");
                 enleverActeur(m);
