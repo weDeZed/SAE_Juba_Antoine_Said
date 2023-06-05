@@ -182,13 +182,11 @@ public class Controlleur implements Initializable {
 
                         for (Tour t : environnement.getTours()){
                             System.out.println("avant instto ");
-                            if(t instanceof TourAProjectile){
-                                System.out.println("tour project ");
-                            }
-                            environnement.getProjectiles().removeAll();
+                         //environnement.getProjectiles().removeAll();
                             if(t instanceof TourAProjectile) {
                                 if (!t.ennemiPlusProche().isEmpty()){
                                     t.creeProjectile();
+
                                 }
 
                                 if(t.ennemiPlusProche().isEmpty()){
@@ -206,6 +204,9 @@ public class Controlleur implements Initializable {
                             for (Tour tourAP : environnement.getTours()){
                                 if (tourAP instanceof TourAProjectile){
                                     tourAP.attaqueEnnemi();
+                                    if(tourAP.ennemiPlusProche().isEmpty()){
+                                        environnement.getProjectiles().removeAll();
+                                    }
                                 }
 
                             }

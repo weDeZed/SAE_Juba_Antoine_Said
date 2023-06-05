@@ -17,6 +17,7 @@ public class TourAProjectile extends Tour {
 
     @Override
     public void attaqueEnnemi() {
+
         for (Projectile pro : getEnvironment().getProjectiles()) {
             for (int k = 0; k < this.ennemiPlusProche().size(); k++) {
                 if (this.ennemiPlusProche().get(k).estVivant()) {
