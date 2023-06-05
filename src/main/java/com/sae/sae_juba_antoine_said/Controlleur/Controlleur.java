@@ -136,7 +136,6 @@ public class Controlleur implements Initializable {
         }
 
     }
-
     private void initAnimation() {
 
         gameLoop = new Timeline();
@@ -182,6 +181,11 @@ public class Controlleur implements Initializable {
 
 
                         for (Tour t : environnement.getTours()){
+                            System.out.println("avant instto ");
+                            if(t instanceof TourAProjectile){
+                                System.out.println("tour project ");
+                            }
+                            environnement.getProjectiles().removeAll();
                             if(t instanceof TourAProjectile) {
                                 if (!t.ennemiPlusProche().isEmpty()){
                                     t.creeProjectile();
@@ -222,6 +226,7 @@ public class Controlleur implements Initializable {
         );
         gameLoop.getKeyFrames().add(kf);
     }
+
 
 
 
