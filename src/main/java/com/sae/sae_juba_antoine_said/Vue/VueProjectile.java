@@ -1,6 +1,6 @@
 package com.sae.sae_juba_antoine_said.Vue;
 
-import com.sae.sae_juba_antoine_said.Modele.*;
+import com.sae.sae_juba_antoine_said.Modele.Tours.Projectile;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
@@ -24,10 +24,8 @@ public class VueProjectile {
 
         if(projectile instanceof Projectile ){
             try {
-                //System.out.println("image laser");
-                fichierGuerrier = new FileInputStream("src/main/java/com/sae/sae_juba_antoine_said/Ressources/laser.png");
-             //   System.out.println(fichierGuerrier);
 
+                fichierGuerrier = new FileInputStream("src/main/java/com/sae/sae_juba_antoine_said/Ressources/laser.png");
             } catch (Exception e) {
                 e.printStackTrace();
             }

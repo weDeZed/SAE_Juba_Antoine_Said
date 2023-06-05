@@ -1,5 +1,7 @@
-package com.sae.sae_juba_antoine_said.Modele;
+package com.sae.sae_juba_antoine_said.Modele.Acteurs;
 
+
+import com.sae.sae_juba_antoine_said.Modele.Environnement.Environnement;
 
 public class Bandit extends Ennemi {
 
@@ -11,7 +13,7 @@ public class Bandit extends Ennemi {
 
     @Override
     public Acteur attaquer() {
-        for (Acteur a : this.ev.getActeurs()) {
+        for (Acteur a : this.env.getActeurs()) {
             if (a instanceof Ally && a.estVivant()) {
                 if (this.getY() - this.getRange() <= a.getY() && a.getY() <= this.getY() + this.getRange() &&
                         this.getX() - this.getRange() <= a.getX() && a.getX() <= this.getX() + this.getRange()) {

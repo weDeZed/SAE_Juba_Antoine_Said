@@ -1,18 +1,18 @@
 package com.sae.sae_juba_antoine_said.Vue;
 
-import com.sae.sae_juba_antoine_said.Modele.*;
+import com.sae.sae_juba_antoine_said.Modele.Acteurs.Acteur;
+import com.sae.sae_juba_antoine_said.Modele.Acteurs.Archer;
+import com.sae.sae_juba_antoine_said.Modele.Acteurs.Bandit;
+import com.sae.sae_juba_antoine_said.Modele.Acteurs.Guerrier;
 import javafx.animation.Animation;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
-import javafx.scene.shape.Circle;
 import javafx.util.Duration;
-import javafx.scene.shape.Circle;
 
 import java.io.FileInputStream;
-import java.util.ArrayList;
 
 public class VueActeur {
     private Pane pane;
@@ -38,7 +38,7 @@ public class VueActeur {
         }
         if (acteur instanceof Bandit) {
             try {
-                fichierGuerrier = new FileInputStream("src/main/java/com/sae/sae_juba_antoine_said/Ressources/enemy/e4/dir.png");
+                fichierGuerrier = new FileInputStream("src/main/java/com/sae/sae_juba_antoine_said/Ressources/bandit2.png");
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -79,10 +79,10 @@ public class VueActeur {
         this.pane.getChildren().add(progressBar);
         this.pane.getChildren().add(imageView);
 
-        if(acteur instanceof Bandit){
+       /* if(acteur instanceof Bandit){
             imageView.setViewport(new Rectangle2D(0, 0, 48, 48));
 
-           /*     final Sprite animation = new Sprite(
+                final Sprite animation = new Sprite(
                         imageView,
                         Duration.millis(500),
                         2, 2,
@@ -91,7 +91,7 @@ public class VueActeur {
                 );
                 animation.setCycleCount(Animation.INDEFINITE);
                 animation.play();
-                */
+
                 final Sprite animation = new Sprite(
                         imageView,
                         Duration.millis(500),
@@ -102,6 +102,7 @@ public class VueActeur {
                 animation.setCycleCount(Animation.INDEFINITE);
                 animation.play();
             }
+             */
 
         }
 }

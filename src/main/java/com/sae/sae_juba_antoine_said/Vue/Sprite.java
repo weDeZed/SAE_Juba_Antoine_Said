@@ -1,4 +1,4 @@
-package com.sae.sae_juba_antoine_said.Modele;
+package com.sae.sae_juba_antoine_said.Vue;
 
 import javafx.animation.Transition;
 import javafx.scene.image.ImageView;

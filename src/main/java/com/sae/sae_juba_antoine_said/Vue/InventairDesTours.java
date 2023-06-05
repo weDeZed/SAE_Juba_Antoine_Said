@@ -8,31 +8,31 @@ import javafx.scene.layout.GridPane;
 import java.io.FileInputStream;
 
 public class InventairDesTours {
-    private ToggleButton tourB1, tourB2, tourB3, tourB4;
+    private ImageView imageViewtourB1, imageViewtourB2, imageViewtourB3, imageViewtourB4;
     GridPane gridPane;
 
-    public InventairDesTours(ToggleButton tourB1, ToggleButton tourB2, ToggleButton tourB3, ToggleButton tourB4) {
-        this.tourB1 = tourB1;
-        this.tourB2 = tourB2;
-        this.tourB3 = tourB3;
-        this.tourB4 = tourB4;
+    public InventairDesTours( ImageView imageViewTour1,ImageView imageViewTour2,ImageView imageViewTour3,ImageView imageViewTour4) {
+        this.imageViewtourB1=imageViewTour1;
+        this.imageViewtourB2 = imageViewTour2;
+        this.imageViewtourB3 = imageViewTour3;
+        this.imageViewtourB4 = imageViewTour4;
         mettreImg();
 
     }
 
 
     public void mettreImg() {
-        tourB1.setGraphic(createImageView(0));
-        tourB2.setGraphic(createImageView(1));
-        tourB3.setGraphic(createImageView(2));
-        tourB4.setGraphic(createImageView(3));
+        imageViewtourB1.setImage(createImageView(0));
+        imageViewtourB2.setImage(createImageView(1));
+        imageViewtourB3.setImage(createImageView(2));
+        imageViewtourB4.setImage(createImageView(3));
+
 
     }
 
 
-    private ImageView createImageView(int i) {
+    private Image createImageView(int i) {
         Image image;
-        ImageView imageView;
         FileInputStream fichierTour = null;
         try {
             fichierTour = new FileInputStream("src/main/java/com/sae/sae_juba_antoine_said/Ressources/tourInventair/tour" + i + ".png");
@@ -40,10 +40,8 @@ public class InventairDesTours {
             e.printStackTrace();
         }
         image = new Image(fichierTour);
-        imageView = new ImageView(image);
-        imageView.setFitHeight(100);
-        imageView.setFitWidth(100);
-        return imageView;
+
+        return image;
     }
 
 

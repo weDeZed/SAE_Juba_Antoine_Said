@@ -1,13 +1,15 @@
 package com.sae.sae_juba_antoine_said.Modele;
 
+import com.sae.sae_juba_antoine_said.Modele.Acteurs.Acteur;
+import com.sae.sae_juba_antoine_said.Modele.Environnement.Environnement;
 import javafx.collections.ObservableList;
 
 public class TourAProjectile extends Tour{
 
 
 
-    public TourAProjectile(int x, int y, int degats, int range,Environnement environnement ) {
-        super(x, y, degats, range,environnement);
+    public TourAProjectile(int x, int y, int degats, int range,Environnement environment ) {
+        super(x, y, degats, range,environment);
         
 
 
@@ -26,10 +28,6 @@ public class TourAProjectile extends Tour{
                     getEnvironment().getProjectiles().remove(pro);
                 }
 
-            }
-
-
-        }
     }
 
     public void creeProjectile(){

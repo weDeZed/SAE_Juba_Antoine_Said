@@ -33,6 +33,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 
 public class Controlleur implements Initializable {
+    private final  int LARGEUR=32;
+    private final int HAUTEUR=32;
 
     private Environnement environnement;
     @FXML
@@ -82,17 +84,25 @@ public class Controlleur implements Initializable {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        this.tilePane.setMinSize(environnement.getX() * 16, environnement.getY() * 16);
-        this.tilePane.setMaxSize(environnement.getX() * 16, environnement.getY() * 16);
-        this.tilePane.setPrefSize(environnement.getX() * 16, environnement.getY() * 16);
-        this.pane.setMinSize(environnement.getX() * 16, environnement.getY() * 16);
-        this.pane.setMaxSize(environnement.getX() * 16, environnement.getY() * 16);
-        this.pane.setPrefSize(environnement.getX() * 16, environnement.getY() * 16);
+        this.tilePane.setMinSize(environnement.getX() * LARGEUR, environnement.getY() * HAUTEUR);
+        this.tilePane.setMaxSize(environnement.getX() * LARGEUR, environnement.getY() * HAUTEUR);
+        this.tilePane.setPrefSize(environnement.getX() * LARGEUR, environnement.getY() * HAUTEUR);
+        this.pane.setMinSize(environnement.getX() * LARGEUR, environnement.getY() * HAUTEUR);
+        this.pane.setMaxSize(environnement.getX() * LARGEUR, environnement.getY() * HAUTEUR);
+        this.pane.setPrefSize(environnement.getX() * LARGEUR, environnement.getY() * HAUTEUR);
 
 
 
+        /************************** Glisser et Poser les Tours *********************************/
+        inventairDesTours = new InventairDesTours(imageForTourB1,imageForTourB2,imageForTourB3,imageForTourB4);
+        dragDropSetup = new PoserTour(environnement);
+        dragDropSetup.MettreEnPlaceTourDeplacable(tourB1, TroopTour.class, dragDropSetup.envoiImage(0),10*16);
+        dragDropSetup.MettreEnPlaceTourDeplacable(tourB2, TourFoudre.class, dragDropSetup.envoiImage(1),10);
+        dragDropSetup.MettreEnPlaceTourDeplacable(tourB3, LaserTour.class, dragDropSetup.envoiImage(2),10);
+        dragDropSetup.MettreEnPlaceTourDeplacable(tourB4, TourAProjectile.class, dragDropSetup.envoiImage(3),10*16);
+        dragDropSetup.MettreEnPlaceZoneDepot(pane);
 
-
+        //imageForTourB1.setImage(createImageView());
         pane.setOnMousePressed(mouseEvent -> {
             if (tourB1.isSelected()) {
                 System.out.println("b1");
@@ -106,11 +116,10 @@ public class Controlleur implements Initializable {
                 ;
             } else if (tourB3.isSelected()) {
                 System.out.println("b3");
-                TourAProjectile tourAProjectile1 = new TourAProjectile((int) mouseEvent.getX(), (int) mouseEvent.getY(), 0, 200, environnement);
-                environnement.ajouterTour(tourAProjectile1);
-                System.out.println("tour a projectile crée ");
+                LaserTour laserTour = new LaserTour((int) mouseEvent.getX(), (int) mouseEvent.getY(), 0, 10, environnement);
+                environnement.ajouterTour(laserTour);
                 ;
-            } else if (tourB4.isSelected()) {
+            } else {
                 ArcTour arcTour = new ArcTour((int) mouseEvent.getX(), (int) mouseEvent.getY(), 0, 10, environnement);
                 environnement.ajouterTour(arcTour);
                 ;
@@ -165,6 +174,7 @@ public class Controlleur implements Initializable {
                 Duration.seconds(0.17),
 
                 (ev -> {
+
                     if (temps%100  == 0) {
                         environnement.ajouterActeur(new Bandit(52, 24, 3, environnement));
                     }
@@ -193,35 +203,26 @@ public class Controlleur implements Initializable {
                                // t.attaqueEnnemi();
                             }
                         }
-
-
-                        for (Tour t : environnement.getTours()){
-                            environnement.getProjectiles().removeAll();
-                            if(t instanceof TourAProjectile) {
-                                if (!t.ennemiPlusProche().isEmpty()){
-                                    t.creeProjectile();
-                                }
-
-                               if(t.ennemiPlusProche().isEmpty()){
-                                    environnement.getProjectiles().removeAll();
-                                }
-                            }
-
-                        }
-
-
+                        tourAProjectile.creeProjectile();
 
                     }
                     if(temps %2==0){
                         try {
-                            for (Tour tourAP : environnement.getTours()){
-                                if (tourAP instanceof TourAProjectile){
-                                    tourAP.attaqueEnnemi();
+
+                            for (Projectile pro : environnement.getProjectiles()) {
+
+                                //   for(int ennemi = 0; ennemi < tourAProjectile.ennemiPlusProche().size(); ennemi++) {
+                                if (guerrier1.estVivant()) {
+                                    //pro.lancerProjectile(guerrier1);
+
+                                } else {
+                                     environnement.suppActeur(tourAProjectile.ennemiPlusProche().get(ennemi));
+                                    environnement.getProjectiles().remove(pro);
                                 }
 
-                            }
+                                }
 
-
+//                            }
 
                         }catch(Exception e){
 
@@ -231,11 +232,29 @@ public class Controlleur implements Initializable {
 
                     }
                     if (temps == 120) {
+                        //troopTours.attaqueEnnemi();
+                        //troopTours1.attaqueEnnemi();
                     }
                     temps++;
                 })
         );
         gameLoop.getKeyFrames().add(kf);
+    }
+
+
+    private Image createImageView() {
+        System.out.println("dans imges view" );
+        Image image;
+        ImageView imageView;
+        FileInputStream fichierTour = null;
+        try {
+            fichierTour = new FileInputStream("src/main/java/com/sae/sae_juba_antoine_said/Ressources/tourInventair/tour3.png");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        image = new Image(fichierTour);
+
+        return image;
     }
 
 

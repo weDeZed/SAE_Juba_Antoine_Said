@@ -1,66 +1,63 @@
 package com.sae.sae_juba_antoine_said.Controlleur;
 
-import com.sae.sae_juba_antoine_said.Modele.Environnement;
-import com.sae.sae_juba_antoine_said.Modele.Tour;
+import com.sae.sae_juba_antoine_said.Modele.Environnement.Environnement;
+import com.sae.sae_juba_antoine_said.Modele.Tours.Tour;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.image.Image;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 
 import java.io.FileInputStream;
 
 public class PoserTour {
     private Environnement environnement;
+    private int placeDeTour;
 
     public PoserTour(Environnement environnement) {
         this.environnement = environnement;
+        this.placeDeTour = 200;
     }
 
-    public void setupDraggableTower(ToggleButton button, Class<? extends Tour> tourtype, Image image) {
+    public void MettreEnPlaceTourDeplacable(ToggleButton button, Class<? extends Tour> tourtype, Image image, int range) {
         button.setOnDragDetected(event -> {
             Dragboard db = button.startDragAndDrop(TransferMode.ANY);
+            Circle rangeCircle = new Circle(event.getX(), event.getY(), range * 16);
+            rangeCircle.setFill(Color.TRANSPARENT); // transparent à l'intérieur
+            rangeCircle.setStroke(Color.RED); // bordure rouge
+            rangeCircle.setStrokeWidth(2);
+
             db.setDragView(image);
 
             ClipboardContent content = new ClipboardContent();
             content.putString(tourtype.getName());
             db.setContent(content);
-            event.consume();
+
         });
     }
 
-    public void setupDropPane(Pane pane) {
+    public void MettreEnPlaceZoneDepot(Pane pane) {
         pane.setOnDragOver(event -> {
-            if (event.getGestureSource() != pane &&
-                    event.getDragboard().hasString()) {
-                event.acceptTransferModes(TransferMode.COPY_OR_MOVE);
-            }
-
-            event.consume();
+            event.acceptTransferModes(TransferMode.COPY_OR_MOVE);
         });
 
         pane.setOnDragDropped(event -> {
-            Dragboard db = event.getDragboard();
-            boolean success = false;
-
+            Dragboard db = event.getDragboard(); //il prend le nom de class qu'on es en train de glisser
             if (db.hasString()) {
                 try {
-                    Class<?> tourClass = Class.forName(db.getString());
-                    if (Tour.class.isAssignableFrom(tourClass)) {
-                        Tour tour = (Tour) tourClass.getConstructor(int.class, int.class, int.class, int.class, Environnement.class)
-                                .newInstance((int) event.getX(), (int) event.getY(), 0, 10, environnement);
+                    Class<?> tourClass = Class.forName(db.getString());// il prend la class de tour
+                    if (placéTourDansBonEndroit((int) event.getX() / 32, (int) event.getY() / 32)) { // si le tour est dans bon endroit
+                        Tour tour = (Tour) tourClass.getConstructor(int.class, int.class, int.class, int.class, Environnement.class).newInstance((int) event.getX(), (int) event.getY(), 0, 10, environnement);
                         environnement.ajouterTour(tour);
-                        success = true;
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
 
-            event.setDropCompleted(success);
-
-            event.consume();
         });
     }
 
@@ -78,5 +75,10 @@ public class PoserTour {
 
         return image;
     }
+
+    public boolean placéTourDansBonEndroit(int x, int y) {
+        return environnement.getMap()[x][y+1] == placeDeTour;
+    }
+
 }
 

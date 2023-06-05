@@ -1,11 +1,14 @@
-package com.sae.sae_juba_antoine_said.Modele;
+package com.sae.sae_juba_antoine_said.Modele.BFS;
 
+import com.sae.sae_juba_antoine_said.Modele.Environnement.Environnement;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.util.*;
 
 public class BFS {
+    private final  int CHEMIN=230;
+    private final  int TERRAIN=164;
 
     private int map[][];
     private int x, y;
@@ -18,6 +21,7 @@ public class BFS {
     private ObservableList<Sommet> obstacles;
 
     private Map<Sommet, Sommet> predecesseurs;
+    private int largeur,hauteur;
 
 
     public BFS(Environnement mapEnv) {
@@ -30,8 +34,8 @@ public class BFS {
         this.obstacles = FXCollections.observableArrayList();
         predecesseurs = new HashMap<Sommet, Sommet>();
         construit();
-        this.source = getSommet(28, 45);
-        this.cible=getSommet(50,0);
+        this.source = getSommet(7, 23);
+        this.cible=getSommet(7,0);
         algoBFS();
 
 
@@ -42,12 +46,12 @@ public class BFS {
         for (i = 0; i < this.x; ++i) {
             for (j = 0; j < this.y; ++j) {
 
-                if (map[i][j] == 1427) {
-                    Sommet s = new Sommet(i, j, 1427);
+                if (map[i][j] == CHEMIN) {
+                    Sommet s = new Sommet(i, j, CHEMIN);
                     this.listeAdj.put(s, new HashSet());
 
                 } else {
-                    Sommet s = new Sommet(i, j, 688);
+                    Sommet s = new Sommet(i, j, TERRAIN);
                     this.listeAdj.put(s, new HashSet());
                 }
             }
@@ -99,7 +103,7 @@ public class BFS {
             Sommet suivant = fifo.pollLast();
 
             parcours.add(suivant);
-            for (Sommet t : this.adjacents1(suivant)) {
+            for (Sommet t : this.adjacents(suivant) ) {
                 if (!(Marquage.contains(t))) {
                     Marquage.addFirst(t);
                     fifo.addFirst(t);
@@ -118,7 +122,7 @@ public class BFS {
         }
         return null;
     }
-    public Set<Sommet> adjacents1(Sommet s) {
+    public Set<Sommet> adjacents(Sommet s) {
         if (this.estDeconnecte(s)) {
             return new HashSet<>();
         } else {
@@ -127,8 +131,6 @@ public class BFS {
             return adjacents;
 
         }
-
-
     }
     public ArrayList<Sommet> cheminVersSource() {
         ArrayList<Sommet> chemin = new ArrayList<>();
@@ -144,4 +146,5 @@ public class BFS {
         */
         return chemin;
     }
+
 }
