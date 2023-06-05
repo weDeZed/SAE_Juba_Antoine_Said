@@ -5,7 +5,7 @@ public class Bandit extends Ennemi {
 
     public Bandit(int x, int y, int vitesse, Environnement ev) {
 
-        super(90, x, y, vitesse, 10, ev);
+        super(100, x, y, vitesse, 10, ev);
     }
 
 

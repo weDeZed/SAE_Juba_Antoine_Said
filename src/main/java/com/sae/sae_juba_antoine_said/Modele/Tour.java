@@ -34,7 +34,9 @@ public class Tour {
             if (env.getActeurs().get(i) instanceof Ennemi) {
                 if ((this.getX() - range <= env.getActeurs().get(i).getY() && env.getActeurs().get(i).getY() <= this.getY() + range) &&
                         (this.getX() - range <= env.getActeurs().get(i).getX() && env.getActeurs().get(i).getX() <= this.getY() + range)) {
+
                     result.add(env.getActeurs().get(i));
+                    System.out.println("Acteur : " + env.getActeurs().get(i) + " ajouté ");
                 }
             }
         }
@@ -82,5 +84,8 @@ public class Tour {
     }
     public Environnement getEnvironment() {
         return env;
+    }
+    public void creeProjectile(){
+
     }
 }

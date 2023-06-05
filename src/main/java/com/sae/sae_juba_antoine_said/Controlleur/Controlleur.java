@@ -91,32 +91,6 @@ public class Controlleur implements Initializable {
 
 
 
-        tourAProjectile = new TourAProjectile(30*16,34*16,10,200,environnement);
-        environnement.ajouterTour(tourAProjectile);
-        vueTour = new VueTour(pane,tourAProjectile);
-
-
-        guerrier1 = new Guerrier(100, 10*16 , 30*16,environnement);
-        guerrier2 = new Guerrier(100, 40*16 , 30*16,environnement);
-        environnement.ajouterActeur(guerrier1);
-        environnement.ajouterActeur(guerrier2);
-        //vueAct=new VueActeur(pane,guerrier1);
-        //vueActeur2 = new VueActeur(pane,guerrier2);
-
-
-
-        troopTours = new TroopTour(56 * 16, 27 * 16, 20, 10, environnement);
-        troopTours1 = new TroopTour(47 * 16, 10 * 16, 20, 10, environnement);
-        vueTour = new VueTour(pane, troopTours);
-        vueTour = new VueTour(pane, troopTours1);
-
-        environnement.ajouterTour(troopTours);
-        environnement.ajouterTour(troopTours1);
-
-        //bfs = new BFS(environnement, new Sommet(28, 45,1427));
-        //chemin = bfs.cheminVersSource(getSommet(50, 0));
-
-
 
 
         pane.setOnMousePressed(mouseEvent -> {
@@ -132,10 +106,11 @@ public class Controlleur implements Initializable {
                 ;
             } else if (tourB3.isSelected()) {
                 System.out.println("b3");
-                TourAProjectile tourAProjectile1 = new TourAProjectile((int) mouseEvent.getX(), (int) mouseEvent.getY(), 0, 400, environnement);
+                TourAProjectile tourAProjectile1 = new TourAProjectile((int) mouseEvent.getX(), (int) mouseEvent.getY(), 0, 200, environnement);
                 environnement.ajouterTour(tourAProjectile1);
+                System.out.println("tour a projectile crée ");
                 ;
-            } else {
+            } else if (tourB4.isSelected()) {
                 ArcTour arcTour = new ArcTour((int) mouseEvent.getX(), (int) mouseEvent.getY(), 0, 10, environnement);
                 environnement.ajouterTour(arcTour);
                 ;
@@ -190,8 +165,7 @@ public class Controlleur implements Initializable {
                 Duration.seconds(0.17),
 
                 (ev -> {
-                    if (temps%20  == 1) {
-                        vueAct=new VueActeur(pane,guerrier1);
+                    if (temps%100  == 0) {
                         environnement.ajouterActeur(new Bandit(52, 24, 3, environnement));
                     }
                     if (temps %5==1) {
@@ -221,9 +195,20 @@ public class Controlleur implements Initializable {
                         }
 
 
-                        if (!tourAProjectile.ennemiPlusProche().isEmpty()){
-                            tourAProjectile.creeProjectile();
+                        for (Tour t : environnement.getTours()){
+                            environnement.getProjectiles().removeAll();
+                            if(t instanceof TourAProjectile) {
+                                if (!t.ennemiPlusProche().isEmpty()){
+                                    t.creeProjectile();
+                                }
+
+                               if(t.ennemiPlusProche().isEmpty()){
+                                    environnement.getProjectiles().removeAll();
+                                }
+                            }
+
                         }
+
 
 
                     }
@@ -231,21 +216,7 @@ public class Controlleur implements Initializable {
                         try {
                             for (Tour tourAP : environnement.getTours()){
                                 if (tourAP instanceof TourAProjectile){
-
-                                    for (Projectile pro: environnement.getProjectiles()) {
-                                        for(int k = 0; k < tourAProjectile.ennemiPlusProche().size(); k++) {
-                                            if (tourAProjectile.ennemiPlusProche().get(k).estVivant()) {
-                                                pro.lancerProjectile(tourAProjectile.ennemiPlusProche().get(k));
-
-                                            } else {
-                                                environnement.suppActeur(tourAProjectile.ennemiPlusProche().get(k));
-                                                environnement.getProjectiles().remove(pro);
-                                            }
-
-                                        }
-
-
-                                    }
+                                    tourAP.attaqueEnnemi();
                                 }
 
                             }
@@ -260,8 +231,6 @@ public class Controlleur implements Initializable {
 
                     }
                     if (temps == 120) {
-                        troopTours.attaqueEnnemi();
-                        troopTours1.attaqueEnnemi();
                     }
                     temps++;
                 })

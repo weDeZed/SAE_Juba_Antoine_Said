@@ -194,18 +194,25 @@ public class Environnement {
             }
 
  */
+
+            /*
             //((Bandit) acteurs.get(i)).move();
             if(acteurs.get(i)instanceof Bandit){
                 if( acteurs.get(i).attaquer()!=null){
                    acteurs.get(i).agir();
                }
             }
+
+             */
+            /*
             if(acteurs.get(i) instanceof Guerrier){
                 ((Guerrier) acteurs.get(i)).marcherSurChemin();
                 if( acteurs.get(i).attaquer()!=null){
                     acteurs.get(i).agir();
                 }
             }
+
+             */
         }
     }
 

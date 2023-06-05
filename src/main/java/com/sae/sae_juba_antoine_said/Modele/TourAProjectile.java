@@ -6,8 +6,8 @@ public class TourAProjectile extends Tour{
 
 
 
-    public TourAProjectile(int x, int y, int degats, int range,Environnement environment ) {
-        super(x, y, degats, range,environment);
+    public TourAProjectile(int x, int y, int degats, int range,Environnement environnement ) {
+        super(x, y, degats, range,environnement);
         
 
 
@@ -16,7 +16,20 @@ public class TourAProjectile extends Tour{
 
     @Override
     public void attaqueEnnemi() {
+        for (Projectile pro: getEnvironment().getProjectiles()) {
+            for(int k = 0; k < this.ennemiPlusProche().size(); k++) {
+                if (this.ennemiPlusProche().get(k).estVivant()) {
+                    pro.lancerProjectile(this.ennemiPlusProche().get(k));
 
+                } else {
+                    getEnvironment().suppActeur(this.ennemiPlusProche().get(k));
+                    getEnvironment().getProjectiles().remove(pro);
+                }
+
+            }
+
+
+        }
     }
 
     public void creeProjectile(){
