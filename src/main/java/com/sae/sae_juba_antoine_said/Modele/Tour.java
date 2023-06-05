@@ -31,15 +31,14 @@ public class Tour {
 
 
         for (int i = 0; i < env.getActeurs().size(); i++) {
-            if ((this.getX() - range <= env.getActeurs().get(i).getY() && env.getActeurs().get(i).getY() <= this.getY() + range) &&
-                    (this.getX() - range <= env.getActeurs().get(i).getX() && env.getActeurs().get(i).getX() <= this.getY()+ range)) {
-                result.add(env.getActeurs().get(i));
-
+            if (env.getActeurs().get(i) instanceof Ennemi) {
+                if ((this.getX() - range <= env.getActeurs().get(i).getY() && env.getActeurs().get(i).getY() <= this.getY() + range) &&
+                        (this.getX() - range <= env.getActeurs().get(i).getX() && env.getActeurs().get(i).getX() <= this.getY() + range)) {
+                    result.add(env.getActeurs().get(i));
+                }
             }
         }
-
         return result;
-
     }
 
     public int getX() {

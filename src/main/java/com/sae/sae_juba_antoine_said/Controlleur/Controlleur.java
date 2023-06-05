@@ -192,7 +192,7 @@ public class Controlleur implements Initializable {
                 (ev -> {
                     if (temps  == 1) {
                         vueAct=new VueActeur(pane,guerrier1);
-                        //environnement.ajouterActeur(new Bandit(52, 24, 3, environnement));
+                        environnement.ajouterActeur(new Bandit(52, 24, 3, environnement));
                     }
                     if (temps %5==1) {
                         environnement.tour();
@@ -227,20 +227,18 @@ public class Controlleur implements Initializable {
                         try {
 
                             for (Projectile pro: environnement.getProjectiles()) {
-
-                             //   for(int ennemi = 0; ennemi < tourAProjectile.ennemiPlusProche().size(); ennemi++) {
-                                    if (guerrier1.estVivant()) {
-                                        pro.lancerProjectile(guerrier1);
+                                for(int ennemi = 0; ennemi < tourAProjectile.ennemiPlusProche().size(); ennemi++) {
+                                    if (tourAProjectile.ennemiPlusProche().get(ennemi).estVivant()) {
+                                        pro.lancerProjectile(tourAProjectile.ennemiPlusProche().get(ennemi));
 
                                     } else {
-                                      //  environnement.suppActeur(tourAProjectile.ennemiPlusProche().get(ennemi));
+                                        environnement.suppActeur(tourAProjectile.ennemiPlusProche().get(ennemi));
                                         environnement.getProjectiles().remove(pro);
                                     }
 
                                 }
 
-//                            }
-
+                            }
                         }catch(Exception e){
 
                         }
