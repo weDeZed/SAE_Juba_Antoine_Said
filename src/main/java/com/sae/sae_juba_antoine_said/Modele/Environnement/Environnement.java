@@ -1,5 +1,14 @@
-package com.sae.sae_juba_antoine_said.Modele;
+package com.sae.sae_juba_antoine_said.Modele.Environnement;
 
+import com.sae.sae_juba_antoine_said.Modele.Acteurs.Acteur;
+import com.sae.sae_juba_antoine_said.Modele.Acteurs.Bandit;
+import com.sae.sae_juba_antoine_said.Modele.Acteurs.Ennemi;
+import com.sae.sae_juba_antoine_said.Modele.Acteurs.Guerrier;
+import com.sae.sae_juba_antoine_said.Modele.BFS.BFS;
+import com.sae.sae_juba_antoine_said.Modele.BFS.Sommet;
+import com.sae.sae_juba_antoine_said.Modele.Tours.Projectile;
+import com.sae.sae_juba_antoine_said.Modele.Tours.Tour;
+import com.sae.sae_juba_antoine_said.Modele.Tours.TroopTour;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
@@ -162,20 +171,6 @@ public class Environnement {
     }
 
 
-    public boolean estDeconnecte(Sommet s) {
-        return this.obstacles.contains(s);
-    }
-
-    public Set<Sommet> adjacents(Sommet s) {
-        if (this.estDeconnecte(s)) {
-            return new HashSet<>();
-        } else {
-            Set<Sommet> adjacents = new HashSet<>(this.listeAdj.get(s));//il prends tous les sommets adjacents de sommet s
-            adjacents.removeIf(adjacent -> adjacent.getPoids() != s.getPoids());//il suprime tous les sommet que les poids ne sont pas égale
-            //System.out.println(" "+adjacents);
-            return adjacents;
-        }
-    }
 
     public ArrayList<Sommet> getChemin() {
         return chemin;
@@ -204,6 +199,7 @@ public class Environnement {
                 }
             }
         }
+
     }
 
 

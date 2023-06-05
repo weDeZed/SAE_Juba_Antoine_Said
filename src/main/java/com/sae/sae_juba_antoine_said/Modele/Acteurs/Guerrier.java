@@ -1,16 +1,18 @@
-package com.sae.sae_juba_antoine_said.Modele;
+package com.sae.sae_juba_antoine_said.Modele.Acteurs;
+
+import com.sae.sae_juba_antoine_said.Modele.Environnement.Environnement;
 
 public class Guerrier extends Ally {
-    private  int direction;
-    private int startX ;
+    private int direction;
+    private int startX;
     private int startY;
 
 
     public Guerrier(int pv, int x, int y, Environnement env) {
         super(pv, x, y, 20, 10, env);
         direction = 1;
-        this.startX = x / 16;
-        this.startY = y / 16;
+        this.startX = x / 32;
+        this.startY = y / 32;
     }
 
     @Override
@@ -35,13 +37,11 @@ public class Guerrier extends Ally {
             } else {
                 dy = distanceY - (distanceY - 1);
             }
-
-            while (a.getX() != this.getX() && a.getY() != this.getY()) {
                 int newposX = this.getX() + (this.getVitesse() * dx);
                 int newposY = this.getY() + (this.getVitesse() * dy);
                 this.setX(newposX);
                 this.setY(newposY);
-            }
+
         }
     }
 
@@ -73,25 +73,25 @@ public class Guerrier extends Ally {
 
 
     public void marcherSurChemin() {
-        int x = getX() / 16;
-        int y = getY() / 16;
+        int x = getX() / 32;
+        int y = getY() / 32;
         boolean peutDeplacer = false;
 
         if (direction == 1) { // marcher droit/en bas
-            if (x < startX + getRange() &&  this.env.getMap()[x + 1][y] == 1427) {
+            if (x < 90 && x < startX + getRange() && this.env.getMap()[x + 1][y] == getCHEMIN()) {
                 x = x + 1;
                 peutDeplacer = true;
-            } else if (y < startY + getRange() &&  this.env.getMap()[x][y + 1] == 1427) {
+            } else if (y < 90 && y < startY + getRange() && this.env.getMap()[x][y + 1] == getCHEMIN()) {
                 y = y + 1;
                 peutDeplacer = true;
             } else {
                 direction = -1; // change la direction
             }
         } else if (direction == -1) { // déplacer gauche / haut
-            if (x > startX - getRange() &&  this.env.getMap()[x - 1][y] == 1427) {
+            if (x > 0 && x > startX - getRange() && this.env.getMap()[x - 1][y] == getCHEMIN()) {
                 x = x - 1;
                 peutDeplacer = true;
-            } else if (y > startY - getRange() &&  this.env.getMap()[x][y - 1] == 1427) {
+            } else if (y > 0 && y > startY - getRange() && this.env.getMap()[x][y - 1] == getCHEMIN()) {
                 y = y - 1;
                 peutDeplacer = true;
             } else {
@@ -100,8 +100,8 @@ public class Guerrier extends Ally {
         }
 
         if (peutDeplacer) {
-            setX(x * 16);
-            setY(y * 16);
+            setX(x * 32);
+            setY(y * 32);
         }
     }
 }

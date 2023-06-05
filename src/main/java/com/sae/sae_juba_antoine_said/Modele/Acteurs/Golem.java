@@ -1,7 +1,9 @@
-package com.sae.sae_juba_antoine_said.Modele;
+package com.sae.sae_juba_antoine_said.Modele.Acteurs;
 
-public class Golem extends Ennemi{
-    public Golem(int x, int y, int vitesse,Environnement env) {
+import com.sae.sae_juba_antoine_said.Modele.Environnement.Environnement;
+
+public class Golem extends Ennemi {
+    public Golem(int x, int y, int vitesse, Environnement env) {
         super(120, x, y, vitesse,0,env);
     }
 

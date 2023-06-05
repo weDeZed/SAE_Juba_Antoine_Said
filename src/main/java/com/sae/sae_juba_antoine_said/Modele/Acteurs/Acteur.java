@@ -1,12 +1,14 @@
-package com.sae.sae_juba_antoine_said.Modele;
+package com.sae.sae_juba_antoine_said.Modele.Acteurs;
 
+import com.sae.sae_juba_antoine_said.Modele.Environnement.Environnement;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
 public abstract class Acteur {
-    private final int CHEMIN = 1427;
+    private final int CHEMIN = 230;
     private int vitesse, range;
     private IntegerProperty x, y,pv;
+
 
     private String id;
     public static int compteur = 0;
@@ -56,6 +58,9 @@ public abstract class Acteur {
         this.y.set(y);
     }
 
+    public Environnement getEnv() {
+        return env;
+    }
 
     public boolean collisionDroit(Acteur acteur, Environnement environnement) {
         //System.out.println("X "+acteur.getX()+" Y "+acteur.getY());
@@ -68,9 +73,7 @@ public abstract class Acteur {
         return false;
     }
 
-
     public boolean collisionGauche(Acteur acteur, Environnement environnement) {
-
         if (environnement.getMap()[acteur.getX() / 16 - 16][getY() / 16] != CHEMIN) {
             //System.out.println("X "+acteur.getX()+" Y "+acteur.getY());
             System.out.println("collision Gauch " + environnement.getMap()[acteur.getX() / 16 - 16][getY() / 16]);
@@ -134,4 +137,8 @@ public abstract class Acteur {
 
     public abstract void seDeplacer();
 
+
+    public int getCHEMIN() {
+        return CHEMIN;
+    }
 }

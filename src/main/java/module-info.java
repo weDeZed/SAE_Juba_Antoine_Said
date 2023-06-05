@@ -9,11 +9,17 @@ module com.example.sae_juba_antoine_said {
 
     opens com.sae.sae_juba_antoine_said to javafx.fxml;
     exports com.sae.sae_juba_antoine_said;
-    opens com.sae.sae_juba_antoine_said.Modele to javafx.fxml;
-    exports com.sae.sae_juba_antoine_said.Modele;
     opens com.sae.sae_juba_antoine_said.Controlleur to  javafx.fxml;
     exports com.sae.sae_juba_antoine_said.Controlleur;
     opens com.sae.sae_juba_antoine_said.Vue to javafx.fxml;
     exports com.sae.sae_juba_antoine_said.Vue;
+    exports com.sae.sae_juba_antoine_said.Modele.Acteurs;
+    opens com.sae.sae_juba_antoine_said.Modele.Acteurs to javafx.fxml;
+    exports com.sae.sae_juba_antoine_said.Modele.Tours;
+    opens com.sae.sae_juba_antoine_said.Modele.Tours to javafx.fxml;
+    exports com.sae.sae_juba_antoine_said.Modele.Environnement;
+    opens com.sae.sae_juba_antoine_said.Modele.Environnement to javafx.fxml;
+    exports com.sae.sae_juba_antoine_said.Modele.BFS;
+    opens com.sae.sae_juba_antoine_said.Modele.BFS to javafx.fxml;
 
 }

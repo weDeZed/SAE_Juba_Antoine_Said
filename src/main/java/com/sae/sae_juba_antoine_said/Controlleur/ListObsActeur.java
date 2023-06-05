@@ -1,21 +1,13 @@
 package com.sae.sae_juba_antoine_said.Controlleur;
 
 
-import com.sae.sae_juba_antoine_said.Modele.Acteur;
-import com.sae.sae_juba_antoine_said.Modele.Bandit;
-import com.sae.sae_juba_antoine_said.Modele.Ennemi;
-import com.sae.sae_juba_antoine_said.Modele.Environnement;
-import com.sae.sae_juba_antoine_said.Vue.VueActeur;
+import com.sae.sae_juba_antoine_said.Modele.Acteurs.Acteur;
+import com.sae.sae_juba_antoine_said.Modele.Acteurs.Ennemi;
+import com.sae.sae_juba_antoine_said.Modele.Environnement.Environnement;
 import com.sae.sae_juba_antoine_said.Vue.VueActeur;
 import javafx.collections.ListChangeListener;
-import javafx.fxml.FXML;
 import javafx.scene.Node;
-import javafx.scene.control.Label;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
-
-import java.io.FileInputStream;
 
 public class ListObsActeur implements ListChangeListener<Acteur> {
 

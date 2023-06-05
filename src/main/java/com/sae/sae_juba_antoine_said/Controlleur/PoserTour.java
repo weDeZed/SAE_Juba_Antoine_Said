@@ -1,7 +1,7 @@
 package com.sae.sae_juba_antoine_said.Controlleur;
 
-import com.sae.sae_juba_antoine_said.Modele.Environnement;
-import com.sae.sae_juba_antoine_said.Modele.Tour;
+import com.sae.sae_juba_antoine_said.Modele.Environnement.Environnement;
+import com.sae.sae_juba_antoine_said.Modele.Tours.Tour;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.image.Image;
 import javafx.scene.input.ClipboardContent;
@@ -19,7 +19,7 @@ public class PoserTour {
 
     public PoserTour(Environnement environnement) {
         this.environnement = environnement;
-        this.placeDeTour = 831;
+        this.placeDeTour = 200;
     }
 
     public void MettreEnPlaceTourDeplacable(ToggleButton button, Class<? extends Tour> tourtype, Image image, int range) {
@@ -49,7 +49,7 @@ public class PoserTour {
             if (db.hasString()) {
                 try {
                     Class<?> tourClass = Class.forName(db.getString());// il prend la class de tour
-                    if (placéTourDansBonEndroit((int) event.getX() / 16, (int) event.getY() / 16)) { // si le tour est dans bon endroit
+                    if (placéTourDansBonEndroit((int) event.getX() / 32, (int) event.getY() / 32)) { // si le tour est dans bon endroit
                         Tour tour = (Tour) tourClass.getConstructor(int.class, int.class, int.class, int.class, Environnement.class).newInstance((int) event.getX(), (int) event.getY(), 0, 10, environnement);
                         environnement.ajouterTour(tour);
                     }

@@ -1,7 +1,7 @@
 package com.sae.sae_juba_antoine_said.Vue;
 
 
-import com.sae.sae_juba_antoine_said.Modele.Environnement;
+import com.sae.sae_juba_antoine_said.Modele.Environnement.Environnement;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -22,11 +22,14 @@ public class VueEnvironnement {
 
     private BorderPane borderPane;
     private String ch;
+    private final int LARGEUR = 32;
+    private final int HAUTEUR = 32;
 
 
     public VueEnvironnement(Environnement env, TilePane tileP) throws FileNotFoundException {
         this.env = env;
         this.tilePane = tileP;
+
         iniTerrain();
     }
 
@@ -55,33 +58,29 @@ public class VueEnvironnement {
     public void afficherMap(ImageView img, int id) {
         int x;
         int y;
-        x = id % ((int) imgTilep.getWidth() / 16);
-        y = id / ((int) imgTilep.getWidth() / 16);
-        x = (x * 16);
-        y = (y * 16);
-        img.setViewport(new Rectangle2D(x, y, 16, 16));
+        x = id % ((int) imgTilep.getWidth() / LARGEUR);
+        y = id / ((int) imgTilep.getWidth() / HAUTEUR);
+        x = (x * LARGEUR);
+        y = (y * HAUTEUR);
+        img.setViewport(new Rectangle2D(x, y, LARGEUR, HAUTEUR));
         this.tilePane.getChildren().add(img);
     }
 
     public void refreshMap(ImageView img, int id) {
         int x;
         int y;
-        x = id % ((int) imgTilep.getWidth() / 16);
-        y = id / ((int) imgTilep.getHeight() / 16);
-        x = (x * 16) - 16;
-        y = (y * 16);
+        x = id % ((int) imgTilep.getWidth() / LARGEUR);
+        y = id / ((int) imgTilep.getHeight() / HAUTEUR);
+        x = (x * LARGEUR) - LARGEUR;
+        y = (y * HAUTEUR);
 
-        img.setViewport(new Rectangle2D(x, y, 16, 16));
+        img.setViewport(new Rectangle2D(x, y, LARGEUR, HAUTEUR));
     }
 
 
     public TilePane getTilePane() {
 
         return tilePane;
-    }
-
-    public ImageView getImage(int x, int y) {
-        return (ImageView) tilePane.getChildren().get(y * 40 + x);
     }
 
     public ImageView getImgV() {

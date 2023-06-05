@@ -1,5 +1,7 @@
-package com.sae.sae_juba_antoine_said.Modele;
+package com.sae.sae_juba_antoine_said.Modele.Acteurs;
 
+
+import com.sae.sae_juba_antoine_said.Modele.Environnement.Environnement;
 
 public class Bandit extends Ennemi {
 

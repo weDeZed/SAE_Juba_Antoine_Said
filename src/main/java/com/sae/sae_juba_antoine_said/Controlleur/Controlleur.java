@@ -1,6 +1,9 @@
 package com.sae.sae_juba_antoine_said.Controlleur;
 
-import com.sae.sae_juba_antoine_said.Modele.*;
+import com.sae.sae_juba_antoine_said.Modele.Acteurs.Acteur;
+import com.sae.sae_juba_antoine_said.Modele.Acteurs.Bandit;
+import com.sae.sae_juba_antoine_said.Modele.Environnement.Environnement;
+import com.sae.sae_juba_antoine_said.Modele.Tours.*;
 import com.sae.sae_juba_antoine_said.Vue.*;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -20,10 +23,11 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.concurrent.atomic.AtomicInteger;
 
 
 public class Controlleur implements Initializable {
+    private final  int LARGEUR=32;
+    private final int HAUTEUR=32;
 
     private Environnement environnement;
     @FXML
@@ -76,12 +80,12 @@ public class Controlleur implements Initializable {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        this.tilePane.setMinSize(environnement.getX() * 16, environnement.getY() * 16);
-        this.tilePane.setMaxSize(environnement.getX() * 16, environnement.getY() * 16);
-        this.tilePane.setPrefSize(environnement.getX() * 16, environnement.getY() * 16);
-        this.pane.setMinSize(environnement.getX() * 16, environnement.getY() * 16);
-        this.pane.setMaxSize(environnement.getX() * 16, environnement.getY() * 16);
-        this.pane.setPrefSize(environnement.getX() * 16, environnement.getY() * 16);
+        this.tilePane.setMinSize(environnement.getX() * LARGEUR, environnement.getY() * HAUTEUR);
+        this.tilePane.setMaxSize(environnement.getX() * LARGEUR, environnement.getY() * HAUTEUR);
+        this.tilePane.setPrefSize(environnement.getX() * LARGEUR, environnement.getY() * HAUTEUR);
+        this.pane.setMinSize(environnement.getX() * LARGEUR, environnement.getY() * HAUTEUR);
+        this.pane.setMaxSize(environnement.getX() * LARGEUR, environnement.getY() * HAUTEUR);
+        this.pane.setPrefSize(environnement.getX() * LARGEUR, environnement.getY() * HAUTEUR);
 
 
 
@@ -95,6 +99,13 @@ public class Controlleur implements Initializable {
         dragDropSetup.MettreEnPlaceZoneDepot(pane);
 
         //imageForTourB1.setImage(createImageView());
+        pane.setOnMousePressed(mouseEvent -> {
+            // environnement.ajouterActeur(new Guerrier(1,(int) mouseEvent.getX(),(int ) mouseEvent.getY()));
+            //environnement.ajouterTour(new Tour((int) mouseEvent.getX(),(int ) mouseEvent.getY(),10,10,environnement));
+            System.out.println("x " + (int) mouseEvent.getX() / LARGEUR + " Y " + (int) mouseEvent.getY() / HAUTEUR + " poid " + environnement.getMap()[(int) mouseEvent.getX() / LARGEUR][(int) mouseEvent.getY() / HAUTEUR]);
+
+        });
+
 
 
 
@@ -133,7 +144,7 @@ public class Controlleur implements Initializable {
                 Duration.seconds(0.17),
                 (ev -> {
                     if (temps % 15 == 0) {
-                        environnement.ajouterActeur(new Bandit(52, 24, 3, environnement));
+                        environnement.ajouterActeur(new Bandit(52, 24,3, environnement));
                     }
                     if (temps % 2 == 1) {
                         environnement.tour();
@@ -154,10 +165,10 @@ public class Controlleur implements Initializable {
                             }
                         }*/
                     }
-                    if (temps % 10 == 0) {
+                    if (temps % 20 == 0) {
                         for (Tour t : environnement.getTours()) {
                             if (t instanceof TroopTour) {
-                                // t.attaqueEnnemi();
+                                 t.attaqueEnnemi();
                             }
                         }
                         //tourAProjectile.creeProjectile();
