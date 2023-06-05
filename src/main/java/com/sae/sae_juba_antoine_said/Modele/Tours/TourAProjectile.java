@@ -1,25 +1,24 @@
-package com.sae.sae_juba_antoine_said.Modele;
+package com.sae.sae_juba_antoine_said.Modele.Tours;
 
 import com.sae.sae_juba_antoine_said.Modele.Acteurs.Acteur;
 import com.sae.sae_juba_antoine_said.Modele.Environnement.Environnement;
+import com.sae.sae_juba_antoine_said.Modele.Tours.Projectile;
+import com.sae.sae_juba_antoine_said.Modele.Tours.Tour;
 import javafx.collections.ObservableList;
 
-public class TourAProjectile extends Tour{
+public class TourAProjectile extends Tour {
 
 
-
-    public TourAProjectile(int x, int y, int degats, int range,Environnement environment ) {
-        super(x, y, degats, range,environment);
-        
-
+    public TourAProjectile(int x, int y, int degats, int range, Environnement env) {
+        super(x, y, degats, range, env);
 
 
     }
 
     @Override
     public void attaqueEnnemi() {
-        for (Projectile pro: getEnvironment().getProjectiles()) {
-            for(int k = 0; k < this.ennemiPlusProche().size(); k++) {
+        for (Projectile pro : getEnvironment().getProjectiles()) {
+            for (int k = 0; k < this.ennemiPlusProche().size(); k++) {
                 if (this.ennemiPlusProche().get(k).estVivant()) {
                     pro.lancerProjectile(this.ennemiPlusProche().get(k));
 
@@ -28,18 +27,22 @@ public class TourAProjectile extends Tour{
                     getEnvironment().getProjectiles().remove(pro);
                 }
 
+            }
+        }
     }
 
-    public void creeProjectile(){
-        ObservableList<Acteur>a = this.ennemiPlusProche();
+            public void creeProjectile () {
+                ObservableList<Acteur> a = this.ennemiPlusProche();
 
-        for(int i = 0; i<1; i++){
+                for (int i = 0; i < 1; i++) {
 
-            this.env.ajouterProjectile(new Projectile(this.getX()+10,this.getY()-30,env));
+                    this.env.ajouterProjectile(new Projectile(this.getX() + 10, this.getY() - 30,env));
+
+                }
+
+            }
+
 
         }
 
-    }
 
-
-}
