@@ -1,9 +1,6 @@
 package com.sae.sae_juba_antoine_said.Vue;
 
-import com.sae.sae_juba_antoine_said.Modele.Acteurs.Acteur;
-import com.sae.sae_juba_antoine_said.Modele.Acteurs.Archer;
-import com.sae.sae_juba_antoine_said.Modele.Acteurs.Bandit;
-import com.sae.sae_juba_antoine_said.Modele.Acteurs.Guerrier;
+import com.sae.sae_juba_antoine_said.Modele.Acteurs.*;
 import javafx.animation.Animation;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.control.ProgressBar;
@@ -13,24 +10,26 @@ import javafx.scene.layout.Pane;
 import javafx.util.Duration;
 
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 
 public class VueActeur {
     private Pane pane;
     private Acteur acteur;
     private Image image;
     private ImageView imageView;
-
+    FileInputStream fichierActeur;
     private ProgressBar progressBar;
+
     public VueActeur(Pane pane, Acteur acteur) {
         this.pane = pane;
         this.acteur = acteur;
         this.progressBar = new ProgressBar();
 
-        FileInputStream fichierGuerrier = null;
+        fichierActeur = null;
 
         if (acteur instanceof Guerrier) {
             try {
-                fichierGuerrier = new FileInputStream("src/main/java/com/sae/sae_juba_antoine_said/Ressources/saidkamal.png");
+                fichierActeur = new FileInputStream("src/main/java/com/sae/sae_juba_antoine_said/Ressources/saidkamal.png");
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -38,7 +37,7 @@ public class VueActeur {
         }
         if (acteur instanceof Bandit) {
             try {
-                fichierGuerrier = new FileInputStream("src/main/java/com/sae/sae_juba_antoine_said/Ressources/bandit2.png");
+                fichierActeur = new FileInputStream("src/main/java/com/sae/sae_juba_antoine_said/Ressources/bandit2.png");
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -46,15 +45,26 @@ public class VueActeur {
         }
         if (acteur instanceof Archer) {
             try {
-                fichierGuerrier = new FileInputStream("src/main/java/com/sae/sae_juba_antoine_said/Ressources/saidkamal.png");
+                fichierActeur = new FileInputStream("src/main/java/com/sae/sae_juba_antoine_said/Ressources/saidkamal.png");
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            System.out.println("Archer ");
 
         }
 
-        this.image = new Image(fichierGuerrier);
+
+        acteur.directionActeurProperty().addListener((obs, oldDirection, newDirection) -> {
+                System.out.println("changement de direction ");
+                try {
+                    changeImage((int) newDirection);
+                } catch (FileNotFoundException e) {
+                    throw new RuntimeException(e);
+                }
+            });
+
+
+
+        this.image = new Image(fichierActeur);
         this.imageView = new ImageView(image);
 
         //Bar de vie
@@ -62,24 +72,91 @@ public class VueActeur {
         progressBar.translateXProperty().bind(acteur.xProperty());
         progressBar.setPrefWidth(30);
         progressBar.setPrefHeight(10);
-        if (acteur.getPv() > 20 ) {
+
+        if (acteur.getPv() > 20) {
             progressBar.progressProperty().bind(acteur.getPvProperty().divide(80.0));
             String barColor = "-fx-accent: red;";
             String trackColor = "-fx-control-inner-background: white;";
             progressBar.setStyle(barColor + trackColor);
-        }else {
+        } else {
             progressBar.setStyle("-fx-accent: red;");
         }
 
-
         imageView.xProperty().bind(acteur.xProperty().subtract(3));
         imageView.yProperty().bind(acteur.yProperty().add(7));
-        progressBar.setId(acteur.getId()+1);
+        progressBar.setId(acteur.getId() + 1);
         imageView.setId(acteur.getId());
         this.pane.getChildren().add(progressBar);
         this.pane.getChildren().add(imageView);
 
-       /* if(acteur instanceof Bandit){
+
+    }
+    private void changeImage(int direction) throws FileNotFoundException {
+        if(acteur instanceof Bandit){
+            if (direction == 1) {
+                fichierActeur = new FileInputStream("src/main/java/com/sae/sae_juba_antoine_said/Ressources/saidkamal.png");
+            } else if (direction == 2) {
+                fichierActeur = new FileInputStream("src/main/java/com/sae/sae_juba_antoine_said/Ressources/enemy/e1/preview.png");
+            } else if (direction == 3) {
+                fichierActeur = new FileInputStream("src/main/java/com/sae/sae_juba_antoine_said/Ressources/bandit2.png");
+            } else if (direction == 4) {
+                fichierActeur = new FileInputStream("src/main/java/com/sae/sae_juba_antoine_said/Ressources/enemy/e1/preview.png");
+            }
+
+        }
+         if(acteur instanceof Guerrier){
+            if (direction == 1) {
+                fichierActeur = new FileInputStream("src/main/java/com/sae/sae_juba_antoine_said/Ressources/saidkamal.png");
+            } else if (direction == 2) {
+                fichierActeur = new FileInputStream("src/main/java/com/sae/sae_juba_antoine_said/Ressources/enemy/e1/preview.png");
+            } else if (direction == 3) {
+                fichierActeur = new FileInputStream("src/main/java/com/sae/sae_juba_antoine_said/Ressources/bandit2.png");
+            } else if (direction == 4) {
+                fichierActeur = new FileInputStream("src/main/java/com/sae/sae_juba_antoine_said/Ressources/enemy/e1/preview.png");
+            }
+        }
+
+        this.image = new Image(fichierActeur);
+        this.imageView.setImage(image);  // mettre à jour l'image de l'ImageView
+    }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* if(acteur instanceof Bandit){
             imageView.setViewport(new Rectangle2D(0, 0, 48, 48));
 
                 final Sprite animation = new Sprite(
@@ -103,6 +180,3 @@ public class VueActeur {
                 animation.play();
             }
              */
-
-        }
-}

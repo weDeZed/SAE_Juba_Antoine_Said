@@ -58,7 +58,6 @@ public class Bandit extends Ennemi {
             }else {
                 dy = distanceY - (distanceY-1);
             }
-
             int newposX = this.getX() + (this.getVitesse()*dx);
             int newposY = this.getY() + (this.getVitesse()*dy);
             this.setX(newposX);

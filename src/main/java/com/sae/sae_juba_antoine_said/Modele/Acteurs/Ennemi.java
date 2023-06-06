@@ -11,14 +11,14 @@ import java.util.ArrayList;
 public abstract class Ennemi extends Acteur {
 
     private int indiceCheminActuel = 0;
-    private IntegerProperty dA;
+    //private IntegerProperty directionActeur;
     private final int CHEMIN = 230;
     ArrayList<Sommet> cheminActuel;
 
 
     public Ennemi(int pv, int x, int y,  int vitesse, int range, Environnement env) {
         super(pv, x, y, vitesse, range, env);
-        dA = new SimpleIntegerProperty(0);
+        //directionActeur = new SimpleIntegerProperty(0);
         cheminActuel = new ArrayList<Sommet>();
 
     }
@@ -28,13 +28,7 @@ public abstract class Ennemi extends Acteur {
 
     }
 
-    public int directionActeur() {
-        return dA.getValue();
-    }
 
-    public IntegerProperty directionACteurProperty() {
-        return dA;
-    }
 
     @Override
     public abstract Acteur attaquer();
@@ -46,9 +40,29 @@ public abstract class Ennemi extends Acteur {
 
     public void move() {
         if (indiceCheminActuel < this.env.getChemin().size() - 1) {
+            // Enregistrer les anciennes coordonnées
+            int oldX = getX();
+            int oldY = getY();
+
             indiceCheminActuel++;
             int newX = this.env.getChemin().get(indiceCheminActuel).getX() * 32;
             int newY = this.env.getChemin().get(indiceCheminActuel).getY() * 32;
+
+            // Déterminer la direction
+            if (newX > oldX) {
+              setDirectionActeur(1); //direction droit
+                //System.out.println("Le soldat se déplace vers la droite.");
+            } else if (newX < oldX) {
+                setDirectionActeur(2); // direction gauche
+                //System.out.println("Le soldat se déplace vers la gauche.");
+            } else if (newY > oldY) {
+                setDirectionActeur(3); //direction bas
+                //System.out.println("Le soldat se déplace vers le bas.");
+            } else if (newY < oldY) {
+                setDirectionActeur(4); // direction haut
+                //System.out.println("Le soldat se déplace vers le haut.");
+            }
+
             setX(newX);
             setY(newY);
 
@@ -56,4 +70,7 @@ public abstract class Ennemi extends Acteur {
             this.env.suppActeur(this);
         }
     }
+
+
+
 }

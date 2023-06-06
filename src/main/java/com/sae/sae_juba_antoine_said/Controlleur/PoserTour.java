@@ -23,17 +23,13 @@ public class PoserTour {
     }
 
     public void MettreEnPlaceTourDeplacable(ToggleButton button, Class<? extends Tour> tourtype, Image image, int range) {
-        System.out.println("tour name "+tourtype.toString());
         button.setOnDragDetected(event -> {
             Dragboard db = button.startDragAndDrop(TransferMode.ANY);
             Circle rangeCircle = new Circle(event.getX(), event.getY(), range * 16);
             rangeCircle.setFill(Color.TRANSPARENT); // transparent à l'intérieur
             rangeCircle.setStroke(Color.RED); // bordure rouge
             rangeCircle.setStrokeWidth(2);
-            System.out.println("bd tour"+ db.getString());
-
             db.setDragView(image);
-
             ClipboardContent content = new ClipboardContent();
             content.putString(tourtype.getName());
             db.setContent(content);
@@ -53,7 +49,6 @@ public class PoserTour {
                     Class<?> tourClass = Class.forName(db.getString());// il prend la class de tour
                     if (placéTourDansBonEndroit((int) event.getX() / 32, (int) event.getY() / 32)) { // si le tour est dans bon endroit
                         Tour tour = (Tour) tourClass.getConstructor(int.class, int.class, int.class, int.class, Environnement.class).newInstance((int) event.getX(), (int) event.getY(), 800, 500, environnement);
-                        System.out.println(" class "+tour.getClass());
                         environnement.ajouterTour(tour);
                     }
                 } catch (Exception e) {

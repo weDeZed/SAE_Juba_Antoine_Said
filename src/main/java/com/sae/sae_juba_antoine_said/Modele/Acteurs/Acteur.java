@@ -8,6 +8,8 @@ public abstract class Acteur {
     private final int CHEMIN = 230;
     private int vitesse, range;
     private IntegerProperty x, y,pv;
+    private IntegerProperty directionActeur;
+
 
 
     private String id;
@@ -20,6 +22,7 @@ public abstract class Acteur {
         this.y = new SimpleIntegerProperty(y);
         this.vitesse = vitesse;
         this.range = range;
+        directionActeur = new SimpleIntegerProperty(0);
         this.pv = new SimpleIntegerProperty(pv);
         this.id = "A" + compteur;
         compteur++;
@@ -62,6 +65,101 @@ public abstract class Acteur {
         return env;
     }
 
+
+    public boolean estVivant(){
+        return this.pv.getValue() > 0;
+    }
+
+    public void decrementationPv(int pv){
+        this.pv.setValue(this.getPv() - pv) ;
+    }
+
+    public int getPv(){
+        return this.pv.getValue();
+    }
+
+    public IntegerProperty getPvProperty (){
+        return this.pv;
+    }
+    public int getVitesse(){
+        return this.vitesse;
+    }
+
+    public void meurt(){
+        this.pv.equals(0);
+    }
+
+    public void setRange(int range){
+        this.range = range;
+    }
+
+    public int getRange(){
+        return this.range;
+    }
+
+    public abstract void seDeplacer();
+
+
+    public int getCHEMIN() {
+        return CHEMIN;
+    }
+
+    public int getDirectionActeur() {
+        return directionActeur.get();
+    }
+
+    public IntegerProperty directionActeurProperty() {
+        return directionActeur;
+    }
+
+    public void setDirectionActeur(int directionActeur) {
+        this.directionActeur.set(directionActeur);
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
     public boolean collisionDroit(Acteur acteur, Environnement environnement) {
         //System.out.println("X "+acteur.getX()+" Y "+acteur.getY());
         if (environnement.getMap()[acteur.getX() / 16 + 16][acteur.getY() / 16] != CHEMIN) {
@@ -104,41 +202,29 @@ public abstract class Acteur {
         return false;
     }
 
-    public boolean estVivant(){
-        return this.pv.getValue() > 0;
-    }
-
-    public void decrementationPv(int pv){
-        this.pv.setValue(this.getPv() - pv) ;
-    }
-
-    public int getPv(){
-        return this.pv.getValue();
-    }
-
-    public IntegerProperty getPvProperty (){
-        return this.pv;
-    }
-    public int getVitesse(){
-        return this.vitesse;
-    }
-
-    public void meurt(){
-        this.pv.equals(0);
-    }
-
-    public void setRange(int range){
-        this.range = range;
-    }
-
-    public int getRange(){
-        return this.range;
-    }
-
-    public abstract void seDeplacer();
+ */
 
 
-    public int getCHEMIN() {
-        return CHEMIN;
-    }
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

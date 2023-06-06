@@ -24,7 +24,7 @@ public class TroopTour extends Tour {
             }
         }
         int placement = 0;
-        for (int i = 0; i < nbEnnemi/4; i++) {
+        for (int i = 0; i < 1; i++) {
             int x = getX() / 32;
             int y = getY() / 32;
             if (x > 1 && map[x - 2][y] == chemin) {

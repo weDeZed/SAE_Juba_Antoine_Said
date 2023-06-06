@@ -2,15 +2,16 @@ package com.sae.sae_juba_antoine_said.Modele.Acteurs;
 
 import com.sae.sae_juba_antoine_said.Modele.Environnement.Environnement;
 
+import java.util.Random;
+
 public class Guerrier extends Ally {
-    private int direction;
+
     private int startX;
     private int startY;
 
 
     public Guerrier(int pv, int x, int y, Environnement env) {
         super(pv, x, y, 20, 10, env);
-        direction = 1;
         this.startX = x / 32;
         this.startY = y / 32;
     }
@@ -76,26 +77,35 @@ public class Guerrier extends Ally {
         int x = getX() / 32;
         int y = getY() / 32;
         boolean peutDeplacer = false;
-
-        if (direction == 1) { // marcher droit/en bas
-            if (x < 90 && x < startX + getRange() && this.env.getMap()[x + 1][y] == getCHEMIN()) {
-                x = x + 1;
-                peutDeplacer = true;
-            } else if (y < 90 && y < startY + getRange() && this.env.getMap()[x][y + 1] == getCHEMIN()) {
-                y = y + 1;
-                peutDeplacer = true;
-            } else {
-                direction = -1; // change la direction
-            }
-        } else if (direction == -1) { // déplacer gauche / haut
-            if (x > 0 && x > startX - getRange() && this.env.getMap()[x - 1][y] == getCHEMIN()) {
-                x = x - 1;
-                peutDeplacer = true;
-            } else if (y > 0 && y > startY - getRange() && this.env.getMap()[x][y - 1] == getCHEMIN()) {
-                y = y - 1;
-                peutDeplacer = true;
-            } else {
-                direction = 1; //cnage la direction
+        Random rand = new Random();
+        while (!peutDeplacer) {
+            int direction = rand.nextInt(4); // Générer une direction aléatoire
+            setDirectionActeur(direction);
+            switch (direction) {
+                case 0: // Haut
+                    if (y > 0 && this.env.getMap()[x][y - 1] == getCHEMIN()) {
+                        y = y - 1;
+                        peutDeplacer = true;
+                    }
+                    break;
+                case 1: // Droit
+                    if (x < 90 && this.env.getMap()[x + 1][y] == getCHEMIN()) {
+                        x = x + 1;
+                        peutDeplacer = true;
+                    }
+                    break;
+                case 2: // Bas
+                    if (y < 90 && this.env.getMap()[x][y + 1] == getCHEMIN()) {
+                        y = y + 1;
+                        peutDeplacer = true;
+                    }
+                    break;
+                case 3: // Gauche
+                    if (x > 0 && this.env.getMap()[x - 1][y] == getCHEMIN()) {
+                        x = x - 1;
+                        peutDeplacer = true;
+                    }
+                    break;
             }
         }
 
@@ -104,5 +114,6 @@ public class Guerrier extends Ally {
             setY(y * 32);
         }
     }
+
 }
 

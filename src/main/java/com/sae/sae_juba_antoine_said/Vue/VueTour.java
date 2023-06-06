@@ -59,6 +59,7 @@ public class VueTour {
             }
         }
 
+
         this.image = new Image(fichierTour);
         int decalageH = ((int) image.getHeight())/2;
         int decalageL = (int) image.getWidth()/2;
@@ -66,6 +67,8 @@ public class VueTour {
         imageView.setLayoutX(tour.getX()-decalageL);
         imageView.setLayoutY(tour.getY()-decalageH);
         this.pane.getChildren().add(imageView);
+
+
 
 
     /*    Circle rangeCircle = new Circle(tour.getX(), tour.getY(), tour.getRange() * 16);
