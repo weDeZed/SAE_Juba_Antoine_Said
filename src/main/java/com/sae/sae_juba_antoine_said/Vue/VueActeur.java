@@ -29,7 +29,7 @@ public class VueActeur {
 
         if (acteur instanceof Guerrier) {
             try {
-                fichierActeur = new FileInputStream("src/main/java/com/sae/sae_juba_antoine_said/Ressources/saidkamal.png");
+                fichierActeur = new FileInputStream("src/main/java/com/sae/sae_juba_antoine_said/Ressources/ally/g0.png");
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -37,7 +37,7 @@ public class VueActeur {
         }
         if (acteur instanceof Bandit) {
             try {
-                fichierActeur = new FileInputStream("src/main/java/com/sae/sae_juba_antoine_said/Ressources/bandit2.png");
+                fichierActeur = new FileInputStream("src/main/java/com/sae/sae_juba_antoine_said/Ressources/EnnemiesImg/bandit2.png");
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -45,7 +45,7 @@ public class VueActeur {
         }
         if (acteur instanceof Archer) {
             try {
-                fichierActeur = new FileInputStream("src/main/java/com/sae/sae_juba_antoine_said/Ressources/saidkamal.png");
+                fichierActeur = new FileInputStream("src/main/java/com/sae/sae_juba_antoine_said/Ressources/ally/g3.png");
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -54,14 +54,13 @@ public class VueActeur {
 
 
         acteur.directionActeurProperty().addListener((obs, oldDirection, newDirection) -> {
-                System.out.println("changement de direction ");
-                try {
-                    changeImage((int) newDirection);
-                } catch (FileNotFoundException e) {
-                    throw new RuntimeException(e);
-                }
-            });
-
+            System.out.println("changement de direction ");
+            try {
+                changeImage((int) newDirection);
+            } catch (FileNotFoundException e) {
+                throw new RuntimeException(e);
+            }
+        });
 
 
         this.image = new Image(fichierActeur);
@@ -91,29 +90,14 @@ public class VueActeur {
 
 
     }
-    private void changeImage(int direction) throws FileNotFoundException {
-        if(acteur instanceof Bandit){
-            if (direction == 1) {
-                fichierActeur = new FileInputStream("src/main/java/com/sae/sae_juba_antoine_said/Ressources/saidkamal.png");
-            } else if (direction == 2) {
-                fichierActeur = new FileInputStream("src/main/java/com/sae/sae_juba_antoine_said/Ressources/enemy/e1/preview.png");
-            } else if (direction == 3) {
-                fichierActeur = new FileInputStream("src/main/java/com/sae/sae_juba_antoine_said/Ressources/bandit2.png");
-            } else if (direction == 4) {
-                fichierActeur = new FileInputStream("src/main/java/com/sae/sae_juba_antoine_said/Ressources/enemy/e1/preview.png");
-            }
+
+    private void changeImage(int i) throws FileNotFoundException {
+        if (acteur instanceof Bandit) {
+            fichierActeur = new FileInputStream("src/main/java/com/sae/sae_juba_antoine_said/Ressources/EnnemiesImg/bandit2.png");
 
         }
-         if(acteur instanceof Guerrier){
-            if (direction == 1) {
-                fichierActeur = new FileInputStream("src/main/java/com/sae/sae_juba_antoine_said/Ressources/saidkamal.png");
-            } else if (direction == 2) {
-                fichierActeur = new FileInputStream("src/main/java/com/sae/sae_juba_antoine_said/Ressources/enemy/e1/preview.png");
-            } else if (direction == 3) {
-                fichierActeur = new FileInputStream("src/main/java/com/sae/sae_juba_antoine_said/Ressources/bandit2.png");
-            } else if (direction == 4) {
-                fichierActeur = new FileInputStream("src/main/java/com/sae/sae_juba_antoine_said/Ressources/enemy/e1/preview.png");
-            }
+        if (acteur instanceof Guerrier) {
+            fichierActeur = new FileInputStream("src/main/java/com/sae/sae_juba_antoine_said/Ressources/ally/g3.png");
         }
 
         this.image = new Image(fichierActeur);
