@@ -13,6 +13,7 @@ import javafx.collections.ListChangeListener;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -24,6 +25,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
+import java.time.temporal.Temporal;
 import java.util.ResourceBundle;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -50,6 +52,7 @@ public class Controlleur implements Initializable {
     private Tour troopTours, troopTours1;
     private VueTour vueTour;
     InventairDesTours inventairDesTours;
+    @FXML private ProgressBar progressBar;
 
     Projectile p;
     VueActeur vueActeur2;
@@ -73,6 +76,8 @@ public class Controlleur implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
+
 
 
         /************************** Environnement *********************************/
@@ -110,6 +115,21 @@ public class Controlleur implements Initializable {
         environnement.getTours().addListener(listenerListeTours);
         environnement.getProjectiles().addListener(listnerListeProjectiles);
 
+        //progressBarActeur.progressProperty().bind(acteur.getPvProperty().divide(100.0));
+
+        //progressBar.progressProperty().bind(environnement.vieProperty().divide(100));
+
+
+        environnement.vieProperty().addListener((obs, old, newv) -> {
+            System.out.println("newv: " + newv);
+            double nb = Double.valueOf(newv.toString()) / 100;
+            System.out.println("nb: " + nb);
+            progressBar.setProgress(nb);
+        });
+
+
+
+
 
         gameLaunche();
         initAnimation();
@@ -120,7 +140,7 @@ public class Controlleur implements Initializable {
 
     public void gameLaunche() {
         try {
-            this.vueEnvironnementMap = new VueEnvironnement(environnement, tilePane);
+            this.vueEnvironnementMap = new VueEnvironnement(environnement, tilePane,progressBar);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -133,15 +153,34 @@ public class Controlleur implements Initializable {
         temps = 1;
         gameLoop.setCycleCount(Timeline.INDEFINITE);
         AtomicInteger i = new AtomicInteger();
-
+        System.out.println("ENV VIE dans c : " + environnement.getVie());
 
         KeyFrame kf = new KeyFrame(
                 Duration.seconds(0.17),
 
                 (ev -> {
-                    if (temps == 1) {
+                    if (temps %20== 1) {
                         environnement.ajouterActeur(new Bandit(52, 24, 3, environnement));
+
+
+
                     }
+                    if (temps == 10) {
+                       // environnement.ajouterActeur(new Bandit(52, 24, 3, environnement));
+                    }
+                    if (temps == 20) {
+                         double progress = progressBar.getProgress();
+                        System.out.println(" avant value prof "+progressBar.getProgress());
+
+                        //progressBar.setProgress(progressBar.getProgress()-0.5);
+                        System.out.println("value prof "+progressBar.getProgress());
+                        System.out.println(progress);
+                        System.out.println("divide par 100  : " + environnement.getVie()/(100));
+                        //environnement.decrementerVie(10);
+                    }
+
+
+
                     if (temps % 5 == 1) {
                         environnement.tour();
                     }
@@ -185,9 +224,7 @@ public class Controlleur implements Initializable {
                             for (Tour tourAP : environnement.getTours()) {
                                 if (tourAP instanceof TourAProjectile) {
                                     tourAP.attaqueEnnemi();
-                                    if (tourAP.ennemiPlusProche().isEmpty()) {
-                                        environnement.getProjectiles().removeAll();
-                                    }
+
                                 }
                             }
                         } catch (Exception e) {
@@ -195,7 +232,11 @@ public class Controlleur implements Initializable {
 
 
                     }
-                    if (temps == 120) {
+
+                    environnement.ennemieAtteintSommetCible();
+
+                    if (environnement.getVie() <= 0 ){
+                        gameLoop.stop();
                     }
                     temps++;
                 })

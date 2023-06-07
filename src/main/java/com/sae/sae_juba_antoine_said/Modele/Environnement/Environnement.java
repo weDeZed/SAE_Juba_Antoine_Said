@@ -1,14 +1,11 @@
 package com.sae.sae_juba_antoine_said.Modele.Environnement;
 
 import com.sae.sae_juba_antoine_said.Modele.Acteurs.Acteur;
-import com.sae.sae_juba_antoine_said.Modele.Acteurs.Bandit;
 import com.sae.sae_juba_antoine_said.Modele.Acteurs.Ennemi;
-import com.sae.sae_juba_antoine_said.Modele.Acteurs.Guerrier;
 import com.sae.sae_juba_antoine_said.Modele.BFS.BFS;
 import com.sae.sae_juba_antoine_said.Modele.BFS.Sommet;
 import com.sae.sae_juba_antoine_said.Modele.Tours.Projectile;
 import com.sae.sae_juba_antoine_said.Modele.Tours.Tour;
-import com.sae.sae_juba_antoine_said.Modele.Tours.TroopTour;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
@@ -25,6 +22,7 @@ public class Environnement {
 
     BFS bfs;
 
+    private IntegerProperty vie;
     private int x, y;
     private int[][] map;
     private ObservableList<Acteur> acteurs;
@@ -35,6 +33,8 @@ public class Environnement {
     private ArrayList<Sommet>chemin;
 
     private IntegerProperty piece;
+
+
 
 
 
@@ -53,7 +53,7 @@ public class Environnement {
         bfs = new BFS(this);
         chemin = bfs.cheminVersSource();
         this.piece=new SimpleIntegerProperty();
-
+        this.vie = new SimpleIntegerProperty(100);
     }
 
     public void readMap() throws IOException {
@@ -92,6 +92,19 @@ public class Environnement {
     }
     public int getX() {
         return x;
+    }
+
+    public void ennemieAtteintSommetCible(){
+        for (Acteur ac : this.getActeurs()){
+            if (ac.estVivant() && ac instanceof Ennemi) {
+                if(ac.getX() == this.getBfs().getCible().getX()*32 && ac.getY()==this.getBfs().getCible().getY()*32){
+                    System.out.println("Vie env avant: " + this.getVie());
+                    this.decrementerVie(10);
+                    System.out.println("Vie env apres: " + this.getVie());
+                }
+              //  System.out.println("Apres if ");
+            }
+        }
     }
 
     public void setX(int x) {
@@ -170,7 +183,26 @@ public class Environnement {
         return null;
     }
 
+    public int getVie() {
+        return vie.get();
+    }
 
+    public IntegerProperty vieProperty() {
+        return vie;
+    }
+
+    public void setVie(int vie) {
+        this.vie.set(vie);
+    }
+
+    public BFS getBfs() {
+        return bfs;
+    }
+
+    public void decrementerVie(double v){
+        this.vie.setValue(this.getVie() - v) ;
+
+    }
 
     public ArrayList<Sommet> getChemin() {
         return chemin;

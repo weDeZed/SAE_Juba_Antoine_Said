@@ -2,10 +2,13 @@ package com.sae.sae_juba_antoine_said.Vue;
 
 
 import com.sae.sae_juba_antoine_said.Modele.Environnement.Environnement;
+import javafx.fxml.FXML;
 import javafx.geometry.Rectangle2D;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
 
 import java.io.FileInputStream;
@@ -14,29 +17,39 @@ import java.io.FileNotFoundException;
 
 public class VueEnvironnement {
 
+
+    private ProgressBar progressBar;
     private Environnement env;
 
     private TilePane tilePane;
     private Image imgTilep;
     private ImageView imgV;
-
-    private BorderPane borderPane;
-    private String ch;
     private final int LARGEUR = 32;
     private final int HAUTEUR = 32;
 
 
-    public VueEnvironnement(Environnement env, TilePane tileP) throws FileNotFoundException {
+
+    public VueEnvironnement(Environnement env, TilePane tileP,ProgressBar progressBar) throws FileNotFoundException {
         this.env = env;
         this.tilePane = tileP;
+        this.progressBar = progressBar;
+
+
+
+        if (env.getVie() > 20) {
+          //progressBar.progressProperty().bind(env.vieProperty().divide(100));
+
+
+          String barColor = "-fx-accent: red;";
+            String trackColor = "-fx-control-inner-background: white;";
+            progressBar.setStyle(barColor + trackColor);
+        } else {
+            progressBar.setStyle("-fx-accent: red;");
+        }
+
 
         iniTerrain();
     }
-
-    public VueEnvironnement() {
-
-    }
-
     void iniTerrain() {
 
         FileInputStream fichierTileSet = null;

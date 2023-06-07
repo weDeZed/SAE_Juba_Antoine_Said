@@ -32,15 +32,21 @@ public class ListObsActeur implements ListChangeListener<Acteur> {
         while (a.next()) {
             for (Acteur act : a.getAddedSubList()) {
                 VueActeur vueActeur = new VueActeur(panneauDeJeu, act);
+
+
             }
             for (Acteur m : a.getRemoved()) {
-                //System.out.println(" dans removed");
+               // System.out.println(" dans removed");
                 if (m instanceof Ennemi){
                   //  ev.ajoutePiece(10);
+
+
                 }
             //    System.out.println("mort acteur");
                 enleverActeur(m);
             }
+
+
         }
     }
 }

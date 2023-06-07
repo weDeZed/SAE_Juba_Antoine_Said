@@ -1,13 +1,10 @@
 package com.sae.sae_juba_antoine_said.Vue;
 
 import com.sae.sae_juba_antoine_said.Modele.Acteurs.*;
-import javafx.animation.Animation;
-import javafx.geometry.Rectangle2D;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
-import javafx.util.Duration;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -18,12 +15,12 @@ public class VueActeur {
     private Image image;
     private ImageView imageView;
     FileInputStream fichierActeur;
-    private ProgressBar progressBar;
+    private ProgressBar progressBarActeur;
 
     public VueActeur(Pane pane, Acteur acteur) {
         this.pane = pane;
         this.acteur = acteur;
-        this.progressBar = new ProgressBar();
+        this.progressBarActeur = new ProgressBar();
 
         fichierActeur = null;
 
@@ -54,7 +51,7 @@ public class VueActeur {
 
 
         acteur.directionActeurProperty().addListener((obs, oldDirection, newDirection) -> {
-            System.out.println("changement de direction ");
+           // System.out.println("changement de direction ");
             try {
                 changeImage((int) newDirection);
             } catch (FileNotFoundException e) {
@@ -67,25 +64,26 @@ public class VueActeur {
         this.imageView = new ImageView(image);
 
         //Bar de vie
-        progressBar.translateYProperty().bind(acteur.yProperty());
-        progressBar.translateXProperty().bind(acteur.xProperty());
-        progressBar.setPrefWidth(30);
-        progressBar.setPrefHeight(10);
+        progressBarActeur.translateYProperty().bind(acteur.yProperty());
+        progressBarActeur.translateXProperty().bind(acteur.xProperty());
+        progressBarActeur.setPrefWidth(30);
+        progressBarActeur.setPrefHeight(10);
 
         if (acteur.getPv() > 20) {
-            progressBar.progressProperty().bind(acteur.getPvProperty().divide(80.0));
+            progressBarActeur.progressProperty().bind(acteur.getPvProperty().divide(100.0));
             String barColor = "-fx-accent: red;";
             String trackColor = "-fx-control-inner-background: white;";
-            progressBar.setStyle(barColor + trackColor);
+            progressBarActeur.setStyle(barColor + trackColor);
         } else {
-            progressBar.setStyle("-fx-accent: red;");
+            progressBarActeur.setStyle("-fx-accent: red;");
         }
-
+      //  progressBar.setLayoutX(progressBar.getLayoutX()-3);
+       // progressBar.setLayoutY(progressBar.getLayoutY()+7);
         imageView.xProperty().bind(acteur.xProperty().subtract(3));
         imageView.yProperty().bind(acteur.yProperty().add(7));
-        progressBar.setId(acteur.getId() + 1);
+        progressBarActeur.setId(acteur.getId() + 1);
         imageView.setId(acteur.getId());
-        this.pane.getChildren().add(progressBar);
+        this.pane.getChildren().add(progressBarActeur);
         this.pane.getChildren().add(imageView);
 
 

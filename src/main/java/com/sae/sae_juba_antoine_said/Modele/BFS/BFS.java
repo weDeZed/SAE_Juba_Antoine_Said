@@ -147,4 +147,8 @@ public class BFS {
         return chemin;
     }
 
+
+    public Sommet getCible() {
+        return cible;
+    }
 }
