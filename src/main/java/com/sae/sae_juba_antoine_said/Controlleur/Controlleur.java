@@ -17,6 +17,8 @@ import javafx.scene.control.ProgressBar;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+
+
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
 import javafx.util.Duration;
@@ -28,7 +30,6 @@ import java.net.URL;
 import java.time.temporal.Temporal;
 import java.util.ResourceBundle;
 import java.util.concurrent.atomic.AtomicInteger;
-
 
 public class Controlleur implements Initializable {
     private final int LARGEUR = 32;
@@ -99,10 +100,10 @@ public class Controlleur implements Initializable {
 
         inventairDesTours = new InventairDesTours(imageForTourB1, imageForTourB2, imageForTourB3, imageForTourB4);
         dragDropSetup = new PoserTour(environnement);
-        dragDropSetup.MettreEnPlaceTourDeplacable(tourB1, TroopTour.class, dragDropSetup.envoiImage(0), 10 * 16);
-        dragDropSetup.MettreEnPlaceTourDeplacable(tourB2, TourFoudre.class, dragDropSetup.envoiImage(1), 10);
-        dragDropSetup.MettreEnPlaceTourDeplacable(tourB3, LaserTour.class, dragDropSetup.envoiImage(2), 10);
-        dragDropSetup.MettreEnPlaceTourDeplacable(tourB4, TourAProjectile.class, dragDropSetup.envoiImage(3), 10 * 16);
+        dragDropSetup.MettreEnPlaceTourDeplacable(tourB1, TroopTour.class, dragDropSetup.envoiImage(0));
+        dragDropSetup.MettreEnPlaceTourDeplacable(tourB2, TourFoudre.class, dragDropSetup.envoiImage(1));
+        dragDropSetup.MettreEnPlaceTourDeplacable(tourB3, LaserTour.class, dragDropSetup.envoiImage(2));
+        dragDropSetup.MettreEnPlaceTourDeplacable(tourB4, TourAProjectile.class, dragDropSetup.envoiImage(3));
         dragDropSetup.MettreEnPlaceZoneDepot(pane);
 
 
@@ -115,21 +116,6 @@ public class Controlleur implements Initializable {
         environnement.getTours().addListener(listenerListeTours);
         environnement.getProjectiles().addListener(listnerListeProjectiles);
 
-        //progressBarActeur.progressProperty().bind(acteur.getPvProperty().divide(100.0));
-
-        //progressBar.progressProperty().bind(environnement.vieProperty().divide(100));
-
-
-        environnement.vieProperty().addListener((obs, old, newv) -> {
-            System.out.println("newv: " + newv);
-            double nb = Double.valueOf(newv.toString()) / 100;
-            System.out.println("nb: " + nb);
-            progressBar.setProgress(nb);
-        });
-
-
-
-
 
         gameLaunche();
         initAnimation();
@@ -140,7 +126,7 @@ public class Controlleur implements Initializable {
 
     public void gameLaunche() {
         try {
-            this.vueEnvironnementMap = new VueEnvironnement(environnement, tilePane,progressBar);
+            this.vueEnvironnementMap = new VueEnvironnement(environnement, tilePane);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -153,36 +139,16 @@ public class Controlleur implements Initializable {
         temps = 1;
         gameLoop.setCycleCount(Timeline.INDEFINITE);
         AtomicInteger i = new AtomicInteger();
-        System.out.println("ENV VIE dans c : " + environnement.getVie());
+
 
         KeyFrame kf = new KeyFrame(
                 Duration.seconds(0.17),
-
                 (ev -> {
-                    if (temps %20== 1) {
+                    if (temps % 20 == 1) {
                         environnement.ajouterActeur(new Bandit(52, 24, 3, environnement));
-
-
-
                     }
-                    if (temps == 10) {
-                       // environnement.ajouterActeur(new Bandit(52, 24, 3, environnement));
-                    }
-                    if (temps == 20) {
-                         double progress = progressBar.getProgress();
-                        System.out.println(" avant value prof "+progressBar.getProgress());
-
-                        //progressBar.setProgress(progressBar.getProgress()-0.5);
-                        System.out.println("value prof "+progressBar.getProgress());
-                        System.out.println(progress);
-                        System.out.println("divide par 100  : " + environnement.getVie()/(100));
-                        //environnement.decrementerVie(10);
-                    }
-
-
-
-                    if (temps % 5 == 1) {
-                        environnement.tour();
+                    if (temps % 2 == 1) {
+                        environnement.nbTours();
                     }
                     if (temps == 10000) {
                         gameLoop.stop();
@@ -200,6 +166,7 @@ public class Controlleur implements Initializable {
                             }
                         }
                     }
+
                     if (temps == 100) {
                         for (Tour t : environnement.getTours()) {
                             if (t instanceof TroopTour) {

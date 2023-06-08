@@ -6,6 +6,8 @@ import com.sae.sae_juba_antoine_said.Modele.BFS.BFS;
 import com.sae.sae_juba_antoine_said.Modele.BFS.Sommet;
 import com.sae.sae_juba_antoine_said.Modele.Tours.Projectile;
 import com.sae.sae_juba_antoine_said.Modele.Tours.Tour;
+import com.sae.sae_juba_antoine_said.Modele.Tours.TourAProjectile;
+import com.sae.sae_juba_antoine_said.Modele.Tours.TroopTour;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
@@ -31,13 +33,8 @@ public class Environnement {
     private ObservableList<Sommet> obstacles;
     private ObservableList<Projectile> projectiles;
     private ArrayList<Sommet>chemin;
-
     private IntegerProperty piece;
-
-
-
-
-
+    private int nbTour;
 
 
     public Environnement(int x, int y) throws IOException {
@@ -54,6 +51,7 @@ public class Environnement {
         chemin = bfs.cheminVersSource();
         this.piece=new SimpleIntegerProperty();
         this.vie = new SimpleIntegerProperty(100);
+        this.nbTour = 0;
     }
 
     public void readMap() throws IOException {
@@ -169,18 +167,8 @@ public class Environnement {
     }
 
 
-
-
-  public void removeProjectile(Projectile p ){
+    public void removeProjectile(Projectile p) {
         this.projectiles.remove(p);
-  }
-    public Sommet getSommet(int x, int y) {
-        for (Sommet sommet : this.listeAdj.keySet()) {
-            if (sommet.getX() == x && sommet.getY() == y) {
-                return sommet;
-            }
-        }
-        return null;
     }
 
     public int getVie() {
@@ -208,38 +196,34 @@ public class Environnement {
         return chemin;
     }
 
-    public void tour(){
-        for (int i = 0; i < acteurs.size(); i++){
 
-            if (!acteurs.get(i).estVivant()){
+    public void nbTours() {
+        for (int i = 0; i < acteurs.size(); i++) {
+            if (!acteurs.get(i).estVivant()) {
                 suppActeur(acteurs.get(i));
             }
-/*
-            if (acteurs.get(i) instanceof Ennemi) {
-                ((Ennemi) acteurs.get(i)).move();
-            }
-
- */
-
-            /*
-            //((Bandit) acteurs.get(i)).move();
-            if(acteurs.get(i)instanceof Bandit){
-                if( acteurs.get(i).attaquer()!=null){
-                   acteurs.get(i).agir();
-               }
-            }
-
-             */
-            /*
-            if(acteurs.get(i) instanceof Guerrier){
-                ((Guerrier) acteurs.get(i)).marcherSurChemin();
-                if( acteurs.get(i).attaquer()!=null){
-                    acteurs.get(i).agir();
+            acteurs.get(i).agir();
+        }
+        for (Tour tour : getTours()) {
+            if (tour instanceof TourAProjectile) {
+                if (!tour.ennemiPlusProche().isEmpty()) {
+                    if (nbTour % 10 == 0) {
+                        tour.creeProjectile();
+                    }
+                    tour.attaqueEnnemi();
+                }
+                if (tour.ennemiPlusProche().isEmpty()) {
+                    getProjectiles().removeAll();
                 }
             }
-
-             */
+            if (tour instanceof TroopTour) {
+                if (nbTour % 20 == 0) {
+                    tour.attaqueEnnemi();
+                }
+            }
         }
+
+        nbTour++;
 
     }
 

@@ -24,8 +24,7 @@ public class VueProjectile {
 
         if(projectile instanceof Projectile ){
             try {
-
-                fichierGuerrier = new FileInputStream("src/main/java/com/sae/sae_juba_antoine_said/Ressources/laser.png");
+                fichierGuerrier = new FileInputStream("src/main/java/com/sae/sae_juba_antoine_said/Ressources/projectilleImg/laser.png");
             } catch (Exception e) {
                 e.printStackTrace();
             }

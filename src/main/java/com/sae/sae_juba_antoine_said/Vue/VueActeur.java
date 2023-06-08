@@ -1,13 +1,18 @@
 package com.sae.sae_juba_antoine_said.Vue;
 
 import com.sae.sae_juba_antoine_said.Modele.Acteurs.*;
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+import javafx.util.Duration;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class VueActeur {
     private Pane pane;
@@ -15,12 +20,12 @@ public class VueActeur {
     private Image image;
     private ImageView imageView;
     FileInputStream fichierActeur;
-    private ProgressBar progressBarActeur;
+    private ProgressBar  progressBarActeur;
 
     public VueActeur(Pane pane, Acteur acteur) {
         this.pane = pane;
         this.acteur = acteur;
-        this.progressBarActeur = new ProgressBar();
+        this. progressBarActeur = new ProgressBar();
 
         fichierActeur = null;
 
@@ -34,7 +39,7 @@ public class VueActeur {
         }
         if (acteur instanceof Bandit) {
             try {
-                fichierActeur = new FileInputStream("src/main/java/com/sae/sae_juba_antoine_said/Ressources/EnnemiesImg/bandit2.png");
+                fichierActeur = new FileInputStream("src/main/java/com/sae/sae_juba_antoine_said/Ressources/EnnemiesImg/banditf0.png");
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -42,7 +47,7 @@ public class VueActeur {
         }
         if (acteur instanceof Archer) {
             try {
-                fichierActeur = new FileInputStream("src/main/java/com/sae/sae_juba_antoine_said/Ressources/ally/g3.png");
+                fichierActeur = new FileInputStream("src/main/java/com/sae/sae_juba_antoine_said/Ressources/ally/g1.png");
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -51,12 +56,8 @@ public class VueActeur {
 
 
         acteur.directionActeurProperty().addListener((obs, oldDirection, newDirection) -> {
-           // System.out.println("changement de direction ");
-            try {
-                changeImage((int) newDirection);
-            } catch (FileNotFoundException e) {
-                throw new RuntimeException(e);
-            }
+            startImageAnimation((int) newDirection);
+
         });
 
 
@@ -70,39 +71,88 @@ public class VueActeur {
         progressBarActeur.setPrefHeight(10);
 
         if (acteur.getPv() > 20) {
-            progressBarActeur.progressProperty().bind(acteur.getPvProperty().divide(100.0));
+            progressBarActeur.progressProperty().bind(acteur.getPvProperty().divide(80.0));
             String barColor = "-fx-accent: red;";
             String trackColor = "-fx-control-inner-background: white;";
             progressBarActeur.setStyle(barColor + trackColor);
         } else {
             progressBarActeur.setStyle("-fx-accent: red;");
         }
-      //  progressBar.setLayoutX(progressBar.getLayoutX()-3);
-       // progressBar.setLayoutY(progressBar.getLayoutY()+7);
+
         imageView.xProperty().bind(acteur.xProperty().subtract(3));
         imageView.yProperty().bind(acteur.yProperty().add(7));
         progressBarActeur.setId(acteur.getId() + 1);
         imageView.setId(acteur.getId());
+
+
         this.pane.getChildren().add(progressBarActeur);
         this.pane.getChildren().add(imageView);
 
 
     }
 
-    private void changeImage(int i) throws FileNotFoundException {
-        if (acteur instanceof Bandit) {
-            fichierActeur = new FileInputStream("src/main/java/com/sae/sae_juba_antoine_said/Ressources/EnnemiesImg/bandit2.png");
 
-        }
-        if (acteur instanceof Guerrier) {
-            fichierActeur = new FileInputStream("src/main/java/com/sae/sae_juba_antoine_said/Ressources/ally/g3.png");
-        }
 
-        this.image = new Image(fichierActeur);
-        this.imageView.setImage(image);  // mettre à jour l'image de l'ImageView
+
+    public void startImageAnimation(int direction) {
+        AtomicInteger temp = new AtomicInteger();
+        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1), e -> {
+            int i = temp.get() % 2;
+            String acteurType = "";
+            String directionType = "";
+            if (acteur instanceof Bandit) {
+                acteurType = "EnnemiesImg/bandit";
+            } else if (acteur instanceof Guerrier) {
+                acteurType = "ally/g";
+            }
+
+            switch (direction) {
+                case 1:
+                    directionType = "d";
+                    break;
+                case 2:
+                    directionType = "g";
+                    break;
+                case 3:
+                    directionType = "b";
+                    break;
+                case 4:
+                    directionType = "f";
+                    break;
+            }
+            if (acteur instanceof Bandit) {
+                // System.out.println("b");
+                String path = "src/main/java/com/sae/sae_juba_antoine_said/Ressources/" + acteurType + directionType + i + ".png";
+                try {
+                    fichierActeur = new FileInputStream(path);
+                } catch (FileNotFoundException ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
+            if (acteur instanceof Guerrier){
+                //System.out.println("g");
+                String path = "src/main/java/com/sae/sae_juba_antoine_said/Ressources/" + acteurType  + i + ".png";
+                try {
+                    fichierActeur = new FileInputStream(path);
+                } catch (FileNotFoundException ex) {
+                    throw new RuntimeException(ex);
+                }
+
+            }
+            this.image = new Image(fichierActeur);
+            this.imageView.setImage(image);
+            temp.getAndIncrement();
+        }));
+
+        timeline.setCycleCount(Animation.INDEFINITE);
+        timeline.play();
     }
 
+
 }
+
+
+
 
 
 
@@ -161,4 +211,20 @@ public class VueActeur {
                 animation.setCycleCount(Animation.INDEFINITE);
                 animation.play();
             }
-             */
+*/
+/*
+    private void changeImage(int i) throws FileNotFoundException {
+        if (acteur instanceof Bandit) {
+            //fichierActeur = new FileInputStream("src/main/java/com/sae/sae_juba_antoine_said/Ressources/EnnemiesImg/bandit2.png");
+
+        }
+        if (acteur instanceof Guerrier) {
+            fichierActeur = new FileInputStream("src/main/java/com/sae/sae_juba_antoine_said/Ressources/ally/g1.png");
+        }
+        //mettre à jour l'image de l'ImageView
+        //this.image = new Image(fichierActeur);
+        //this.imageView.setImage(image);
+        //startImageAnimation(i);
+    }
+
+ */

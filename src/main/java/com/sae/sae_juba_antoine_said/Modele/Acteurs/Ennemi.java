@@ -45,10 +45,10 @@ public abstract class Ennemi extends Acteur {
             int oldY = getY();
 
             indiceCheminActuel++;
+
             int newX = this.env.getChemin().get(indiceCheminActuel).getX() * 32;
             int newY = this.env.getChemin().get(indiceCheminActuel).getY() * 32;
 
-            // Déterminer la direction
             if (newX > oldX) {
               setDirectionActeur(1); //direction droit
                 //System.out.println("Le soldat se déplace vers la droite.");

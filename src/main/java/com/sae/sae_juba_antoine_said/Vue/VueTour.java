@@ -30,37 +30,18 @@ public class VueTour {
         FileInputStream fichierTour = null;
 
         if (tour instanceof TroopTour) {
-            try {
-                fichierTour = new FileInputStream("src/main/java/com/sae/sae_juba_antoine_said/Ressources/tourInventair/tour0.png");
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+           this.image=envoiImage(0);
 
         }
         if (tour instanceof TourFoudre) {
-            try {
-                fichierTour = new FileInputStream("src/main/java/com/sae/sae_juba_antoine_said/Ressources/tourInventair/tour1.png");
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+            this.image=envoiImage(1);
         }
         if (tour instanceof LaserTour) {
-            try {
-                fichierTour = new FileInputStream("src/main/java/com/sae/sae_juba_antoine_said/Ressources/tourInventair/tour2.png");
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+            this.image=envoiImage(2);
         }
         if (tour instanceof TourAProjectile) {
-            try {
-                fichierTour = new FileInputStream("src/main/java/com/sae/sae_juba_antoine_said/Ressources/tourInventair/tour3.png");
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+            this.image=envoiImage(3);
         }
-
-
-        this.image = new Image(fichierTour);
         int decalageH = ((int) image.getHeight())/2;
         int decalageL = (int) image.getWidth()/2;
         this.imageView = new ImageView(image);
@@ -68,10 +49,40 @@ public class VueTour {
         imageView.setLayoutY(tour.getY()-decalageH);
         this.pane.getChildren().add(imageView);
 
+    }
+    public Image envoiImage(int i) {
+        Image image;
+
+        FileInputStream fichierTour = null;
+        try {
+            fichierTour = new FileInputStream("src/main/java/com/sae/sae_juba_antoine_said/Ressources/tourInventair/tour" + i + ".png");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        image = new Image(fichierTour);
+
+        return image;
+    }
+
+}
 
 
 
-    /*    Circle rangeCircle = new Circle(tour.getX(), tour.getY(), tour.getRange() * 16);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*    Circle rangeCircle = new Circle(tour.getX(), tour.getY(), tour.getRange() * 16);
         rangeCircle.setFill(Color.TRANSPARENT); // transparent à l'intérieur
         rangeCircle.setStroke(Color.RED); // bordure rouge
         rangeCircle.setStrokeWidth(2);
@@ -93,7 +104,9 @@ public class VueTour {
         initAnimation();
 
  */
-    }
+
+
+/*
 
     public Line getFléche() {
         return fléche;
@@ -113,6 +126,4 @@ public class VueTour {
 
     }
 
-
-}
-
+     */

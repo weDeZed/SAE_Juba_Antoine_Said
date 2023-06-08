@@ -49,7 +49,7 @@ public class Projectile {
 
         if (atteintActeur(a) == true){
           //  System.out.println("PV ACT AVANT " + a.getPv());
-            a.decrementationPv(50);
+            a.decrementationPv(25);
             //System.out.println("C BON");
            // System.out.println("PV ACT APRES "+a.getPv());
         }
@@ -62,7 +62,6 @@ public class Projectile {
 
     public boolean atteintActeur(Acteur a) {
         boolean atteint = false;
-
         if(((getX()+38 >= a.getX()) && getX() <= a.getX()+32) && (getY() >= a.getY()) && (getY()+13 <= a.getY()+32)){
             env.removeProjectile(this);
             atteint= true;
