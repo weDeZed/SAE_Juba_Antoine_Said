@@ -38,10 +38,10 @@ public class Guerrier extends Ally {
             } else {
                 dy = distanceY - (distanceY - 1);
             }
-                int newposX = this.getX() + (this.getVitesse() * dx);
-                int newposY = this.getY() + (this.getVitesse() * dy);
-                this.setX(newposX);
-                this.setY(newposY);
+            int newposX = this.getX() + (this.getVitesse() * dx);
+            int newposY = this.getY() + (this.getVitesse() * dy);
+            this.setX(newposX);
+            this.setY(newposY);
 
         }
     }
@@ -62,14 +62,19 @@ public class Guerrier extends Ally {
 
     @Override
     public void agir() {
+
         Acteur a = this.attaquer();
-        this.seDeplacer();
-        if (a.getPv() <= 10) {
-            a.meurt();
+        if (a != null) {
+            this.seDeplacer();
+            if (a.getPv() <= 10) {
+                a.meurt();
+            } else {
+                a.decrementationPv(10);
+            }
         } else {
-            a.decrementationPv(10);
+            marcherSurChemin();
         }
-        this.decrementationPv(1);
+
     }
 
 

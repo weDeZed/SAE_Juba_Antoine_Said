@@ -10,8 +10,6 @@ public abstract class Acteur {
     private IntegerProperty x, y,pv;
     private IntegerProperty directionActeur;
 
-
-
     private String id;
     public static int compteur = 0;
     Environnement env;

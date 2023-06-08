@@ -20,7 +20,7 @@ public class Lanceur extends Application {
         Scene scene = new Scene(fxmlLoader.load(), 1440, 800);
         stage.setTitle("Tour De Defense");
         stage.setScene(scene);
-        stage.setResizable(false);
+        //stage.setResizable(false);
         stage.show();
     }
 

@@ -14,7 +14,7 @@ public class Bandit extends Ennemi {
     @Override
     public Acteur attaquer() {
         for (Acteur a : this.env.getActeurs()) {
-            if (a instanceof Ally && a.estVivant()) {
+            if (a instanceof Ally && a.estVivant()){
                 if (this.getY() - this.getRange() <= a.getY() && a.getY() <= this.getY() + this.getRange() &&
                         this.getX() - this.getRange() <= a.getX() && a.getX() <= this.getX() + this.getRange()) {
                     return a;
@@ -26,14 +26,17 @@ public class Bandit extends Ennemi {
 
     @Override
     public void agir() {
-        //test
         Acteur a = this.attaquer();
-        this.seDeplacer();
-
-        if (a.estVivant()) {
-            a.decrementationPv(10);
-            System.out.println("il n'est pas mort");
+        if (a!=null){
+            this.seDeplacer();
+            if (a.estVivant()) {
+                a.decrementationPv(10);
+                System.out.println("il n'est pas mort");
+            }
+        }else {
+            move();
         }
+
 }
 
     @Override
@@ -41,9 +44,7 @@ public class Bandit extends Ennemi {
         Acteur a = this.attaquer();
         int dx, dy;
         int distanceX,distanceY;
-
         if (a != null){
-
             distanceX = a.getX() - this.getX();
             distanceY = a.getY() - this.getY();
 

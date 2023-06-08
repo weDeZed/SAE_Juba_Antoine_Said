@@ -1,6 +1,4 @@
 package com.sae.sae_juba_antoine_said.Vue;
-
-
 import com.sae.sae_juba_antoine_said.Modele.Environnement.Environnement;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.image.Image;

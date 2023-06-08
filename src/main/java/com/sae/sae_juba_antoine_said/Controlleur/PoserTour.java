@@ -22,13 +22,10 @@ public class PoserTour {
         this.placeDeTour = 200;
     }
 
-    public void MettreEnPlaceTourDeplacable(ToggleButton button, Class<? extends Tour> tourtype, Image image, int range) {
+    public void MettreEnPlaceTourDeplacable(ToggleButton button, Class<? extends Tour> tourtype, Image image) {
         button.setOnDragDetected(event -> {
             Dragboard db = button.startDragAndDrop(TransferMode.ANY);
-            Circle rangeCircle = new Circle(event.getX(), event.getY(), range * 16);
-            rangeCircle.setFill(Color.TRANSPARENT); // transparent à l'intérieur
-            rangeCircle.setStroke(Color.RED); // bordure rouge
-            rangeCircle.setStrokeWidth(2);
+
             db.setDragView(image);
             ClipboardContent content = new ClipboardContent();
             content.putString(tourtype.getName());

@@ -2,8 +2,6 @@ package com.sae.sae_juba_antoine_said.Controlleur;
 
 import com.sae.sae_juba_antoine_said.Modele.Acteurs.Acteur;
 import com.sae.sae_juba_antoine_said.Modele.Acteurs.Bandit;
-import com.sae.sae_juba_antoine_said.Modele.Acteurs.Ennemi;
-import com.sae.sae_juba_antoine_said.Modele.Acteurs.Guerrier;
 import com.sae.sae_juba_antoine_said.Modele.Environnement.Environnement;
 import com.sae.sae_juba_antoine_said.Modele.Tours.*;
 import com.sae.sae_juba_antoine_said.Vue.*;
@@ -14,19 +12,18 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+
+
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
 import javafx.util.Duration;
 
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.concurrent.atomic.AtomicInteger;
-
 
 public class Controlleur implements Initializable {
     private final int LARGEUR = 32;
@@ -94,12 +91,11 @@ public class Controlleur implements Initializable {
 
         inventairDesTours = new InventairDesTours(imageForTourB1, imageForTourB2, imageForTourB3, imageForTourB4);
         dragDropSetup = new PoserTour(environnement);
-        dragDropSetup.MettreEnPlaceTourDeplacable(tourB1, TroopTour.class, dragDropSetup.envoiImage(0), 10 * 16);
-        dragDropSetup.MettreEnPlaceTourDeplacable(tourB2, TourFoudre.class, dragDropSetup.envoiImage(1), 10);
-        dragDropSetup.MettreEnPlaceTourDeplacable(tourB3, LaserTour.class, dragDropSetup.envoiImage(2), 10);
-        dragDropSetup.MettreEnPlaceTourDeplacable(tourB4, TourAProjectile.class, dragDropSetup.envoiImage(3), 10 * 16);
+        dragDropSetup.MettreEnPlaceTourDeplacable(tourB1, TroopTour.class, dragDropSetup.envoiImage(0));
+        dragDropSetup.MettreEnPlaceTourDeplacable(tourB2, TourFoudre.class, dragDropSetup.envoiImage(1));
+        dragDropSetup.MettreEnPlaceTourDeplacable(tourB3, LaserTour.class, dragDropSetup.envoiImage(2));
+        dragDropSetup.MettreEnPlaceTourDeplacable(tourB4, TourAProjectile.class, dragDropSetup.envoiImage(3));
         dragDropSetup.MettreEnPlaceZoneDepot(pane);
-
 
         /************************** les listes observablesc *********************************/
 
@@ -128,28 +124,53 @@ public class Controlleur implements Initializable {
     }
 
     private void initAnimation() {
-
         gameLoop = new Timeline();
         temps = 1;
         gameLoop.setCycleCount(Timeline.INDEFINITE);
         AtomicInteger i = new AtomicInteger();
 
-
         KeyFrame kf = new KeyFrame(
                 Duration.seconds(0.17),
-
                 (ev -> {
-                    if (temps == 1) {
+                    if (temps % 20 == 1) {
                         environnement.ajouterActeur(new Bandit(52, 24, 3, environnement));
                     }
-                    if (temps % 5 == 1) {
-                        environnement.tour();
+                    if (temps % 2 == 1) {
+                        environnement.nbTours();
                     }
                     if (temps == 10000) {
                         gameLoop.stop();
-                    } else if (temps % 2 == 0) {
+                    }
+                    temps++;
+                })
+        );
+        gameLoop.getKeyFrames().add(kf);
+    }
 
-                        for (Acteur acteur : environnement.getActeurs()) {
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+                    else if (temps % 2 == 0) {
+
+
+                   for (Acteur acteur : environnement.getActeurs()) {
                             if (acteur instanceof Ennemi) {
                                 ((Ennemi) acteur).move();
                             }
@@ -161,7 +182,8 @@ public class Controlleur implements Initializable {
                             }
                         }
                     }
-                    if (temps == 100) {
+
+                    if (temps  == 30) {
                         for (Tour t : environnement.getTours()) {
                             if (t instanceof TroopTour) {
                                 t.attaqueEnnemi();
@@ -195,33 +217,7 @@ public class Controlleur implements Initializable {
 
 
                     }
-                    if (temps == 120) {
-                    }
-                    temps++;
-                })
-        );
-        gameLoop.getKeyFrames().add(kf);
-    }
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+                    //*/
 
 
 
