@@ -126,7 +126,7 @@ public class Controlleur implements Initializable {
 
     public void gameLaunche() {
         try {
-            this.vueEnvironnementMap = new VueEnvironnement(environnement, tilePane);
+            this.vueEnvironnementMap = new VueEnvironnement(environnement, tilePane,progressBar);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
