@@ -48,25 +48,33 @@ public class Projectile {
 
 
         if (atteintActeur(a) == true){
-          //  System.out.println("PV ACT AVANT " + a.getPv());
-            a.decrementationPv(25);
-            //System.out.println("C BON");
-           // System.out.println("PV ACT APRES "+a.getPv());
+            a.decrementationPv(50);
+
         }
 
     }
+
+    public boolean atteintActeur(Acteur a) {
+        if (((getX() + 38 >= a.getX()) && getX() <= a.getX() + 32) && (getY() >= a.getY()) && (getY() + 13 <= a.getY() + 32)) {
+            // env.removeProjectile(this);
+            return true;
+        }
+        return false;
+    }
+
+
+
+
+
+
+
+
 
     public String getId() {
         return id;
     }
 
-    public boolean atteintActeur(Acteur a) {
-        if (((getX() + 38 >= a.getX()) && getX() <= a.getX() + 32) && (getY() >= a.getY()) && (getY() + 13 <= a.getY() + 32)) {
-           // env.removeProjectile(this);
-            return true;
-        }
-        return false;
-    }
+
 
     public int getVitesse() {
         return vitesse;

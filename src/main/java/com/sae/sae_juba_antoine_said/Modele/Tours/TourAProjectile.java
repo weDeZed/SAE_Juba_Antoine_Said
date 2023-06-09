@@ -17,23 +17,27 @@ public class TourAProjectile extends Tour {
 
     @Override
     public void attaqueEnnemi() {
-        for (Acteur acteur : env.getActeurs()) {
-                if (acteur == this.ennemiPlusProche()) {
-                   // creeProjectile();
-                    for (Projectile pro : getEnvironment().getProjectiles()) {
-                    System.out.println("Acteur : " + acteur);
-                    System.out.println("Ennemi plus proche : " + this.ennemiPlusProche());
+        Acteur act=this.ennemiPlusProche();
+                if (act != null)  {
+                        Projectile p = creeProjectile();
 
-                    pro.lancerProjectile(acteur);
+                       // p.lancerProjectile(act);
 
-                    if (pro.atteintActeur(acteur)){
-                        getEnvironment().getProjectiles().remove(pro);
-                    }
+
+                               /*
+                           System.out.println("Acteur : " + acteur);
+                           System.out.println("Ennemi plus proche : " + this.ennemiPlusProche());
+
+                                */
+
+
+
+
 
                 }
             }
-        }
-    }
+
+
 
     public Projectile creeProjectile() {
 
@@ -43,25 +47,9 @@ public class TourAProjectile extends Tour {
 
     }
 
-    public void attaquerEnnemisDansRange() {
-        for (Acteur acteur : env.getActeurs()) {
-            if (acteur == this.ennemiPlusProche()) {
-                if (acteur.estVivant() ) {
-                    Projectile projectile = new Projectile(this.getX(), this.getY(), env);
-                    System.out.println("Projectile : "+projectile);
-                    if (projectile.atteintActeur(acteur)==false){
-                        projectile.lancerProjectile(acteur);
-
-                    }
-                    if (projectile.atteintActeur(acteur)) {
-                        break; // Sortir de la boucle si l'ennemi est touché par le projectile
-                    }
-                }
-            }
-        }
     }
 
 
-}
+
 
 
