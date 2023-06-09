@@ -2,8 +2,6 @@ package com.sae.sae_juba_antoine_said.Controlleur;
 
 import com.sae.sae_juba_antoine_said.Modele.Acteurs.Acteur;
 import com.sae.sae_juba_antoine_said.Modele.Acteurs.Bandit;
-import com.sae.sae_juba_antoine_said.Modele.Acteurs.Ennemi;
-import com.sae.sae_juba_antoine_said.Modele.Acteurs.Guerrier;
 import com.sae.sae_juba_antoine_said.Modele.Environnement.Environnement;
 import com.sae.sae_juba_antoine_said.Modele.Tours.*;
 import com.sae.sae_juba_antoine_said.Vue.*;
@@ -15,7 +13,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.ToggleButton;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 
@@ -23,11 +20,9 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
 import javafx.util.Duration;
 
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
-import java.time.temporal.Temporal;
 import java.util.ResourceBundle;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -40,7 +35,7 @@ public class Controlleur implements Initializable {
     private TilePane tilePane;
 
     @FXML
-    private Label nbPiece;
+    private Label labelEnvPieces;
     private VueEnvironnement vueEnvironnementMap;
 
 
@@ -53,7 +48,8 @@ public class Controlleur implements Initializable {
     private Tour troopTours, troopTours1;
     private VueTour vueTour;
     InventairDesTours inventairDesTours;
-    @FXML private ProgressBar progressBar;
+    @FXML
+    private ProgressBar progressBar;
 
     Projectile p;
     VueActeur vueActeur2;
@@ -66,6 +62,9 @@ public class Controlleur implements Initializable {
 
     @FXML
     private ToggleButton tourB1, tourB2, tourB3, tourB4;
+    @FXML
+    Label labelPrixT1, labelPrixT2, labelPrixT3, labelPrixT4;
+    private int prixb1, prixb2, prixb3, prixb4;
 
     private PoserTour dragDropSetup;
 
@@ -77,9 +76,6 @@ public class Controlleur implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
-
-
 
         /************************** Environnement *********************************/
 
@@ -95,27 +91,54 @@ public class Controlleur implements Initializable {
         this.pane.setMaxSize(environnement.getX() * LARGEUR, environnement.getY() * HAUTEUR);
         this.pane.setPrefSize(environnement.getX() * LARGEUR, environnement.getY() * HAUTEUR);
 
-
         /************************** Glisser et Poser les Tours  *********************************/
+
+        try {
+            prixb1 = Integer.parseInt(labelPrixT1.getText());
+            prixb2 = Integer.parseInt(labelPrixT2.getText());
+            prixb3 = Integer.parseInt(labelPrixT3.getText());
+            prixb4 = Integer.parseInt(labelPrixT4.getText());
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+        }
 
         inventairDesTours = new InventairDesTours(imageForTourB1, imageForTourB2, imageForTourB3, imageForTourB4);
         dragDropSetup = new PoserTour(environnement);
-        dragDropSetup.MettreEnPlaceTourDeplacable(tourB1, TroopTour.class, dragDropSetup.envoiImage(0));
-        dragDropSetup.MettreEnPlaceTourDeplacable(tourB2, TourFoudre.class, dragDropSetup.envoiImage(1));
-        dragDropSetup.MettreEnPlaceTourDeplacable(tourB3, LaserTour.class, dragDropSetup.envoiImage(2));
-        dragDropSetup.MettreEnPlaceTourDeplacable(tourB4, TourAProjectile.class, dragDropSetup.envoiImage(3));
+        //System.out.println("b1 "+prixb1 +" b2 "+prixb2+" b3  "+prixb3+" b4 "+prixb4);
+
+        if (environnement.getPiece() >= prixb1) {
+            System.out.println( " les pieces d'environnement "+environnement.getPiece());
+            dragDropSetup.MettreEnPlaceTourDeplacable(tourB1, TroopTour.class, dragDropSetup.envoiImage(0));
+        }
+        if (environnement.getPiece() >= prixb2) {
+            dragDropSetup.MettreEnPlaceTourDeplacable(tourB2, TourFoudre.class, dragDropSetup.envoiImage(1));
+        }
+        if (environnement.getPiece() >= prixb3) {
+            dragDropSetup.MettreEnPlaceTourDeplacable(tourB3, LaserTour.class, dragDropSetup.envoiImage(2));
+
+        }
+        if (environnement.getPiece() >= prixb4) {
+            dragDropSetup.MettreEnPlaceTourDeplacable(tourB4, TourAProjectile.class, dragDropSetup.envoiImage(3));
+
+        }
         dragDropSetup.MettreEnPlaceZoneDepot(pane);
 
 
         /************************** les listes observablesc *********************************/
 
         listenerListeActeurs = new ListObsActeur(pane, environnement);
-        listenerListeTours = new ListObsTour(pane);
+        listenerListeTours = new ListObsTour(pane,environnement);
         listnerListeProjectiles = new ListObsProjectile(pane);
         environnement.getActeurs().addListener(listenerListeActeurs);
         environnement.getTours().addListener(listenerListeTours);
         environnement.getProjectiles().addListener(listnerListeProjectiles);
 
+
+        /************************************ lisnter de environnment**************/
+        environnement.vieProperty().addListener((obs, old, newv) -> {
+            double nb = Double.valueOf(newv.toString()) / 100;
+            progressBar.setProgress(nb);
+        });
 
         gameLaunche();
         initAnimation();
@@ -126,7 +149,7 @@ public class Controlleur implements Initializable {
 
     public void gameLaunche() {
         try {
-            this.vueEnvironnementMap = new VueEnvironnement(environnement, tilePane,progressBar);
+            this.vueEnvironnementMap = new VueEnvironnement(environnement, tilePane, progressBar,labelEnvPieces);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -152,59 +175,11 @@ public class Controlleur implements Initializable {
                     }
                     if (temps == 10000) {
                         gameLoop.stop();
-                    } else if (temps % 2 == 0) {
-
-                        for (Acteur acteur : environnement.getActeurs()) {
-                            if (acteur instanceof Ennemi) {
-                                ((Ennemi) acteur).move();
-                            }
-                            if (acteur instanceof Guerrier) {
-                                ((Guerrier) acteur).marcherSurChemin();
-                                if (acteur.attaquer() != null) {
-                                    acteur.agir();
-                                }
-                            }
-                        }
                     }
 
-                    if (temps == 100) {
-                        for (Tour t : environnement.getTours()) {
-                            if (t instanceof TroopTour) {
-                                t.attaqueEnnemi();
-                            }
-                        }
-                        for (Tour t : environnement.getTours()) {
-                            //environnement.getProjectiles().removeAll();
-                            if (t instanceof TourAProjectile) {
-                                if (!t.ennemiPlusProche().isEmpty()) {
-                                    t.creeProjectile();
-                                }
-                                if (t.ennemiPlusProche().isEmpty()) {
-                                    environnement.getProjectiles().removeAll();
-                                }
-                            }
 
-                        }
-                    }
-                    if (temps % 2 == 0) {
-                        try {
-                            for (Tour tourAP : environnement.getTours()) {
-                                if (tourAP instanceof TourAProjectile) {
-                                    tourAP.attaqueEnnemi();
+                    // environnement.ennemieAtteintSommetCible();
 
-                                }
-                            }
-                        } catch (Exception e) {
-                        }
-
-
-                    }
-
-                    environnement.ennemieAtteintSommetCible();
-
-                    if (environnement.getVie() <= 0 ){
-                        gameLoop.stop();
-                    }
                     temps++;
                 })
         );
@@ -270,6 +245,53 @@ public class Controlleur implements Initializable {
 
  */
 
+/*
+                    else if (temps % 2 == 0) {
+                        for (Acteur acteur : environnement.getActeurs()) {
+                            if (acteur instanceof Ennemi) {
+                                ((Ennemi) acteur).move();
+                            }
+                            if (acteur instanceof Guerrier) {
+                                ((Guerrier) acteur).marcherSurChemin();
+                                if (acteur.attaquer() != null) {
+                                    acteur.agir();
+                                }
+                            }
+                        }
+                    }
+
+                    if (temps == 100) {
+                        for (Tour t : environnement.getTours()) {
+                            if (t instanceof TroopTour) {
+                                t.attaqueEnnemi();
+                            }
+                        }
+                        for (Tour t : environnement.getTours()) {
+                            //environnement.getProjectiles().removeAll();
+                            if (t instanceof TourAProjectile) {
+                                if (!t.ennemiPlusProche().isEmpty()) {
+                                    t.creeProjectile();
+                                }
+                                if (t.ennemiPlusProche().isEmpty()) {
+                                    environnement.getProjectiles().removeAll();
+                                }
+                            }
+
+                        }
+                    }
+                    if (temps % 2 == 0) {
+                        try {
+                            for (Tour tourAP : environnement.getTours()) {
+                                if (tourAP instanceof TourAProjectile) {
+                                    tourAP.attaqueEnnemi();
+
+                                }
+                            }
+                        } catch (Exception e) {
+                        }
+
+
+                    }*/
 
 
 /*  for (int i = 0; i <environnement.getChemin().size(); i++){

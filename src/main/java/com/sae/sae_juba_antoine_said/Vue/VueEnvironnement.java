@@ -1,7 +1,9 @@
 package com.sae.sae_juba_antoine_said.Vue;
 import com.sae.sae_juba_antoine_said.Modele.Environnement.Environnement;
+import com.sae.sae_juba_antoine_said.Modele.Tours.Projectile;
 import javafx.fxml.FXML;
 import javafx.geometry.Rectangle2D;
+import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -24,29 +26,31 @@ public class VueEnvironnement {
     private ImageView imgV;
     private final int LARGEUR = 32;
     private final int HAUTEUR = 32;
+    private Label labelEnvPieces;
 
 
 
-    public VueEnvironnement(Environnement env, TilePane tileP,ProgressBar progressBar) throws FileNotFoundException {
+    public VueEnvironnement(Environnement env, TilePane tileP,ProgressBar progressBar,Label labelEnvPieces) throws FileNotFoundException {
         this.env = env;
         this.tilePane = tileP;
         this.progressBar = progressBar;
+        this.labelEnvPieces=labelEnvPieces;
 
 
 
         if (env.getVie() > 20) {
           //progressBar.progressProperty().bind(env.vieProperty().divide(100));
-
-
-          String barColor = "-fx-accent: red;";
+            String barColor = "-fx-accent: red;";
             String trackColor = "-fx-control-inner-background: white;";
             progressBar.setStyle(barColor + trackColor);
         } else {
             progressBar.setStyle("-fx-accent: red;");
         }
-
-
+        labelEnvPieces.textProperty().bind(env.getPieceProperty().asString());
         iniTerrain();
+        mettreImagePieceDansBar();
+
+
     }
     void iniTerrain() {
 
@@ -76,30 +80,23 @@ public class VueEnvironnement {
         img.setViewport(new Rectangle2D(x, y, LARGEUR, HAUTEUR));
         this.tilePane.getChildren().add(img);
     }
+    public  void mettreImagePieceDansBar(){
+        FileInputStream fichierGuerrier = null;
 
-    public void refreshMap(ImageView img, int id) {
-        int x;
-        int y;
-        x = id % ((int) imgTilep.getWidth() / LARGEUR);
-        y = id / ((int) imgTilep.getHeight() / HAUTEUR);
-        x = (x * LARGEUR) - LARGEUR;
-        y = (y * HAUTEUR);
 
-        img.setViewport(new Rectangle2D(x, y, LARGEUR, HAUTEUR));
+            try {
+                fichierGuerrier = new FileInputStream("src/main/java/com/sae/sae_juba_antoine_said/Ressources/piece.png");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+
+        Image image = new Image(fichierGuerrier);
+        ImageView imageView = new ImageView(image);
+        imageView.setFitHeight(50); // Ajustez la hauteur et la largeur comme nécessaire
+        imageView.setFitWidth(50);
+        labelEnvPieces.setGraphic(imageView);
     }
 
-
-    public TilePane getTilePane() {
-
-        return tilePane;
-    }
-
-    public ImageView getImgV() {
-        return imgV;
-    }
-
-    public void setImgV(ImageView imgV) {
-        this.imgV = imgV;
-    }
 
 }

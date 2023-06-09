@@ -21,9 +21,7 @@ import java.util.*;
 
 
 public class Environnement {
-
     BFS bfs;
-
     private IntegerProperty vie;
     private int x, y;
     private int[][] map;
@@ -32,7 +30,7 @@ public class Environnement {
     private Map<Sommet, Set<Sommet>> listeAdj;
     private ObservableList<Sommet> obstacles;
     private ObservableList<Projectile> projectiles;
-    private ArrayList<Sommet>chemin;
+    private ArrayList<Sommet> chemin;
     private IntegerProperty piece;
     private int nbTour;
 
@@ -49,7 +47,7 @@ public class Environnement {
         readMap();
         bfs = new BFS(this);
         chemin = bfs.cheminVersSource();
-        this.piece=new SimpleIntegerProperty();
+        this.piece = new SimpleIntegerProperty(100);
         this.vie = new SimpleIntegerProperty(100);
         this.nbTour = 0;
     }
@@ -69,7 +67,7 @@ public class Environnement {
                     if (!tout_ligne[y].trim().isEmpty()) {
                         map[y][x] = Integer.parseInt(tout_ligne[y].trim());
 
-                       // System.out.println(" Largeur  : "+x);
+                        // System.out.println(" Largeur  : "+x);
                         //System.out.print(" "+map[x][y]);
                     }
                 }
@@ -88,19 +86,20 @@ public class Environnement {
         }
 
     }
+
     public int getX() {
         return x;
     }
 
-    public void ennemieAtteintSommetCible(){
-        for (Acteur ac : this.getActeurs()){
+    public void ennemieAtteintSommetCible() {
+        for (Acteur ac : this.getActeurs()) {
             if (ac.estVivant() && ac instanceof Ennemi) {
-                if(ac.getX() == this.getBfs().getCible().getX()*32 && ac.getY()==this.getBfs().getCible().getY()*32){
-                    System.out.println("Vie env avant: " + this.getVie());
+                if (ac.getX() == this.getBfs().getCible().getX() * 32 && ac.getY() == this.getBfs().getCible().getY() * 32) {
+                    //System.out.println("Vie env avant: " + this.getVie());
                     this.decrementerVie(10);
-                    System.out.println("Vie env apres: " + this.getVie());
+                    //System.out.println("Vie env apres: " + this.getVie());
                 }
-              //  System.out.println("Apres if ");
+                //  System.out.println("Apres if ");
             }
         }
     }
@@ -121,25 +120,27 @@ public class Environnement {
         return map;
     }
 
-    public int getPiece(){
+    public int getPiece() {
         return this.piece.getValue();
     }
 
-    public IntegerProperty getPieceProperty (){
+    public IntegerProperty getPieceProperty() {
         return this.piece;
     }
-    public void decrementationPiece (int piece){
+
+    public void decrementationPiece(int piece) {
         this.piece.subtract(piece);
     }
 
-    public void ajoutePiece (int piece){
-        this.piece.setValue(this.piece.getValue()+piece);
+    public void ajoutePiece(int piece) {
+        this.piece.setValue(this.piece.getValue() + piece);
     }
 
 
-    public void suppActeur (Acteur acteur){
+    public void suppActeur(Acteur acteur) {
         acteurs.remove(acteur);
     }
+
     public ObservableList<Acteur> getActeurs() {
         return acteurs;
     }
@@ -147,13 +148,15 @@ public class Environnement {
     public void ajouterActeur(Acteur a) {
         this.acteurs.add(a);
     }
+
     public ObservableList<Tour> getTours() {
         return tours;
     }
 
-    public void ajouterTour(Tour t){
+    public void ajouterTour(Tour t) {
         this.tours.add(t);
-}
+    }
+
     public boolean dansTerrain(int x, int y) {
         return getMap()[x][y] == 1427;
     }
@@ -187,15 +190,13 @@ public class Environnement {
         return bfs;
     }
 
-    public void decrementerVie(double v){
-        this.vie.setValue(this.getVie() - v) ;
-
+    public void decrementerVie(double v) {
+        this.vie.setValue(this.getVie() - v);
     }
 
     public ArrayList<Sommet> getChemin() {
         return chemin;
     }
-
 
     public void nbTours() {
         for (int i = 0; i < acteurs.size(); i++) {
@@ -222,13 +223,16 @@ public class Environnement {
                 }
             }
         }
-
         nbTour++;
-
     }
 
+    public IntegerProperty pieceProperty() {
+        return piece;
+    }
 
-
+    public void setPiece(int piece) {
+        this.piece.set(getPiece() - piece);
+    }
 }
 
 

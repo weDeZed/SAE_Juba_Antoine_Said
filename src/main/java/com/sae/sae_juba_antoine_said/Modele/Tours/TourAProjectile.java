@@ -9,8 +9,8 @@ import javafx.collections.ObservableList;
 public class TourAProjectile extends Tour {
 
 
-    public TourAProjectile(int x, int y, int degats, int range, Environnement env) {
-        super(x, y, degats, range, env);
+    public TourAProjectile(int x, int y, int degats,int prix, int range, Environnement env) {
+        super(x, y, degats,50, range, env);
 
 
     }
@@ -37,7 +37,6 @@ public class TourAProjectile extends Tour {
         }
 
     }
-
 
 }
 

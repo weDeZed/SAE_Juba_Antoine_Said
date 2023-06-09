@@ -10,28 +10,26 @@ import javafx.collections.ObservableList;
 
 public class Tour {
 
- IntegerProperty x,y;
- int degatsParSeconde,range;
-  Environnement env;
+    IntegerProperty x, y;
+    int degatsParSeconde, range;
+    Environnement env;
+    private  int prix;
 
 
-    public Tour(int x, int y, int degats,int range,Environnement env) {
+    public Tour(int x, int y, int degats,int prix, int range, Environnement env) {
         this.x = new SimpleIntegerProperty(x);
         this.y = new SimpleIntegerProperty(y);
         this.degatsParSeconde = degats;
         this.range = range;
-        this.env=env;
+        this.env = env;
+        this.prix=prix;
     }
 
-    public void attaqueEnnemi(){
-
-
+    public void attaqueEnnemi() {
     }
-    public ObservableList<Acteur> ennemiPlusProche () {
 
+    public ObservableList<Acteur> ennemiPlusProche() {
         ObservableList<Acteur> result = FXCollections.observableArrayList();
-
-
         for (int i = 0; i < env.getActeurs().size(); i++) {
             if (env.getActeurs().get(i) instanceof Ennemi) {
                 if ((this.getX() - range <= env.getActeurs().get(i).getY() && env.getActeurs().get(i).getY() <= this.getY() + range) &&
@@ -82,9 +80,11 @@ public class Tour {
     public void setRange(int range) {
         this.range = range;
     }
+
     public Environnement getEnvironment() {
         return env;
     }
-    public void creeProjectile(){
+
+    public void creeProjectile() {
     }
 }

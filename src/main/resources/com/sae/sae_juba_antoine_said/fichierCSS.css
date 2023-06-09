@@ -1,0 +1,34 @@
+.body {
+    -fx-font-family: "Arial";
+}
+
+#labelEnvPieces {
+    -fx-background-color: #407de3;
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 20px;
+    -fx-border-color: #ffffff;
+    -fx-border-width: 2px;
+    -fx-border-radius: 5px;
+    -fx-alignment: center;
+    -fx-padding: 2px;
+}
+
+#pane {
+    -fx-background-radius: 10px;
+}
+
+#tilePane {
+    -fx-background-radius: 10px;
+}
+
+.toggleButton {
+    -fx-background-color: #407de3;
+    -fx-border-color: #ffffff;
+    -fx-border-width: 2px;
+    -fx-border-radius: 10px;
+    -fx-text-fill: #ffffff;
+}
+
+.progressBar {
+    -fx-accent: #407de3;
+}
