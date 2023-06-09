@@ -1,6 +1,7 @@
 package com.sae.sae_juba_antoine_said.Modele.Environnement;
 
 import com.sae.sae_juba_antoine_said.Modele.Acteurs.Acteur;
+import com.sae.sae_juba_antoine_said.Modele.Acteurs.Ennemi;
 import com.sae.sae_juba_antoine_said.Modele.BFS.BFS;
 import com.sae.sae_juba_antoine_said.Modele.BFS.Sommet;
 import com.sae.sae_juba_antoine_said.Modele.Tours.Projectile;
@@ -172,29 +173,36 @@ public class Environnement {
         }
         for (Tour tour : getTours()) {
             if (tour instanceof TourAProjectile) {
-                if (!tour.ennemiPlusProche().isEmpty()) {
-                    if (nbTour % 10 == 0) {
-                        tour.creeProjectile();
+
+                for (Acteur ennemi : tour.ennemiPlusProche()){
+                    if (ennemi instanceof Ennemi) {
+                            if (nbTour % 10 == 0 && ennemi.estVivant()) {
+                                    tour.creeProjectile();
+                                    tour.attaqueEnnemi();
+
+                            }
+
+
+                        }
+                   // getProjectiles().removeAll();
+
                     }
-                    tour.attaqueEnnemi();
+
                 }
-                if (tour.ennemiPlusProche().isEmpty()) {
-                    getProjectiles().removeAll();
-                }
-            }
             if (tour instanceof TroopTour) {
                 if (nbTour % 20 == 0) {
                     tour.attaqueEnnemi();
                 }
+              }
             }
-        }
+
 
         nbTour++;
+            }
 
-    }
+        }
 
 
-}
 
 
 
