@@ -17,25 +17,48 @@ public class TourAProjectile extends Tour {
 
     @Override
     public void attaqueEnnemi() {
-        for (Projectile pro : getEnvironment().getProjectiles()) {
-            for (int k = 0; k < this.ennemiPlusProche().size(); k++) {
-                if (this.ennemiPlusProche().get(k).estVivant()) {
-                    pro.lancerProjectile(this.ennemiPlusProche().get(k));
+        for (Acteur acteur : env.getActeurs()) {
+                if (acteur == this.ennemiPlusProche()) {
+                   // creeProjectile();
+                    for (Projectile pro : getEnvironment().getProjectiles()) {
+                    System.out.println("Acteur : " + acteur);
+                    System.out.println("Ennemi plus proche : " + this.ennemiPlusProche());
 
-                } else {
-                    getEnvironment().suppActeur(this.ennemiPlusProche().get(k));
-                    getEnvironment().getProjectiles().remove(pro);
+                    pro.lancerProjectile(acteur);
+
+                    if (pro.atteintActeur(acteur)){
+                        getEnvironment().getProjectiles().remove(pro);
+                    }
+
                 }
             }
         }
     }
 
-    public void creeProjectile() {
-        ObservableList<Acteur> a = this.ennemiPlusProche();
-        for (int i = 0; i < 1; i++) {
-            this.env.ajouterProjectile(new Projectile(this.getX() + 10, this.getY() - 30, env));
-        }
+    public Projectile creeProjectile() {
 
+            Projectile pro = new Projectile(this.getX() + 10, this.getY() - 30, env);
+            this.env.ajouterProjectile(pro);
+            return pro;
+
+    }
+
+    public void attaquerEnnemisDansRange() {
+        for (Acteur acteur : env.getActeurs()) {
+            if (acteur == this.ennemiPlusProche()) {
+                if (acteur.estVivant() ) {
+                    Projectile projectile = new Projectile(this.getX(), this.getY(), env);
+                    System.out.println("Projectile : "+projectile);
+                    if (projectile.atteintActeur(acteur)==false){
+                        projectile.lancerProjectile(acteur);
+
+                    }
+                    if (projectile.atteintActeur(acteur)) {
+                        break; // Sortir de la boucle si l'ennemi est touché par le projectile
+                    }
+                }
+            }
+        }
     }
 
 

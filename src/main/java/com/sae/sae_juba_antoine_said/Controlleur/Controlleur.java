@@ -152,7 +152,8 @@ public class Controlleur implements Initializable {
                     }
                     if (temps == 10000) {
                         gameLoop.stop();
-                    } else if (temps % 2 == 0) {
+                    } /*
+                    else if (temps % 2 == 0) {
 
                         for (Acteur acteur : environnement.getActeurs()) {
                             if (acteur instanceof Ennemi) {
@@ -198,7 +199,7 @@ public class Controlleur implements Initializable {
                         }
 
 
-                    }
+                    }*/
 
                     environnement.ennemieAtteintSommetCible();
 
