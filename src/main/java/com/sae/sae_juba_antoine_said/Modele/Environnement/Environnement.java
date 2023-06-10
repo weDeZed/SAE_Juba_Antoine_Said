@@ -219,7 +219,7 @@ public class Environnement {
             }
             if (tour instanceof TroopTour) {
                 if (nbTour % 20 == 0) {
-                    tour.attaqueEnnemi();
+                    //tour.attaqueEnnemi();
                 }
             }
         }
@@ -228,6 +228,10 @@ public class Environnement {
 
     public IntegerProperty pieceProperty() {
         return piece;
+    }
+
+    public void ajouterPieces(int piece) {
+        this.piece.set(getPiece() + piece);
     }
 
     public void setPiece(int piece) {

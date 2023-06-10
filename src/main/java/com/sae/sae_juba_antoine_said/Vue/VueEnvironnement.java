@@ -1,14 +1,11 @@
 package com.sae.sae_juba_antoine_said.Vue;
+
 import com.sae.sae_juba_antoine_said.Modele.Environnement.Environnement;
-import com.sae.sae_juba_antoine_said.Modele.Tours.Projectile;
-import javafx.fxml.FXML;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
 
 import java.io.FileInputStream;
@@ -29,29 +26,23 @@ public class VueEnvironnement {
     private Label labelEnvPieces;
 
 
-
-    public VueEnvironnement(Environnement env, TilePane tileP,ProgressBar progressBar,Label labelEnvPieces) throws FileNotFoundException {
+    public VueEnvironnement(Environnement env, TilePane tileP, ProgressBar progressBar, Label labelEnvPieces) throws FileNotFoundException {
         this.env = env;
         this.tilePane = tileP;
         this.progressBar = progressBar;
-        this.labelEnvPieces=labelEnvPieces;
+        this.labelEnvPieces = labelEnvPieces;
 
 
 
-        if (env.getVie() > 20) {
-          //progressBar.progressProperty().bind(env.vieProperty().divide(100));
-            String barColor = "-fx-accent: red;";
-            String trackColor = "-fx-control-inner-background: white;";
-            progressBar.setStyle(barColor + trackColor);
-        } else {
-            progressBar.setStyle("-fx-accent: red;");
-        }
+
+
         labelEnvPieces.textProperty().bind(env.getPieceProperty().asString());
         iniTerrain();
         mettreImagePieceDansBar();
 
 
     }
+
     void iniTerrain() {
 
         FileInputStream fichierTileSet = null;
@@ -79,16 +70,16 @@ public class VueEnvironnement {
         y = (y * HAUTEUR);
         img.setViewport(new Rectangle2D(x, y, LARGEUR, HAUTEUR));
         this.tilePane.getChildren().add(img);
+        listObsBarDeEnvronnement();
     }
-    public  void mettreImagePieceDansBar(){
+
+    public void mettreImagePieceDansBar() {
         FileInputStream fichierGuerrier = null;
-
-
-            try {
-                fichierGuerrier = new FileInputStream("src/main/java/com/sae/sae_juba_antoine_said/Ressources/piece.png");
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+        try {
+            fichierGuerrier = new FileInputStream("src/main/java/com/sae/sae_juba_antoine_said/Ressources/piece.png");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
 
         Image image = new Image(fichierGuerrier);
@@ -97,6 +88,22 @@ public class VueEnvironnement {
         imageView.setFitWidth(50);
         labelEnvPieces.setGraphic(imageView);
     }
+
+    public void listObsBarDeEnvronnement() {
+
+        if (env.getVie() > 20) {
+            String barColor = "-fx-accent: red;";
+            String trackColor = "-fx-control-inner-background: white;";
+            progressBar.setStyle(barColor + trackColor);
+        } else {
+            progressBar.setStyle("-fx-accent: red;");
+        }
+        env.vieProperty().addListener((obs, old, newv) -> {
+            double nb = Double.valueOf(newv.toString()) / 100;
+            progressBar.setProgress(nb);
+        });
+    }
+
 
 
 }

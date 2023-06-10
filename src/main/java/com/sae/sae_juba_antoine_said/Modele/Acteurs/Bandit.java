@@ -31,10 +31,10 @@ public class Bandit extends Ennemi {
             this.seDeplacer();
             if (a.getPv()>0) {
                 a.decrementationPv(10);
-                System.out.println("jusqu'a tué ennemie");
+                //System.out.println("jusqu'a tué ennemie");
             }
         }else {
-            System.out.println("sinon move ");
+            //System.out.println("sinon move ");
             move();
         }
 

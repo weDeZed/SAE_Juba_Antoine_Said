@@ -67,6 +67,7 @@ public abstract class Ennemi extends Acteur {
         } else {
             this.env.suppActeur(this);
             env.decrementerVie(10);
+            env.ajouterPieces(10);
         }
     }
 

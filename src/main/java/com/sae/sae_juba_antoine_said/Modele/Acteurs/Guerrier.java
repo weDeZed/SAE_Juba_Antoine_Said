@@ -27,7 +27,7 @@ public class Guerrier extends Ally {
         int distanceX, distanceY;
 
         if (a != null) {
-            System.out.println("deplacer vers ennemie " + i);
+            //System.out.println("deplacer vers ennemie " + i);
             distanceX = a.getX() - this.getX();
             distanceY = a.getY() - this.getY();
 
@@ -68,7 +68,7 @@ public class Guerrier extends Ally {
     public void agir() {
         Acteur a = this.attaquer();
         if (a != null) {
-            System.out.println(" Déplacer acteur vers ennemei ");
+            //System.out.println(" Déplacer acteur vers ennemei ");
             this.seDeplacer();
             if (a.getPv() <= 10) {
                 a.meurt();
