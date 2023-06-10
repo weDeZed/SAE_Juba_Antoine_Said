@@ -47,7 +47,7 @@ public class Environnement {
         readMap();
         bfs = new BFS(this);
         chemin = bfs.cheminVersSource();
-        this.piece = new SimpleIntegerProperty(100);
+        this.piece = new SimpleIntegerProperty(150);
         this.vie = new SimpleIntegerProperty(100);
         this.nbTour = 0;
     }

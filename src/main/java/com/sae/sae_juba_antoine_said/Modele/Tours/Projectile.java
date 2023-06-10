@@ -20,7 +20,7 @@ public class Projectile {
         this.x = new SimpleIntegerProperty(x);
         this.y = new SimpleIntegerProperty(y);
         this.env = environnement;
-        this.vitesse = 40;
+        this.vitesse = 100;
         id="P"+ compteur;
         compteur++;
     }

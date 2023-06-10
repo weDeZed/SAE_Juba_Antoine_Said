@@ -42,7 +42,7 @@ public class PoserTour {
                 try {
                     Class<?> tourClass = Class.forName(db.getString());// il prend la class de tour
                     if (placéTourDansBonEndroit((int) event.getX() / 32, (int) event.getY() / 32)) { // si le tour est dans bon endroit
-                        Tour tour = (Tour) tourClass.getConstructor(int.class, int.class,int.class, int.class, int.class, Environnement.class).newInstance((int) event.getX(), (int) event.getY(), 800,0, 500, environnement);
+                        Tour tour = (Tour) tourClass.getConstructor(int.class, int.class,int.class, int.class, int.class, Environnement.class).newInstance((int) event.getX(), (int) event.getY(), 800,0, 200, environnement);
                         environnement.ajouterTour(tour);
                     }
                 } catch (Exception e) {

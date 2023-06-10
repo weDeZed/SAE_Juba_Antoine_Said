@@ -113,6 +113,7 @@ public abstract class Acteur {
     public void setDirectionActeur(int directionActeur) {
         this.directionActeur.set(directionActeur);
     }
+
 }
 
 

@@ -8,22 +8,26 @@ public class Guerrier extends Ally {
 
     private int startX;
     private int startY;
+    int i;
 
 
     public Guerrier(int pv, int x, int y, Environnement env) {
-        super(pv, x, y, 20, 10, env);
+        super(pv, x, y, 20, 100, env);
         this.startX = x / 32;
         this.startY = y / 32;
+        i = 0;
     }
 
     @Override
     public void seDeplacer() {
+        i++;
+
         Acteur a = this.attaquer();
         int dx, dy;
         int distanceX, distanceY;
 
         if (a != null) {
-
+            System.out.println("deplacer vers ennemie " + i);
             distanceX = a.getX() - this.getX();
             distanceY = a.getY() - this.getY();
 
@@ -62,9 +66,9 @@ public class Guerrier extends Ally {
 
     @Override
     public void agir() {
-
         Acteur a = this.attaquer();
         if (a != null) {
+            System.out.println(" Déplacer acteur vers ennemei ");
             this.seDeplacer();
             if (a.getPv() <= 10) {
                 a.meurt();
@@ -81,6 +85,7 @@ public class Guerrier extends Ally {
     public void marcherSurChemin() {
         int x = getX() / 32;
         int y = getY() / 32;
+
         boolean peutDeplacer = false;
         Random rand = new Random();
         while (!peutDeplacer) {
@@ -88,25 +93,25 @@ public class Guerrier extends Ally {
             setDirectionActeur(direction);
             switch (direction) {
                 case 0: // Haut
-                    if (y > 0 && this.env.getMap()[x][y - 1] == getCHEMIN()) {
+                    if (dansTerrain(x, y) && this.env.getMap()[x][y - 1] == getCHEMIN()) {
                         y = y - 1;
                         peutDeplacer = true;
                     }
                     break;
                 case 1: // Droit
-                    if (x < 90 && this.env.getMap()[x + 1][y] == getCHEMIN()) {
+                    if (dansTerrain(x, y) && this.env.getMap()[x + 1][y] == getCHEMIN()) {
                         x = x + 1;
                         peutDeplacer = true;
                     }
                     break;
                 case 2: // Bas
-                    if (y < 90 && this.env.getMap()[x][y + 1] == getCHEMIN()) {
+                    if (dansTerrain(x, y) && this.env.getMap()[x][y + 1] == getCHEMIN()) {
                         y = y + 1;
                         peutDeplacer = true;
                     }
                     break;
                 case 3: // Gauche
-                    if (x > 0 && this.env.getMap()[x - 1][y] == getCHEMIN()) {
+                    if (dansTerrain(x, y) && this.env.getMap()[x - 1][y] == getCHEMIN()) {
                         x = x - 1;
                         peutDeplacer = true;
                     }
@@ -120,5 +125,8 @@ public class Guerrier extends Ally {
         }
     }
 
+    public boolean dansTerrain(int x, int y) {
+        return y > 0 && y < 90 && x > 0 && x < 90;
+    }
 }
 

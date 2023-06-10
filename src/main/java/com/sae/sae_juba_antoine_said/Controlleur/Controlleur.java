@@ -167,7 +167,7 @@ public class Controlleur implements Initializable {
         KeyFrame kf = new KeyFrame(
                 Duration.seconds(0.17),
                 (ev -> {
-                    if (temps % 20 == 1) {
+                    if (temps == 1) {
                         environnement.ajouterActeur(new Bandit(52, 24, 3, environnement));
                     }
                     if (temps % 2 == 1) {

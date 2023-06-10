@@ -7,7 +7,7 @@ public class Bandit extends Ennemi {
 
     public Bandit(int x, int y, int vitesse, Environnement ev) {
 
-        super(100, x, y, vitesse, 10, ev);
+        super(100, x, y, vitesse, 100, ev);
     }
 
 
@@ -29,11 +29,12 @@ public class Bandit extends Ennemi {
         Acteur a = this.attaquer();
         if (a!=null){
             this.seDeplacer();
-            if (a.estVivant()) {
+            if (a.getPv()>0) {
                 a.decrementationPv(10);
-                System.out.println("il n'est pas mort");
+                System.out.println("jusqu'a tué ennemie");
             }
         }else {
+            System.out.println("sinon move ");
             move();
         }
 

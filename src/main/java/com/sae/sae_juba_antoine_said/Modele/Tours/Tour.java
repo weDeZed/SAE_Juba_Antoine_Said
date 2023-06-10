@@ -9,7 +9,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 public class Tour {
-
     IntegerProperty x, y;
     int degatsParSeconde, range;
     Environnement env;
