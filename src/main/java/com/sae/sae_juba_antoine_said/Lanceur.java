@@ -16,8 +16,8 @@ public class Lanceur extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         borderPane = new BorderPane();
-        FXMLLoader fxmlLoader = new FXMLLoader(Lanceur.class.getResource("vueSae.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 1440, 800);
+        FXMLLoader fxmlLoader = new FXMLLoader(Lanceur.class.getResource("menu.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 200, 400);
         stage.setTitle("Tour De Defense");
         stage.setScene(scene);
         //stage.setResizable(false);

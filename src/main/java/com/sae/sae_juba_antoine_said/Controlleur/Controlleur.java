@@ -10,8 +10,13 @@ import com.sae.sae_juba_antoine_said.Vue.*;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.collections.ListChangeListener;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.ToggleButton;
@@ -31,7 +36,11 @@ import java.time.temporal.Temporal;
 import java.util.ResourceBundle;
 import java.util.concurrent.atomic.AtomicInteger;
 
+
+
 public class Controlleur implements Initializable {
+    @FXML
+    private Button lancerButton;
     private final int LARGEUR = 32;
     private final int HAUTEUR = 32;
 
@@ -210,6 +219,28 @@ public class Controlleur implements Initializable {
                 })
         );
         gameLoop.getKeyFrames().add(kf);
+    }
+
+
+
+    @FXML
+    private void lancerButtonAction(ActionEvent event) {
+        try {
+            // Charger le fichier FXML du jeu
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("vueSae.fxml"));
+            Parent jeuRoot = loader.load();
+
+            // Créer une nouvelle scène avec le contenu du jeu
+            Scene jeuScene = new Scene(jeuRoot);
+
+            // Obtenir la scène actuelle à partir du bouton "Lancer"
+            Scene scene = lancerButton.getScene();
+
+            // Changer la scène actuelle pour afficher le jeu
+            scene.setRoot(jeuRoot);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }
