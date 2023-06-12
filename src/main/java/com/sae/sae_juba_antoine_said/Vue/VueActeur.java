@@ -10,6 +10,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.util.Duration;
 
+import javax.crypto.spec.PSource;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -20,18 +21,18 @@ public class VueActeur {
     private Image image;
     private ImageView imageView;
     FileInputStream fichierActeur;
-    private ProgressBar  progressBarActeur;
+    private ProgressBar progressBarActeur;
 
     public VueActeur(Pane pane, Acteur acteur) {
         this.pane = pane;
         this.acteur = acteur;
-        this. progressBarActeur = new ProgressBar();
+        this.progressBarActeur = new ProgressBar();
 
         fichierActeur = null;
 
         if (acteur instanceof Guerrier) {
             try {
-                fichierActeur = new FileInputStream("src/main/java/com/sae/sae_juba_antoine_said/Ressources/ally/g0.png");
+                fichierActeur = new FileInputStream("src/main/java/com/sae/sae_juba_antoine_said/Ressources/ally/g3.png");
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -45,16 +46,6 @@ public class VueActeur {
             }
 
         }
-        if (acteur instanceof Archer) {
-            try {
-                fichierActeur = new FileInputStream("src/main/java/com/sae/sae_juba_antoine_said/Ressources/ally/g1.png");
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-        }
-
-
         acteur.directionActeurProperty().addListener((obs, oldDirection, newDirection) -> {
             startImageAnimation((int) newDirection);
 
@@ -92,12 +83,9 @@ public class VueActeur {
     }
 
 
-
-
     public void startImageAnimation(int direction) {
-        AtomicInteger temp = new AtomicInteger();
-        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1), e -> {
-            int i = temp.get() % 2;
+        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(0.17), e -> {
+            int i = (int) (Math.random() * 2);
             String acteurType = "";
             String directionType = "";
             if (acteur instanceof Bandit) {
@@ -120,28 +108,49 @@ public class VueActeur {
                     directionType = "f";
                     break;
             }
-            if (acteur instanceof Bandit) {
-                // System.out.println("b");
-                String path = "src/main/java/com/sae/sae_juba_antoine_said/Ressources/" + acteurType + directionType + i + ".png";
-                try {
-                    fichierActeur = new FileInputStream(path);
-                } catch (FileNotFoundException ex) {
-                    throw new RuntimeException(ex);
-                }
-            }
-            if (acteur instanceof Guerrier){
-                //System.out.println("g");
-                String path = "src/main/java/com/sae/sae_juba_antoine_said/Ressources/" + acteurType  + i + ".png";
-                try {
-                    fichierActeur = new FileInputStream(path);
-                } catch (FileNotFoundException ex) {
-                    throw new RuntimeException(ex);
+            if (direction == 5) {
+                if (acteur instanceof Bandit) {
+                    System.out.println("dans vue acteur b dir5 " + i);
+                    String path = "src/main/java/com/sae/sae_juba_antoine_said/Ressources/EnnemiesImg/bandit2.png";
+                    try {
+                        fichierActeur = new FileInputStream(path);
+                    } catch (FileNotFoundException ex) {
+                        throw new RuntimeException(ex);
+                    }
+                } else if (acteur instanceof Guerrier) {
+                    System.out.println("dans vue acteur g dir5 " + i);
+                    String path = "src/main/java/com/sae/sae_juba_antoine_said/Ressources/ally/g" + i + ".png";
+                    try {
+                        fichierActeur = new FileInputStream(path);
+                    } catch (FileNotFoundException ex) {
+                        throw new RuntimeException(ex);
+                    }
                 }
 
+            } else {
+                if (acteur instanceof Bandit) {
+                    //System.out.println("b");
+                    String path = "src/main/java/com/sae/sae_juba_antoine_said/Ressources/" + acteurType + directionType + i + ".png";
+                    try {
+                        fichierActeur = new FileInputStream(path);
+                    } catch (FileNotFoundException ex) {
+                        throw new RuntimeException(ex);
+                    }
+                }
+                if (acteur instanceof Guerrier) {
+                    //System.out.println("g");
+                    String path = "src/main/java/com/sae/sae_juba_antoine_said/Ressources/" + acteurType + "0.png";
+                    try {
+                        fichierActeur = new FileInputStream(path);
+                    } catch (FileNotFoundException ex) {
+                        throw new RuntimeException(ex);
+                    }
+
+                }
             }
+
             this.image = new Image(fichierActeur);
             this.imageView.setImage(image);
-            temp.getAndIncrement();
         }));
 
         timeline.setCycleCount(Animation.INDEFINITE);
@@ -219,7 +228,7 @@ public class VueActeur {
 
         }
         if (acteur instanceof Guerrier) {
-            fichierActeur = new FileInputStream("src/main/java/com/sae/sae_juba_antoine_said/Ressources/ally/g1.png");
+            fichierActeur = new FileInputStream("src/main/java/com/sae/sae_juba_antoine_said/Ressources/ally/g3.png");
         }
         //mettre à jour l'image de l'ImageView
         //this.image = new Image(fichierActeur);

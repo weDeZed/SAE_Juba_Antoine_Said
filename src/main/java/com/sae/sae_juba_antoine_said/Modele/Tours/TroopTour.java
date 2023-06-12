@@ -10,7 +10,7 @@ import javax.crypto.spec.PSource;
 public class TroopTour extends Tour {
     private int chemin;
 
-    public TroopTour(int x, int y, int degats,int prix, int range, Environnement environnement) {
+    public TroopTour(int x, int y, int degats, int range, Environnement environnement) {
         super(x, y, degats,150, range, environnement);
         chemin = 230;
     }
@@ -43,9 +43,8 @@ public class TroopTour extends Tour {
                 System.out.println("case pas trouvé");
                 break;
             }
-
             placement += 1 + 1 / 2;
-            env.ajouterActeur(new Guerrier(100, x * 32, y * 32, env));
+            env.ajouterActeur(new Guerrier( x * 32, y * 32, env));
         }
 
 

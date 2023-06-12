@@ -33,6 +33,8 @@ public class Environnement {
     private ArrayList<Sommet> chemin;
     private IntegerProperty piece;
     private int nbTour;
+    private final  int CHEMIN=230;
+    private final  int TERRAIN=164;
 
 
     public Environnement(int x, int y) throws IOException {
@@ -47,7 +49,7 @@ public class Environnement {
         readMap();
         bfs = new BFS(this);
         chemin = bfs.cheminVersSource();
-        this.piece = new SimpleIntegerProperty(150);
+        this.piece = new SimpleIntegerProperty(1500);
         this.vie = new SimpleIntegerProperty(100);
         this.nbTour = 0;
     }
@@ -158,7 +160,7 @@ public class Environnement {
     }
 
     public boolean dansTerrain(int x, int y) {
-        return getMap()[x][y] == 1427;
+         return (0 <= x && x < this.x && 0 <= y && y < this.y && getMap()[x][y] == CHEMIN);
     }
 
     public void ajouterProjectile(Projectile p) {
@@ -204,6 +206,7 @@ public class Environnement {
                 suppActeur(acteurs.get(i));
             }
             acteurs.get(i).agir();
+            //System.out.println(" acteurs size "+acteurs.size()+" i "+ i);
         }
         for (Tour tour : getTours()) {
             if (tour instanceof TourAProjectile) {
@@ -219,7 +222,7 @@ public class Environnement {
             }
             if (tour instanceof TroopTour) {
                 if (nbTour % 20 == 0) {
-                    //tour.attaqueEnnemi();
+                    tour.attaqueEnnemi();
                 }
             }
         }
@@ -236,6 +239,10 @@ public class Environnement {
 
     public void setPiece(int piece) {
         this.piece.set(getPiece() - piece);
+    }
+
+    public int getCHEMIN() {
+        return CHEMIN;
     }
 }
 

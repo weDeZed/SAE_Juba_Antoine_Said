@@ -13,7 +13,6 @@ public class ListObsTour implements ListChangeListener<Tour> {
     private VueTour vueTour;
     private Environnement environnement;
     int troopTourPrix = 150, tourFoudrePrix = 20, laserTourPrix = 30, tourAprojectilePrix = 50;
-
     public ListObsTour(Pane panneauDeJeu, Environnement environnement) {
         this.panneauDeJeu = panneauDeJeu;
         this.environnement = environnement;
@@ -27,7 +26,6 @@ public class ListObsTour implements ListChangeListener<Tour> {
             for (Tour tour : t.getAddedSubList()) {
                 vueTour = new VueTour(panneauDeJeu, tour);
                 enleveLesPieces(tour);
-                System.out.println(" " + environnement.getPiece());
             }
         }
     }

@@ -94,18 +94,19 @@ public class Controlleur implements Initializable {
         /************************** Glisser et Poser les Tours  *********************************/
 
         inventairDesTours = new InventairDesTours(imageForTourB1, imageForTourB2, imageForTourB3, imageForTourB4);
-        dragDropSetup = new PoserTour(environnement,pane,tourB1,tourB2,tourB3,tourB4);
+        dragDropSetup = new PoserTour(environnement, pane, tourB1, tourB2, tourB3, tourB4);
 
 
-        /************************** les listes observables *********************************/
-
+        /************************** les listes observables  *********************************/
 
 
         listenerListeActeurs = new ListObsActeur(pane, environnement);
-        listenerListeTours = new ListObsTour(pane,environnement);
-        listnerListeProjectiles = new ListObsProjectile(pane);
         environnement.getActeurs().addListener(listenerListeActeurs);
+
+        listenerListeTours = new ListObsTour(pane, environnement);
         environnement.getTours().addListener(listenerListeTours);
+
+        listnerListeProjectiles = new ListObsProjectile(pane);
         environnement.getProjectiles().addListener(listnerListeProjectiles);
 
 
@@ -113,12 +114,11 @@ public class Controlleur implements Initializable {
         initAnimation();
         gameLoop.play();
 
-
     }
 
     public void gameLaunche() {
         try {
-            this.vueEnvironnementMap = new VueEnvironnement(environnement, tilePane, progressBar,labelEnvPieces);
+            this.vueEnvironnementMap = new VueEnvironnement(environnement, tilePane, progressBar, labelEnvPieces);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -132,20 +132,19 @@ public class Controlleur implements Initializable {
         gameLoop.setCycleCount(Timeline.INDEFINITE);
         AtomicInteger i = new AtomicInteger();
 
-
         KeyFrame kf = new KeyFrame(
-                Duration.seconds(0.17),
+                Duration.seconds(0.14),
                 (ev -> {
-                    if (temps %10== 1) {
+                    if (temps % 30 == 1) {
                         environnement.ajouterActeur(new Bandit(52, 24, 3, environnement));
                     }
                     if (temps % 2 == 1) {
                         environnement.nbTours();
+
                     }
-                    if (temps == 10000) {
+                    if (temps == 1000000) {
                         gameLoop.stop();
                     }
-
 
                     // environnement.ennemieAtteintSommetCible();
 
@@ -300,8 +299,6 @@ pane.setOnMousePressed(mouseEvent -> {
 
 
 
-
-
 /*
 for (Acteur a : environnement.getActeurs()) {
                 if(!a.collisionDroit(a,environnement)){
@@ -367,8 +364,7 @@ for (Acteur a : environnement.getActeurs()) {
                 System.out.println("b1");
                 TroopTour troopTour = new TroopTour((int) mouseEvent.getX(), (int) mouseEvent.getY(), 0, 10, environnement);
                 environnement.ajouterTour(troopTour);
-
-           } else if (tourB2.isSelected()) {
+            } else if (tourB2.isSelected()) {
                 System.out.println("b2");
                 TourFoudre tourFoudre = new TourFoudre((int) mouseEvent.getX(), (int) mouseEvent.getY(), 0, 10, environnement);
                 environnement.ajouterTour(tourFoudre);

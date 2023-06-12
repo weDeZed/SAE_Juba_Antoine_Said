@@ -10,53 +10,18 @@ public class Guerrier extends Ally {
     private int startY;
     int i;
 
-
-    public Guerrier(int pv, int x, int y, Environnement env) {
-        super(pv, x, y, 20, 100, env);
+    public Guerrier(int x, int y, Environnement env) {
+        super(50, x, y, 20, 100, env);
         this.startX = x / 32;
         this.startY = y / 32;
         i = 0;
     }
-
-    @Override
-    public void seDeplacer() {
-        i++;
-
-        Acteur a = this.attaquer();
-        int dx, dy;
-        int distanceX, distanceY;
-
-        if (a != null) {
-            //System.out.println("deplacer vers ennemie " + i);
-            distanceX = a.getX() - this.getX();
-            distanceY = a.getY() - this.getY();
-
-            if (distanceX < 0) {
-                dx = distanceX + (distanceX - 1);
-            } else {
-                dx = distanceX - (distanceX - 1);
-            }
-
-            if (distanceY < 0) {
-                dy = distanceY + (distanceY - 1);
-            } else {
-                dy = distanceY - (distanceY - 1);
-            }
-            int newposX = this.getX() + (this.getVitesse() * dx);
-            int newposY = this.getY() + (this.getVitesse() * dy);
-            this.setX(newposX);
-            this.setY(newposY);
-
-        }
-    }
-
 
     public Acteur attaquer() {
         for (Acteur a : this.env.getActeurs()) {
             if (a instanceof Ennemi && a.estVivant()) {
                 if (this.getY() - this.getRange() <= a.getY() && a.getY() <= this.getY() + this.getRange() &&
                         this.getX() - this.getRange() <= a.getX() && a.getX() <= this.getX() + this.getRange()) {
-                    System.out.println("un ennemie ");
                     return a;
                 }
             }
@@ -68,57 +33,56 @@ public class Guerrier extends Ally {
     public void agir() {
         Acteur a = this.attaquer();
         if (a != null) {
-            //System.out.println(" Déplacer acteur vers ennemei ");
-            this.seDeplacer();
+            this.seDeplacer(a);
             if (a.getPv() <= 10) {
-                a.meurt();
+                env.suppActeur(a);
             } else {
-                a.decrementationPv(10);
+                a.decrementationPv(7);
             }
         } else {
             marcherSurChemin();
         }
-
     }
-
 
     public void marcherSurChemin() {
         int x = getX() / 32;
         int y = getY() / 32;
-
         boolean peutDeplacer = false;
         Random rand = new Random();
         while (!peutDeplacer) {
-            int direction = rand.nextInt(4); // Générer une direction aléatoire
+            int direction = rand.nextInt(4);
             setDirectionActeur(direction);
             switch (direction) {
                 case 0: // Haut
                     if (dansTerrain(x, y) && this.env.getMap()[x][y - 1] == getCHEMIN()) {
                         y = y - 1;
+                        this.setDirectionActeur(1);
                         peutDeplacer = true;
                     }
                     break;
                 case 1: // Droit
                     if (dansTerrain(x, y) && this.env.getMap()[x + 1][y] == getCHEMIN()) {
                         x = x + 1;
+                        this.setDirectionActeur(2);
                         peutDeplacer = true;
                     }
                     break;
                 case 2: // Bas
                     if (dansTerrain(x, y) && this.env.getMap()[x][y + 1] == getCHEMIN()) {
                         y = y + 1;
+                        this.setDirectionActeur(3);
                         peutDeplacer = true;
                     }
                     break;
                 case 3: // Gauche
                     if (dansTerrain(x, y) && this.env.getMap()[x - 1][y] == getCHEMIN()) {
                         x = x - 1;
+                        this.setDirectionActeur(4);
                         peutDeplacer = true;
                     }
                     break;
             }
         }
-
         if (peutDeplacer) {
             setX(x * 32);
             setY(y * 32);
@@ -129,4 +93,3 @@ public class Guerrier extends Ally {
         return y > 0 && y < 90 && x > 0 && x < 90;
     }
 }
-

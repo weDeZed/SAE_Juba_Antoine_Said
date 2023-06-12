@@ -13,6 +13,7 @@ import javafx.scene.layout.Pane;
 import java.io.FileInputStream;
 
 public class PoserTour {
+
     private Environnement environnement;
     private int placeDeTour;
 
@@ -24,7 +25,9 @@ public class PoserTour {
         MettreEnPlaceTourDeplacable(tourB3, LaserTour.class, envoiImage(2), 30);
         MettreEnPlaceTourDeplacable(tourB4, TourAProjectile.class, envoiImage(3), 50);
         MettreEnPlaceZoneDepot(pane);
+
     }
+
 
     public void MettreEnPlaceTourDeplacable(ToggleButton button, Class<? extends Tour> tourtype, Image image, int prix) {
         // Attache la désactivation du bouton à la condition : environnement.getPieceProperty() < prix
@@ -56,8 +59,8 @@ public class PoserTour {
                 try {
                     Class<?> tourClass = Class.forName(db.getString()); // Récupère la classe du tour depuis le contenu
                     if (placéTourDansBonEndroit((int) event.getX() / 32, (int) event.getY() / 32)) { // Vérifie si l'emplacement du tour est correct
-                        Tour tour = (Tour) tourClass.getConstructor(int.class, int.class, int.class, int.class, int.class, Environnement.class)
-                                .newInstance((int) event.getX(), (int) event.getY(), 800, 0, 200, environnement); // Crée une nouvelle instance de la classe de tour
+                        Tour tour = (Tour) tourClass.getConstructor(int.class, int.class, int.class,int.class, Environnement.class)
+                                .newInstance((int) event.getX(), (int) event.getY(), 800, 100, environnement); // Crée une nouvelle instance de la classe de tour
                         environnement.ajouterTour(tour); // Ajoute le tour à l'environnement
                     }
                 } catch (Exception e) {

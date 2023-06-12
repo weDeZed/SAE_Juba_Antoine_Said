@@ -2,8 +2,6 @@ package com.sae.sae_juba_antoine_said.Modele.Tours;
 
 import com.sae.sae_juba_antoine_said.Modele.Acteurs.Acteur;
 import com.sae.sae_juba_antoine_said.Modele.Environnement.Environnement;
-import com.sae.sae_juba_antoine_said.Modele.Tours.Projectile;
-import com.sae.sae_juba_antoine_said.Modele.Tours.Tour;
 import javafx.collections.ObservableList;
 
 import java.util.HashMap;
@@ -11,7 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 public class TourAProjectile extends Tour {
-    public TourAProjectile(int x, int y, int degats, int prix, int range, Environnement env) {
+    public TourAProjectile(int x, int y, int degats, int range, Environnement env) {
         super(x, y, degats, 50, range, env);
 
 
@@ -31,7 +29,6 @@ public class TourAProjectile extends Tour {
     @Override
     public void attaqueEnnemi() {
         assignerEnnemiAuxProjectiles();
-
         for (Map.Entry<Projectile, Acteur> entry : projectileEnnemiMap.entrySet()) {
             Projectile pro = entry.getKey();
             Acteur ennemi = entry.getValue();
@@ -45,15 +42,12 @@ public class TourAProjectile extends Tour {
             }
         }
     }
-
-
     public void creeProjectile() {
         ObservableList<Acteur> a = this.ennemiPlusProche();
         for (int i = 0; i < 1; i++) {
             this.env.ajouterProjectile(new Projectile(this.getX() + 10, this.getY() - 30, env));
         }
     }
-
 }
 
 
