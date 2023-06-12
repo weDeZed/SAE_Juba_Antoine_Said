@@ -110,7 +110,7 @@ public class VueActeur {
             }
             if (direction == 5) {
                 if (acteur instanceof Bandit) {
-                    System.out.println("dans vue acteur b dir5 " + i);
+                    //System.out.println("dans vue acteur b dir5 " + i);
                     String path = "src/main/java/com/sae/sae_juba_antoine_said/Ressources/EnnemiesImg/bandit2.png";
                     try {
                         fichierActeur = new FileInputStream(path);
@@ -118,7 +118,7 @@ public class VueActeur {
                         throw new RuntimeException(ex);
                     }
                 } else if (acteur instanceof Guerrier) {
-                    System.out.println("dans vue acteur g dir5 " + i);
+                    //System.out.println("dans vue acteur g dir5 " + i);
                     String path = "src/main/java/com/sae/sae_juba_antoine_said/Ressources/ally/g" + i + ".png";
                     try {
                         fichierActeur = new FileInputStream(path);
