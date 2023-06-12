@@ -161,54 +161,27 @@ public class Controlleur implements Initializable {
                     }
                     if (temps == 10000) {
                         gameLoop.stop();
-                    } /*
-                    else if (temps % 2 == 0) {
+                    }
+                    if (temps %5 == 0 ){
 
-                        for (Acteur acteur : environnement.getActeurs()) {
-                            if (acteur instanceof Ennemi) {
-                                ((Ennemi) acteur).move();
-                            }
-                            if (acteur instanceof Guerrier) {
-                                ((Guerrier) acteur).marcherSurChemin();
-                                if (acteur.attaquer() != null) {
-                                    acteur.agir();
+                        for (Tour t : environnement.getTours()){
+                            boolean projCree = false;
+                            if (t instanceof TourAProjectile){
+                                if (t.ennemiPlusProche() != null && environnement.getProjectiles().isEmpty()) {
+                                   ((TourAProjectile) t).creeProjectile();
+                                        projCree = true;
+
                                 }
+
+                                }
+
                             }
+                        }
+                    if (!environnement.getProjectiles().isEmpty() && temps %1 ==0 ){
+                        for (Projectile p : environnement.getProjectiles()){
+                            p.lancerProjectile();
                         }
                     }
-
-                    if (temps == 100) {
-                        for (Tour t : environnement.getTours()) {
-                            if (t instanceof TroopTour) {
-                                t.attaqueEnnemi();
-                            }
-                        }
-                        for (Tour t : environnement.getTours()) {
-                            //environnement.getProjectiles().removeAll();
-                            if (t instanceof TourAProjectile) {
-                                if (!t.ennemiPlusProche().isEmpty()) {
-                                    t.creeProjectile();
-                                }
-                                if (t.ennemiPlusProche().isEmpty()) {
-                                    environnement.getProjectiles().removeAll();
-                                }
-                            }
-
-                        }
-                    }
-                    if (temps % 2 == 0) {
-                        try {
-                            for (Tour tourAP : environnement.getTours()) {
-                                if (tourAP instanceof TourAProjectile) {
-                                    tourAP.attaqueEnnemi();
-
-                                }
-                            }
-                        } catch (Exception e) {
-                        }
-
-
-                    }*/
 
                     environnement.ennemieAtteintSommetCible();
 

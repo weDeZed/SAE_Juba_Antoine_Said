@@ -212,13 +212,19 @@ public class Environnement {
         }
         if (nbTour % 20 == 0) {
             for (Tour tour : getTours()) {
-                if (tour instanceof TourAProjectile) {
+                /*
+                if (tour instanceof TourAProjectile ) {
                     if (tour.ennemiPlusProche() != null && tour.ennemiPlusProche().estVivant()) {
                         ((TourAProjectile) tour).creeProjectile();
+                        for (Projectile p : getProjectiles()){
+                            p.lancerProjectile();
+                        }
 
                     }
 
                 }
+
+                 */
                 if (tour instanceof TroopTour) {
                     if (nbTour % 20 == 0) {
                         tour.attaqueEnnemi();

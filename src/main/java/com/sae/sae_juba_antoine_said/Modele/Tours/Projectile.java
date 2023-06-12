@@ -15,6 +15,8 @@ public class Projectile {
 
     Acteur a;
 
+    int disX,disY;
+
 
 
     public Projectile(int x, int y,Acteur a ,Environnement environnement) {
@@ -22,7 +24,7 @@ public class Projectile {
         this.x = new SimpleIntegerProperty(x);
         this.y = new SimpleIntegerProperty(y);
         this.env = environnement;
-        this.vitesse = 40;
+        this.vitesse = 32;
         id="P"+ compteur;
         compteur++;
         this.a = a;
@@ -59,10 +61,27 @@ public class Projectile {
     }
 
     public boolean atteintActeur() {
-        if (((getX() + 38 >= a.getX()) && getX() <= a.getX() + 32) && (getY() >= a.getY()) && (getY() + 13 <= a.getY() + 32)) {
-            env.removeProjectile(this);
+        // Les coins du projectile
+        int x1 = getX();
+        int y1 = getY();
+        int x2 = getX() + 38;
+        int y2 = getY() + 13;
+
+        // Les coins de l'acteur
+        int aX1 = a.getX();
+        int aY1 = a.getY();
+        int aX2 = a.getX() + 32;
+        int aY2 = a.getY() + 32;
+
+        // Vérifie si l'un des coins du projectile est à l'intérieur de la hitbox de l'acteur
+        if ((x1 >= aX1 && x1 <= aX2 && y1 >= aY1 && y1 <= aY2) ||  // Coin supérieur gauche
+                (x1 >= aX1 && x1 <= aX2 && y2 >= aY1 && y2 <= aY2) ||  // Coin inférieur gauche
+                (x2 >= aX1 && x2 <= aX2 && y1 >= aY1 && y1 <= aY2) ||  // Coin supérieur droit
+                (x2 >= aX1 && x2 <= aX2 && y2 >= aY1 && y2 <= aY2)) {  // Coin inférieur droit
+           // env.removeProjectile(this);
             return true;
         }
+
         return false;
     }
 
