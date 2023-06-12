@@ -210,10 +210,13 @@ public class Environnement {
             }
             acteurs.get(i).agir();
         }
-        if (nbTour % 5 == 0) {
+        if (nbTour % 20 == 0) {
             for (Tour tour : getTours()) {
                 if (tour instanceof TourAProjectile) {
-                    tour.attaqueEnnemi();
+                    if (tour.ennemiPlusProche() != null && tour.ennemiPlusProche().estVivant()) {
+                        ((TourAProjectile) tour).creeProjectile();
+
+                    }
 
                 }
                 if (tour instanceof TroopTour) {
@@ -226,36 +229,13 @@ public class Environnement {
 
 
         }
-        for (Tour t : getTours()) {
-            if (t instanceof TourAProjectile){
 
-               animProjectiles();
-            }
-            nbTour++;
-
-        }
 
 
 
 
     }
 
-    public void animProjectiles () {
-
-            for (Projectile p : projectiles){
-                p.lancerProjectile();
-                p.atteintActeur();
-
-
-            }
-
-            for (int i = 0; i<projectiles.size();i++){
-                if (projectiles.get(i).atteintActeur()){
-                    projectiles.remove(i);
-                }
-            }
-
-        }
 }
 
 

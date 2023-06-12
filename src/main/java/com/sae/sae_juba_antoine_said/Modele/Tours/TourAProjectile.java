@@ -14,25 +14,28 @@ public class TourAProjectile extends Tour {
 
 
     }
+
 /*
     @Override
     public void attaqueEnnemi() {
         Acteur act=this.ennemiPlusProche();
                 if (act != null)  {
-                        Projectile p = creeProjectile();
+                        Projectile p = new Projectile(getX(), getY(),act,env);
                 }
             }
 
-
+ */
 
     public Projectile creeProjectile() {
-
-            Projectile pro = new Projectile(this.getX() + 10, this.getY() - 30, env,a);
+        Acteur act=this.ennemiPlusProche();
+            Projectile pro = new Projectile(this.getX() + 10, this.getY() - 30,act, env);
             this.env.ajouterProjectile(pro);
             return pro;
 
     }
- */
+
+
+
     }
 
 
