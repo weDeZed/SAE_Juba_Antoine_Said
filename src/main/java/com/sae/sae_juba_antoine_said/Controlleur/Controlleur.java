@@ -164,24 +164,30 @@ public class Controlleur implements Initializable {
                     }
                     if (temps %5 == 0 ){
 
-                        for (Tour t : environnement.getTours()){
-                            boolean projCree = false;
-                            if (t instanceof TourAProjectile){
-                                if (t.ennemiPlusProche() != null && environnement.getProjectiles().isEmpty()) {
-                                   ((TourAProjectile) t).creeProjectile();
-                                        projCree = true;
 
-                                }
+                        for (Tour t : environnement.getTours()){
+                            if (t instanceof TourAProjectile){
+                                if (t.ennemiPlusProche() != null && environnement.getProjectiles().isEmpty() && t.ennemiPlusProche().estVivant()) {
+                                    ((TourAProjectile) t).creeProjectile();
+
 
                                 }
 
                             }
-                        }
-                    if (!environnement.getProjectiles().isEmpty() && temps %1 ==0 ){
-                        for (Projectile p : environnement.getProjectiles()){
-                            p.lancerProjectile();
+
                         }
                     }
+
+                    try{
+                        if (!environnement.getProjectiles().isEmpty() && temps %1 ==0 ){
+                            for (Projectile p : environnement.getProjectiles()){
+                                p.lancerProjectile();
+                            }
+                        }
+                    }catch (Exception e){
+
+                    }
+
 
                     environnement.ennemieAtteintSommetCible();
 
@@ -378,7 +384,6 @@ for (Acteur a : environnement.getActeurs()) {
         });
 
 */
-
 
 
 
