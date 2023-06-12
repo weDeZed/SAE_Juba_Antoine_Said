@@ -13,9 +13,11 @@ public class Projectile {
     String id;
     static int compteur = 0;
 
+    Acteur a;
 
 
-    public Projectile(int x, int y,Environnement environnement) {
+
+    public Projectile(int x, int y,Acteur a ,Environnement environnement) {
 
         this.x = new SimpleIntegerProperty(x);
         this.y = new SimpleIntegerProperty(y);
@@ -23,9 +25,10 @@ public class Projectile {
         this.vitesse = 40;
         id="P"+ compteur;
         compteur++;
+        this.a = a;
     }
 
-    public void lancerProjectile(Acteur a) {
+    public void lancerProjectile() {
 
         double distanceX = a.getX() - this.getX();
         double distanceY = a.getY() - this.getY();
@@ -47,16 +50,16 @@ public class Projectile {
 
 
 
-        if (atteintActeur(a) == true){
+        if (atteintActeur() == true){
             a.decrementationPv(50);
 
         }
 
     }
 
-    public boolean atteintActeur(Acteur a) {
+    public boolean atteintActeur() {
         if (((getX() + 38 >= a.getX()) && getX() <= a.getX() + 32) && (getY() >= a.getY()) && (getY() + 13 <= a.getY() + 32)) {
-            // env.removeProjectile(this);
+            env.removeProjectile(this);
             return true;
         }
         return false;

@@ -223,25 +223,6 @@ public class Controlleur implements Initializable {
 
 
 
-    @FXML
-    private void lancerButtonAction(ActionEvent event) {
-        try {
-            // Charger le fichier FXML du jeu
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("vueSae.fxml"));
-            Parent jeuRoot = loader.load();
-
-            // Créer une nouvelle scène avec le contenu du jeu
-            Scene jeuScene = new Scene(jeuRoot);
-
-            // Obtenir la scène actuelle à partir du bouton "Lancer"
-            Scene scene = lancerButton.getScene();
-
-            // Changer la scène actuelle pour afficher le jeu
-            scene.setRoot(jeuRoot);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 
 }
 

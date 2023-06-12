@@ -1,0 +1,49 @@
+/* The root element */
+.root {
+    -fx-font-family: "Arial";
+    -fx-background-color: linear-gradient(to bottom, #669999, #003333);
+}
+
+/* Define the style for buttons in general */
+.button {
+    -fx-background-color:
+            #4169e1,
+            linear-gradient(#7ebcea, #2f4b8f),
+            linear-gradient(#426ab7, #263e75),
+            linear-gradient(#395cab, #223768);
+    -fx-background-insets: 0,1,2,3;
+    -fx-text-fill: white;
+    -fx-font-size: 20px;
+    -fx-padding: 10px 20px;
+    -fx-font-weight: bold;
+}
+
+/* Specific styles for each button */
+#lancerButton {
+    -fx-background-color:
+            #32cd32,
+            linear-gradient(#98fb98, #008000),
+            linear-gradient(#00ff00, #006400),
+            linear-gradient(#7cfc00, #006400);
+}
+
+#quitterButton {
+    -fx-background-color:
+            #ff4500,
+            linear-gradient(#ff6347, #8b0000),
+            linear-gradient(#ff4500, #8b0000),
+            linear-gradient(#ff6347, #8b0000);
+}
+
+/* Button hover effects */
+.button:hover {
+    -fx-text-fill: black;
+}
+
+#lancerButton:hover {
+    -fx-background-color: #7cfc00;
+}
+
+#quitterButton:hover {
+    -fx-background-color: #ff6347;
+}

@@ -14,26 +14,12 @@ public class TourAProjectile extends Tour {
 
 
     }
-
+/*
     @Override
     public void attaqueEnnemi() {
         Acteur act=this.ennemiPlusProche();
                 if (act != null)  {
                         Projectile p = creeProjectile();
-
-                       // p.lancerProjectile(act);
-
-
-                               /*
-                           System.out.println("Acteur : " + acteur);
-                           System.out.println("Ennemi plus proche : " + this.ennemiPlusProche());
-
-                                */
-
-
-
-
-
                 }
             }
 
@@ -41,13 +27,15 @@ public class TourAProjectile extends Tour {
 
     public Projectile creeProjectile() {
 
-            Projectile pro = new Projectile(this.getX() + 10, this.getY() - 30, env);
+            Projectile pro = new Projectile(this.getX() + 10, this.getY() - 30, env,a);
             this.env.ajouterProjectile(pro);
             return pro;
 
     }
-
+ */
     }
+
+
 
 
 

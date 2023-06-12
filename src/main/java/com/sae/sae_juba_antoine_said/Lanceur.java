@@ -17,8 +17,8 @@ public class Lanceur extends Application {
     public void start(Stage stage) throws IOException {
         borderPane = new BorderPane();
         FXMLLoader fxmlLoader = new FXMLLoader(Lanceur.class.getResource("menu.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 200, 400);
-        stage.setTitle("Tour De Defense");
+        Scene scene = new Scene(fxmlLoader.load(), 1400, 800);
+        stage.setTitle("Tower");
         stage.setScene(scene);
         //stage.setResizable(false);
         stage.show();
