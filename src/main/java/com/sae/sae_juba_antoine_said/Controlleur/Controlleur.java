@@ -145,17 +145,17 @@ public class Controlleur implements Initializable {
         gameLoop.setCycleCount(Timeline.INDEFINITE);
         AtomicInteger i = new AtomicInteger();
 
+
         KeyFrame kf = new KeyFrame(
-                Duration.seconds(0.14),
+                Duration.seconds(0.17),
                 (ev -> {
-                    if (temps % 30 == 1) {
+                    if (temps % 20 == 1) {
                         environnement.ajouterActeur(new Bandit(52, 24, 3, environnement));
                     }
                     if (temps % 2 == 1) {
                         environnement.nbTours();
-
                     }
-                    if (temps == 1000000) {
+                    if (temps == 10000) {
                         gameLoop.stop();
                     }
                     if (temps %5 == 0 ){
@@ -195,9 +195,6 @@ public class Controlleur implements Initializable {
         );
         gameLoop.getKeyFrames().add(kf);
     }
-
-
-
 
 }
 

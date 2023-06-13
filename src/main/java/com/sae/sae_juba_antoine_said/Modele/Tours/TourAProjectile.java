@@ -25,16 +25,15 @@ public class TourAProjectile extends Tour {
 
     public Projectile creeProjectile() {
         Acteur act=this.ennemiPlusProche();
-            Projectile pro = new Projectile(this.getX() + 10, this.getY() - 30,act, env);
-            this.env.ajouterProjectile(pro);
-            return pro;
+        Projectile pro = new Projectile(this.getX() + 10, this.getY() - 30,act, env);
+        this.env.ajouterProjectile(pro);
+        return pro;
 
     }
 
 
 
-    }
-
+}
 
 
 
