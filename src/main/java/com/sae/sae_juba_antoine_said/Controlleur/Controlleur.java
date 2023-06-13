@@ -12,6 +12,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -23,6 +24,7 @@ import javafx.scene.image.ImageView;
 
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.io.FileNotFoundException;
@@ -30,6 +32,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.concurrent.atomic.AtomicInteger;
+
 
 
 public class Controlleur implements Initializable {
@@ -154,6 +157,7 @@ public class Controlleur implements Initializable {
 
                     }
 
+
                     if (temps == 10000) {
                         gameLoop.stop();
                     }
@@ -166,6 +170,24 @@ public class Controlleur implements Initializable {
         );
         gameLoop.getKeyFrames().add(kf);
     }
+
+
+    public void afficherGameOverScene() {
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        URL resource = getClass().getResource("/com/sae/sae_juba_antoine_said/finDeJeu.fxml");
+        Parent root = null;
+        try {
+            root = fxmlLoader.load(resource);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return; // Arrêter la méthode si une exception se produit lors du chargement du fichier FXML
+        }
+        Scene scene = new Scene(root);
+        Stage primaryStage = (Stage) ((Node) pane).getScene().getWindow();
+        primaryStage.setScene(scene);
+        primaryStage.show();
+    }
+
 
 }
 

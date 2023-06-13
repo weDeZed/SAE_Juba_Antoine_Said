@@ -293,7 +293,7 @@ public class Environnement {
             if (ac.estVivant() && ac instanceof Ennemi) {
                 if (ac.getX() == this.getBfs().getCible().getX() * 32 && ac.getY() == this.getBfs().getCible().getY() * 32) {
                     //System.out.println("Vie env avant: " + this.getVie());
-                    this.decrementerVie(10);
+                    this.decrementerVie(50);
                     //System.out.println("Vie env apres: " + this.getVie());
                 }
                 //  System.out.println("Apres if ");
