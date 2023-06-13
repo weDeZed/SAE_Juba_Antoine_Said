@@ -153,7 +153,11 @@ public class Controlleur implements Initializable {
                         environnement.ajouterActeur(new Bandit(52, 24, 3, environnement));
                     }
                     if (temps % 2 == 1) {
-                        environnement.nbTours();
+                        try{
+                            environnement.nbTours();
+                        }catch (Exception e ){
+
+                        }
                     }
                     if (temps == 10000) {
                         gameLoop.stop();

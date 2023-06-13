@@ -9,19 +9,17 @@ import javafx.collections.ObservableList;
 public class TourAProjectile extends Tour {
 
 
-    public TourAProjectile(int x, int y, int degats, int range, Environnement env) {
-        super(x, y, degats, range, env);
+    public TourAProjectile(int x, int y, int degats,int range, Environnement env) {
+        super(x, y, degats,50,range, env);
 
 
     }
-/*
-    @Override
-    public void attaqueEnnemi() {};
-    /*
 
 
+    public void attaqueEnnemi() {
 
- */
+    };
+
 
     public Projectile creeProjectile() {
         Acteur act=this.ennemiPlusProche();

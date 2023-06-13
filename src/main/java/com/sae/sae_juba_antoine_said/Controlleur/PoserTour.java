@@ -60,7 +60,7 @@ public class PoserTour {
                     Class<?> tourClass = Class.forName(db.getString()); // Récupère la classe du tour depuis le contenu
                     if (placéTourDansBonEndroit((int) event.getX() / 32, (int) event.getY() / 32)) { // Vérifie si l'emplacement du tour est correct
                         Tour tour = (Tour) tourClass.getConstructor(int.class, int.class, int.class,int.class, Environnement.class)
-                                .newInstance((int) event.getX(), (int) event.getY(), 800, 200, environnement); // Crée une nouvelle instance de la classe de tour
+                                .newInstance((int) event.getX(), (int) event.getY(), 800, 250, environnement); // Crée une nouvelle instance de la classe de tour
                         environnement.ajouterTour(tour); // Ajoute le tour à l'environnement
                     }
                 } catch (Exception e) {

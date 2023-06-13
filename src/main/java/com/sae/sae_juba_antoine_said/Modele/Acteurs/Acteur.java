@@ -134,7 +134,7 @@ public abstract class Acteur {
 
             double tolerance = 20;
             if (distance <= tolerance) {
-                System.out.println("dans deplacement dir 5 ");
+                //System.out.println("dans deplacement dir 5 ");
                 this.setDirectionActeur(5);
             }
         }

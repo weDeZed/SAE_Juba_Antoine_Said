@@ -10,8 +10,8 @@ import javax.crypto.spec.PSource;
 public class TroopTour extends Tour {
     private int chemin;
 
-    public TroopTour(int x, int y, int degats, Environnement environnement) {
-        super(x, y, degats,150, environnement);
+    public TroopTour(int x, int y, int degats,int range, Environnement environnement) {
+        super(x, y, degats,150,range, environnement);
         chemin = 230;
     }
 
