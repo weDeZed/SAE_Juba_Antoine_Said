@@ -27,20 +27,20 @@ public class Tour {
 
 
     }
-    public Acteur ennemiPlusProche () {
+    public ObservableList<Acteur> ennemiPlusProche () {
 
-        Acteur act  = null;
+        ObservableList<Acteur> result = FXCollections.observableArrayList();
 
 
         for (int i = 0; i < env.getActeurs().size(); i++) {
             if (env.getActeurs().get(i) instanceof Ennemi) {
                 if ((this.getX() - range <= env.getActeurs().get(i).getY() && env.getActeurs().get(i).getY() <= this.getY() + range) &&
                         (this.getX() - range <= env.getActeurs().get(i).getX() && env.getActeurs().get(i).getX() <= this.getY() + range)) {
-                   act = env.getActeurs().get(i);
+                    result.add(env.getActeurs().get(i));
                 }
             }
         }
-        return act;
+        return result;
     }
 
     public int getX() {
@@ -85,5 +85,6 @@ public class Tour {
     public Environnement getEnvironment() {
         return env;
     }
-
+    public void creeProjectile(){
+    }
 }

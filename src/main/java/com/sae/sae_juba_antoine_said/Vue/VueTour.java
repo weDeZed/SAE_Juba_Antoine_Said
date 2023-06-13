@@ -45,6 +45,7 @@ public class VueTour {
         int decalageH = ((int) image.getHeight())/2;
         int decalageL = (int) image.getWidth()/2;
         this.imageView = new ImageView(image);
+
         imageView.setLayoutX(tour.getX()-decalageL);
         imageView.setLayoutY(tour.getY()-decalageH);
         this.pane.getChildren().add(imageView);

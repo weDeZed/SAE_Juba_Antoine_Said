@@ -2,8 +2,6 @@ package com.sae.sae_juba_antoine_said.Controlleur;
 
 import com.sae.sae_juba_antoine_said.Modele.Acteurs.Acteur;
 import com.sae.sae_juba_antoine_said.Modele.Acteurs.Bandit;
-import com.sae.sae_juba_antoine_said.Modele.Acteurs.Ennemi;
-import com.sae.sae_juba_antoine_said.Modele.Acteurs.Guerrier;
 import com.sae.sae_juba_antoine_said.Modele.Environnement.Environnement;
 import com.sae.sae_juba_antoine_said.Modele.Tours.*;
 import com.sae.sae_juba_antoine_said.Vue.*;
@@ -20,7 +18,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.ToggleButton;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 
@@ -28,11 +25,9 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
 import javafx.util.Duration;
 
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
-import java.time.temporal.Temporal;
 import java.util.ResourceBundle;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -49,7 +44,7 @@ public class Controlleur implements Initializable {
     private TilePane tilePane;
 
     @FXML
-    private Label nbPiece;
+    private Label labelEnvPieces;
     private VueEnvironnement vueEnvironnementMap;
 
 
@@ -62,7 +57,8 @@ public class Controlleur implements Initializable {
     private Tour troopTours, troopTours1;
     private VueTour vueTour;
     InventairDesTours inventairDesTours;
-    @FXML private ProgressBar progressBar;
+    @FXML
+    private ProgressBar progressBar;
 
     Projectile p;
     VueActeur vueActeur2;
@@ -75,6 +71,9 @@ public class Controlleur implements Initializable {
 
     @FXML
     private ToggleButton tourB1, tourB2, tourB3, tourB4;
+    @FXML
+    Label labelPrixT1, labelPrixT2, labelPrixT3, labelPrixT4;
+    private int prixb1, prixb2, prixb3, prixb4;
 
     private PoserTour dragDropSetup;
 
@@ -104,25 +103,22 @@ public class Controlleur implements Initializable {
         this.pane.setMaxSize(environnement.getX() * LARGEUR, environnement.getY() * HAUTEUR);
         this.pane.setPrefSize(environnement.getX() * LARGEUR, environnement.getY() * HAUTEUR);
 
-
         /************************** Glisser et Poser les Tours  *********************************/
 
         inventairDesTours = new InventairDesTours(imageForTourB1, imageForTourB2, imageForTourB3, imageForTourB4);
-        dragDropSetup = new PoserTour(environnement);
-        dragDropSetup.MettreEnPlaceTourDeplacable(tourB1, TroopTour.class, dragDropSetup.envoiImage(0));
-        dragDropSetup.MettreEnPlaceTourDeplacable(tourB2, TourFoudre.class, dragDropSetup.envoiImage(1));
-        dragDropSetup.MettreEnPlaceTourDeplacable(tourB3, LaserTour.class, dragDropSetup.envoiImage(2));
-        dragDropSetup.MettreEnPlaceTourDeplacable(tourB4, TourAProjectile.class, dragDropSetup.envoiImage(3));
-        dragDropSetup.MettreEnPlaceZoneDepot(pane);
+        dragDropSetup = new PoserTour(environnement, pane, tourB1, tourB2, tourB3, tourB4);
 
 
-        /************************** les listes observablesc *********************************/
+        /************************** les listes observables  *********************************/
+
 
         listenerListeActeurs = new ListObsActeur(pane, environnement);
-        listenerListeTours = new ListObsTour(pane);
-        listnerListeProjectiles = new ListObsProjectile(pane);
         environnement.getActeurs().addListener(listenerListeActeurs);
+
+        listenerListeTours = new ListObsTour(pane, environnement);
         environnement.getTours().addListener(listenerListeTours);
+
+        listnerListeProjectiles = new ListObsProjectile(pane);
         environnement.getProjectiles().addListener(listnerListeProjectiles);
 
 
@@ -135,7 +131,7 @@ public class Controlleur implements Initializable {
 
     public void gameLaunche() {
         try {
-            this.vueEnvironnementMap = new VueEnvironnement(environnement, tilePane,progressBar);
+            this.vueEnvironnementMap = new VueEnvironnement(environnement, tilePane, progressBar, labelEnvPieces);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -149,17 +145,17 @@ public class Controlleur implements Initializable {
         gameLoop.setCycleCount(Timeline.INDEFINITE);
         AtomicInteger i = new AtomicInteger();
 
-
         KeyFrame kf = new KeyFrame(
-                Duration.seconds(0.17),
+                Duration.seconds(0.14),
                 (ev -> {
-                    if (temps % 20 == 1) {
+                    if (temps % 30 == 1) {
                         environnement.ajouterActeur(new Bandit(52, 24, 3, environnement));
                     }
                     if (temps % 2 == 1) {
                         environnement.nbTours();
+
                     }
-                    if (temps == 10000) {
+                    if (temps == 1000000) {
                         gameLoop.stop();
                     }
                     if (temps %5 == 0 ){
@@ -384,6 +380,7 @@ for (Acteur a : environnement.getActeurs()) {
         });
 
 */
+
 
 
 

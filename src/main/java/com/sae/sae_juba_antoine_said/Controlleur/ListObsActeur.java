@@ -19,12 +19,6 @@ public class ListObsActeur implements ListChangeListener<Acteur> {
         this.ev = ev;
     }
 
-    private void enleverActeur (Acteur m){
-        Node sprite=panneauDeJeu.lookup("#"+m.getId());
-        this.panneauDeJeu.getChildren().remove(sprite);
-       // System.out.println(" enlever " +this.panneauDeJeu.lookup("#"+ m.getId()));
-        this.panneauDeJeu.getChildren().remove(this.panneauDeJeu.lookup("#"+ m.getId()+1));
-    }
 
     @Override
     public void onChanged(Change<? extends Acteur> a) {
@@ -36,19 +30,17 @@ public class ListObsActeur implements ListChangeListener<Acteur> {
 
             }
             for (Acteur m : a.getRemoved()) {
-               // System.out.println(" dans removed");
-                if (m instanceof Ennemi){
-                  //  ev.ajoutePiece(10);
-
-
-                }
-            //    System.out.println("mort acteur");
-                enleverActeur(m);
+               enleverActeur(m);
             }
-
-
         }
     }
+    private void enleverActeur (Acteur m){
+        Node sprite=panneauDeJeu.lookup("#"+m.getId());
+        this.panneauDeJeu.getChildren().remove(sprite);
+        // System.out.println(" enlever " +this.panneauDeJeu.lookup("#"+ m.getId()));
+        this.panneauDeJeu.getChildren().remove(this.panneauDeJeu.lookup("#"+ m.getId()+1));
+    }
+
 }
 
 

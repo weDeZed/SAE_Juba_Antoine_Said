@@ -6,22 +6,18 @@
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.TilePane?>
 <?import javafx.scene.layout.VBox?>
 
-<?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.image.ImageView?>
-<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
-            prefHeight="800.0" prefWidth="1400.0" style="-fx-background-color: #407de3" styleClass="body"
-            xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.sae.sae_juba_antoine_said.Controlleur.Controlleur">
+<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1400.0" style="-fx-background-color: #407de3" styleClass="body" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1"
+            stylesheets="@fichierCSS.css" fx:controller="com.sae.sae_juba_antoine_said.Controlleur.Controlleur">
     <children>
         <Pane fx:id="pane" style="-fx-background-color: #129d0c">
             <children>
-                <TilePane fx:id="tilePane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
-                          minWidth="-Infinity" style="-fx-background-color: #9b340f">
+                <TilePane fx:id="tilePane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" style="-fx-background-color: #9b340f">
                 </TilePane>
             </children>
         </Pane>
@@ -29,64 +25,51 @@
     <left>
         <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
             <children>
-                <ToggleButton fx:id="tourB1" alignment="TOP_CENTER" mnemonicParsing="false" prefHeight="186.0"
-                              prefWidth="100.0"
-                              style="-fx-font-size: 2px; -fx-font-weight: bold; -fx-background-radius: 10; -fx-border-color: #992cc4; -fx-border-width: 3; -fx-border-radius: 10;">
+                <ToggleButton fx:id="tourB1" alignment="TOP_CENTER" mnemonicParsing="false" prefHeight="186.0" prefWidth="100.0" style="-fx-font-size: 2px; -fx-font-weight: bold; -fx-background-radius: 10; -fx-border-color: #992cc4; -fx-border-width: 3; -fx-border-radius: 10;">
                     <toggleGroup>
-                        <ToggleGroup fx:id="tourButton"/>
+                        <ToggleGroup fx:id="tourButton" />
                     </toggleGroup>
                     <graphic>
                         <StackPane>
                             <VBox alignment="TOP_CENTER">
-                                <Label style="-fx-text-fill: #65d5c3; -fx-font-size: 18px; -fx-font-weight: bold;"
-                                       text="Tour Soldat" StackPane.alignment="TOP_CENTER"/>
-                                <Label style="-fx-text-fill: #ff0000; -fx-font-size: 12px;" text="150 pièces"/>
+                                <Label style="-fx-text-fill: #65d5c3; -fx-font-size: 18px; -fx-font-weight: bold;" text="Tour Soldat" StackPane.alignment="TOP_CENTER" />
+                                <Label fx:id="labelPrixT1" style="-fx-text-fill: #ff0000; -fx-font-size: 12px;" text="150" />
+                            </VBox>
+                            <ImageView fx:id="imageForTourB1" /> <!-- Your Image here -->
+                        </StackPane>
+                    </graphic>
+                </ToggleButton>
+                <ToggleButton fx:id="tourB2" alignment="TOP_CENTER" mnemonicParsing="false" prefHeight="197.0" prefWidth="100.0" style="-fx-font-size: 2px; -fx-font-weight: bold; -fx-background-radius: 10; -fx-border-color: #c439ec; -fx-border-width: 3; -fx-border-radius: 10;" toggleGroup="$tourButton">
+                    <graphic>
+                        <StackPane>
+                            <VBox alignment="TOP_CENTER">
+                                <Label style="-fx-text-fill: #2baf9b; -fx-font-size: 16px; -fx-font-weight: bold;" text="Tour Foudre" StackPane.alignment="TOP_CENTER" />
+                                <Label fx:id="labelPrixT2" style="-fx-text-fill: #ff0000; -fx-font-size: 12px;" text="20" />
 
                             </VBox>
-                            <ImageView fx:id="imageForTourB1"/> <!-- Your Image here -->
+                            <ImageView fx:id="imageForTourB2" />
                         </StackPane>
                     </graphic>
                 </ToggleButton>
-                <ToggleButton fx:id="tourB2" alignment="TOP_CENTER" mnemonicParsing="false" prefHeight="197.0"
-                              prefWidth="100.0" toggleGroup="$tourButton"
-                              style="-fx-font-size: 2px; -fx-font-weight: bold; -fx-background-radius: 10; -fx-border-color: #c439ec; -fx-border-width: 3; -fx-border-radius: 10;">
+                <ToggleButton fx:id="tourB3" alignment="TOP_CENTER" mnemonicParsing="false" prefHeight="211.0" prefWidth="100.0" style="-fx-font-size: 2px; -fx-font-weight: bold; -fx-background-radius: 10; -fx-border-color: #842cb6; -fx-border-width: 3; -fx-border-radius: 10;" toggleGroup="$tourButton">
                     <graphic>
                         <StackPane>
                             <VBox alignment="TOP_CENTER">
-                                <Label style="-fx-text-fill: #2baf9b; -fx-font-size: 16px; -fx-font-weight: bold;"
-                                       text="Tour Foudre" StackPane.alignment="TOP_CENTER"/>
-                                <Label style="-fx-text-fill: #ff0000; -fx-font-size: 12px;" text="20 pièces"/>
-
+                                <Label style="-fx-text-fill: #2baf9b; -fx-font-size: 18px; -fx-font-weight: bold;" text="Tour Arc" StackPane.alignment="TOP_CENTER" />
+                                <Label fx:id="labelPrixT3" style="-fx-text-fill: #ff0000; -fx-font-size: 12px;" text="30" />
                             </VBox>
-                            <ImageView fx:id="imageForTourB2"/>
+                            <ImageView fx:id="imageForTourB3" />
                         </StackPane>
                     </graphic>
                 </ToggleButton>
-                <ToggleButton fx:id="tourB3" alignment="TOP_CENTER" mnemonicParsing="false" prefHeight="211.0"
-                              prefWidth="100.0" toggleGroup="$tourButton"
-                              style="-fx-font-size: 2px; -fx-font-weight: bold; -fx-background-radius: 10; -fx-border-color: #842cb6; -fx-border-width: 3; -fx-border-radius: 10;">
+                <ToggleButton fx:id="tourB4" alignment="TOP_CENTER" mnemonicParsing="false" prefHeight="213.0" prefWidth="100.0" style="-fx-font-size: 2px; -fx-font-weight: bold; -fx-background-radius: 10; -fx-border-color: #b235dc; -fx-border-width: 3; -fx-border-radius: 10;" toggleGroup="$tourButton">
                     <graphic>
                         <StackPane>
                             <VBox alignment="TOP_CENTER">
-                                <Label style="-fx-text-fill: #2baf9b; -fx-font-size: 18px; -fx-font-weight: bold;"
-                                       text="Tour Arc" StackPane.alignment="TOP_CENTER"/>
-                                <Label style="-fx-text-fill: #ff0000; -fx-font-size: 12px;" text="30 pièces"/>
+                                <Label style="-fx-text-fill: #2baf9b; -fx-font-size: 18px; -fx-font-weight: bold;" text="Tour Laser" />
+                                <Label fx:id="labelPrixT4" style="-fx-text-fill: #ff0000; -fx-font-size: 12px;" text="50" />
                             </VBox>
-                            <ImageView fx:id="imageForTourB3"/>
-                        </StackPane>
-                    </graphic>
-                </ToggleButton>
-                <ToggleButton fx:id="tourB4" alignment="TOP_CENTER" mnemonicParsing="false" prefHeight="213.0"
-                              prefWidth="100.0" toggleGroup="$tourButton"
-                              style="-fx-font-size: 2px; -fx-font-weight: bold; -fx-background-radius: 10; -fx-border-color: #b235dc; -fx-border-width: 3; -fx-border-radius: 10;">
-                    <graphic>
-                        <StackPane>
-                            <VBox alignment="TOP_CENTER">
-                                <Label style="-fx-text-fill: #2baf9b; -fx-font-size: 18px; -fx-font-weight: bold;"
-                                       text="Tour Laser"/>
-                                <Label style="-fx-text-fill: #ff0000; -fx-font-size: 12px;" text="50 pièces"/>
-                            </VBox>
-                            <ImageView fx:id="imageForTourB4"/>
+                            <ImageView fx:id="imageForTourB4" />
                         </StackPane>
                     </graphic>
                 </ToggleButton>
@@ -98,17 +81,12 @@
         <ProgressBar fx:id="progressBar" prefHeight="20" prefWidth="300" progress="1.0" style="--fxbackground-color: red" BorderPane.alignment="TOP_CENTER">
         </ProgressBar>
     </center>
-    <right>
-        <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
-            <children>
-                <VBox prefHeight="200.0" prefWidth="100.0">
-                    <children>
-                        <Label style="-fx-padding: 5;" text="nbre de peice " textFill="#dce009"/>
-                        <Label fx:id="nbPiece" prefHeight="16.0" prefWidth="85.0" style="-fx-border-color: yellow;"
-                               text="0"/>
-                    </children>
-                </VBox>
-            </children>
-        </VBox>
-    </right>
+   <right>
+      <HBox prefHeight="50.0" prefWidth="150.0" BorderPane.alignment="CENTER">
+         <children>
+             <Label fx:id="labelEnvPieces" alignment="CENTER" prefHeight="10.0" prefWidth="221.0" text="0">
+             </Label>
+         </children>
+      </HBox>
+   </right>
 </BorderPane>

@@ -35,6 +35,8 @@ public class Environnement {
     private ArrayList<Sommet> chemin;
     private IntegerProperty piece;
     private int nbTour;
+    private final  int CHEMIN=230;
+    private final  int TERRAIN=164;
 
 
     public Environnement(int x, int y) throws IOException {
@@ -49,7 +51,7 @@ public class Environnement {
         readMap();
         bfs = new BFS(this);
         chemin = bfs.cheminVersSource();
-        this.piece = new SimpleIntegerProperty();
+        this.piece = new SimpleIntegerProperty(1500);
         this.vie = new SimpleIntegerProperty(100);
         this.nbTour = 0;
     }
@@ -69,7 +71,7 @@ public class Environnement {
                     if (!tout_ligne[y].trim().isEmpty()) {
                         map[y][x] = Integer.parseInt(tout_ligne[y].trim());
 
-                        // System.out.println(" Largeur  : "+x);
+                       // System.out.println(" Largeur  : "+x);
                         //System.out.print(" "+map[x][y]);
                     }
                 }
@@ -122,15 +124,14 @@ public class Environnement {
         return map;
     }
 
-    public int getPiece() {
+    public int getPiece(){
         return this.piece.getValue();
     }
 
-    public IntegerProperty getPieceProperty() {
+    public IntegerProperty getPieceProperty (){
         return this.piece;
     }
-
-    public void decrementationPiece(int piece) {
+    public void decrementationPiece (int piece){
         this.piece.subtract(piece);
     }
 
@@ -160,7 +161,7 @@ public class Environnement {
     }
 
     public boolean dansTerrain(int x, int y) {
-        return getMap()[x][y] == 1427;
+         return (0 <= x && x < this.x && 0 <= y && y < this.y && getMap()[x][y] == CHEMIN);
     }
 
     public void ajouterProjectile(Projectile p) {
@@ -194,13 +195,22 @@ public class Environnement {
 
     public void decrementerVie(double v) {
         this.vie.setValue(this.getVie() - v);
-
     }
 
     public ArrayList<Sommet> getChemin() {
         return chemin;
     }
+    public void ajouterPieces(int piece) {
+        this.piece.set(getPiece() + piece);
+    }
 
+    public void setPiece(int piece) {
+        this.piece.set(getPiece() - piece);
+    }
+
+    public int getCHEMIN() {
+        return CHEMIN;
+    }
 
     public void nbTours() {
         Acteur act;
@@ -212,19 +222,7 @@ public class Environnement {
         }
         if (nbTour % 20 == 0) {
             for (Tour tour : getTours()) {
-                /*
-                if (tour instanceof TourAProjectile ) {
-                    if (tour.ennemiPlusProche() != null && tour.ennemiPlusProche().estVivant()) {
-                        ((TourAProjectile) tour).creeProjectile();
-                        for (Projectile p : getProjectiles()){
-                            p.lancerProjectile();
-                        }
 
-                    }
-
-                }
-
-                 */
                 if (tour instanceof TroopTour) {
                     if (nbTour % 20 == 0) {
                         tour.attaqueEnnemi();
@@ -233,16 +231,17 @@ public class Environnement {
 
             }
 
+            }
 
+        nbTour++;
         }
-
-
-
-
 
     }
 
-}
+
+
+
+
 
 
 
