@@ -123,17 +123,17 @@ public abstract class Acteur {
             int newposX = this.getX() + (this.getVitesse() * dx);
             int newposY = this.getY() + (this.getVitesse() * dy);
 
-            //if (newposX >= 0 && newposX < env.getMap().length && newposY >= 0 && newposY < env.getMap()[0].length && env.getMap()[newposX][newposY] == env.getCHEMIN()) {
+            if (newposX >= 0 && newposX < env.getMap().length && newposY >= 0 && newposY < env.getMap()[0].length && env.getMap()[newposX][newposY] == env.getCHEMIN()) {
                 this.setX(newposX);
                 this.setY(newposY);
-            //}
+            }
 
             // Calculez la distance entre le Bandit et l'Acteur
             double distance = Math.sqrt(Math.pow((this.getX() - a.getX()), 2) + Math.pow((this.getY() - a.getY()), 2));
             //System.out.println("distance " + distance);
 
-            double tolerance = 20;
-            if (distance <= tolerance) {
+            double range = 20;
+            if (distance <= range) {
                 System.out.println("dans deplacement dir 5 ");
                 this.setDirectionActeur(5);
             }
