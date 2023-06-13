@@ -30,7 +30,7 @@ public class ControlleurMenu {
         Parent root = fxmlLoader.load(resource);
         Scene scene = new Scene(root, 1440, 800);
         primaryStage.setResizable(false);
-        primaryStage.setTitle(" SAE ");
+        primaryStage.setTitle(" Tower Defense ");
         primaryStage.setScene(scene);
         primaryStage.show();
     }

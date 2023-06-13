@@ -32,7 +32,6 @@ import java.util.ResourceBundle;
 import java.util.concurrent.atomic.AtomicInteger;
 
 
-
 public class Controlleur implements Initializable {
     @FXML
     private Button lancerButton;
@@ -85,8 +84,6 @@ public class Controlleur implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
-
 
 
         /************************** Environnement *********************************/
@@ -149,49 +146,19 @@ public class Controlleur implements Initializable {
         KeyFrame kf = new KeyFrame(
                 Duration.seconds(0.17),
                 (ev -> {
-                    if (temps % 20 == 1) {
-                        environnement.ajouterActeur(new Bandit(52, 24, 3, environnement));
-                    }
-                    if (temps % 2 == 1) {
-                        try{
-                            environnement.nbTours();
-                        }catch (Exception e ){
 
-                        }
+
+                    try {
+                        environnement.nbTours();
+                    } catch (Exception e) {
+
                     }
+
                     if (temps == 10000) {
                         gameLoop.stop();
                     }
-                    if (temps %5 == 0 ){
 
-
-                        for (Tour t : environnement.getTours()){
-                            if (t instanceof TourAProjectile){
-                                if (t.ennemiPlusProche() != null && environnement.getProjectiles().isEmpty() && t.ennemiPlusProche().estVivant()) {
-                                    ((TourAProjectile) t).creeProjectile();
-
-
-                                }
-
-                            }
-
-                        }
-                    }
-
-                    try{
-                        if (!environnement.getProjectiles().isEmpty() && temps %1 ==0 ){
-                            for (Projectile p : environnement.getProjectiles()){
-                                p.lancerProjectile();
-                            }
-                        }
-                    }catch (Exception e){
-
-                    }
-
-
-                    environnement.ennemieAtteintSommetCible();
-
-                    if (environnement.getVie() <= 0 ){
+                    if (environnement.getVie() <= 0) {
                         gameLoop.stop();
                     }
                     temps++;

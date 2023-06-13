@@ -11,7 +11,7 @@ public class Guerrier extends Ally {
     int i;
 
     public Guerrier(int x, int y, Environnement env) {
-        super(50, x, y, 20, 100, env);
+        super(100, x, y, 20, 100, env);
         this.startX = x / 32;
         this.startY = y / 32;
         i = 0;

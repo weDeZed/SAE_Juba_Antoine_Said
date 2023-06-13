@@ -111,7 +111,7 @@ public class VueActeur {
             if (direction == 5) {
                 if (acteur instanceof Bandit) {
                     //System.out.println("dans vue acteur b dir5 " + i);
-                    String path = "src/main/java/com/sae/sae_juba_antoine_said/Ressources/EnnemiesImg/bandit2.png";
+                    String path = "src/main/java/com/sae/sae_juba_antoine_said/Ressources/EnnemiesImg/banditb0.png";
                     try {
                         fichierActeur = new FileInputStream(path);
                     } catch (FileNotFoundException ex) {

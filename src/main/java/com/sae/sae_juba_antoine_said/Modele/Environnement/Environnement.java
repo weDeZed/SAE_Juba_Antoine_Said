@@ -1,6 +1,7 @@
 package com.sae.sae_juba_antoine_said.Modele.Environnement;
 
 import com.sae.sae_juba_antoine_said.Modele.Acteurs.Acteur;
+import com.sae.sae_juba_antoine_said.Modele.Acteurs.Bandit;
 import com.sae.sae_juba_antoine_said.Modele.Acteurs.Ennemi;
 import com.sae.sae_juba_antoine_said.Modele.BFS.BFS;
 import com.sae.sae_juba_antoine_said.Modele.BFS.Sommet;
@@ -35,8 +36,8 @@ public class Environnement {
     private ArrayList<Sommet> chemin;
     private IntegerProperty piece;
     private int nbTour;
-    private final  int CHEMIN=230;
-    private final  int TERRAIN=164;
+    private final int CHEMIN = 230;
+    private final int TERRAIN = 164;
 
 
     public Environnement(int x, int y) throws IOException {
@@ -51,7 +52,7 @@ public class Environnement {
         readMap();
         bfs = new BFS(this);
         chemin = bfs.cheminVersSource();
-        this.piece = new SimpleIntegerProperty(1500);
+        this.piece = new SimpleIntegerProperty(170);
         this.vie = new SimpleIntegerProperty(100);
         this.nbTour = 0;
     }
@@ -71,8 +72,6 @@ public class Environnement {
                     if (!tout_ligne[y].trim().isEmpty()) {
                         map[y][x] = Integer.parseInt(tout_ligne[y].trim());
 
-                       // System.out.println(" Largeur  : "+x);
-                        //System.out.print(" "+map[x][y]);
                     }
                 }
                 x++;
@@ -95,18 +94,6 @@ public class Environnement {
         return x;
     }
 
-    public void ennemieAtteintSommetCible() {
-        for (Acteur ac : this.getActeurs()) {
-            if (ac.estVivant() && ac instanceof Ennemi) {
-                if (ac.getX() == this.getBfs().getCible().getX() * 32 && ac.getY() == this.getBfs().getCible().getY() * 32) {
-                    //System.out.println("Vie env avant: " + this.getVie());
-                    this.decrementerVie(10);
-                    //System.out.println("Vie env apres: " + this.getVie());
-                }
-                //  System.out.println("Apres if ");
-            }
-        }
-    }
 
     public void setX(int x) {
         this.x = x;
@@ -124,14 +111,15 @@ public class Environnement {
         return map;
     }
 
-    public int getPiece(){
+    public int getPiece() {
         return this.piece.getValue();
     }
 
-    public IntegerProperty getPieceProperty (){
+    public IntegerProperty getPieceProperty() {
         return this.piece;
     }
-    public void decrementationPiece (int piece){
+
+    public void decrementationPiece(int piece) {
         this.piece.subtract(piece);
     }
 
@@ -160,9 +148,7 @@ public class Environnement {
         this.tours.add(t);
     }
 
-    public boolean dansTerrain(int x, int y) {
-         return (0 <= x && x < this.x && 0 <= y && y < this.y && getMap()[x][y] == CHEMIN);
-    }
+
 
     public void ajouterProjectile(Projectile p) {
         this.projectiles.add(p);
@@ -200,6 +186,7 @@ public class Environnement {
     public ArrayList<Sommet> getChemin() {
         return chemin;
     }
+
     public void ajouterPieces(int piece) {
         this.piece.set(getPiece() + piece);
     }
@@ -213,31 +200,50 @@ public class Environnement {
     }
 
     public void nbTours() {
-        Acteur act;
-        for (int i = 0; i < acteurs.size(); i++) {
-            if (!acteurs.get(i).estVivant()) {
-                suppActeur(acteurs.get(i));
+        if (nbTour % 20 == 1) {
+            ajouterActeur(new Bandit(52, 24, 3, this));
+        }
+        if (nbTour%2==0){
+            for (int i = 0; i < acteurs.size(); i++) {
+                if (!acteurs.get(i).estVivant()) {
+                    suppActeur(acteurs.get(i));
+                }
+                acteurs.get(i).agir();
             }
-            acteurs.get(i).agir();
         }
         if (nbTour % 20 == 0) {
             for (Tour tour : getTours()) {
-
                 if (tour instanceof TroopTour) {
                     if (nbTour % 20 == 0) {
                         tour.attaqueEnnemi();
                     }
                 }
+            }
+        }
+        if (nbTour % 5 == 0) {
+            for (Tour t : this.getTours()) {
+                if (t instanceof TourAProjectile) {
+                    if (t.ennemiPlusProche() != null && getProjectiles().isEmpty() && t.ennemiPlusProche().estVivant()) {
+                        ((TourAProjectile) t).creeProjectile();
+                    }
+                }
 
             }
-
+        }
+        try {
+            if (!getProjectiles().isEmpty()) {
+                for (Projectile p : getProjectiles()) {
+                    p.lancerProjectile();
+                }
             }
+        } catch (Exception e) {
 
-        nbTour++;
         }
 
+        nbTour++;
     }
 
+}
 
 
 
@@ -246,4 +252,54 @@ public class Environnement {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+    public void ennemieAtteintSommetCible() {
+        for (Acteur ac : this.getActeurs()) {
+            if (ac.estVivant() && ac instanceof Ennemi) {
+                if (ac.getX() == this.getBfs().getCible().getX() * 32 && ac.getY() == this.getBfs().getCible().getY() * 32) {
+                    //System.out.println("Vie env avant: " + this.getVie());
+                    this.decrementerVie(10);
+                    //System.out.println("Vie env apres: " + this.getVie());
+                }
+                //  System.out.println("Apres if ");
+            }
+        }
+    }
+
+     */
 

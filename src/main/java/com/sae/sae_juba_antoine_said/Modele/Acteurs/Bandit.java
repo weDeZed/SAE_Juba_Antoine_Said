@@ -5,7 +5,7 @@ import com.sae.sae_juba_antoine_said.Modele.Environnement.Environnement;
 public class Bandit extends Ennemi {
 
     public Bandit(int x, int y, int vitesse, Environnement ev) {
-        super(50, x, y, vitesse, 50, ev);
+        super(100, x, y, vitesse, 50, ev);
     }
 
     @Override
