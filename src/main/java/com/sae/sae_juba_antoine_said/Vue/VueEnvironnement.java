@@ -1,15 +1,23 @@
 package com.sae.sae_juba_antoine_said.Vue;
 
 import com.sae.sae_juba_antoine_said.Modele.Environnement.Environnement;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
+import javafx.stage.Stage;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.net.URL;
 
 
 public class VueEnvironnement {
@@ -25,12 +33,15 @@ public class VueEnvironnement {
     private final int HAUTEUR = 32;
     private Label labelEnvPieces;
 
+    private Pane pane;
 
-    public VueEnvironnement(Environnement env, TilePane tileP, ProgressBar progressBar, Label labelEnvPieces) throws FileNotFoundException {
+
+    public VueEnvironnement(Environnement env, TilePane tileP, ProgressBar progressBar,Pane pane, Label labelEnvPieces) throws FileNotFoundException {
         this.env = env;
         this.tilePane = tileP;
         this.progressBar = progressBar;
         this.labelEnvPieces = labelEnvPieces;
+        this.pane = pane;
 
 
 
@@ -104,6 +115,20 @@ public class VueEnvironnement {
         });
     }
 
-
+    public void afficherGameOverScene() {
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        URL resource = getClass().getResource("/com/sae/sae_juba_antoine_said/finDeJeu.fxml");
+        Parent root = null;
+        try {
+            root = fxmlLoader.load(resource);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return; // Arrêter la méthode si une exception se produit lors du chargement du fichier FXML
+        }
+        Scene scene = new Scene(root);
+        Stage primaryStage = (Stage) ((Node) pane).getScene().getWindow();
+        primaryStage.setScene(scene);
+        primaryStage.show();
+    }
 
 }

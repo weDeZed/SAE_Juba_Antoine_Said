@@ -19,14 +19,17 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.ToggleButton;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
@@ -70,6 +73,8 @@ public class Controlleur implements Initializable {
 
     VueActeur vueAct;
     TourAProjectile tourAProjectile;
+    @FXML
+    AnchorPane anchorPaneId;
 
     @FXML
     private ToggleButton tourB1, tourB2, tourB3, tourB4;
@@ -112,7 +117,7 @@ public class Controlleur implements Initializable {
         /************************** les listes observables  *********************************/
 
 
-        listenerListeActeurs = new ListObsActeur(pane, environnement);
+                listenerListeActeurs = new ListObsActeur(pane, environnement);
         environnement.getActeurs().addListener(listenerListeActeurs);
 
         listenerListeTours = new ListObsTour(pane, environnement);
@@ -131,7 +136,7 @@ public class Controlleur implements Initializable {
 
     public void gameLaunche() {
         try {
-            this.vueEnvironnementMap = new VueEnvironnement(environnement, tilePane, progressBar, labelEnvPieces);
+            this.vueEnvironnementMap = new VueEnvironnement(environnement, tilePane, progressBar,pane, labelEnvPieces);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -164,6 +169,7 @@ public class Controlleur implements Initializable {
 
                     if (environnement.getVie() <= 0) {
                         gameLoop.stop();
+                        vueEnvironnementMap.afficherGameOverScene();
                     }
                     temps++;
                 })
@@ -172,21 +178,7 @@ public class Controlleur implements Initializable {
     }
 
 
-    public void afficherGameOverScene() {
-        FXMLLoader fxmlLoader = new FXMLLoader();
-        URL resource = getClass().getResource("/com/sae/sae_juba_antoine_said/finDeJeu.fxml");
-        Parent root = null;
-        try {
-            root = fxmlLoader.load(resource);
-        } catch (IOException e) {
-            e.printStackTrace();
-            return; // Arrêter la méthode si une exception se produit lors du chargement du fichier FXML
-        }
-        Scene scene = new Scene(root);
-        Stage primaryStage = (Stage) ((Node) pane).getScene().getWindow();
-        primaryStage.setScene(scene);
-        primaryStage.show();
-    }
+
 
 
 }
