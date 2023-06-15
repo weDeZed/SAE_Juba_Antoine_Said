@@ -133,6 +133,7 @@ public class Environnement {
         acteurs.remove(acteur);
     }
 
+
     public ObservableList<Acteur> getActeurs() {
         return acteurs;
     }
