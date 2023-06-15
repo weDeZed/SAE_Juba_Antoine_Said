@@ -26,11 +26,12 @@ public class Bandit extends Ennemi {
         Acteur a = this.attaquer();
         if (a != null) {
             this.seDeplacer(a);
-            if (a.getPv() > 0) {
-                a.decrementationPv(8);
-            } else {
-                a.meurt();
+            if (a.getPv() <= 10) {
+                System.out.println("g mort");
                 env.suppActeur(a);
+                //env.ajoutePiece(10);
+            } else {
+                a.decrementationPv(7);
             }
         } else {
             move();
