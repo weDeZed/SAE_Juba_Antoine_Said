@@ -28,7 +28,7 @@ public class Lanceur extends Application {
 
     public static void main(String[] args) {
         Music music = new Music();
-        //music.playMusicFond();
+        music.playMusicFond();
         launch();
     }
 
