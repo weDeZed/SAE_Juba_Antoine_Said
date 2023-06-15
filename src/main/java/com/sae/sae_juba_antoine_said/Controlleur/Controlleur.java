@@ -167,11 +167,14 @@ public class Controlleur implements Initializable {
 
                         for (Tour t : environnement.getTours()){
                             if (t instanceof TourAProjectile){
-                                if (t.ennemiPlusProche() != null && environnement.getProjectiles().isEmpty() && t.ennemiPlusProche().estVivant()) {
-                                    ((TourAProjectile) t).creeProjectile();
+                                for (int m = 0; m <t.ennemiPlusProche().size(); m++){
+                                    if (t.ennemiPlusProche() != null && environnement.getProjectiles().isEmpty() && t.ennemiPlusProche().get(m).estVivant()) {
+                                        ((TourAProjectile) t).creeProjectile();
 
 
+                                    }
                                 }
+
 
                             }
 

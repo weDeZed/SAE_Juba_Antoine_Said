@@ -53,7 +53,7 @@ public class Projectile {
 
 
         if (atteintActeur() == true){
-            a.decrementationPv(50);
+            a.decrementationPv(10);
             env.getProjectiles().remove(this);
 
         }
