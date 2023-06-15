@@ -27,20 +27,24 @@ public class Tour {
 
     public void attaqueEnnemi() {
     }
-    public Acteur ennemiPlusProche () {
+    public Acteur ennemiPlusProche() {
 
-        Acteur act  = null;
-
+        Acteur ennemiLePlusProche = null;
+        double distanceMin = Double.MAX_VALUE;
 
         for (int i = 0; i < env.getActeurs().size(); i++) {
             if (env.getActeurs().get(i) instanceof Ennemi) {
-                if ((this.getX() - range <= env.getActeurs().get(i).getY() && env.getActeurs().get(i).getY() <= this.getY() + range) &&
-                        (this.getX() - range <= env.getActeurs().get(i).getX() && env.getActeurs().get(i).getX() <= this.getY() + range)) {
-                    act = env.getActeurs().get(i);
+                double dx = this.getX() - env.getActeurs().get(i).getX();
+                double dy = this.getY() - env.getActeurs().get(i).getY();
+                double distance = Math.sqrt(dx * dx + dy * dy);
+
+                if (distance <= range && distance < distanceMin) {
+                    ennemiLePlusProche = env.getActeurs().get(i);
+                    distanceMin = distance;
                 }
             }
         }
-        return act;
+        return ennemiLePlusProche;
     }
 
     public int getX() {

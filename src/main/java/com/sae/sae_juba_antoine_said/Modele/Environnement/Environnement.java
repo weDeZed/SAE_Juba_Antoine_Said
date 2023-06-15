@@ -2,7 +2,6 @@ package com.sae.sae_juba_antoine_said.Modele.Environnement;
 
 import com.sae.sae_juba_antoine_said.Modele.Acteurs.Acteur;
 import com.sae.sae_juba_antoine_said.Modele.Acteurs.Bandit;
-import com.sae.sae_juba_antoine_said.Modele.Acteurs.Ennemi;
 import com.sae.sae_juba_antoine_said.Modele.BFS.BFS;
 import com.sae.sae_juba_antoine_said.Modele.BFS.Sommet;
 import com.sae.sae_juba_antoine_said.Modele.Tours.Projectile;
@@ -52,7 +51,7 @@ public class Environnement {
         readMap();
         bfs = new BFS(this);
         chemin = bfs.cheminVersSource();
-        this.piece = new SimpleIntegerProperty(170);
+        this.piece = new SimpleIntegerProperty(1000);
         this.vie = new SimpleIntegerProperty(100);
         this.nbTour = 0;
     }
@@ -202,8 +201,8 @@ public class Environnement {
     }
 
     public void nbTours() {
-        if (nbTour % 20 == 1) {
-            ajouterActeur(new Bandit(52, 24, 3, this));
+        if (nbTour % 10 == 1) {
+            ajouterActeur(new Bandit(52*32, 24*32, 3, this));
         }
         if (nbTour%2==0){
             for (int i = 0; i < acteurs.size(); i++) {
@@ -213,7 +212,7 @@ public class Environnement {
                 acteurs.get(i).agir();
             }
         }
-        if (nbTour % 20 == 0) {
+       /* if (nbTour % 20 == 0) {
             for (Tour tour : getTours()) {
                 if (tour instanceof TroopTour) {
                     if (nbTour % 20 == 0) {
@@ -222,29 +221,27 @@ public class Environnement {
                 }
             }
         }
+
+        */
         if (nbTour % 5 == 0) {
             for (Tour t : this.getTours()) {
-                if (t instanceof TourAProjectile) {
-                    if (t.ennemiPlusProche() != null && getProjectiles().isEmpty() && t.ennemiPlusProche().estVivant()) {
-                        ((TourAProjectile) t).creeProjectile();
-                    }
-                }
-
+                //if (t instanceof TourAProjectile) {
+                   t.attaqueEnnemi();
+                //}
             }
         }
-        try {
-            if (!getProjectiles().isEmpty()) {
-                for (Projectile p : getProjectiles()) {
-                    p.lancerProjectile();
-                }
-            }
-        } catch (Exception e) {
 
+        for (Projectile p : this.getProjectiles()) {
+            p.lancerProjectile();
         }
+
+
+
+        // supprimer les projectiles qui ont terminé leur trajectoire
+        projectiles.removeIf(p -> p.aFiniTrajectoire());
 
         nbTour++;
     }
-
 
 }
 

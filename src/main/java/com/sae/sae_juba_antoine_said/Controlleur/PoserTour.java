@@ -21,9 +21,9 @@ public class PoserTour {
         this.environnement = environnement;
         this.placeDeTour = 200;
         MettreEnPlaceTourDeplacable(tourB1, TroopTour.class, envoiImage(0), 150);
-        MettreEnPlaceTourDeplacable(tourB2, TourFoudre.class, envoiImage(1), 20);
-        MettreEnPlaceTourDeplacable(tourB3, LaserTour.class, envoiImage(2), 30);
-        MettreEnPlaceTourDeplacable(tourB4, TourAProjectile.class, envoiImage(3), 50);
+        MettreEnPlaceTourDeplacable(tourB2, FoudreTour.class, envoiImage(1), 20);
+        MettreEnPlaceTourDeplacable(tourB3, FlecheTour.class, envoiImage(2), 30);
+        MettreEnPlaceTourDeplacable(tourB4, LaserTour.class, envoiImage(3), 50);
         MettreEnPlaceZoneDepot(pane);
 
     }

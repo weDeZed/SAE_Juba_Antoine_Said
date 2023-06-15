@@ -1,5 +1,8 @@
 package com.sae.sae_juba_antoine_said.Vue;
 
+import com.sae.sae_juba_antoine_said.Modele.Tours.Fleche;
+import com.sae.sae_juba_antoine_said.Modele.Tours.Foudre;
+import com.sae.sae_juba_antoine_said.Modele.Tours.Laser;
 import com.sae.sae_juba_antoine_said.Modele.Tours.Projectile;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -22,9 +25,26 @@ public class VueProjectile {
 
         FileInputStream fichierGuerrier = null;
 
-        if(projectile instanceof Projectile ){
+        if(projectile instanceof Laser){
             try {
                 fichierGuerrier = new FileInputStream("src/main/java/com/sae/sae_juba_antoine_said/Ressources/projectilleImg/laser.png");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+        }
+
+        if(projectile instanceof Fleche){
+            try {
+                fichierGuerrier = new FileInputStream("src/main/java/com/sae/sae_juba_antoine_said/Ressources/projectilleImg/fleche.png");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+        }
+        if(projectile instanceof Foudre){
+            try {
+                fichierGuerrier = new FileInputStream("src/main/java/com/sae/sae_juba_antoine_said/Ressources/projectilleImg/foudre.png");
             } catch (Exception e) {
                 e.printStackTrace();
             }

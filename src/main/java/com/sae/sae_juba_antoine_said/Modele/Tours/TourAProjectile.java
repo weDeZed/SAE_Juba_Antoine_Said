@@ -6,29 +6,37 @@ import com.sae.sae_juba_antoine_said.Modele.Tours.Projectile;
 import com.sae.sae_juba_antoine_said.Modele.Tours.Tour;
 import javafx.collections.ObservableList;
 
-public class TourAProjectile extends Tour {
+import java.util.ArrayList;
+import java.util.List;
+
+public abstract class TourAProjectile extends Tour {
+    private  int tour;
 
 
     public TourAProjectile(int x, int y, int degats,int range, Environnement env) {
         super(x, y, degats,50,range, env);
+        tour=0;
 
 
-    }
-
-
-    public void attaqueEnnemi() {
-
-    };
-
-
-    public Projectile creeProjectile() {
-        Acteur act=this.ennemiPlusProche();
-        Projectile pro = new Projectile(this.getX() + 10, this.getY() - 30,act, env);
-        this.env.ajouterProjectile(pro);
-        return pro;
 
     }
 
+    public void attaqueEnnemi(){
+        if (this.ennemiPlusProche() != null && this.ennemiPlusProche().estVivant()) {
+            Projectile p = ((TourAProjectile) this).creeProjectile();
+            //this.ajouterProjectile(p);
+
+        }
+
+
+       /* for (Projectile p : env.getProjectiles()) {
+            p.lancerProjectile();
+        }
+
+        */
+    }
+
+    public abstract Projectile creeProjectile();
 
 
 }

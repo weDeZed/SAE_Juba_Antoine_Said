@@ -53,7 +53,7 @@ public class Projectile {
 
 
         if (atteintActeur() == true){
-            a.decrementationPv(50);
+            a.decrementationPv(10);
             env.getProjectiles().remove(this);
 
         }
@@ -64,8 +64,8 @@ public class Projectile {
         // Les coins du projectile
         int x1 = getX();
         int y1 = getY();
-        int x2 = getX() + 38;
-        int y2 = getY() + 13;
+        int x2 = getX() + 32;
+        int y2 = getY() + 32;
 
         // Les coins de l'acteur
         int aX1 = a.getX();
@@ -130,5 +130,9 @@ public class Projectile {
 
     public void setY(int y) {
         this.y.set(y);
+    }
+
+    public boolean aFiniTrajectoire() {
+        return atteintActeur();
     }
 }
