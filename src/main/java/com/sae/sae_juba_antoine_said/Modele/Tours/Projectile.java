@@ -7,7 +7,7 @@ import javafx.beans.property.SimpleIntegerProperty;
 
 public class Projectile {
 
-    IntegerProperty x,y;
+    IntegerProperty x, y;
     int vitesse;
     Environnement env;
     String id;
@@ -15,17 +15,16 @@ public class Projectile {
 
     Acteur a;
 
-    int disX,disY;
+    int disX, disY;
 
 
-
-    public Projectile(int x, int y,Acteur a ,Environnement environnement) {
+    public Projectile(int x, int y, Acteur a, Environnement environnement) {
 
         this.x = new SimpleIntegerProperty(x);
         this.y = new SimpleIntegerProperty(y);
         this.env = environnement;
         this.vitesse = 32;
-        id="P"+ compteur;
+        id = "P" + compteur;
         compteur++;
         this.a = a;
     }
@@ -46,16 +45,16 @@ public class Projectile {
         double newposX = this.getX() + (this.getVitesse() * directionX);
         double newposY = this.getY() + (this.getVitesse() * directionY);
 
-
         this.setX((int) newposX);
         this.setY((int) newposY);
 
 
-
-        if (atteintActeur() == true){
+        if (atteintActeur() == true) {
             a.decrementationPv(50);
+            if (a.getPv() <=0) {
+                env.ajoutePiece(10);
+            }
             env.getProjectiles().remove(this);
-
         }
 
     }
@@ -78,7 +77,7 @@ public class Projectile {
                 (x1 >= aX1 && x1 <= aX2 && y2 >= aY1 && y2 <= aY2) ||  // Coin inférieur gauche
                 (x2 >= aX1 && x2 <= aX2 && y1 >= aY1 && y1 <= aY2) ||  // Coin supérieur droit
                 (x2 >= aX1 && x2 <= aX2 && y2 >= aY1 && y2 <= aY2)) {  // Coin inférieur droit
-           // env.removeProjectile(this);
+            // env.removeProjectile(this);
             return true;
         }
 
@@ -86,17 +85,9 @@ public class Projectile {
     }
 
 
-
-
-
-
-
-
-
     public String getId() {
         return id;
     }
-
 
 
     public int getVitesse() {

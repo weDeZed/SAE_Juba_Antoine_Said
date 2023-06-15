@@ -29,6 +29,65 @@ public abstract class Acteur {
         this.env = env;
     }
 
+
+
+    public void seDeplacer(Acteur a) {
+        int dx, dy;
+        int distanceX, distanceY;
+        if (a != null) {
+            distanceX = a.getX() - this.getX();
+            distanceY = a.getY() - this.getY();
+
+            if (distanceX < 0) {
+                dx = -1;
+            } else if (distanceX > 0) {
+                dx = 1;
+            } else {
+                dx = 0;
+            }
+            if (distanceY < 0) {
+                dy = -1;
+            } else if (distanceY > 0) {
+                dy = 1;
+            } else {
+                dy = 0;
+            }
+            int newposX = this.getX() + (this.getVitesse() * dx);
+            int newposY = this.getY() + (this.getVitesse() * dy);
+
+            //if (newposX >= 0 && newposX < env.getMap().length && newposY >= 0 && newposY < env.getMap()[0].length && env.getMap()[newposX][newposY] == env.getCHEMIN()) {
+                this.setX(newposX);
+                this.setY(newposY);
+            //}
+
+            // Calculez la distance entre le Bandit et l'Acteur
+            double distance = Math.sqrt(Math.pow((this.getX() - a.getX()), 2) + Math.pow((this.getY() - a.getY()), 2));
+            //System.out.println("distance " + distance);
+
+            double tolerance = 20;
+            if (distance <= tolerance) {
+                //System.out.println("dans deplacement dir 5 ");
+                this.setDirectionActeur(5);
+            }
+        }
+    }
+
+    public int getCHEMIN() {
+        return CHEMIN;
+    }
+
+    public int getDirectionActeur() {
+        return directionActeur.get();
+    }
+
+    public IntegerProperty directionActeurProperty() {
+        return directionActeur;
+    }
+
+    public void setDirectionActeur(int directionActeur) {
+        this.directionActeur.set(directionActeur);
+    }
+
     public abstract Acteur attaquer();
 
     public abstract void agir();
@@ -98,79 +157,6 @@ public abstract class Acteur {
         return this.range;
     }
 
-
-    public void seDeplacer(Acteur a) {
-        int dx, dy;
-        int distanceX, distanceY;
-        if (a != null) {
-            distanceX = a.getX() - this.getX();
-            distanceY = a.getY() - this.getY();
-
-            if (distanceX < 0) {
-                dx = -1;
-            } else if (distanceX > 0) {
-                dx = 1;
-            } else {
-                dx = 0;
-            }
-            if (distanceY < 0) {
-                dy = -1;
-            } else if (distanceY > 0) {
-                dy = 1;
-            } else {
-                dy = 0;
-            }
-            int newposX = this.getX() + (this.getVitesse() * dx);
-            int newposY = this.getY() + (this.getVitesse() * dy);
-
-            //if (newposX >= 0 && newposX < env.getMap().length && newposY >= 0 && newposY < env.getMap()[0].length && env.getMap()[newposX][newposY] == env.getCHEMIN()) {
-                this.setX(newposX);
-                this.setY(newposY);
-            //}
-
-            // Calculez la distance entre le Bandit et l'Acteur
-            double distance = Math.sqrt(Math.pow((this.getX() - a.getX()), 2) + Math.pow((this.getY() - a.getY()), 2));
-            //System.out.println("distance " + distance);
-
-            double tolerance = 20;
-            if (distance <= tolerance) {
-                //System.out.println("dans deplacement dir 5 ");
-                this.setDirectionActeur(5);
-            }
-        }
-    }
-
-    public int getCHEMIN() {
-        return CHEMIN;
-    }
-
-    public int getDirectionActeur() {
-        return directionActeur.get();
-    }
-
-    public IntegerProperty directionActeurProperty() {
-        return directionActeur;
-    }
-
-    public void setDirectionActeur(int directionActeur) {
-        this.directionActeur.set(directionActeur);
-    }
-
-    public void tirerDirection() {
-        Random random = new Random();
-        int randomInt = random.nextInt(3);
-        dx = randomInt - 1;
-        if (dx == 0) {
-            randomInt = random.nextInt(2) - 1;
-            if (randomInt == 0) {
-                dy = -1;
-            } else {
-                dy = 1;
-            }
-        } else {
-            dy = random.nextInt(3) - 1;
-        }
-    }
 
 }
 

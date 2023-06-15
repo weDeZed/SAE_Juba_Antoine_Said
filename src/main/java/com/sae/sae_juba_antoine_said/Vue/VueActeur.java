@@ -10,10 +10,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.util.Duration;
 
-import javax.crypto.spec.PSource;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class VueActeur {
     private Pane pane;
@@ -45,6 +43,13 @@ public class VueActeur {
                 e.printStackTrace();
             }
 
+        }
+        if (acteur instanceof Dragon) {
+            try {
+                fichierActeur = new FileInputStream("src/main/java/com/sae/sae_juba_antoine_said/Ressources/EnnemiesImg/gb0.png");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
         acteur.directionActeurProperty().addListener((obs, oldDirection, newDirection) -> {
             startImageAnimation((int) newDirection);
@@ -92,6 +97,8 @@ public class VueActeur {
                 acteurType = "EnnemiesImg/bandit";
             } else if (acteur instanceof Guerrier) {
                 acteurType = "ally/g";
+            } else {
+                acteurType = "EnnemiesImg/g";
             }
 
             switch (direction) {
@@ -146,6 +153,14 @@ public class VueActeur {
                         throw new RuntimeException(ex);
                     }
 
+                }
+            }
+            if (acteur instanceof Dragon) {
+                String path = "src/main/java/com/sae/sae_juba_antoine_said/Ressources/" + acteurType + directionType + i + ".png";
+                try {
+                    fichierActeur = new FileInputStream(path);
+                } catch (FileNotFoundException ex) {
+                    throw new RuntimeException(ex);
                 }
             }
 

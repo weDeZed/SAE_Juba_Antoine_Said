@@ -1,5 +1,6 @@
 package com.sae.sae_juba_antoine_said.Controlleur;
 
+import com.sae.sae_juba_antoine_said.Vue.Music;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -20,10 +21,12 @@ public class ControlleurMenu {
 
     @FXML
     Button quitterButton;
+    Music music;
 
 
     @FXML
     public void lancerButtonAction(ActionEvent event) throws IOException {
+        music =new Music();
         Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         FXMLLoader fxmlLoader = new FXMLLoader();
         URL resource = getClass().getResource("/com/sae/sae_juba_antoine_said/vueSae.fxml");
@@ -33,6 +36,8 @@ public class ControlleurMenu {
         primaryStage.setTitle(" Tower Defense ");
         primaryStage.setScene(scene);
         primaryStage.show();
+
+
     }
     @FXML
 

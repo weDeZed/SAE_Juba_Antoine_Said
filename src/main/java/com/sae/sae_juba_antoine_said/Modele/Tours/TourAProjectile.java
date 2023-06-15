@@ -14,8 +14,6 @@ public class TourAProjectile extends Tour {
 
 
     }
-
-
     public void attaqueEnnemi() {
 
     };

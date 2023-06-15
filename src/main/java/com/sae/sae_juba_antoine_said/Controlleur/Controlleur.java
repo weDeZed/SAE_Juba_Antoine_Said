@@ -1,26 +1,21 @@
 package com.sae.sae_juba_antoine_said.Controlleur;
 
+import com.sae.sae_juba_antoine_said.Lanceur;
 import com.sae.sae_juba_antoine_said.Modele.Acteurs.Acteur;
-import com.sae.sae_juba_antoine_said.Modele.Acteurs.Bandit;
 import com.sae.sae_juba_antoine_said.Modele.Environnement.Environnement;
 import com.sae.sae_juba_antoine_said.Modele.Tours.*;
+import com.sae.sae_juba_antoine_said.Vue.Music;
 import com.sae.sae_juba_antoine_said.Vue.*;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.collections.ListChangeListener;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.image.ImageView;
-
-
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
 import javafx.util.Duration;
@@ -37,6 +32,7 @@ public class Controlleur implements Initializable {
     private Button lancerButton;
     private final int LARGEUR = 32;
     private final int HAUTEUR = 32;
+    private int temps;
 
     private Environnement environnement;
     @FXML
@@ -44,46 +40,37 @@ public class Controlleur implements Initializable {
 
     @FXML
     private Label labelEnvPieces;
-    private VueEnvironnement vueEnvironnementMap;
 
 
     private Timeline gameLoop;
 
-    private int temps;
     @FXML
     private Pane pane;
 
-    private Tour troopTours, troopTours1;
-    private VueTour vueTour;
-    InventairDesTours inventairDesTours;
+
     @FXML
     private ProgressBar progressBar;
 
-    Projectile p;
-    VueActeur vueActeur2;
-
-    VueProjectile vueProjectile;
-    private Acteur guerrier1, guerrier2, guerrier3;
-
-    VueActeur vueAct;
-    TourAProjectile tourAProjectile;
 
     @FXML
     private ToggleButton tourB1, tourB2, tourB3, tourB4;
     @FXML
     Label labelPrixT1, labelPrixT2, labelPrixT3, labelPrixT4;
-    private int prixb1, prixb2, prixb3, prixb4;
-
     private PoserTour dragDropSetup;
+    private InventairDesTours inventairDesTours;
+    private VueEnvironnement vueEnvironnementMap;
 
-    ListChangeListener<Acteur> listenerListeActeurs;
-    ListChangeListener<Tour> listenerListeTours;
-    ListObsProjectile listnerListeProjectiles;
+    private ListChangeListener<Acteur> listenerListeActeurs;
+    private ListChangeListener<Tour> listenerListeTours;
+    private ListObsProjectile listnerListeProjectiles;
+    private Music music;
+
     @FXML
     ImageView imageForTourB1, imageForTourB2, imageForTourB3, imageForTourB4;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        music = new Music();
 
 
         /************************** Environnement *********************************/
@@ -146,23 +133,24 @@ public class Controlleur implements Initializable {
         KeyFrame kf = new KeyFrame(
                 Duration.seconds(0.17),
                 (ev -> {
-
-
                     try {
-                        environnement.nbTours();
+                        environnement.unTour();
                     } catch (Exception e) {
 
                     }
-
-                    if (temps == 10000) {
-                        gameLoop.stop();
-                    }
-
                     if (environnement.getVie() <= 0) {
                         gameLoop.stop();
+                        //music.stopMusicFond();
+                        //music.PlayMusicDefaite();
+
                     }
+
+
+
                     temps++;
                 })
+
+
         );
         gameLoop.getKeyFrames().add(kf);
     }

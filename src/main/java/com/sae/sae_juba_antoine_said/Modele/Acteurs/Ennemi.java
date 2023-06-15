@@ -35,7 +35,6 @@ public abstract class Ennemi extends Acteur {
 
     public void move() {
         if (indiceCheminActuel < this.env.getChemin().size() - 1) {
-
             int oldX = (this.env.getChemin().get(indiceCheminActuel).getX() * 32);
             int oldY = (this.env.getChemin().get(indiceCheminActuel).getY() * 32);
             indiceCheminActuel++;
@@ -60,8 +59,8 @@ public abstract class Ennemi extends Acteur {
             this.setY(newY);
         } else {
             this.env.suppActeur(this);
-            env.decrementerVie(10);
-            env.ajouterPieces(10);
+            env.decrementerVie(100);
+            //env.ajouterPieces(10);
         }
     }
 

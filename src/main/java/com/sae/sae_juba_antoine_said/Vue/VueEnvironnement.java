@@ -26,6 +26,7 @@ public class VueEnvironnement {
     private Label labelEnvPieces;
 
 
+
     public VueEnvironnement(Environnement env, TilePane tileP, ProgressBar progressBar, Label labelEnvPieces) throws FileNotFoundException {
         this.env = env;
         this.tilePane = tileP;

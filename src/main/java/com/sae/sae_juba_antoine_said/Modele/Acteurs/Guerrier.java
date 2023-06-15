@@ -8,13 +8,13 @@ public class Guerrier extends Ally {
 
     private int startX;
     private int startY;
-    int i;
+    int temps;
 
     public Guerrier(int x, int y, Environnement env) {
         super(100, x, y, 20, 100, env);
         this.startX = x / 32;
         this.startY = y / 32;
-        i = 0;
+        temps = 0;
     }
 
     public Acteur attaquer() {
@@ -31,16 +31,20 @@ public class Guerrier extends Ally {
 
     @Override
     public void agir() {
+        temps++;
         Acteur a = this.attaquer();
         if (a != null) {
             this.seDeplacer(a);
             if (a.getPv() <= 10) {
                 env.suppActeur(a);
+                env.ajoutePiece(10);
             } else {
                 a.decrementationPv(7);
             }
         } else {
-            marcherSurChemin();
+            if(temps%5==0){
+                marcherSurChemin();
+            }
         }
     }
 
