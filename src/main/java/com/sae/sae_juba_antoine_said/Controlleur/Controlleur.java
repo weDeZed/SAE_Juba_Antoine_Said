@@ -1,9 +1,11 @@
 package com.sae.sae_juba_antoine_said.Controlleur;
 
+import com.sae.sae_juba_antoine_said.Lanceur;
 import com.sae.sae_juba_antoine_said.Modele.Acteurs.Acteur;
 import com.sae.sae_juba_antoine_said.Modele.Acteurs.Bandit;
 import com.sae.sae_juba_antoine_said.Modele.Environnement.Environnement;
 import com.sae.sae_juba_antoine_said.Modele.Tours.*;
+import com.sae.sae_juba_antoine_said.Vue.Music;
 import com.sae.sae_juba_antoine_said.Vue.*;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -43,6 +45,7 @@ public class Controlleur implements Initializable {
     private Button lancerButton;
     private final int LARGEUR = 32;
     private final int HAUTEUR = 32;
+    private int temps;
 
     private Environnement environnement;
     @FXML
@@ -55,12 +58,9 @@ public class Controlleur implements Initializable {
 
     private Timeline gameLoop;
 
-    private int temps;
     @FXML
     private Pane pane;
 
-    private Tour troopTours, troopTours1;
-    private VueTour vueTour;
     InventairDesTours inventairDesTours;
     @FXML
     private ProgressBar progressBar;
@@ -84,14 +84,17 @@ public class Controlleur implements Initializable {
 
     private PoserTour dragDropSetup;
 
-    ListChangeListener<Acteur> listenerListeActeurs;
-    ListChangeListener<Tour> listenerListeTours;
-    ListObsProjectile listnerListeProjectiles;
+    private ListChangeListener<Acteur> listenerListeActeurs;
+    private ListChangeListener<Tour> listenerListeTours;
+    private ListObsProjectile listnerListeProjectiles;
+    private Music music;
+
     @FXML
     ImageView imageForTourB1, imageForTourB2, imageForTourB3, imageForTourB4;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        music = new Music();
 
 
         /************************** Environnement *********************************/

@@ -32,11 +32,9 @@ public class VueEnvironnement {
     private final int LARGEUR = 32;
     private final int HAUTEUR = 32;
     private Label labelEnvPieces;
-
     private Pane pane;
 
-
-    public VueEnvironnement(Environnement env, TilePane tileP, ProgressBar progressBar,Pane pane, Label labelEnvPieces) throws FileNotFoundException {
+    public VueEnvironnement(Environnement env, TilePane tileP, ProgressBar progressBar, Label labelEnvPieces) throws FileNotFoundException {
         this.env = env;
         this.tilePane = tileP;
         this.progressBar = progressBar;

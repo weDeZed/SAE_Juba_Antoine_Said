@@ -1,7 +1,9 @@
 package com.sae.sae_juba_antoine_said.Controlleur;
 
+import com.sae.sae_juba_antoine_said.Lanceur;
 import com.sae.sae_juba_antoine_said.Modele.Environnement.Environnement;
 import com.sae.sae_juba_antoine_said.Modele.Tours.*;
+import com.sae.sae_juba_antoine_said.Vue.Music;
 import javafx.beans.binding.Bindings;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.image.Image;
@@ -11,11 +13,13 @@ import javafx.scene.input.TransferMode;
 import javafx.scene.layout.Pane;
 
 import java.io.FileInputStream;
+import java.net.URL;
 
 public class PoserTour {
 
     private Environnement environnement;
     private int placeDeTour;
+    Music music;
 
     public PoserTour(Environnement environnement, Pane pane, ToggleButton tourB1, ToggleButton tourB2, ToggleButton tourB3, ToggleButton tourB4) {
         this.environnement = environnement;
@@ -26,6 +30,7 @@ public class PoserTour {
         MettreEnPlaceTourDeplacable(tourB4, LaserTour.class, envoiImage(3), 50);
         MettreEnPlaceZoneDepot(pane);
 
+
     }
 
 
@@ -33,8 +38,12 @@ public class PoserTour {
         // Attache la désactivation du bouton à la condition : environnement.getPieceProperty() < prix
         button.disableProperty().bind(Bindings.lessThan(environnement.getPieceProperty(), prix));
 
+        music=new Music();
+        //music.playMusicFond();
+
         // Lorsque le bouton est détecté en tant que source de glisser-déposer
         button.setOnDragDetected(event -> {
+
             // Vérifie si le bouton n'est pas désactivé
             if (!button.isDisable()) {
                 Dragboard db = button.startDragAndDrop(TransferMode.ANY);
@@ -59,7 +68,7 @@ public class PoserTour {
                 try {
                     Class<?> tourClass = Class.forName(db.getString()); // Récupère la classe du tour depuis le contenu
                     if (placéTourDansBonEndroit((int) event.getX() / 32, (int) event.getY() / 32)) { // Vérifie si l'emplacement du tour est correct
-                        Tour tour = (Tour) tourClass.getConstructor(int.class, int.class, int.class,int.class, Environnement.class)
+                        Tour tour = (Tour) tourClass.getConstructor(int.class, int.class, int.class, int.class, Environnement.class)
                                 .newInstance((int) event.getX(), (int) event.getY(), 800, 250, environnement); // Crée une nouvelle instance de la classe de tour
                         environnement.ajouterTour(tour); // Ajoute le tour à l'environnement
                     }

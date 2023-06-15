@@ -2,6 +2,7 @@ package com.sae.sae_juba_antoine_said.Modele.Environnement;
 
 import com.sae.sae_juba_antoine_said.Modele.Acteurs.Acteur;
 import com.sae.sae_juba_antoine_said.Modele.Acteurs.Bandit;
+import com.sae.sae_juba_antoine_said.Modele.Acteurs.Dragon;
 import com.sae.sae_juba_antoine_said.Modele.BFS.BFS;
 import com.sae.sae_juba_antoine_said.Modele.BFS.Sommet;
 import com.sae.sae_juba_antoine_said.Modele.Tours.Projectile;
@@ -51,7 +52,7 @@ public class Environnement {
         readMap();
         bfs = new BFS(this);
         chemin = bfs.cheminVersSource();
-        this.piece = new SimpleIntegerProperty(1000);
+        this.piece = new SimpleIntegerProperty(170);
         this.vie = new SimpleIntegerProperty(100);
         this.nbTour = 0;
     }
@@ -102,8 +103,6 @@ public class Environnement {
         return y;
     }
 
-
-
     public void setY(int y) {
         this.y = y;
     }
@@ -132,7 +131,6 @@ public class Environnement {
     public void suppActeur(Acteur acteur) {
         acteurs.remove(acteur);
     }
-
 
     public ObservableList<Acteur> getActeurs() {
         return acteurs;
@@ -294,7 +292,7 @@ public class Environnement {
             if (ac.estVivant() && ac instanceof Ennemi) {
                 if (ac.getX() == this.getBfs().getCible().getX() * 32 && ac.getY() == this.getBfs().getCible().getY() * 32) {
                     //System.out.println("Vie env avant: " + this.getVie());
-                    this.decrementerVie(50);
+                    this.decrementerVie(10);
                     //System.out.println("Vie env apres: " + this.getVie());
                 }
                 //  System.out.println("Apres if ");
