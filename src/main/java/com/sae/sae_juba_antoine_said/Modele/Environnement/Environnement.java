@@ -228,10 +228,9 @@ public class Environnement {
                         tour.attaqueEnnemi();
                     }
                 }
-
             }
 
-            }
+        }
 
         nbTour++;
         }

@@ -16,7 +16,7 @@ public class Lanceur extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         borderPane = new BorderPane();
-        FXMLLoader fxmlLoader = new FXMLLoader(Lanceur.class.getResource("menu.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(Lanceur.class.getResource("/com/sae/sae_juba_antoine_said/vueSae.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 1400, 800);
         stage.setTitle("Tower");
         stage.setScene(scene);

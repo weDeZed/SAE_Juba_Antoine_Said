@@ -36,6 +36,12 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class Controlleur implements Initializable {
     @FXML
     private Button lancerButton;
+
+    @FXML
+    private Button Relancer;
+
+    @FXML
+    private Button pause;
     private final int LARGEUR = 32;
     private final int HAUTEUR = 32;
 
@@ -85,8 +91,6 @@ public class Controlleur implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
-
 
 
         /************************** Environnement *********************************/
@@ -145,10 +149,14 @@ public class Controlleur implements Initializable {
         gameLoop.setCycleCount(Timeline.INDEFINITE);
         AtomicInteger i = new AtomicInteger();
 
-
         KeyFrame kf = new KeyFrame(
                 Duration.seconds(0.17),
                 (ev -> {
+
+                   pause.setOnAction(actionEvent -> gameLoop.stop());
+
+                    Relancer.setOnAction(actionEvent -> gameLoop.play());
+
                     if (temps % 20 == 1) {
                         environnement.ajouterActeur(new Bandit(52, 24, 3, environnement));
                     }

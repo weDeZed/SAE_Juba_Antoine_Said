@@ -1,19 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ProgressBar?>
-<?import javafx.scene.control.ToggleButton?>
-<?import javafx.scene.control.ToggleGroup?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.layout.TilePane?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
 
-<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1400.0" style="-fx-background-color: #407de3" styleClass="body" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1"
-            stylesheets="@fichierCSS.css" fx:controller="com.sae.sae_juba_antoine_said.Controlleur.Controlleur">
+<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1400.0" style="-fx-background-color: #407de3" styleClass="body" stylesheets="@fichierCSS.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sae.sae_juba_antoine_said.Controlleur.Controlleur">
     <children>
         <Pane fx:id="pane" style="-fx-background-color: #129d0c">
             <children>
@@ -77,10 +68,6 @@
             </children>
         </VBox>
     </left>
-    <center>
-        <ProgressBar fx:id="progressBar" prefHeight="20" prefWidth="300" progress="1.0" style="--fxbackground-color: red" BorderPane.alignment="TOP_CENTER">
-        </ProgressBar>
-    </center>
    <right>
       <HBox prefHeight="50.0" prefWidth="150.0" BorderPane.alignment="CENTER">
          <children>
@@ -89,4 +76,14 @@
          </children>
       </HBox>
    </right>
+   <center>
+      <HBox prefHeight="100.0" prefWidth="200.0" style="-fx-margin: 20;" BorderPane.alignment="CENTER">
+         <children>
+              <ProgressBar fx:id="progressBar" prefHeight="20" prefWidth="300" progress="1.0" style="--fxbackground-color: red">
+        </ProgressBar>
+            <Button fx:id="pause" mnemonicParsing="false" text="Pause "/>
+            <Button fx:id="Relancer" mnemonicParsing="false" text="Relancer" />
+         </children>
+      </HBox>
+   </center>
 </BorderPane>

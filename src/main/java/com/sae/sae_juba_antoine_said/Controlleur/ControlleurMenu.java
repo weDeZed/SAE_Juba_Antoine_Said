@@ -40,4 +40,5 @@ public class ControlleurMenu {
         Platform.exit();
         System.exit(0);
     }
+
 }
