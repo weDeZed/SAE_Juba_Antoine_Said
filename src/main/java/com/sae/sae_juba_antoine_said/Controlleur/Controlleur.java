@@ -157,32 +157,25 @@ public class Controlleur implements Initializable {
         KeyFrame kf = new KeyFrame(
                 Duration.seconds(0.17),
                 (ev -> {
-
-
+                    if(music.verifSon()==false){
+                        System.out.println(" lancer music ");
+                        music.playMusicFond();
+                    }
                     try {
                         environnement.nbTours();
                     } catch (Exception e) {
 
                     }
-
-
-                    if (temps == 10000) {
-                        gameLoop.stop();
-                    }
-
                     if (environnement.getVie() <= 0) {
                         gameLoop.stop();
                         vueEnvironnementMap.afficherGameOverScene();
+                        System.out.println("game loop aret ");
                     }
                     temps++;
                 })
         );
         gameLoop.getKeyFrames().add(kf);
     }
-
-
-
-
 
 }
 

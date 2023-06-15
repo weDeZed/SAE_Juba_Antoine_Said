@@ -9,24 +9,20 @@ import javax.crypto.spec.PSource;
 
 public class TroopTour extends Tour {
     private int chemin;
+    private int nbTour;
 
     public TroopTour(int x, int y, int degats, int range, Environnement environnement) {
         super(x, y, degats, 150, range, environnement);
         chemin = 230;
+        nbTour = 0;
     }
 
     public void attaqueEnnemi() {
         int[][] map = this.env.getMap();
-        int n = 0;
-        int nbEnnemi = 0;
-        for (Acteur a : env.getActeurs()) {
-            if (a instanceof Ennemi) {
-                nbEnnemi++;
-            }
-        }
-        //System.out.println("nb enneimeie sorite "+ nbEnnemi);
-        //if (nbEnnemi % 4 == 0) {
-            //System.out.println("dans if  enneimeie sorite "+ nbEnnemi);
+        nbTour++;
+        //System.out.println("nbTour "+nbTour);
+        if (nbTour % 20 == 0) {
+
             int placement = 0;
             for (int i = 0; i < 1; i++) {
                 int x = getX() / 32;
@@ -50,7 +46,7 @@ public class TroopTour extends Tour {
                 placement += 1 + 1 / 2;
                 env.ajouterActeur(new Guerrier(x * 32, y * 32, env));
             }
+        }
 
-        //}
     }
 }

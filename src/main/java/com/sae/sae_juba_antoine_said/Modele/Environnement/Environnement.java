@@ -149,7 +149,6 @@ public class Environnement {
     }
 
 
-
     public void ajouterProjectile(Projectile p) {
         this.projectiles.add(p);
     }
@@ -201,13 +200,13 @@ public class Environnement {
 
     public void nbTours() {
         if (nbTour % 10 == 1) {
-            ajouterActeur(new Bandit(52*32, 24*32, 3, this));
+            ajouterActeur(new Bandit(52 * 32, 24 * 32, 3, this));
         }
-        if (nbTour%2==0){
+        if (nbTour % 50 == 0) {
+            ajouterActeur(new Dragon(52 * 32, 24 * 32, 5, this));
+        }
+        if (nbTour % 2 == 0) {
             for (int i = 0; i < acteurs.size(); i++) {
-                if (!acteurs.get(i).estVivant()) {
-                    suppActeur(acteurs.get(i));
-                }
                 acteurs.get(i).agir();
             }
         }
@@ -225,7 +224,7 @@ public class Environnement {
         if (nbTour % 5 == 0) {
             for (Tour t : this.getTours()) {
                 //if (t instanceof TourAProjectile) {
-                   t.attaqueEnnemi();
+                t.attaqueEnnemi();
                 //}
             }
         }
@@ -233,7 +232,6 @@ public class Environnement {
         for (Projectile p : this.getProjectiles()) {
             p.lancerProjectile();
         }
-
 
 
         // supprimer les projectiles qui ont terminé leur trajectoire

@@ -107,7 +107,7 @@ public class Music {
     }
 
     public void PlayMusicDefaite() {
-        URL urlImageVaiL = Lanceur.class.getResource("/com/sae/sae_juba_antoine_said/sounds/lauch_sound.wav");
+        URL urlImageVaiL = Lanceur.class.getResource("/com/sae/sae_juba_antoine_said/sounds/launch_sound.wav");
         // Obtention du chemin de l'URL en tant que chaîne de caractères
         String location = urlImageVaiL.getPath();
         AudioInputStream audioInputStream = null;

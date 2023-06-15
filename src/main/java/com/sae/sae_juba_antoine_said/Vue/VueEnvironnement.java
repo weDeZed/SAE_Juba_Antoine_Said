@@ -33,6 +33,7 @@ public class VueEnvironnement {
     private final int HAUTEUR = 32;
     private Label labelEnvPieces;
     private Pane pane;
+    Music music;
 
     public VueEnvironnement(Environnement env, TilePane tileP, ProgressBar progressBar,Pane pane, Label labelEnvPieces) throws FileNotFoundException {
         this.env = env;
@@ -40,10 +41,6 @@ public class VueEnvironnement {
         this.progressBar = progressBar;
         this.labelEnvPieces = labelEnvPieces;
         this.pane = pane;
-
-
-
-
 
         labelEnvPieces.textProperty().bind(env.getPieceProperty().asString());
         iniTerrain();
@@ -114,6 +111,7 @@ public class VueEnvironnement {
     }
 
     public void afficherGameOverScene() {
+        music =new Music();
         FXMLLoader fxmlLoader = new FXMLLoader();
         URL resource = getClass().getResource("/com/sae/sae_juba_antoine_said/finDeJeu.fxml");
         Parent root = null;
@@ -127,6 +125,7 @@ public class VueEnvironnement {
         Stage primaryStage = (Stage) ((Node) pane).getScene().getWindow();
         primaryStage.setScene(scene);
         primaryStage.show();
+        music.stopMusicFond();
+        music.PlayMusicDefaite();
     }
-
 }
