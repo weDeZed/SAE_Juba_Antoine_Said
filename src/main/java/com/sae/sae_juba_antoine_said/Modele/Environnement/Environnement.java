@@ -211,22 +211,9 @@ public class Environnement {
                 acteurs.get(i).agir();
             }
         }
-       /* if (nbTour % 20 == 0) {
-            for (Tour tour : getTours()) {
-                if (tour instanceof TroopTour) {
-                    if (nbTour % 20 == 0) {
-                        tour.attaqueEnnemi();
-                    }
-                }
-            }
-        }
-
-        */
         if (nbTour % 5 == 0) {
             for (Tour t : this.getTours()) {
-                //if (t instanceof TourAProjectile) {
                    t.attaqueEnnemi();
-                //}
             }
         }
 
