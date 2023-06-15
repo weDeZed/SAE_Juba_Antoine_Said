@@ -53,7 +53,14 @@ public class Projectile {
 
 
         if (atteintActeur() == true){
-            a.decrementationPv(50);
+            if(this instanceof Laser){
+                a.decrementationPv(20);
+            } else if (this instanceof Fleche) {
+                a.decrementationPv(5);
+            }else {
+                a.decrementationPv(10);
+            }
+
             if (a.getPv() <=0) {
                 env.ajoutePiece(10);
                 env.suppActeur(a);

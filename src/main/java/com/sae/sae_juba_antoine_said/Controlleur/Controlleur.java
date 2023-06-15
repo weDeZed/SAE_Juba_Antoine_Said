@@ -3,6 +3,7 @@ package com.sae.sae_juba_antoine_said.Controlleur;
 import com.sae.sae_juba_antoine_said.Lanceur;
 import com.sae.sae_juba_antoine_said.Modele.Acteurs.Acteur;
 import com.sae.sae_juba_antoine_said.Modele.Acteurs.Bandit;
+import com.sae.sae_juba_antoine_said.Modele.Acteurs.VagueEnnemi;
 import com.sae.sae_juba_antoine_said.Modele.Environnement.Environnement;
 import com.sae.sae_juba_antoine_said.Modele.Tours.*;
 import com.sae.sae_juba_antoine_said.Vue.Music;
@@ -37,7 +38,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.concurrent.atomic.AtomicInteger;
-
 
 
 public class Controlleur implements Initializable {
@@ -80,7 +80,7 @@ public class Controlleur implements Initializable {
     private ToggleButton tourB1, tourB2, tourB3, tourB4;
     @FXML
     Label labelPrixT1, labelPrixT2, labelPrixT3, labelPrixT4;
-    private int prixb1, prixb2, prixb3, prixb4;
+
 
     private PoserTour dragDropSetup;
 
@@ -92,8 +92,11 @@ public class Controlleur implements Initializable {
     @FXML
     ImageView imageForTourB1, imageForTourB2, imageForTourB3, imageForTourB4;
 
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        /**************** musicn ***************/
         music = new Music();
 
 
@@ -104,6 +107,11 @@ public class Controlleur implements Initializable {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+        /**************** class vague ***************/
+
+        environnement.getVagueEnnemi().nbVagueProperty().bind(environnement.getVagueEnnemi().nbVagueBindingProperty());
+
+
         this.tilePane.setMinSize(environnement.getX() * LARGEUR, environnement.getY() * HAUTEUR);
         this.tilePane.setMaxSize(environnement.getX() * LARGEUR, environnement.getY() * HAUTEUR);
         this.tilePane.setPrefSize(environnement.getX() * LARGEUR, environnement.getY() * HAUTEUR);
@@ -120,7 +128,7 @@ public class Controlleur implements Initializable {
         /************************** les listes observables  *********************************/
 
 
-                listenerListeActeurs = new ListObsActeur(pane, environnement);
+        listenerListeActeurs = new ListObsActeur(pane, environnement);
         environnement.getActeurs().addListener(listenerListeActeurs);
 
         listenerListeTours = new ListObsTour(pane, environnement);
@@ -139,7 +147,7 @@ public class Controlleur implements Initializable {
 
     public void gameLaunche() {
         try {
-            this.vueEnvironnementMap = new VueEnvironnement(environnement, tilePane, progressBar,pane, labelEnvPieces);
+            this.vueEnvironnementMap = new VueEnvironnement(environnement, tilePane, progressBar, pane, labelEnvPieces);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -157,20 +165,32 @@ public class Controlleur implements Initializable {
         KeyFrame kf = new KeyFrame(
                 Duration.seconds(0.17),
                 (ev -> {
-                    if(music.verifSon()==false){
+                    if (music.verifSon() == false) {
                         System.out.println(" lancer music ");
                         music.playMusicFond();
                     }
                     try {
-                        environnement.nbTours();
+                        environnement.unTour();
                     } catch (Exception e) {
 
                     }
+                    if (temps % 2 == 0) {
+                        for (Acteur acteur : environnement.getActeurs()) {
+                            acteur.agir();
+                        }
+                    }
+
                     if (environnement.getVie() <= 0) {
                         gameLoop.stop();
                         vueEnvironnementMap.afficherGameOverScene();
-                        System.out.println("game loop aret ");
+
                     }
+                    /*if (environnement.getVagueEnnemi().getNbVague() == 2) {
+                        gameLoop.stop();
+                        vueEnvironnementMap.afficherGameOverScene();
+                        System.out.println("game gagné ");
+                    }*/
+
                     temps++;
                 })
         );

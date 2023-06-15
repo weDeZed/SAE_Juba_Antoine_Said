@@ -3,6 +3,7 @@ package com.sae.sae_juba_antoine_said.Modele.Environnement;
 import com.sae.sae_juba_antoine_said.Modele.Acteurs.Acteur;
 import com.sae.sae_juba_antoine_said.Modele.Acteurs.Bandit;
 import com.sae.sae_juba_antoine_said.Modele.Acteurs.Dragon;
+import com.sae.sae_juba_antoine_said.Modele.Acteurs.VagueEnnemi;
 import com.sae.sae_juba_antoine_said.Modele.BFS.BFS;
 import com.sae.sae_juba_antoine_said.Modele.BFS.Sommet;
 import com.sae.sae_juba_antoine_said.Modele.Tours.Projectile;
@@ -39,6 +40,9 @@ public class Environnement {
     private final int CHEMIN = 230;
     private final int TERRAIN = 164;
 
+    private VagueEnnemi vagueEnnemi;
+    private int indexActeur;
+
 
     public Environnement(int x, int y) throws IOException {
         this.x = x;
@@ -55,6 +59,9 @@ public class Environnement {
         this.piece = new SimpleIntegerProperty(170);
         this.vie = new SimpleIntegerProperty(100);
         this.nbTour = 0;
+        vagueEnnemi = new VagueEnnemi(this);
+        indexActeur = 0;
+
     }
 
     public void readMap() throws IOException {
@@ -198,49 +205,38 @@ public class Environnement {
         return CHEMIN;
     }
 
-    public void nbTours() {
-        if (nbTour % 10 == 1) {
-            ajouterActeur(new Bandit(52 * 32, 24 * 32, 3, this));
-        }
-        if (nbTour % 50 == 0) {
-            ajouterActeur(new Dragon(52 * 32, 24 * 32, 5, this));
-        }
-        if (nbTour % 2 == 0) {
-            for (int i = 0; i < acteurs.size(); i++) {
-                acteurs.get(i).agir();
-            }
-        }
-       /* if (nbTour % 20 == 0) {
-            for (Tour tour : getTours()) {
-                if (tour instanceof TroopTour) {
-                    if (nbTour % 20 == 0) {
-                        tour.attaqueEnnemi();
-                    }
-                }
-            }
+    public void unTour() {
+
+        if (acteurs.isEmpty() && nbTour % 20 == 0) {
+            vagueEnnemi.creeVague();
         }
 
-        */
+        // Les tours attaquent tous les 5 tours
         if (nbTour % 5 == 0) {
-            for (Tour t : this.getTours()) {
-                //if (t instanceof TourAProjectile) {
+            for (Tour t : getTours()) {
                 t.attaqueEnnemi();
-                //}
             }
         }
 
-        for (Projectile p : this.getProjectiles()) {
+        // Lancer les projectiles
+        for (Projectile p : getProjectiles()) {
             p.lancerProjectile();
         }
 
-
-        // supprimer les projectiles qui ont terminé leur trajectoire
-        projectiles.removeIf(p -> p.aFiniTrajectoire());
+        // Supprimer les projectiles qui ont terminé leur trajectoire
+        projectiles.removeIf(Projectile::aFiniTrajectoire);
 
         nbTour++;
     }
 
+    public VagueEnnemi getVagueEnnemi() {
+        return vagueEnnemi;
+    }
+    // ...
 }
+
+
+
 
 
 

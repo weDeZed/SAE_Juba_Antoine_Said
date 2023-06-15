@@ -1,11 +1,13 @@
 package com.sae.sae_juba_antoine_said.Modele.Acteurs;
 
 import com.sae.sae_juba_antoine_said.Modele.Environnement.Environnement;
+
 public class Dragon extends Ennemi {
-    private  int nb;
+    private int nb;
+
     public Dragon(int x, int y, int vitesse, Environnement env) {
         super(100, x, y, vitesse, 0, env);
-        nb=0;
+        nb = 0;
     }
 
 
@@ -17,7 +19,7 @@ public class Dragon extends Ennemi {
     @Override
     public void agir() {
         nb++;
-        if (nb%8==0){
+        if (nb % 2 == 0) {
             move();
         }
     }

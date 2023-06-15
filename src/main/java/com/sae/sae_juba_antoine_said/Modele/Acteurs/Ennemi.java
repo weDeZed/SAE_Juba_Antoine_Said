@@ -25,13 +25,11 @@ public abstract class Ennemi extends Acteur {
     }
 
 
-
-
     @Override
     public abstract Acteur attaquer();
 
     @Override
-    public  abstract void agir();
+    public abstract void agir();
 
     public void move() {
         if (indiceCheminActuel < this.env.getChemin().size() - 1) {
@@ -41,27 +39,20 @@ public abstract class Ennemi extends Acteur {
             indiceCheminActuel++;
             int newX = (this.env.getChemin().get(indiceCheminActuel).getX() * 32);
             int newY = (this.env.getChemin().get(indiceCheminActuel).getY() * 32);
-
             if (newX > oldX) {
                 setDirectionActeur(1); //direction droit
-                //System.out.println(" vers droit ");
             } else if (newX < oldX) {
-                //System.out.println(" vers gauche ");
                 setDirectionActeur(2); //direction gauche
             } else if (newY > oldY) {
-                //System.out.println(" vers bas ");
                 setDirectionActeur(3); //direction bas
             } else if (newY < oldY) {
-                //System.out.println(" vers haut ");
                 setDirectionActeur(4); // direction haut
             }
-            //System.out.println(" final après new X " + newX + " newY " + newY);
             this.setX(newX);
             this.setY(newY);
         } else {
             this.env.suppActeur(this);
             env.decrementerVie(10);
-            //env.ajouterPieces(10);
         }
     }
 
