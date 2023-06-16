@@ -11,6 +11,7 @@ public class Bandit extends Ennemi {
     }
 
     @Override
+
     public Acteur attaquer() {
         for (Acteur a : this.env.getActeurs()) {
             if (a instanceof Ally && a.estVivant()) {
