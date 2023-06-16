@@ -44,11 +44,11 @@ public class VagueEnnemi {
 
                 compteur++;
                 if (getNbVague() % 2 == 0) { // créer  10 ennemies
-                    if (compteur >= 3) {
+                    if (compteur >= 10) {
                         timer.cancel(); // Arrêter le minuteur
                     }
                 } else {
-                    if (compteur >= 4) { //créer 15 ennemies
+                    if (compteur >= 15) { //créer 15 ennemies
                         timer.cancel(); // Arrêter le minuteur
                     }
                 }

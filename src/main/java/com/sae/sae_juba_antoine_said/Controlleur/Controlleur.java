@@ -65,17 +65,6 @@ public class Controlleur implements Initializable {
     @FXML
     private ProgressBar progressBar;
 
-    Projectile p;
-    VueActeur vueActeur2;
-
-    VueProjectile vueProjectile;
-    private Acteur guerrier1, guerrier2, guerrier3;
-
-    VueActeur vueAct;
-    TourAProjectile tourAProjectile;
-    @FXML
-    AnchorPane anchorPaneId;
-
     @FXML
     private ToggleButton tourB1, tourB2, tourB3, tourB4;
     @FXML
@@ -185,11 +174,10 @@ public class Controlleur implements Initializable {
                         vueEnvironnementMap.afficherGameOverScene();
 
                     }
-                    /*if (environnement.getVagueEnnemi().getNbVague() == 2) {
+                    if (environnement.getVagueEnnemi().getNbVague() == 11) { // après dix vague on gagne le jeu
                         gameLoop.stop();
-                        vueEnvironnementMap.afficherGameOverScene();
-                        System.out.println("game gagné ");
-                    }*/
+                        vueEnvironnementMap.afficherGameWinScene();
+                    }
 
                     temps++;
                 })

@@ -1,5 +1,6 @@
 package com.sae.sae_juba_antoine_said.Controlleur;
 
+import com.sae.sae_juba_antoine_said.Vue.Music;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -13,14 +14,16 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 
-public class ControlleurFinDeJeu {
-
+public class ControlleurFinDeJeu{
+    Music music;
     @FXML
     Button relancerButton;
+
     @FXML
     Button quitButton;
     @FXML
     public void relancerJeu(ActionEvent event) throws IOException {
+        music=new Music();
         Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         FXMLLoader fxmlLoader = new FXMLLoader();
         URL resource = getClass().getResource("/com/sae/sae_juba_antoine_said/vueSae.fxml");
@@ -30,10 +33,27 @@ public class ControlleurFinDeJeu {
         primaryStage.setTitle(" Tower Defense ");
         primaryStage.setScene(scene);
         primaryStage.show();
+
+        /*
+        Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        URL resource = getClass().getResource("/com/sae/sae_juba_antoine_said/vueSae.fxml");
+        Parent root = fxmlLoader.load(resource);
+        Scene scene = new Scene(root, 1440, 800);
+        primaryStage.setResizable(false);
+        primaryStage.setTitle(" Tower Defense ");
+        primaryStage.setScene(scene);
+        primaryStage.show();
+        music.stopMusicVictoire();
+        music.stopMusicDefaite();
+
+         */
     }
 
     public void quitJeu(ActionEvent event) {
         Platform.exit();
         System.exit(0);
+        music.stopMusicVictoire();
+        music.stopMusicDefaite();
     }
 }

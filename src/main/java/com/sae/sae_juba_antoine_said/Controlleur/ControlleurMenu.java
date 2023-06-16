@@ -27,6 +27,7 @@ public class ControlleurMenu {
     @FXML
     public void lancerButtonAction(ActionEvent event) throws IOException {
         music =new Music();
+
         Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         FXMLLoader fxmlLoader = new FXMLLoader();
         URL resource = getClass().getResource("/com/sae/sae_juba_antoine_said/vueSae.fxml");

@@ -35,7 +35,7 @@ public class VueEnvironnement {
     private Pane pane;
     Music music;
 
-    public VueEnvironnement(Environnement env, TilePane tileP, ProgressBar progressBar,Pane pane, Label labelEnvPieces) throws FileNotFoundException {
+    public VueEnvironnement(Environnement env, TilePane tileP, ProgressBar progressBar, Pane pane, Label labelEnvPieces) throws FileNotFoundException {
         this.env = env;
         this.tilePane = tileP;
         this.progressBar = progressBar;
@@ -96,7 +96,6 @@ public class VueEnvironnement {
     }
 
     public void listObsBarDeEnvronnement() {
-
         if (env.getVie() > 20) {
             String barColor = "-fx-accent: red;";
             String trackColor = "-fx-control-inner-background: white;";
@@ -111,7 +110,7 @@ public class VueEnvironnement {
     }
 
     public void afficherGameOverScene() {
-        music =new Music();
+        music = new Music();
         FXMLLoader fxmlLoader = new FXMLLoader();
         URL resource = getClass().getResource("/com/sae/sae_juba_antoine_said/finDeJeu.fxml");
         Parent root = null;
@@ -126,6 +125,25 @@ public class VueEnvironnement {
         primaryStage.setScene(scene);
         primaryStage.show();
         music.stopMusicFond();
-        music.PlayMusicDefaite();
+        music.playMusicDefaite();
+    }
+
+    public void afficherGameWinScene() {
+        music = new Music();
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        URL resource = getClass().getResource("/com/sae/sae_juba_antoine_said/victoirDeJeu.fxml");
+        Parent root = null;
+        try {
+            root = fxmlLoader.load(resource);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return; // Arrêter la méthode si une exception se produit lors du chargement du fichier FXML
+        }
+        Scene scene = new Scene(root);
+        Stage primaryStage = (Stage) ((Node) pane).getScene().getWindow();
+        primaryStage.setScene(scene);
+        primaryStage.show();
+        music.stopMusicFond();
+        music.playMusicVictoire();
     }
 }
