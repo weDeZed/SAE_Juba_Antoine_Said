@@ -61,8 +61,6 @@ public class Controlleur implements Initializable {
 
     private PoserTour dragDropSetup;
 
-    private ListChangeListener<Acteur> listenerListeActeurs;
-    private ListChangeListener<Tour> listenerListeTours;
     private ListObsProjectile listnerListeProjectiles;
     private Music music;
 
@@ -105,11 +103,10 @@ public class Controlleur implements Initializable {
         /************************** les listes observables  *********************************/
 
 
-        listenerListeActeurs = new ListObsActeur(pane, environnement);
-        environnement.getActeurs().addListener(listenerListeActeurs);
 
-        listenerListeTours = new ListObsTour(pane, environnement);
-        environnement.getTours().addListener(listenerListeTours);
+        environnement.getActeurs().addListener(new ListObsActeur(pane, environnement));
+
+        environnement.getTours().addListener( new ListObsTour(pane, environnement));
 
         listnerListeProjectiles = new ListObsProjectile(pane);
         environnement.getProjectiles().addListener(listnerListeProjectiles);

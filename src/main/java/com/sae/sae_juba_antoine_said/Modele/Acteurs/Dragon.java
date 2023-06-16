@@ -19,7 +19,7 @@ public class Dragon extends Ennemi {
     @Override
     public void agir() {
         nb++;
-        if (nb % 2 == 0) {
+        if (nb % 4 == 0) {
             move();
         }
     }

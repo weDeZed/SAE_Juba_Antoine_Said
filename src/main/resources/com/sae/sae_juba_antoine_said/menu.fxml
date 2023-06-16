@@ -11,12 +11,12 @@
     <children>
         <ImageView fitWidth="${anchorPaneIdM.prefWidth}" fitHeight="${anchorPaneIdM.prefHeight}">
             <image>
-                <Image url="@images/playGame.jpg"/>
+                <Image url="@images/imageMenu.png"/>
             </image>
         </ImageView>
-        <Button fx:id="lancerButton" layoutX="630.0" layoutY="329.0" onAction="#lancerButtonAction" prefHeight="70.0"
+        <Button fx:id="lancerButton" layoutX="450.0" layoutY="630.0" onAction="#lancerButtonAction" prefHeight="70.0"
                 prefWidth="140.0" text="Lancer"/>
-        <Button fx:id="quitterButton" layoutX="630.0" layoutY="435.0" onAction="#quitterButtonAction" prefHeight="60.0"
+        <Button fx:id="quitterButton" layoutX="750.0" layoutY="630.0" onAction="#quitterButtonAction" prefHeight="70.0"
                 prefWidth="140.0" text="Quitter"/>
     </children>
 </AnchorPane>

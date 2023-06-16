@@ -51,9 +51,9 @@ public class VueActeur {
                 e.printStackTrace();
             }
         }
-        acteur.directionActeurProperty().addListener((obs, oldDirection, newDirection) -> {
-            startImageAnimation((int) newDirection);
 
+        acteur.directionActeurProperty().addListener((obs, oldDirection, newDirection) -> { // Dès qu'il y a un changement dans la direction, il est appliqué ici.
+            startImageAnimation((int) newDirection);
         });
 
 
@@ -87,7 +87,7 @@ public class VueActeur {
 
     }
 
-
+    // La méthode startImageAnimation lance une animation de l'image de l'acteur en fonction de la direction donnée.
     public void startImageAnimation(int direction) {
         Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(0.17), e -> {
             int i = (int) (Math.random() * 2);
@@ -115,7 +115,7 @@ public class VueActeur {
                     directionType = "f";
                     break;
             }
-            if (direction == 5) {
+            if (direction == 5) {  // pour l'animaiton de bandit et guerrier pour fair le combat
                 if (acteur instanceof Bandit) {
                     //System.out.println("dans vue acteur b dir5 " + i);
                     String path = "src/main/java/com/sae/sae_juba_antoine_said/Ressources/EnnemiesImg/banditb0.png";
@@ -212,43 +212,3 @@ public class VueActeur {
 
 
 
-/* if(acteur instanceof Bandit){
-            imageView.setViewport(new Rectangle2D(0, 0, 48, 48));
-
-                final Sprite animation = new Sprite(
-                        imageView,
-                        Duration.millis(500),
-                        2, 2,
-                        0, 87,
-                        58, 52
-                );
-                animation.setCycleCount(Animation.INDEFINITE);
-                animation.play();
-
-                final Sprite animation = new Sprite(
-                        imageView,
-                        Duration.millis(500),
-                        2, 2,
-                        16, 136,
-                        58, 52
-                );
-                animation.setCycleCount(Animation.INDEFINITE);
-                animation.play();
-            }
-*/
-/*
-    private void changeImage(int i) throws FileNotFoundException {
-        if (acteur instanceof Bandit) {
-            //fichierActeur = new FileInputStream("src/main/java/com/sae/sae_juba_antoine_said/Ressources/EnnemiesImg/bandit2.png");
-
-        }
-        if (acteur instanceof Guerrier) {
-            fichierActeur = new FileInputStream("src/main/java/com/sae/sae_juba_antoine_said/Ressources/ally/g3.png");
-        }
-        //mettre à jour l'image de l'ImageView
-        //this.image = new Image(fichierActeur);
-        //this.imageView.setImage(image);
-        //startImageAnimation(i);
-    }
-
- */

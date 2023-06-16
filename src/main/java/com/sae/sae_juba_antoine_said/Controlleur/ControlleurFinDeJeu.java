@@ -38,20 +38,6 @@ public class ControlleurFinDeJeu {
         primaryStage.setScene(scene);
         primaryStage.show();
 
-        /*
-        Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        FXMLLoader fxmlLoader = new FXMLLoader();
-        URL resource = getClass().getResource("/com/sae/sae_juba_antoine_said/vueSae.fxml");
-        Parent root = fxmlLoader.load(resource);
-        Scene scene = new Scene(root, 1440, 800);
-        primaryStage.setResizable(false);
-        primaryStage.setTitle(" Tower Defense ");
-        primaryStage.setScene(scene);
-        primaryStage.show();
-        music.stopMusicVictoire();
-        music.stopMusicDefaite();
-
-         */
     }
 
     public void quitJeu(ActionEvent event) {

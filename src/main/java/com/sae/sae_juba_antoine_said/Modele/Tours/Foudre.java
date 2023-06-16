@@ -5,7 +5,7 @@ import com.sae.sae_juba_antoine_said.Modele.Environnement.Environnement;
 
 public class Foudre extends Projectile{
     public Foudre(int x, int y, Acteur a, Environnement environnement) {
-        super(x, y,7, a, environnement);
+        super(x, y,9, a, environnement);
     }
 
 

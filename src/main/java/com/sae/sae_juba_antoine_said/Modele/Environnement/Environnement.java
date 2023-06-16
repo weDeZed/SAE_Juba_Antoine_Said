@@ -204,23 +204,23 @@ public class Environnement {
         int nbEnnemie = 0;
         for (Acteur acteur : getActeurs()) {
             if (acteur instanceof Ennemi) {
-                nbEnnemie++;
+                nbEnnemie++; // verifier les ennemis
             }
         }
 
 
-        if (nbEnnemie <=0 && nbTour % 20 == 0) {
+        if (nbEnnemie <= 0 && nbTour % 10 == 0) { // Il crée une vague lorsqu'il n'y a plus d'ennemis sur le terrain
             vagueEnnemi.creeVague();
         }
-        if (nbTour % 2 == 0) {
-            for (Acteur acteur : getActeurs()) {
-                acteur.agir();
-            }
+
+        /********les acteurs agire ********/
+        for (Acteur acteur : getActeurs()) {
+            acteur.agir();
         }
 
 
         // Les tours attaquent tous les 5 tours
-        if (nbTour % 5 == 0) {
+        if (nbTour % 7 == 0) {
             for (Tour t : getTours()) {
                 t.attaqueEnnemi();
             }

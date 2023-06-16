@@ -34,7 +34,7 @@ public class VagueEnnemi {
 
             @Override
             public void run() {
-                int type = (int) (Math.random() * 2);
+                int type = (int) (Math.random() * 2); //  soit bandit et soit Dragon
                 Ennemi e;
                 if (type == 1) {
                     e = new Bandit(52 * 32, 24 * 32, 0, env);
@@ -58,7 +58,7 @@ public class VagueEnnemi {
 
             }
         };
-        timer.schedule(task, 1000, 3000); // Début après 1 secondes, répétition toutes les 3 secondes
+        timer.schedule(task, 1000, 4000); // Début après 1 secondes, répétition toutes les 3 secondes
         setNbVagueBinding(1); // ajouter vage
     }
 

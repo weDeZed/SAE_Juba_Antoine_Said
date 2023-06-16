@@ -8,7 +8,7 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-public class Tour {
+public abstract class Tour {
 
     IntegerProperty x, y;
     int degatsParSeconde, range;
@@ -24,8 +24,10 @@ public class Tour {
         this.prix=prix;
     }
 
-    public void attaqueEnnemi() {
-    }
+    public abstract void attaqueEnnemi();
+
+
+    // Méthode pour trouver l'ennemi le plus proche dans le rayon d'attaque de la tour
     public Acteur ennemiPlusProche() {
 
         Acteur ennemiLePlusProche = null;
@@ -36,7 +38,7 @@ public class Tour {
                 double dx = this.getX() - env.getActeurs().get(i).getX();
                 double dy = this.getY() - env.getActeurs().get(i).getY();
                 double distance = Math.sqrt(dx * dx + dy * dy);
-
+                // Si l'ennemi est dans le rayon d'attaque et plus proche que l'ennemi précédent, il devient l'ennemi le plus proche
                 if (distance <= range && distance < distanceMin) {
                     ennemiLePlusProche = env.getActeurs().get(i);
                     distanceMin = distance;

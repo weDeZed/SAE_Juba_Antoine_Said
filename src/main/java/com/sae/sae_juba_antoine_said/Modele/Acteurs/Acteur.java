@@ -61,12 +61,11 @@ public abstract class Acteur {
 
             // Calculez la distance entre le Bandit et l'Acteur
             double distance = Math.sqrt(Math.pow((this.getX() - a.getX()), 2) + Math.pow((this.getY() - a.getY()), 2));
-            //System.out.println("distance " + distance);
+
 
             double tolerance = 20;
             if (distance <= tolerance) {
-                //System.out.println("dans deplacement dir 5 ");
-                this.setDirectionActeur(5);
+                this.setDirectionActeur(5); // la direction 5 c'est pour animation de combat
             }
         }
     }

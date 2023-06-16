@@ -7,6 +7,6 @@ public class Laser extends Projectile {
 
 
     public Laser(int x, int y, Acteur a, Environnement environnement) {
-        super(x, y,10, a, environnement);
+        super(x, y,15, a, environnement);
     }
 }

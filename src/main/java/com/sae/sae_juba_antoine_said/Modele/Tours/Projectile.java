@@ -7,7 +7,7 @@ import javafx.beans.property.SimpleIntegerProperty;
 
 public class Projectile {
 
-    IntegerProperty x,y;
+    IntegerProperty x, y;
     int vitesse;
     Environnement env;
     String id;
@@ -15,19 +15,17 @@ public class Projectile {
 
     Acteur a;
 
-    int disX,disY;
+    int disX, disY;
     int degat;
 
 
-
-
-    public Projectile(int x, int y,int degat, Acteur a , Environnement environnement) {
+    public Projectile(int x, int y, int degat, Acteur a, Environnement environnement) {
 
         this.x = new SimpleIntegerProperty(x);
         this.y = new SimpleIntegerProperty(y);
         this.env = environnement;
         this.vitesse = 32;
-        id="P"+ compteur;
+        id = "P" + compteur;
         compteur++;
         this.a = a;
         this.degat = degat;
@@ -53,22 +51,25 @@ public class Projectile {
         this.setX((int) newposX);
         this.setY((int) newposY);
 
-        if (atteintActeur() == true){
-            if(this instanceof Laser){
+        if (atteintActeur() == true) {
+            if (this instanceof Laser) {
                 a.decrementationPv(getDegat());
             } else if (this instanceof Fleche) {
                 a.decrementationPv(getDegat());
 
-            }else {
+            } else {
                 a.decrementationPv(getDegat());
             }
 
-            if (a.getPv() <=0) {
+            if (a.getPv() <= 0) {
                 env.ajoutePiece(10);
                 env.suppActeur(a);
             }
             env.getProjectiles().remove(this);
 
+        }
+        if (!getFocusProjectile().estVivant()) {
+            env.getProjectiles().remove(this);
         }
 
     }
@@ -91,14 +92,13 @@ public class Projectile {
                 (x1 >= aX1 && x1 <= aX2 && y2 >= aY1 && y2 <= aY2) ||  // Coin inférieur gauche
                 (x2 >= aX1 && x2 <= aX2 && y1 >= aY1 && y1 <= aY2) ||  // Coin supérieur droit
                 (x2 >= aX1 && x2 <= aX2 && y2 >= aY1 && y2 <= aY2)) {  // Coin inférieur droit
-           // env.removeProjectile(this);
+            // env.removeProjectile(this);
             return true;
         }
 
+
         return false;
     }
-
-
 
 
     public int getDegat() {
@@ -106,12 +106,9 @@ public class Projectile {
     }
 
 
-
-
     public String getId() {
         return id;
     }
-
 
 
     public int getVitesse() {
@@ -149,5 +146,9 @@ public class Projectile {
 
     public boolean aFiniTrajectoire() {
         return atteintActeur();
+    }
+
+    public Acteur getFocusProjectile() {
+        return a;
     }
 }
