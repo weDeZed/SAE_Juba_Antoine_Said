@@ -105,14 +105,9 @@ public class Controlleur implements Initializable {
         /************************** les listes observables  *********************************/
 
 
-        listenerListeActeurs = new ListObsActeur(pane, environnement);
-        environnement.getActeurs().addListener(listenerListeActeurs);
-
-        listenerListeTours = new ListObsTour(pane, environnement);
-        environnement.getTours().addListener(listenerListeTours);
-
-        listnerListeProjectiles = new ListObsProjectile(pane);
-        environnement.getProjectiles().addListener(listnerListeProjectiles);
+        environnement.getActeurs().addListener(new ListObsActeur(pane, environnement));
+        environnement.getTours().addListener(new ListObsTour(pane, environnement));
+        environnement.getProjectiles().addListener(new ListObsProjectile(pane));
 
 
         gameLaunche();
