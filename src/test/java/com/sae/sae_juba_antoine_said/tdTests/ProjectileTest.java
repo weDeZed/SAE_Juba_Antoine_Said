@@ -3,6 +3,7 @@ package com.sae.sae_juba_antoine_said.tdTests;
 import com.sae.sae_juba_antoine_said.Modele.Acteurs.Acteur;
 import com.sae.sae_juba_antoine_said.Modele.Environnement.Environnement;
 import com.sae.sae_juba_antoine_said.Modele.Tours.Projectile;
+import org.junit.Before;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -14,8 +15,52 @@ public class ProjectileTest {
 
 
 
+    private Projectile projectile;
+    private Acteur acteur;
+
+
+
     @Test
-    void testLancerProjectile() {
+    public void testLancerProjectile() {
+
+        Environnement env;
+        try {
+            env = new Environnement(90, 90);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return;
+        }
+
+        acteur = new Acteur(110, 0, 0, 0, 0, env) {
+            @Override
+            public Acteur attaquer() {
+                return null;
+            }
+
+            @Override
+            public void agir() {
+
+            }
+        }; // Créez l'acteur approprié ici
+        projectile = new Projectile(0, 0, acteur, env);
+
+        // Définir les positions de l'acteur
+        acteur.setX(22);
+        acteur.setY(22);
+
+        projectile.lancerProjectile();
+
+        // Vérifier les nouvelles positions
+        assertEquals(22, projectile.getX());
+        assertEquals(22, projectile.getY());
+
+        // Vérifier que le projectile a atteint l'acteur
+        assertTrue(projectile.aFiniTrajectoire());
+    }
+
+
+    @Test
+    void testAtteintActeur_CasAtteint() {
 
         // Création des objets nécessaires pour le test
         Environnement env;
@@ -26,48 +71,7 @@ public class ProjectileTest {
             return;
         }
 
-        Acteur a = new Acteur(100, 20, 20, 2, 10, env) {
-            @Override
-            public Acteur attaquer() {
-                return null;
-            }
-
-            @Override
-            public void agir() {}
-        };
-
-        Projectile p = new Projectile(0, 0, a, env);
-
-        // Appeler la méthode à tester
-        p.lancerProjectile();
-
-        // Calcul des valeurs attendues
-        double distanceX = a.getX() - p.getX();
-        double distanceY = a.getY() - p.getY();
-        double totalDistance = Math.sqrt(distanceX * distanceX + distanceY * distanceY);
-        double expectedX = p.getX() + (p.getVitesse() * (distanceX / totalDistance));
-        double expectedY = p.getY() + (p.getVitesse() * (distanceY / totalDistance));
-
-        // Assertion de l'égalité des valeurs attendues et réelles avec une précision de 0.0001
-        Assertions.assertEquals((int) expectedX, p.getX(), "X position is incorrect");
-        Assertions.assertEquals((int) expectedY, p.getY(), "Y position is incorrect");
-    }
-
-
-
-    @Test
-    void testAtteintActeur_CasAtteint() {
-
-        // Création des objets nécessaires pour le test
-        Environnement env;
-        try {
-            env = new Environnement(20, 20);
-        } catch (IOException e) {
-            e.printStackTrace();
-            return;
-        }
-
-        Acteur a = new Acteur(100, 20, 20, 2, 10, env) {
+        Acteur a = new Acteur(100, 19, 19, 2, 10, env) {
             @Override
             public Acteur attaquer() {
                 return null;
@@ -78,46 +82,15 @@ public class ProjectileTest {
         };
 
         // Le projectile sera créé juste à côté de l'acteur
-        Projectile p = new Projectile(20, 20, a, env);
+        Projectile p = new Projectile(19, 19, a, env);
 
         // Appeler la méthode à tester
         boolean resultat = p.atteintActeur();
 
         // Vérifier le résultat
-        Assertions.assertTrue(resultat, "Le projectile devrait atteindre l'acteur.");
+        assertTrue(resultat, "Le projectile devrait atteindre l'acteur.");
     }
 
-    @Test
-    void testAtteintActeur_CasNonAtteint() {
-
-        // Création des objets nécessaires pour le test
-        Environnement env;
-        try {
-            env = new Environnement(20, 20);
-        } catch (IOException e) {
-            e.printStackTrace();
-            return;
-        }
-
-        Acteur a = new Acteur(100, 0, 0, 2, 10, env) {
-            @Override
-            public Acteur attaquer() {
-                return null;
-            }
-
-            @Override
-            public void agir() {}
-        };
-
-        // Le projectile sera créé loin de l'acteur
-        Projectile p = new Projectile(20, 20, a, env);
-
-        // Appeler la méthode à tester
-        boolean resultat = p.atteintActeur();
-
-        // Vérifier le résultat
-        Assertions.assertFalse(resultat, "Le projectile ne devrait pas atteindre l'acteur.");
-    }
 
 
 

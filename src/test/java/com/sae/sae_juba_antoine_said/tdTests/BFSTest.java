@@ -4,6 +4,7 @@ import com.sae.sae_juba_antoine_said.Modele.BFS.BFS;
 import com.sae.sae_juba_antoine_said.Modele.BFS.Sommet;
 import com.sae.sae_juba_antoine_said.Modele.Environnement.Environnement;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -13,6 +14,26 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class BFSTest {
 
+    private BFS bfs;
+    private Environnement env;
+
+
+    @Test
+    public void testCheminVersSource() {
+
+        bfs = new BFS(env);
+
+        // Pour l'instant, nous supposons simplement que le chemin vers la source n'est pas vide.
+        assertFalse(bfs.cheminVersSource().isEmpty());
+    }
+    @Test
+    public void testGetSommet() {
+        // Nous nous attendons à ce que le sommet en (5,5) existe, car nous avons initialisé la carte avec 10x10.
+        assertNotNull(bfs.getSommet(5, 5));
+
+        // Nous nous attendons à ce que le sommet en (10,10) n'existe pas, car ces coordonnées sont en dehors de la carte.
+        assertNull(bfs.getSommet(10, 10));
+    }
    @Test
     void testConstruit() {
         // Créez un nouvel environnement et un nouvel objet BFS

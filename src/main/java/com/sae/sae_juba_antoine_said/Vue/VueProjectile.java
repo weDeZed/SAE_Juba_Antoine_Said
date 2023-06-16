@@ -54,7 +54,7 @@ public class VueProjectile {
         this.image = new Image(fichierGuerrier);
         this.imageView = new ImageView(image);
         this.imageView.setId(projectile.getId());
-        imageView.xProperty().bind(projectile.xProperty());
+          imageView.xProperty().bind(projectile.xProperty());
         imageView.yProperty().bind(projectile.yProperty());
         this.pane.getChildren().add(imageView);
        // System.out.println("image id"+ imageView.getId());
