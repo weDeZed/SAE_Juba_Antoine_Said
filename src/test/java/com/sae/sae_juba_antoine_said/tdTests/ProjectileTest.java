@@ -1,16 +1,17 @@
-package com.sae.sae_juba_antoine_said.TestJUnit;
+package com.sae.sae_juba_antoine_said.tdTests;
 
 import com.sae.sae_juba_antoine_said.Modele.Acteurs.Acteur;
 import com.sae.sae_juba_antoine_said.Modele.Environnement.Environnement;
 import com.sae.sae_juba_antoine_said.Modele.Tours.Projectile;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-
 public class ProjectileTest {
+
 
 
     @Test
@@ -19,7 +20,7 @@ public class ProjectileTest {
         // Création des objets nécessaires pour le test
         Environnement env;
         try {
-            env = new Environnement(20, 20);
+            env = new Environnement(90, 90);
         } catch (IOException e) {
             e.printStackTrace();
             return;
@@ -48,8 +49,8 @@ public class ProjectileTest {
         double expectedY = p.getY() + (p.getVitesse() * (distanceY / totalDistance));
 
         // Assertion de l'égalité des valeurs attendues et réelles avec une précision de 0.0001
-        assertEquals((int) expectedX, p.getX(), "X position is incorrect");
-        assertEquals((int) expectedY, p.getY(), "Y position is incorrect");
+        Assertions.assertEquals((int) expectedX, p.getX(), "X position is incorrect");
+        Assertions.assertEquals((int) expectedY, p.getY(), "Y position is incorrect");
     }
 
 
@@ -83,7 +84,7 @@ public class ProjectileTest {
         boolean resultat = p.atteintActeur();
 
         // Vérifier le résultat
-        assertTrue(resultat, "Le projectile devrait atteindre l'acteur.");
+        Assertions.assertTrue(resultat, "Le projectile devrait atteindre l'acteur.");
     }
 
     @Test
@@ -115,7 +116,7 @@ public class ProjectileTest {
         boolean resultat = p.atteintActeur();
 
         // Vérifier le résultat
-        assertFalse(resultat, "Le projectile ne devrait pas atteindre l'acteur.");
+        Assertions.assertFalse(resultat, "Le projectile ne devrait pas atteindre l'acteur.");
     }
 
 

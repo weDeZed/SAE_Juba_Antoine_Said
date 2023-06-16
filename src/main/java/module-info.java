@@ -6,8 +6,7 @@ module com.example.sae_juba_antoine_said {
     requires org.controlsfx.controls;
     requires com.dlsc.formsfx;
     requires org.kordamp.bootstrapfx.core;
-    requires junit;
-    requires org.junit.jupiter.api;
+    //requires org.junit.jupiter.api;
 
 
     opens com.sae.sae_juba_antoine_said to javafx.fxml;
@@ -24,7 +23,7 @@ module com.example.sae_juba_antoine_said {
     opens com.sae.sae_juba_antoine_said.Modele.Environnement to javafx.fxml;
     exports com.sae.sae_juba_antoine_said.Modele.BFS;
     opens com.sae.sae_juba_antoine_said.Modele.BFS to javafx.fxml;
-    exports com.sae.sae_juba_antoine_said.TestJUnit;
-    opens com.sae.sae_juba_antoine_said.TestJUnit to javafx.fxml;
+    //exports java.TestJUnit;
+    //opens java.TestJUnit to javafx.fxml;
 
 }
