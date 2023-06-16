@@ -17,7 +17,7 @@ public class TroopTour extends Tour {
         int[][] map = this.env.getMap();
         temp++;
         //System.out.println("nbTour "+nbTour);
-        if (temp % 15 == 0) {
+        if (temp % 12 == 0) {
 
             int placement = 0;
             for (int i = 0; i < 1; i++) {
