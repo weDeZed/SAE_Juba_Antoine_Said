@@ -37,7 +37,7 @@ public class Guerrier extends Ally {
             this.seDeplacer(a);
             if (a.getPv() <= 10) {
                 env.suppActeur(a);
-                env.ajoutePiece(10);
+                env.ajoutePiece(5);
             } else {
                 a.decrementationPv(7);
             }

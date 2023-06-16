@@ -6,8 +6,8 @@ import com.sae.sae_juba_antoine_said.Modele.Environnement.Environnement;
 public class FoudreTour extends TourAProjectile{
 
 
-    public FoudreTour(int x, int y, int degats, int range, Environnement env) {
-        super(x, y, degats, range, env);
+    public FoudreTour(int x, int y, int range, Environnement env) {
+        super(x, y, range, env);
     }
 
     @Override

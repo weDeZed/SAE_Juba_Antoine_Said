@@ -16,10 +16,9 @@ public class Tour {
     private  int prix;
 
 
-    public Tour(int x, int y, int degats,int prix, int range, Environnement env) {
+    public Tour(int x, int y, int prix, int range, Environnement env) {
         this.x = new SimpleIntegerProperty(x);
         this.y = new SimpleIntegerProperty(y);
-        this.degatsParSeconde = degats;
         this.range = range;
         this.env = env;
         this.prix=prix;

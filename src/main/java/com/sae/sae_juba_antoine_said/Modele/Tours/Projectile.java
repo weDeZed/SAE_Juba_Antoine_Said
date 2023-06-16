@@ -16,10 +16,12 @@ public class Projectile {
     Acteur a;
 
     int disX,disY;
+    int degat;
 
 
 
-    public Projectile(int x, int y,Acteur a ,Environnement environnement) {
+
+    public Projectile(int x, int y,int degat, Acteur a , Environnement environnement) {
 
         this.x = new SimpleIntegerProperty(x);
         this.y = new SimpleIntegerProperty(y);
@@ -28,6 +30,7 @@ public class Projectile {
         id="P"+ compteur;
         compteur++;
         this.a = a;
+        this.degat = degat;
     }
 
     public void lancerProjectile() {
@@ -50,15 +53,14 @@ public class Projectile {
         this.setX((int) newposX);
         this.setY((int) newposY);
 
-
-
         if (atteintActeur() == true){
             if(this instanceof Laser){
-                a.decrementationPv(20);
+                a.decrementationPv(getDegat());
             } else if (this instanceof Fleche) {
-                a.decrementationPv(5);
+                a.decrementationPv(getDegat());
+
             }else {
-                a.decrementationPv(10);
+                a.decrementationPv(getDegat());
             }
 
             if (a.getPv() <=0) {
@@ -99,7 +101,9 @@ public class Projectile {
 
 
 
-
+    public int getDegat() {
+        return degat;
+    }
 
 
 

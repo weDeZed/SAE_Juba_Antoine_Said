@@ -6,7 +6,7 @@ public class Dragon extends Ennemi {
     private int nb;
 
     public Dragon(int x, int y, int vitesse, Environnement env) {
-        super(100, x, y, vitesse, 0, env);
+        super(150, x, y, vitesse, 0, env);
         nb = 0;
     }
 

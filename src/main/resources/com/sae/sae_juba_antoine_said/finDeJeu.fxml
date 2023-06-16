@@ -5,13 +5,13 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane fx:id="anchorPaneId" prefHeight="800.0" prefWidth="1400.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sae.sae_juba_antoine_said.Controlleur.ControlleurFinDeJeu">
+<AnchorPane fx:id="anchorPaneId" stylesheets="@css/finDeJeu.css" prefHeight="800.0" prefWidth="1400.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sae.sae_juba_antoine_said.Controlleur.ControlleurFinDeJeu">
     <ImageView fitWidth="${anchorPaneId.prefWidth}" fitHeight="${anchorPaneId.prefHeight}">
         <image>
-            <Image url="@gameOver.jpg" />
+            <Image url="@images/gameOver.jpg" />
         </image>
     </ImageView>
-   <Button fx:id="relancerButton" onAction="#relancerJeu" layoutX="268.0" layoutY="272.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="75.0" text="Relancer" />
-   <Button fx:id="quitButton"  onAction="#quitJeu" layoutX="414.0" layoutY="272.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="75.0" text="Quitter" />
+    <Button fx:id="relancerButton" onAction="#relancerJeu" layoutX="620.0" layoutY="700.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="100.0" text="Relancer" />
+    <Button fx:id="quitButton"  onAction="#quitJeu" layoutX="730.0" layoutY="700.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="100.0" text="Quitter" />
 
 </AnchorPane>

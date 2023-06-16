@@ -13,8 +13,8 @@ public abstract class TourAProjectile extends Tour {
     private int tour;
 
 
-    public TourAProjectile(int x, int y, int degats, int range, Environnement env) {
-        super(x, y, degats, 50, range, env);
+    public TourAProjectile(int x, int y, int range, Environnement env) {
+        super(x, y, 50, range, env);
         tour = 0;
 
 

@@ -1,5 +1,8 @@
-package com.sae.sae_juba_antoine_said.Modele.Acteurs;
+package com.sae.sae_juba_antoine_said.Modele.Environnement;
 
+import com.sae.sae_juba_antoine_said.Modele.Acteurs.Bandit;
+import com.sae.sae_juba_antoine_said.Modele.Acteurs.Dragon;
+import com.sae.sae_juba_antoine_said.Modele.Acteurs.Ennemi;
 import com.sae.sae_juba_antoine_said.Modele.Environnement.Environnement;
 import javafx.application.Platform;
 import javafx.beans.property.IntegerProperty;
@@ -55,7 +58,7 @@ public class VagueEnnemi {
 
             }
         };
-        timer.schedule(task, 1000, 2000); // Début après 1 secondes, répétition toutes les 2 secondes
+        timer.schedule(task, 1000, 3000); // Début après 1 secondes, répétition toutes les 3 secondes
         setNbVagueBinding(1); // ajouter vage
     }
 

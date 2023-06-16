@@ -11,8 +11,8 @@ public class TroopTour extends Tour {
     private int chemin;
     private int nbTour;
 
-    public TroopTour(int x, int y, int degats, int range, Environnement environnement) {
-        super(x, y, degats, 150, range, environnement);
+    public TroopTour(int x, int y, int range, Environnement environnement) {
+        super(x, y, 150, range, environnement);
         chemin = 230;
         nbTour = 0;
     }
@@ -40,7 +40,6 @@ public class TroopTour extends Tour {
                     y = y + 2;
                     x = x + placement;
                 } else {
-                    System.out.println("case pas trouvé");
                     break;
                 }
                 placement += 1 + 1 / 2;

@@ -7,6 +7,8 @@ import javafx.collections.ObservableList;
 import java.util.*;
 
 public class BFS {
+    // Définition des constantes pour identifier les types de terrains sur la carte.
+
     private final  int CHEMIN=230;
     private final  int TERRAIN=164;
 
@@ -14,8 +16,11 @@ public class BFS {
     private int x, y;
     private Environnement mapEnv;
 
+
+    // Les sommets source et cible du parcours.
     private Sommet source,cible;
 
+    // La liste des sommets parcourus, la liste d'adjacence, la liste des obstacles et la liste des prédécesseurs.
     private ArrayList<Sommet> parcours;
     private Map<Sommet, Set<Sommet>> listeAdj;
     private ObservableList<Sommet> obstacles;
@@ -93,6 +98,9 @@ public class BFS {
     }
 
 
+
+
+    // Algorithme de recherche en largeur (BFS).
     private void algoBFS() {
         LinkedList<Sommet> fifo = new LinkedList<>();
         LinkedList<Sommet> Marquage = new LinkedList<>();
@@ -122,6 +130,8 @@ public class BFS {
         }
         return null;
     }
+
+    // Cette méthode retourne un ensemble de sommets adjacents à un sommet donné.
     public Set<Sommet> adjacents(Sommet s) {
         if (this.estDeconnecte(s)) {
             return new HashSet<>();
@@ -132,6 +142,8 @@ public class BFS {
 
         }
     }
+
+    // Cette méthode retourne le chemin du sommet cible à la source.
     public ArrayList<Sommet> cheminVersSource() {
         ArrayList<Sommet> chemin = new ArrayList<>();
         Sommet courant = cible;
@@ -140,10 +152,6 @@ public class BFS {
             courant = predecesseurs.get(courant);
         }
         Collections.reverse(chemin);
-        /*for (Sommet s : chemin) {
-            System.out.print(" " + s);
-        }
-        */
         return chemin;
     }
 

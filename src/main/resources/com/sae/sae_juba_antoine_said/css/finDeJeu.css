@@ -1,0 +1,31 @@
+#anchorPaneId {
+    -fx-background-color: transparent;
+}
+
+.button {
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-background-color: #2ecc71;
+    -fx-padding: 8px 16px;
+    -fx-background-radius: 4px;
+}
+
+.button:hover {
+    -fx-background-color: #27ae60;
+}
+
+#relancerButton {
+    -fx-background-color:
+            #32cd32,
+            linear-gradient(#98fb98, #008000),
+            linear-gradient(#00ff00, #006400),
+            linear-gradient(#7cfc00, #006400);
+}
+
+#quitButton {
+    -fx-background-color:
+            #ff4500,
+            linear-gradient(#ff6347, #8b0000),
+            linear-gradient(#ff4500, #8b0000),
+            linear-gradient(#ff6347, #8b0000);
+}

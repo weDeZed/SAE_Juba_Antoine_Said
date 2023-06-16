@@ -3,9 +3,20 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane stylesheets="@menuStyle.css" prefHeight="800.0" prefWidth="1400.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sae.sae_juba_antoine_said.Controlleur.ControlleurMenu">
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<AnchorPane fx:id="anchorPaneIdM" stylesheets="@css/menuStyle.css" prefHeight="800.0" prefWidth="1400.0"
+            xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.sae.sae_juba_antoine_said.Controlleur.ControlleurMenu">
     <children>
-        <Button fx:id="lancerButton" layoutX="630.0" layoutY="329.0" onAction="#lancerButtonAction" prefHeight="70.0" prefWidth="140.0" text="Lancer" />
-        <Button fx:id="quitterButton" layoutX="630.0" layoutY="435.0" onAction="#quitterButtonAction" prefHeight="60.0" prefWidth="140.0" text="Quitter" />
+        <ImageView fitWidth="${anchorPaneIdM.prefWidth}" fitHeight="${anchorPaneIdM.prefHeight}">
+            <image>
+                <Image url="@images/playGame.jpg"/>
+            </image>
+        </ImageView>
+        <Button fx:id="lancerButton" layoutX="630.0" layoutY="329.0" onAction="#lancerButtonAction" prefHeight="70.0"
+                prefWidth="140.0" text="Lancer"/>
+        <Button fx:id="quitterButton" layoutX="630.0" layoutY="435.0" onAction="#quitterButtonAction" prefHeight="60.0"
+                prefWidth="140.0" text="Quitter"/>
     </children>
 </AnchorPane>

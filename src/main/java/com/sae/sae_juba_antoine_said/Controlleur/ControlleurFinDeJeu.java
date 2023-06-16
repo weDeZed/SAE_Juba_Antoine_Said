@@ -9,12 +9,13 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
 
-public class ControlleurFinDeJeu{
+public class ControlleurFinDeJeu {
     Music music;
     @FXML
     Button relancerButton;
@@ -22,8 +23,11 @@ public class ControlleurFinDeJeu{
     @FXML
     Button quitButton;
     @FXML
+    AnchorPane anchorPaneIdW;
+
+    @FXML
     public void relancerJeu(ActionEvent event) throws IOException {
-        music=new Music();
+        music = new Music();
         Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         FXMLLoader fxmlLoader = new FXMLLoader();
         URL resource = getClass().getResource("/com/sae/sae_juba_antoine_said/vueSae.fxml");

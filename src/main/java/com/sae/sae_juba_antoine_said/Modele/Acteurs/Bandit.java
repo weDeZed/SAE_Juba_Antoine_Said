@@ -29,7 +29,7 @@ public class Bandit extends Ennemi {
             if (a.getPv() <= 10) {
                 env.suppActeur(a);
             } else {
-                a.decrementationPv(7);
+                a.decrementationPv(10);
             }
         } else {
             move();

@@ -1,15 +1,10 @@
 package com.sae.sae_juba_antoine_said.Modele.Environnement;
 
-import com.sae.sae_juba_antoine_said.Modele.Acteurs.Acteur;
-import com.sae.sae_juba_antoine_said.Modele.Acteurs.Bandit;
-import com.sae.sae_juba_antoine_said.Modele.Acteurs.Dragon;
-import com.sae.sae_juba_antoine_said.Modele.Acteurs.VagueEnnemi;
+import com.sae.sae_juba_antoine_said.Modele.Acteurs.*;
 import com.sae.sae_juba_antoine_said.Modele.BFS.BFS;
 import com.sae.sae_juba_antoine_said.Modele.BFS.Sommet;
 import com.sae.sae_juba_antoine_said.Modele.Tours.Projectile;
 import com.sae.sae_juba_antoine_said.Modele.Tours.Tour;
-import com.sae.sae_juba_antoine_said.Modele.Tours.TourAProjectile;
-import com.sae.sae_juba_antoine_said.Modele.Tours.TroopTour;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
@@ -206,10 +201,23 @@ public class Environnement {
     }
 
     public void unTour() {
+        int nbEnnemie = 0;
+        for (Acteur acteur : getActeurs()) {
+            if (acteur instanceof Ennemi) {
+                nbEnnemie++;
+            }
+        }
 
-        if (acteurs.isEmpty() && nbTour % 20 == 0) {
+
+        if (nbEnnemie <=0 && nbTour % 20 == 0) {
             vagueEnnemi.creeVague();
         }
+        if (nbTour % 2 == 0) {
+            for (Acteur acteur : getActeurs()) {
+                acteur.agir();
+            }
+        }
+
 
         // Les tours attaquent tous les 5 tours
         if (nbTour % 5 == 0) {
@@ -232,8 +240,9 @@ public class Environnement {
     public VagueEnnemi getVagueEnnemi() {
         return vagueEnnemi;
     }
-    // ...
+
 }
+
 
 
 
