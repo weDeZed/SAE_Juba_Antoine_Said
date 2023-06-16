@@ -18,13 +18,13 @@ public class VueProjectile {
     private ImageView imageView;
     Circle circle;
     Projectile projectile;
-    Music music;
+    //Music music;
 
     public VueProjectile(Pane pane, Projectile projectile) {
-        music =new Music();
+        //music =new Music();
         this.pane = pane;
         this.projectile = projectile;
-        music.playLaser();
+        //music.playLaser();
 
         FileInputStream fichierGuerrier = null;
 

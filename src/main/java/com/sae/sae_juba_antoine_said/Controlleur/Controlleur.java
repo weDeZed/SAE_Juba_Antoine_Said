@@ -62,7 +62,7 @@ public class Controlleur implements Initializable {
     private PoserTour dragDropSetup;
 
     private ListObsProjectile listnerListeProjectiles;
-    private Music music;
+    //private Music music;
 
     @FXML
     ImageView imageForTourB1, imageForTourB2, imageForTourB3, imageForTourB4;
@@ -72,7 +72,7 @@ public class Controlleur implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         /**************** musicn ***************/
-        music = new Music();
+        //music = new Music();
 
 
         /************************** Environnement *********************************/
@@ -139,9 +139,10 @@ public class Controlleur implements Initializable {
         KeyFrame kf = new KeyFrame(
                 Duration.seconds(0.17),
                 (ev -> {
-                    if (music.verifSon() == false) {
+                    /*if (music.verifSon() == false) {
                         music.playMusicFond();
                     }
+                     */
                     try {
                         environnement.unTour();
                     } catch (Exception e) {

@@ -16,7 +16,7 @@ import java.io.IOException;
 import java.net.URL;
 
 public class ControlleurFinDeJeu {
-    Music music;
+    //Music music;
     @FXML
     Button relancerButton;
 
@@ -27,7 +27,7 @@ public class ControlleurFinDeJeu {
 
     @FXML
     public void relancerJeu(ActionEvent event) throws IOException {
-        music = new Music();
+        //music = new Music();
         Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         FXMLLoader fxmlLoader = new FXMLLoader();
         URL resource = getClass().getResource("/com/sae/sae_juba_antoine_said/vueSae.fxml");
@@ -43,7 +43,7 @@ public class ControlleurFinDeJeu {
     public void quitJeu(ActionEvent event) {
         Platform.exit();
         System.exit(0);
-        music.stopMusicVictoire();
-        music.stopMusicDefaite();
+        //music.stopMusicVictoire();
+        //music.stopMusicDefaite();
     }
 }
