@@ -240,7 +240,9 @@ public class Environnement {
     public VagueEnnemi getVagueEnnemi() {
         return vagueEnnemi;
     }
-
+    public void setActeurs(ObservableList<Acteur> acteurs) {
+        this.acteurs = acteurs;
+    }
 }
 
 
@@ -287,21 +289,4 @@ public class Environnement {
 
 
 
-
-
-/*
-    public void ennemieAtteintSommetCible() {
-        for (Acteur ac : this.getActeurs()) {
-            if (ac.estVivant() && ac instanceof Ennemi) {
-                if (ac.getX() == this.getBfs().getCible().getX() * 32 && ac.getY() == this.getBfs().getCible().getY() * 32) {
-                    //System.out.println("Vie env avant: " + this.getVie());
-                    this.decrementerVie(10);
-                    //System.out.println("Vie env apres: " + this.getVie());
-                }
-                //  System.out.println("Apres if ");
-            }
-        }
-    }
-
-     */
 

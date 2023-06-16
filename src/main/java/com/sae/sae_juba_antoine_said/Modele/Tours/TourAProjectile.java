@@ -24,7 +24,6 @@ public abstract class TourAProjectile extends Tour {
         if (this.ennemiPlusProche() != null && this.ennemiPlusProche().estVivant()) {
             Projectile p = ((TourAProjectile) this).creeProjectile();
             //this.ajouterProjectile(p);
-
         }
     }
 
