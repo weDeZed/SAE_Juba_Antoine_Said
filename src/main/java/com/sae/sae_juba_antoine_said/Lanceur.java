@@ -14,6 +14,7 @@ public class Lanceur extends Application {
 
 
     @Override
+
     public void start(Stage primaryStage) throws IOException {
         // Chargement du fichier FXML pour la scène du menu
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("menu.fxml"));
