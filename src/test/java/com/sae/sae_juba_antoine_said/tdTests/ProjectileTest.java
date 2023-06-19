@@ -88,7 +88,7 @@ public class ProjectileTest {
         boolean resultat = p.atteintActeur();
 
         // Vérifier le résultat
-        assertTrue(resultat, "Le projectile devrait atteindre l'acteur.");
+        assertTrue(resultat, "Le projectile atteint l'acteur.");
     }
 
 
