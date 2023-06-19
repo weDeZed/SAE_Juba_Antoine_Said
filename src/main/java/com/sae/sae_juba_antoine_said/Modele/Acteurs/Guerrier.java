@@ -49,10 +49,8 @@ public class Guerrier extends Ally {
     }
 
     public void marcherSurChemin() {
-
         int x = getX() / 32;
         int y = getY() / 32;
-        System.out.println("vant ");
         boolean peutDeplacer = false;
         Random rand = new Random();
 

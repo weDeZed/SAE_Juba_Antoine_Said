@@ -42,7 +42,7 @@ public class ProjectileTest {
 
             }
         }; // Créez l'acteur approprié ici
-        projectile = new Projectile(0, 0, acteur, env);
+        projectile = new Projectile(0, 0,0, acteur, env);
 
         // Définir les positions de l'acteur
         acteur.setX(22);
@@ -82,7 +82,7 @@ public class ProjectileTest {
         };
 
         // Le projectile sera créé juste à côté de l'acteur
-        Projectile p = new Projectile(19, 19, a, env);
+        Projectile p = new Projectile(19, 19,0, a, env);
 
         // Appeler la méthode à tester
         boolean resultat = p.atteintActeur();
