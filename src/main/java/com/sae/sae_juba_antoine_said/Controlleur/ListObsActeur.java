@@ -27,7 +27,6 @@ public class ListObsActeur implements ListChangeListener<Acteur> {
             for (Acteur act : a.getAddedSubList()) {
                 VueActeur vueActeur = new VueActeur(panneauDeJeu, act);
 
-
             }
             for (Acteur m : a.getRemoved()) {
                enleverActeur(m);

@@ -13,14 +13,13 @@ public abstract class Ennemi extends Acteur {
 
     private int indiceCheminActuel = 0;
     //private IntegerProperty directionActeur;
-    private final int CHEMIN = 230;
-    ArrayList<Sommet> cheminActuel;
+
 
 
     public Ennemi(int pv, int x, int y, int vitesse, int range, Environnement env) {
         super(pv, x, y, vitesse, range, env);
-        //directionActeur = new SimpleIntegerProperty(0);
-        cheminActuel = new ArrayList<Sommet>();
+
+
 
     }
 
@@ -33,7 +32,6 @@ public abstract class Ennemi extends Acteur {
 
     public void move() {
         if (indiceCheminActuel < this.env.getChemin().size() - 1) {
-
             int oldX = (this.env.getChemin().get(indiceCheminActuel).getX() * 32);
             int oldY = (this.env.getChemin().get(indiceCheminActuel).getY() * 32);
             indiceCheminActuel++;

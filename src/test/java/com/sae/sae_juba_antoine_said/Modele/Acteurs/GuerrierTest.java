@@ -28,7 +28,7 @@ class GuerrierTest {
 
         env.setActeurs(acteurs); //  j'ai  mis la liste des acteurs dans environnement
 
-        Acteur cible = guerrier.attaquer(); // attaquer return acteur car  nous avons une ennemi à coté de guerrier
+        Acteur cible = guerrier.attaquer(); // attaquer return acteur car  nous avons un ennemi à coté de guerrier
         assertNotNull(cible);
 
         Bandit bandit = new Bandit(78, 81, 15, env);

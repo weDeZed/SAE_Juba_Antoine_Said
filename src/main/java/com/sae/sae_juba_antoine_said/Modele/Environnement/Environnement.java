@@ -26,8 +26,6 @@ public class Environnement {
     private int[][] map;
     private ObservableList<Acteur> acteurs;
     private ObservableList<Tour> tours;
-    private Map<Sommet, Set<Sommet>> listeAdj;
-    private ObservableList<Sommet> obstacles;
     private ObservableList<Projectile> projectiles;
     private ArrayList<Sommet> chemin;
     private IntegerProperty piece;
@@ -45,8 +43,6 @@ public class Environnement {
         this.map = new int[x][y];
         this.acteurs = FXCollections.observableArrayList();
         this.tours = FXCollections.observableArrayList();
-        this.listeAdj = new HashMap();
-        this.obstacles = FXCollections.observableArrayList();
         this.projectiles = FXCollections.observableArrayList();
         readMap();
         bfs = new BFS(this);
@@ -208,7 +204,6 @@ public class Environnement {
             }
         }
 
-
         if (nbEnnemie <= 0 && nbTour % 10 == 0) { // Il crée une vague lorsqu'il n'y a plus d'ennemis sur le terrain
             vagueEnnemi.creeVague();
         }
@@ -244,49 +239,3 @@ public class Environnement {
         this.acteurs = acteurs;
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
