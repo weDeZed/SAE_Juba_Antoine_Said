@@ -42,7 +42,7 @@ public class Guerrier extends Ally {
                 a.decrementationPv(7);
             }
         } else {
-            if(temps%5==0){
+            if (temps % 5 == 0) {
                 marcherSurChemin();
             }
         }
@@ -53,6 +53,7 @@ public class Guerrier extends Ally {
         int y = getY() / 32;
         boolean peutDeplacer = false;
         Random rand = new Random();
+
         while (!peutDeplacer) {
             int direction = rand.nextInt(4);
             setDirectionActeur(direction);
@@ -61,6 +62,7 @@ public class Guerrier extends Ally {
                     if (dansTerrain(x, y) && this.env.getMap()[x][y - 1] == getCHEMIN()) {
                         y = y - 1;
                         this.setDirectionActeur(1);
+
                         peutDeplacer = true;
                     }
                     break;
@@ -94,6 +96,6 @@ public class Guerrier extends Ally {
     }
 
     public boolean dansTerrain(int x, int y) {
-        return y > 0 && y < 90 && x > 0 && x < 90;
+        return y >= 0 && y < 90 && x >= 0 && x < 90;
     }
 }
