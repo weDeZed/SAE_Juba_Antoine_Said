@@ -50,7 +50,6 @@
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
             <version>${junit.version}</version>
-            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
@@ -58,6 +57,13 @@
             <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.13.1</version>
+            <scope>test</scope>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -81,7 +87,7 @@
                         <id>default-cli</id>
                         <configuration>
                             <mainClass>
-                                com.example.sae_juba_antoine_said/com.sae.sae_juba_antoine_said.Lanceur
+                                com.sae.sae_juba_antoine_said.Lanceur
                             </mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>

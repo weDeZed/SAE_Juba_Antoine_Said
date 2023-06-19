@@ -5,6 +5,8 @@ import com.sae.sae_juba_antoine_said.Modele.BFS.BFS;
 import com.sae.sae_juba_antoine_said.Modele.BFS.Sommet;
 import com.sae.sae_juba_antoine_said.Modele.Tours.Projectile;
 import com.sae.sae_juba_antoine_said.Modele.Tours.Tour;
+import com.sae.sae_juba_antoine_said.Modele.Tours.TourAProjectile;
+import com.sae.sae_juba_antoine_said.Modele.Tours.TroopTour;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
@@ -149,6 +151,7 @@ public class Environnement {
     public void ajouterTour(Tour t) {
         this.tours.add(t);
     }
+
 
 
     public void ajouterProjectile(Projectile p) {
