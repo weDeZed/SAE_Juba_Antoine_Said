@@ -133,13 +133,13 @@ public class BFS {
 
     // Cette méthode retourne un ensemble de sommets adjacents à un sommet donné.
     public Set<Sommet> adjacents(Sommet s) {
+
         if (this.estDeconnecte(s)) {
             return new HashSet<>();
         } else {
             Set<Sommet> adjacents = new HashSet<>(this.listeAdj.get(s));//il prends tous les sommets adjacents de sommet s
             adjacents.removeIf(adjacent -> adjacent.getPoids() != s.getPoids());//il suprime tous les sommet que les poids ne sont pas égale
             return adjacents;
-
         }
     }
 
@@ -158,5 +158,13 @@ public class BFS {
 
     public Sommet getCible() {
         return cible;
+    }
+
+    public Map<Sommet, Set<Sommet>> getListeAdj() {
+        return listeAdj;
+    }
+
+    public ObservableList<Sommet> getObstacles() {
+        return obstacles;
     }
 }

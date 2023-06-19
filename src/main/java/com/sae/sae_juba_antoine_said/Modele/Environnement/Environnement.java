@@ -28,8 +28,6 @@ public class Environnement {
     private int[][] map;
     private ObservableList<Acteur> acteurs;
     private ObservableList<Tour> tours;
-    private Map<Sommet, Set<Sommet>> listeAdj;
-    private ObservableList<Sommet> obstacles;
     private ObservableList<Projectile> projectiles;
     private ArrayList<Sommet> chemin;
     private IntegerProperty piece;
@@ -47,8 +45,6 @@ public class Environnement {
         this.map = new int[x][y];
         this.acteurs = FXCollections.observableArrayList();
         this.tours = FXCollections.observableArrayList();
-        this.listeAdj = new HashMap();
-        this.obstacles = FXCollections.observableArrayList();
         this.projectiles = FXCollections.observableArrayList();
         readMap();
         bfs = new BFS(this);
@@ -211,7 +207,6 @@ public class Environnement {
             }
         }
 
-
         if (nbEnnemie <= 0 && nbTour % 10 == 0) { // Il crée une vague lorsqu'il n'y a plus d'ennemis sur le terrain
             vagueEnnemi.creeVague();
         }
@@ -243,68 +238,7 @@ public class Environnement {
     public VagueEnnemi getVagueEnnemi() {
         return vagueEnnemi;
     }
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-    public void ennemieAtteintSommetCible() {
-        for (Acteur ac : this.getActeurs()) {
-            if (ac.estVivant() && ac instanceof Ennemi) {
-                if (ac.getX() == this.getBfs().getCible().getX() * 32 && ac.getY() == this.getBfs().getCible().getY() * 32) {
-                    //System.out.println("Vie env avant: " + this.getVie());
-                    this.decrementerVie(10);
-                    //System.out.println("Vie env apres: " + this.getVie());
-                }
-                //  System.out.println("Apres if ");
-            }
-        }
+    public void setActeurs(ObservableList<Acteur> acteurs) {
+        this.acteurs = acteurs;
     }
-
-     */
-
+}
