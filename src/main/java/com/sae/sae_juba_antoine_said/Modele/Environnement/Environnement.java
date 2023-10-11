@@ -37,11 +37,12 @@ public class Environnement {
 
     private VagueEnnemi vagueEnnemi;
     private int indexActeur;
+    private static Environnement environnementInstance = null;
 
 
-    public Environnement(int x, int y) throws IOException {
-        this.x = x;
-        this.y = y;
+    public Environnement() throws IOException {
+        this.x = 90;
+        this.y = 90;
         this.map = new int[x][y];
         this.acteurs = FXCollections.observableArrayList();
         this.tours = FXCollections.observableArrayList();
@@ -54,7 +55,13 @@ public class Environnement {
         this.nbTour = 0;
         vagueEnnemi = new VagueEnnemi(this);
         indexActeur = 0;
+    }
 
+    public static Environnement getEnvironnementInstance() throws IOException {
+        if(environnementInstance == null) {
+            environnementInstance = new Environnement();
+        }
+        return environnementInstance;
     }
 
     public void readMap() throws IOException {
