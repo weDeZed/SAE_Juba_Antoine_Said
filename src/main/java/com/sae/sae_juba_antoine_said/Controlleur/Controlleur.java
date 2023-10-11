@@ -78,7 +78,7 @@ public class Controlleur implements Initializable {
         /************************** Environnement *********************************/
 
         try {
-            this.environnement = new Environnement(90, 90);
+            this.environnement = Environnement.getEnvironnementInstance();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

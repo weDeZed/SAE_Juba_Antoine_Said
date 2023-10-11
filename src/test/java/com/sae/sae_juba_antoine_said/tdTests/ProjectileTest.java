@@ -25,7 +25,7 @@ public class ProjectileTest {
 
         Environnement env;
         try {
-            env = new Environnement(90, 90);
+            env = Environnement.getEnvironnementInstance();
         } catch (IOException e) {
             e.printStackTrace();
             return;
@@ -65,7 +65,7 @@ public class ProjectileTest {
         // Création des objets nécessaires pour le test
         Environnement env;
         try {
-            env = new Environnement(90, 90);
+            env = Environnement.getEnvironnementInstance();
         } catch (IOException e) {
             e.printStackTrace();
             return;

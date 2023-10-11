@@ -14,7 +14,7 @@ class GuerrierTest {
     Environnement env;
 
     GuerrierTest() throws IOException {
-        this.env = new Environnement(90, 90);
+        this.env = Environnement.getEnvironnementInstance();
 
     }
 

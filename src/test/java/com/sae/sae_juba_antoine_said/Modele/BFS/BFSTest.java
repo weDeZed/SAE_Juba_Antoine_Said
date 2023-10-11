@@ -11,8 +11,8 @@ import java.util.Set;
 import static org.junit.jupiter.api.Assertions.*;
 
 class BFSTest {
-    Environnement env = new Environnement(90, 90);
-    BFS bfs = new BFS(env);
+
+    BFS bfs = new BFS(Environnement.getEnvironnementInstance());
 
     BFSTest() throws IOException {
     }
