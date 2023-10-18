@@ -7,19 +7,20 @@ import javafx.beans.property.SimpleIntegerProperty;
 
 public class Projectile {
 
+
     IntegerProperty x, y;
     int vitesse;
     Environnement env;
     String id;
     static int compteur = 0;
-
+    FaconDAgir faconDAgir;
     Acteur a;
 
     int disX, disY;
     int degat;
 
 
-    public Projectile(int x, int y, int degat, Acteur a, Environnement environnement) {
+    public Projectile(int x, int y, int degat, Acteur a, Environnement environnement,FaconDAgir faconDAgir) {
 
         this.x = new SimpleIntegerProperty(x);
         this.y = new SimpleIntegerProperty(y);
@@ -29,50 +30,11 @@ public class Projectile {
         compteur++;
         this.a = a;
         this.degat = degat;
+        this.faconDAgir = faconDAgir;
     }
 
-    public void lancerProjectile() {
-
-        double distanceX = a.getX() - this.getX();
-        double distanceY = a.getY() - this.getY();
-
-        // Calcule la distance total
-        double totalDistance = Math.sqrt(distanceX * distanceX + distanceY * distanceY);
 
 
-        double directionX = distanceX / totalDistance;
-        double directionY = distanceY / totalDistance;
-
-        // Calculer les nouvelles positions
-        double newposX = this.getX() + (this.getVitesse() * directionX);
-        double newposY = this.getY() + (this.getVitesse() * directionY);
-
-
-        this.setX((int) newposX);
-        this.setY((int) newposY);
-
-        if (atteintActeur() == true) {
-            if (this instanceof Laser) {
-                a.decrementationPv(getDegat());
-            } else if (this instanceof Fleche) {
-                a.decrementationPv(getDegat());
-
-            } else {
-                a.decrementationPv(getDegat());
-            }
-
-            if (a.getPv() <= 0) {
-                env.ajoutePiece(10);
-                env.suppActeur(a);
-            }
-            env.getProjectiles().remove(this);
-
-        }
-        if (!getFocusProjectile().estVivant()) {
-            env.getProjectiles().remove(this);
-        }
-
-    }
 
     public boolean atteintActeur() {
         // Les coins du projectile
@@ -151,4 +113,72 @@ public class Projectile {
     public Acteur getFocusProjectile() {
         return a;
     }
+
+    public Environnement getEnvProjectile() {
+        return env;
+    }
+
+    public FaconDAgir getFaconDAgir() {
+        return faconDAgir;
+    }
+
+    public void setFaconDAgir(FaconDAgir faconDAgir) {
+        this.faconDAgir = faconDAgir;
+    }
 }
+/*
+public void lancerProjectile() {
+
+        double distanceX = a.getX() - this.getX();
+        double distanceY = a.getY() - this.getY();
+
+        // Calcule la distance total
+        double totalDistance = Math.sqrt(distanceX * distanceX + distanceY * distanceY);
+
+
+        double directionX = distanceX / totalDistance;
+        double directionY = distanceY / totalDistance;
+
+        // Calculer les nouvelles positions
+        double newposX = this.getX() + (this.getVitesse() * directionX);
+        double newposY = this.getY() + (this.getVitesse() * directionY);
+
+
+        this.setX((int) newposX);
+        this.setY((int) newposY);
+
+        if (atteintActeur() == true) {
+            if (this instanceof Laser) {
+                a.decrementationPv(getDegat());
+            } else if (this instanceof Fleche) {
+                a.decrementationPv(getDegat());
+
+            } else {
+                a.decrementationPv(getDegat());
+            }
+
+            if (a.getPv() <= 0) {
+                env.ajoutePiece(10);
+                env.suppActeur(a);
+            }
+            env.getProjectiles().remove(this);
+
+        }
+        if (!getFocusProjectile().estVivant()) {
+            env.getProjectiles().remove(this);
+        }
+
+    }
+*
+*
+*
+*
+*
+*
+*
+*
+*
+*
+*
+*
+* */

@@ -33,12 +33,7 @@ public class VueTour {
            this.image=envoiImage(0);
 
         }
-        if (tour instanceof FoudreTour) {
-            this.image=envoiImage(1);
-        }
-        if (tour instanceof FlecheTour) {
-            this.image=envoiImage(2);
-        }
+
         if (tour instanceof LaserTour) {
             this.image=envoiImage(3);
         }

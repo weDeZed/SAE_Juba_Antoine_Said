@@ -14,11 +14,19 @@ public class LaserTour extends TourAProjectile {
 
     @Override
     public Projectile creeProjectile() {
+        Projectile pro;
         Acteur act = this.ennemiPlusProche();
-        Projectile pro = new Laser(this.getX() + 10, this.getY() - 30, act, env);
-        this.env.ajouterProjectile(pro);
-        return pro;
+        TeteChercheuse t = new TeteChercheuse();
+        if (act != null) {
 
+            pro = new Laser(this.getX() + 10, this.getY() - 30, act, env,t);
+            //pro.setFaconDAgir(t);
+            this.env.ajouterProjectile(pro);
+           // System.out.println("Projectile dans Laser Tour: " + pro);
+            return pro;
+        }
+        return null;
     }
+
 
 }

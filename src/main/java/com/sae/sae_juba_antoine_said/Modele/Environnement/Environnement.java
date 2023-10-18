@@ -5,8 +5,6 @@ import com.sae.sae_juba_antoine_said.Modele.BFS.BFS;
 import com.sae.sae_juba_antoine_said.Modele.BFS.Sommet;
 import com.sae.sae_juba_antoine_said.Modele.Tours.Projectile;
 import com.sae.sae_juba_antoine_said.Modele.Tours.Tour;
-import com.sae.sae_juba_antoine_said.Modele.Tours.TourAProjectile;
-import com.sae.sae_juba_antoine_said.Modele.Tours.TroopTour;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
@@ -211,7 +209,7 @@ public class Environnement {
             vagueEnnemi.creeVague();
         }
 
-        /********les acteurs agire ********/
+        /********les acteurs agir ********/
         for (Acteur acteur : getActeurs()) {
             acteur.agir();
         }
@@ -226,11 +224,12 @@ public class Environnement {
 
         // Lancer les projectiles
         for (Projectile p : getProjectiles()) {
-            p.lancerProjectile();
+            p.getFaconDAgir().agir();
         }
 
         // Supprimer les projectiles qui ont terminé leur trajectoire
         projectiles.removeIf(Projectile::aFiniTrajectoire);
+
 
         nbTour++;
     }

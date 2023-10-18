@@ -34,12 +34,6 @@ public class ListObsTour implements ListChangeListener<Tour> {
         if (tour instanceof TroopTour) {
             environnement.setPiece(troopTourPrix);
         }
-        if (tour instanceof FoudreTour) {
-            environnement.setPiece(tourFoudrePrix);
-        }
-        if (tour instanceof FlecheTour) {
-            environnement.setPiece(laserTourPrix);
-        }
         if (tour instanceof LaserTour) {
             environnement.setPiece(tourAprojectilePrix);
         }
