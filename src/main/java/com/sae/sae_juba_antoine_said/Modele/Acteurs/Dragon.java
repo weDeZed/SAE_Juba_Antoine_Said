@@ -12,15 +12,10 @@ public class Dragon extends Ennemi {
 
 
     @Override
-    public Acteur attaquer() {
-        return null;
-    }
-
-    @Override
     public void agir() {
         nb++;
         if (nb % 4 == 0) {
-            move();
+            getDeplacement().seDeplacer(env,this);
         }
     }
 }

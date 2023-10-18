@@ -211,13 +211,13 @@ public class Environnement {
             vagueEnnemi.creeVague();
         }
 
-        /********les acteurs agire ********/
+        /********les acteurs agir ********/
         for (Acteur acteur : getActeurs()) {
             acteur.agir();
         }
 
 
-        // Les tours attaquent tous les 5 tours
+        // Les tours attaquent tous les 7 tours
         if (nbTour % 7 == 0) {
             for (Tour t : getTours()) {
                 t.attaqueEnnemi();

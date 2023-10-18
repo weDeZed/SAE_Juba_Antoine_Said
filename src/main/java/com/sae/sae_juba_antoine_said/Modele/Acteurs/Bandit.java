@@ -10,25 +10,13 @@ public class Bandit extends Ennemi {
         temp = 0;
     }
 
-    @Override
 
-    public Acteur attaquer() {
-        for (Acteur a : this.env.getActeurs()) {
-            if (a instanceof Ally && a.estVivant()) {
-                if (this.getY() - this.getRange() <= a.getY() && a.getY() <= this.getY() + this.getRange() &&
-                        this.getX() - this.getRange() <= a.getX() && a.getX() <= this.getX() + this.getRange()) {
-                    return a;
-                }
-            }
-        }
-        return null;
-    }
 
     @Override
     public void agir() {
         Acteur a = this.attaquer();
         if (a != null) {
-            this.seDeplacer(a);
+            this.seRaprocher(a);
             if (a.getPv() <= 10) {
                 env.suppActeur(a);
             } else {
@@ -37,10 +25,8 @@ public class Bandit extends Ennemi {
         } else {
             temp++;
             if (temp % 3 == 0) { //relantir les bandit
-                move();
+                getDeplacement().seDeplacer(env,this);
             }
-
-
         }
 
     }

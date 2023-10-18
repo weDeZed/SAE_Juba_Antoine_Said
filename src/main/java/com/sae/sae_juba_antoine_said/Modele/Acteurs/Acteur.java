@@ -14,9 +14,11 @@ public abstract class Acteur {
     private String id;
     public static int compteur = 0;
     Environnement env;
+    private Deplacement deplacement;
 
 
-    public Acteur(int pv, int x, int y, int vitesse, int range, Environnement env) {
+
+    public Acteur(int pv, int x, int y, int vitesse, int range, Environnement env,Deplacement deplacement) {
         this.x = new SimpleIntegerProperty(x);
         this.y = new SimpleIntegerProperty(y);
         this.vitesse = vitesse;
@@ -26,11 +28,10 @@ public abstract class Acteur {
         this.id = "A" + compteur;
         compteur++;
         this.env = env;
+        this.deplacement=deplacement;
+
     }
-
-
-
-    public void seDeplacer(Acteur a) {
+    public void seRaprocher(Acteur a) {
         int dx, dy;
         int distanceX, distanceY;
         if (a != null) {
@@ -86,7 +87,18 @@ public abstract class Acteur {
         this.directionActeur.set(directionActeur);
     }
 
-    public abstract Acteur attaquer();
+    public abstract boolean MonAdversaire(Acteur a);
+    public Acteur attaquer(){
+        for (Acteur a : this.env.getActeurs()) {
+            if (this.MonAdversaire(a) && a.estVivant()) {
+                if (this.getY() - this.getRange() <= a.getY() && a.getY() <= this.getY() + this.getRange() &&
+                        this.getX() - this.getRange() <= a.getX() && a.getX() <= this.getX() + this.getRange()) {
+                    return a;
+                }
+            }
+        }
+        return null;
+    }
 
     public abstract void agir();
 
@@ -143,20 +155,15 @@ public abstract class Acteur {
         return this.vitesse;
     }
 
-    public void meurt() {
-        this.pv.equals(0);
-    }
 
-    public void setRange(int range) {
-        this.range = range;
-    }
 
     public int getRange() {
         return this.range;
     }
 
-
-
+    public Deplacement getDeplacement() {
+        return deplacement;
+    }
 }
 
 

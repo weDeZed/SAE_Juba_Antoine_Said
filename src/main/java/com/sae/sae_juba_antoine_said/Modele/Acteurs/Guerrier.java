@@ -11,30 +11,19 @@ public class Guerrier extends Ally {
     int temps;
 
     public Guerrier(int x, int y, Environnement env) {
-        super(100, x, y, 20, 50, env);
+        super(100, x, y, 20, 50,env);
         this.startX = x / 32;
         this.startY = y / 32;
         temps = 0;
     }
 
-    public Acteur attaquer() {
-        for (Acteur a : this.env.getActeurs()) {
-            if (a instanceof Ennemi && a.estVivant()) {
-                if (this.getY() - this.getRange() <= a.getY() && a.getY() <= this.getY() + this.getRange() &&
-                        this.getX() - this.getRange() <= a.getX() && a.getX() <= this.getX() + this.getRange()) {
-                    return a;
-                }
-            }
-        }
-        return null;
-    }
 
     @Override
     public void agir() {
         temps++;
         Acteur a = this.attaquer();
         if (a != null) {
-            this.seDeplacer(a);
+            this.seRaprocher(a);
             if (a.getPv() <= 10) {
                 env.suppActeur(a);
                 env.ajoutePiece(5);
@@ -43,12 +32,12 @@ public class Guerrier extends Ally {
             }
         } else {
             if (temps % 5 == 0) {
-                marcherSurChemin();
+                getDeplacement().seDeplacer(env,this);
             }
         }
     }
 
-    public void marcherSurChemin() {
+   public void marcherSurChemin() {
         int x = getX() / 32;
         int y = getY() / 32;
         boolean peutDeplacer = false;

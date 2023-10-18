@@ -52,14 +52,8 @@ public class Projectile {
         this.setY((int) newposY);
 
         if (atteintActeur() == true) {
-            if (this instanceof Laser) {
-                a.decrementationPv(getDegat());
-            } else if (this instanceof Fleche) {
-                a.decrementationPv(getDegat());
 
-            } else {
                 a.decrementationPv(getDegat());
-            }
 
             if (a.getPv() <= 0) {
                 env.ajoutePiece(10);

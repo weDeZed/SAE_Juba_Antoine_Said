@@ -1,6 +1,7 @@
 package com.sae.sae_juba_antoine_said.Modele.Environnement;
 
 import com.sae.sae_juba_antoine_said.Modele.Acteurs.Bandit;
+import com.sae.sae_juba_antoine_said.Modele.Acteurs.DeplacementEnnemi;
 import com.sae.sae_juba_antoine_said.Modele.Acteurs.Dragon;
 import com.sae.sae_juba_antoine_said.Modele.Acteurs.Ennemi;
 import com.sae.sae_juba_antoine_said.Modele.Environnement.Environnement;
