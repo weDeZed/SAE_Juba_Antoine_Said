@@ -23,6 +23,8 @@ module com.example.sae_juba_antoine_said {
     opens com.sae.sae_juba_antoine_said.Modele.Environnement to javafx.fxml;
     exports com.sae.sae_juba_antoine_said.Modele.BFS;
     opens com.sae.sae_juba_antoine_said.Modele.BFS to javafx.fxml;
+    exports com.sae.sae_juba_antoine_said.Modele.vague;
+    opens com.sae.sae_juba_antoine_said.Modele.vague to javafx.fxml;
     //exports java.TestJUnit;
     //opens java.TestJUnit to javafx.fxml;
 

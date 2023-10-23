@@ -5,8 +5,9 @@ import com.sae.sae_juba_antoine_said.Modele.BFS.BFS;
 import com.sae.sae_juba_antoine_said.Modele.BFS.Sommet;
 import com.sae.sae_juba_antoine_said.Modele.Tours.Projectile;
 import com.sae.sae_juba_antoine_said.Modele.Tours.Tour;
-import com.sae.sae_juba_antoine_said.Modele.Tours.TourAProjectile;
-import com.sae.sae_juba_antoine_said.Modele.Tours.TroopTour;
+import com.sae.sae_juba_antoine_said.Modele.vague.TypeVagueAleatoire;
+import com.sae.sae_juba_antoine_said.Modele.vague.TypeVagueDragon;
+import com.sae.sae_juba_antoine_said.Modele.vague.VagueEnnemi;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
@@ -27,6 +28,7 @@ public class Environnement {
     private int x, y;
     private int[][] map;
     private ObservableList<Acteur> acteurs;
+    private ObservableList<Acteur> acteursEnnemies;
     private ObservableList<Tour> tours;
     private ObservableList<Projectile> projectiles;
     private ArrayList<Sommet> chemin;
@@ -37,24 +39,40 @@ public class Environnement {
 
     private VagueEnnemi vagueEnnemi;
     private int indexActeur;
+    private static Environnement getInstance = null;
+    static int count = 0;
 
+    public Environnement() {
+        try {
+            this.x = 90;
+            this.y = 90;
+            this.map = new int[x][y];
+            this.acteurs = FXCollections.observableArrayList();
+            this.tours = FXCollections.observableArrayList();
+            this.projectiles = FXCollections.observableArrayList();
+            this.acteursEnnemies = FXCollections.observableArrayList();
 
-    public Environnement(int x, int y) throws IOException {
-        this.x = x;
-        this.y = y;
-        this.map = new int[x][y];
-        this.acteurs = FXCollections.observableArrayList();
-        this.tours = FXCollections.observableArrayList();
-        this.projectiles = FXCollections.observableArrayList();
-        readMap();
-        bfs = new BFS(this);
-        chemin = bfs.cheminVersSource();
-        this.piece = new SimpleIntegerProperty(170);
-        this.vie = new SimpleIntegerProperty(100);
-        this.nbTour = 0;
-        vagueEnnemi = new VagueEnnemi(this);
-        indexActeur = 0;
+            readMap();
+            bfs = new BFS(this);
+            chemin = bfs.cheminVersSource();
+            this.piece = new SimpleIntegerProperty(170);
+            this.vie = new SimpleIntegerProperty(100);
+            this.nbTour = 0;
+            vagueEnnemi = new VagueEnnemi(this, new TypeVagueAleatoire());
+            indexActeur = 0;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
+    }
+
+    public static Environnement getEnvironnementInstance() {
+        if (getInstance == null) {
+            getInstance = new Environnement();
+            return getInstance;
+        }
+
+        return getInstance;
     }
 
     public void readMap() throws IOException {
@@ -68,7 +86,6 @@ public class Environnement {
             while ((ligne = terrain.readLine()) != null) {
                 tout_ligne = ligne.split(",");
                 for (int y = 0; y < tout_ligne.length; y++) {
-
                     if (!tout_ligne[y].trim().isEmpty()) {
                         map[y][x] = Integer.parseInt(tout_ligne[y].trim());
 
@@ -88,6 +105,56 @@ public class Environnement {
             e.printStackTrace();
         }
 
+    }
+
+
+    public void unTour() {
+        if (count % 10 == 0 && nbTour % 50 == 0) { // Il crée une vague lorsqu'il n'y a plus d'ennemis sur le terrain
+            vagueEnnemi.creeVague();
+        }
+
+        if (nbTour % 10 == 0) {
+            ajouterActeur(acteursEnnemies.get(0));
+            acteursEnnemies.remove(0);
+            if (acteursEnnemies.isEmpty()) {
+                System.out.println("count "+ count);
+                count++;
+            }
+
+        }
+
+
+
+        /********les acteurs agir ********/
+        for (Acteur acteur : getActeurs()) {
+            acteur.agir();
+        }
+
+
+        // Les tours attaquent tous les 7 tours
+        if (nbTour % 7 == 0) {
+            for (Tour t : getTours()) {
+                t.attaqueEnnemi();
+            }
+        }
+
+        // Lancer les projectiles
+        for (Projectile p : getProjectiles()) {
+            p.lancerProjectile();
+        }
+
+        // Supprimer les projectiles qui ont terminé leur trajectoire
+        projectiles.removeIf(Projectile::aFiniTrajectoire);
+
+        nbTour++;
+    }
+
+    public VagueEnnemi getVagueEnnemi() {
+        return vagueEnnemi;
+    }
+
+    public void setActeurs(ObservableList<Acteur> acteurs) {
+        this.acteurs = acteurs;
     }
 
     public int getX() {
@@ -140,6 +207,10 @@ public class Environnement {
         this.acteurs.add(a);
     }
 
+    public void ajouterEnnemis(Acteur a) {
+        acteursEnnemies.add(a);
+    }
+
     public ObservableList<Tour> getTours() {
         return tours;
     }
@@ -147,7 +218,6 @@ public class Environnement {
     public void ajouterTour(Tour t) {
         this.tours.add(t);
     }
-
 
 
     public void ajouterProjectile(Projectile p) {
@@ -199,46 +269,5 @@ public class Environnement {
         return CHEMIN;
     }
 
-    public void unTour() {
-        int nbEnnemie = 0;
-        for (Acteur acteur : getActeurs()) {
-            if (acteur instanceof Ennemi) {
-                nbEnnemie++; // verifier les ennemis
-            }
-        }
 
-        if (nbEnnemie <= 0 && nbTour % 10 == 0) { // Il crée une vague lorsqu'il n'y a plus d'ennemis sur le terrain
-            vagueEnnemi.creeVague();
-        }
-
-        /********les acteurs agir ********/
-        for (Acteur acteur : getActeurs()) {
-            acteur.agir();
-        }
-
-
-        // Les tours attaquent tous les 7 tours
-        if (nbTour % 7 == 0) {
-            for (Tour t : getTours()) {
-                t.attaqueEnnemi();
-            }
-        }
-
-        // Lancer les projectiles
-        for (Projectile p : getProjectiles()) {
-            p.lancerProjectile();
-        }
-
-        // Supprimer les projectiles qui ont terminé leur trajectoire
-        projectiles.removeIf(Projectile::aFiniTrajectoire);
-
-        nbTour++;
-    }
-
-    public VagueEnnemi getVagueEnnemi() {
-        return vagueEnnemi;
-    }
-    public void setActeurs(ObservableList<Acteur> acteurs) {
-        this.acteurs = acteurs;
-    }
 }

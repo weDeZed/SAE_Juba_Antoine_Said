@@ -13,7 +13,7 @@ public abstract class Acteur {
     private int dx, dy;// direction
     private String id;
     public static int compteur = 0;
-    Environnement env;
+    private Environnement env;
     private Deplacement deplacement;
 
 
@@ -164,6 +164,7 @@ public abstract class Acteur {
     public Deplacement getDeplacement() {
         return deplacement;
     }
+
 }
 
 

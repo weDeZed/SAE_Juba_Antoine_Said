@@ -20,6 +20,7 @@ public class Guerrier extends Ally {
 
     @Override
     public void agir() {
+        Environnement env=Environnement.getEnvironnementInstance();
         temps++;
         Acteur a = this.attaquer();
         if (a != null) {
@@ -32,12 +33,13 @@ public class Guerrier extends Ally {
             }
         } else {
             if (temps % 5 == 0) {
-                getDeplacement().seDeplacer(env,this);
+                getDeplacement().seDeplacer(this);
             }
         }
     }
 
    public void marcherSurChemin() {
+       Environnement env =Environnement.getEnvironnementInstance();
         int x = getX() / 32;
         int y = getY() / 32;
         boolean peutDeplacer = false;
@@ -48,7 +50,7 @@ public class Guerrier extends Ally {
             setDirectionActeur(direction);
             switch (direction) {
                 case 0: // Haut
-                    if (dansTerrain(x, y) && this.env.getMap()[x][y - 1] == getCHEMIN()) {
+                    if (dansTerrain(x, y) && env.getMap()[x][y - 1] == getCHEMIN()) {
                         y = y - 1;
                         this.setDirectionActeur(1);
 
@@ -56,21 +58,21 @@ public class Guerrier extends Ally {
                     }
                     break;
                 case 1: // Droit
-                    if (dansTerrain(x, y) && this.env.getMap()[x + 1][y] == getCHEMIN()) {
+                    if (dansTerrain(x, y) && env.getMap()[x + 1][y] == getCHEMIN()) {
                         x = x + 1;
                         this.setDirectionActeur(2);
                         peutDeplacer = true;
                     }
                     break;
                 case 2: // Bas
-                    if (dansTerrain(x, y) && this.env.getMap()[x][y + 1] == getCHEMIN()) {
+                    if (dansTerrain(x, y) && env.getMap()[x][y + 1] == getCHEMIN()) {
                         y = y + 1;
                         this.setDirectionActeur(3);
                         peutDeplacer = true;
                     }
                     break;
                 case 3: // Gauche
-                    if (dansTerrain(x, y) && this.env.getMap()[x - 1][y] == getCHEMIN()) {
+                    if (dansTerrain(x, y) && env.getMap()[x - 1][y] == getCHEMIN()) {
                         x = x - 1;
                         this.setDirectionActeur(4);
                         peutDeplacer = true;

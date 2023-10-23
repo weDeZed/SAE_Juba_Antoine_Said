@@ -15,7 +15,7 @@ public class Dragon extends Ennemi {
     public void agir() {
         nb++;
         if (nb % 4 == 0) {
-            getDeplacement().seDeplacer(env,this);
+            getDeplacement().seDeplacer(this);
         }
     }
 }

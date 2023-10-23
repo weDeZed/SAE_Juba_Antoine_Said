@@ -5,7 +5,8 @@ import com.sae.sae_juba_antoine_said.Modele.Environnement.Environnement;
 public class DeplacementEnnemi implements Deplacement{
     private int indiceCheminActuel = 0;
     @Override
-    public void seDeplacer(Environnement env,Acteur acteur) {
+    public void seDeplacer(Acteur acteur) {
+        Environnement env=Environnement.getEnvironnementInstance();
 
         if (indiceCheminActuel < env.getChemin().size() - 1) {
             int oldX = (env.getChemin().get(indiceCheminActuel).getX() * 32);

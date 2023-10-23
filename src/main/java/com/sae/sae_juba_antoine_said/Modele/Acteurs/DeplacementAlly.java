@@ -6,8 +6,10 @@ import java.util.Random;
 
 public class DeplacementAlly implements Deplacement{
 
+
     @Override
-    public void seDeplacer(Environnement env, Acteur acteur) {
+    public void seDeplacer(Acteur acteur) {
+        Environnement env=Environnement.getEnvironnementInstance();
         int x = acteur.getX() / 32;
         int y = acteur.getY() / 32;
         boolean peutDeplacer = false;
@@ -20,7 +22,6 @@ public class DeplacementAlly implements Deplacement{
                     if (dansTerrain(x, y) && env.getMap()[x][y - 1] == acteur.getCHEMIN()) {
                         y = y - 1;
                         acteur.setDirectionActeur(1);
-
                         peutDeplacer = true;
                     }
                     break;

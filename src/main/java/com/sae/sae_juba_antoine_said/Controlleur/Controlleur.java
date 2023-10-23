@@ -77,11 +77,9 @@ public class Controlleur implements Initializable {
 
         /************************** Environnement *********************************/
 
-        try {
-            this.environnement = new Environnement(90, 90);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+
+        this.environnement = Environnement.getEnvironnementInstance();
+
         /**************** class vague ***************/
 
         environnement.getVagueEnnemi().nbVagueProperty().bind(environnement.getVagueEnnemi().nbVagueBindingProperty());
