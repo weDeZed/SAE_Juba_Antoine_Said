@@ -6,8 +6,8 @@ module com.example.sae_juba_antoine_said {
     requires org.controlsfx.controls;
     requires com.dlsc.formsfx;
     requires org.kordamp.bootstrapfx.core;
+    requires java.sql;
     //requires org.junit.jupiter.api;
-
 
     opens com.sae.sae_juba_antoine_said to javafx.fxml;
     exports com.sae.sae_juba_antoine_said;
