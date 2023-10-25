@@ -5,7 +5,7 @@ import com.sae.sae_juba_antoine_said.Modele.Environnement.Environnement;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
-public class Projectile {
+public abstract class Projectile {
 
     IntegerProperty x, y;
     int vitesse;
@@ -31,48 +31,8 @@ public class Projectile {
         this.degat = degat;
     }
 
-    public void lancerProjectile() {
+    public abstract void lancerProjectile();
 
-        double distanceX = a.getX() - this.getX();
-        double distanceY = a.getY() - this.getY();
-
-        // Calcule la distance total
-        double totalDistance = Math.sqrt(distanceX * distanceX + distanceY * distanceY);
-
-
-        double directionX = distanceX / totalDistance;
-        double directionY = distanceY / totalDistance;
-
-        // Calculer les nouvelles positions
-        double newposX = this.getX() + (this.getVitesse() * directionX);
-        double newposY = this.getY() + (this.getVitesse() * directionY);
-
-
-        this.setX((int) newposX);
-        this.setY((int) newposY);
-
-        if (atteintActeur() == true) {
-            if (this instanceof Laser) {
-                a.decrementationPv(getDegat());
-            } else if (this instanceof Fleche) {
-                a.decrementationPv(getDegat());
-
-            } else {
-                a.decrementationPv(getDegat());
-            }
-
-            if (a.getPv() <= 0) {
-                env.ajoutePiece(10);
-                env.suppActeur(a);
-            }
-            env.getProjectiles().remove(this);
-
-        }
-        if (!getFocusProjectile().estVivant()) {
-            env.getProjectiles().remove(this);
-        }
-
-    }
 
     public boolean atteintActeur() {
         // Les coins du projectile
@@ -151,4 +111,6 @@ public class Projectile {
     public Acteur getFocusProjectile() {
         return a;
     }
+
+
 }

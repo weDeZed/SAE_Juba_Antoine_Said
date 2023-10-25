@@ -3,10 +3,7 @@ package com.sae.sae_juba_antoine_said.Modele.Environnement;
 import com.sae.sae_juba_antoine_said.Modele.Acteurs.*;
 import com.sae.sae_juba_antoine_said.Modele.BFS.BFS;
 import com.sae.sae_juba_antoine_said.Modele.BFS.Sommet;
-import com.sae.sae_juba_antoine_said.Modele.Tours.Projectile;
-import com.sae.sae_juba_antoine_said.Modele.Tours.Tour;
-import com.sae.sae_juba_antoine_said.Modele.Tours.TourAProjectile;
-import com.sae.sae_juba_antoine_said.Modele.Tours.TroopTour;
+import com.sae.sae_juba_antoine_said.Modele.Tours.*;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
@@ -226,7 +223,11 @@ public class Environnement {
 
         // Lancer les projectiles
         for (Projectile p : getProjectiles()) {
+
             p.lancerProjectile();
+
+
+           // System.out.println("Les coordonnées du projectile "+ p + "X : " + p .getX() + " Y : " + p.getY() );
         }
 
         // Supprimer les projectiles qui ont terminé leur trajectoire

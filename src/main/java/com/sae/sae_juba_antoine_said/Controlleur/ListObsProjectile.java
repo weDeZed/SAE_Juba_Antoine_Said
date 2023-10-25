@@ -18,10 +18,10 @@ public class ListObsProjectile implements ListChangeListener<Projectile> {
 
     @Override
     public void onChanged(Change<? extends Projectile> p) {
+        System.out.println("dans class dans obs projectile");
 
         while (p.next()) {
             for (Projectile proj : p.getAddedSubList()) {
-
                 VueProjectile vueProjectile = new VueProjectile(panneauDeJeu, proj);
 
             }
