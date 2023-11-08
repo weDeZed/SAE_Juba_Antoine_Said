@@ -5,8 +5,10 @@ import com.sae.sae_juba_antoine_said.Modele.Environnement.Environnement;
 import javafx.application.Platform;
 
 public class TypeVagueDragon implements TypeVague{
+
     @Override
+
     public void ajouteEnnemis(Environnement env) {
-        Platform.runLater(() -> env.ajouterActeur(new Dragon(52 * 32, 24 * 32, 0, env)));
+        env.ajouterActeur(new Dragon(52 * 32, 24 * 32, 0));
     }
 }

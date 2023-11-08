@@ -10,8 +10,8 @@ public class Guerrier extends Ally {
     private int startY;
     int temps;
 
-    public Guerrier(int x, int y, Environnement env) {
-        super(100, x, y, 20, 50,env);
+    public Guerrier(int x, int y) {
+        super(100, x, y, 20, 50);
         this.startX = x / 32;
         this.startY = y / 32;
         temps = 0;
@@ -28,6 +28,7 @@ public class Guerrier extends Ally {
             if (a.getPv() <= 10) {
                 env.suppActeur(a);
                 env.ajoutePiece(5);
+                env.decrementNbEnemies(1);
             } else {
                 a.decrementationPv(7);
             }
@@ -36,57 +37,5 @@ public class Guerrier extends Ally {
                 getDeplacement().seDeplacer(this);
             }
         }
-    }
-
-   public void marcherSurChemin() {
-       Environnement env =Environnement.getEnvironnementInstance();
-        int x = getX() / 32;
-        int y = getY() / 32;
-        boolean peutDeplacer = false;
-        Random rand = new Random();
-
-        while (!peutDeplacer) {
-            int direction = rand.nextInt(4);
-            setDirectionActeur(direction);
-            switch (direction) {
-                case 0: // Haut
-                    if (dansTerrain(x, y) && env.getMap()[x][y - 1] == getCHEMIN()) {
-                        y = y - 1;
-                        this.setDirectionActeur(1);
-
-                        peutDeplacer = true;
-                    }
-                    break;
-                case 1: // Droit
-                    if (dansTerrain(x, y) && env.getMap()[x + 1][y] == getCHEMIN()) {
-                        x = x + 1;
-                        this.setDirectionActeur(2);
-                        peutDeplacer = true;
-                    }
-                    break;
-                case 2: // Bas
-                    if (dansTerrain(x, y) && env.getMap()[x][y + 1] == getCHEMIN()) {
-                        y = y + 1;
-                        this.setDirectionActeur(3);
-                        peutDeplacer = true;
-                    }
-                    break;
-                case 3: // Gauche
-                    if (dansTerrain(x, y) && env.getMap()[x - 1][y] == getCHEMIN()) {
-                        x = x - 1;
-                        this.setDirectionActeur(4);
-                        peutDeplacer = true;
-                    }
-                    break;
-            }
-        }
-        if (peutDeplacer) {
-            setX(x * 32);
-            setY(y * 32);
-        }
-    }
-
-    public boolean dansTerrain(int x, int y) {
-        return y >= 0 && y < 90 && x >= 0 && x < 90;
     }
 }

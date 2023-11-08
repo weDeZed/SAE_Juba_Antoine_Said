@@ -1,13 +1,10 @@
 package com.sae.sae_juba_antoine_said.Controlleur;
 
-import com.sae.sae_juba_antoine_said.Modele.Acteurs.Acteur;
 import com.sae.sae_juba_antoine_said.Modele.Environnement.Environnement;
-import com.sae.sae_juba_antoine_said.Modele.Tours.*;
 import com.sae.sae_juba_antoine_said.Vue.Music;
 import com.sae.sae_juba_antoine_said.Vue.*;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.collections.ListChangeListener;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -22,7 +19,6 @@ import javafx.scene.layout.TilePane;
 import javafx.util.Duration;
 
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -101,10 +97,9 @@ public class Controlleur implements Initializable {
         /************************** les listes observables  *********************************/
 
 
-
         environnement.getActeurs().addListener(new ListObsActeur(pane, environnement));
 
-        environnement.getTours().addListener( new ListObsTour(pane, environnement));
+        environnement.getTours().addListener(new ListObsTour(pane, environnement));
 
         listnerListeProjectiles = new ListObsProjectile(pane);
         environnement.getProjectiles().addListener(listnerListeProjectiles);
@@ -148,7 +143,10 @@ public class Controlleur implements Initializable {
 
                     if (environnement.getVie() <= 0) {
                         gameLoop.stop();
+                        environnement.mettreEnvInstanceNull();
                         vueEnvironnementMap.afficherGameOverScene();
+
+
 
                     }
                     if (environnement.getVagueEnnemi().getNbVague() == 10) { // après dix vague on gagne le jeu

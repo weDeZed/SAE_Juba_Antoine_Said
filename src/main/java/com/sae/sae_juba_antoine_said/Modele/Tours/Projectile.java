@@ -58,6 +58,7 @@ public class Projectile {
             if (a.getPv() <= 0) {
                 env.ajoutePiece(10);
                 env.suppActeur(a);
+                env.decrementNbEnemies(1);
             }
             env.getProjectiles().remove(this);
 

@@ -27,6 +27,7 @@ public class DeplacementEnnemi implements Deplacement{
             acteur.setY(newY);
         } else {
             env.suppActeur(acteur);
+            env.decrementNbEnemies(1);
             env.decrementerVie(10);
         }
     }

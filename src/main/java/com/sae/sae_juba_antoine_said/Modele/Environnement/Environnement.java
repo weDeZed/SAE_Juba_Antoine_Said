@@ -6,7 +6,6 @@ import com.sae.sae_juba_antoine_said.Modele.BFS.Sommet;
 import com.sae.sae_juba_antoine_said.Modele.Tours.Projectile;
 import com.sae.sae_juba_antoine_said.Modele.Tours.Tour;
 import com.sae.sae_juba_antoine_said.Modele.vague.TypeVagueAleatoire;
-import com.sae.sae_juba_antoine_said.Modele.vague.TypeVagueDragon;
 import com.sae.sae_juba_antoine_said.Modele.vague.VagueEnnemi;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -30,6 +29,7 @@ public class Environnement {
     private ObservableList<Acteur> acteurs;
     private ObservableList<Acteur> acteursEnnemies;
     private ObservableList<Tour> tours;
+    private IntegerProperty nbEnemies;
     private ObservableList<Projectile> projectiles;
     private ArrayList<Sommet> chemin;
     private IntegerProperty piece;
@@ -42,7 +42,7 @@ public class Environnement {
     private static Environnement getInstance = null;
     static int count = 0;
 
-    public Environnement() {
+    private Environnement() {
         try {
             this.x = 90;
             this.y = 90;
@@ -51,6 +51,8 @@ public class Environnement {
             this.tours = FXCollections.observableArrayList();
             this.projectiles = FXCollections.observableArrayList();
             this.acteursEnnemies = FXCollections.observableArrayList();
+
+            nbEnemies = new SimpleIntegerProperty();
 
             readMap();
             bfs = new BFS(this);
@@ -69,9 +71,7 @@ public class Environnement {
     public static Environnement getEnvironnementInstance() {
         if (getInstance == null) {
             getInstance = new Environnement();
-            return getInstance;
         }
-
         return getInstance;
     }
 
@@ -109,20 +109,19 @@ public class Environnement {
 
 
     public void unTour() {
-        if (count % 10 == 0 && nbTour % 50 == 0) { // Il crée une vague lorsqu'il n'y a plus d'ennemis sur le terrain
+
+
+        if (getNbEnemies() == 0) { // Il crée une vague lorsqu'il n'y a plus d'ennemis sur le terrain
             vagueEnnemi.creeVague();
+
         }
 
         if (nbTour % 10 == 0) {
-            ajouterActeur(acteursEnnemies.get(0));
-            acteursEnnemies.remove(0);
-            if (acteursEnnemies.isEmpty()) {
-                System.out.println("count "+ count);
-                count++;
-            }
-
+           if(acteursEnnemies.size()!=0){
+               ajouterActeur(acteursEnnemies.get(0));
+               acteursEnnemies.remove(0);
+           }
         }
-
 
 
         /********les acteurs agir ********/
@@ -145,7 +144,6 @@ public class Environnement {
 
         // Supprimer les projectiles qui ont terminé leur trajectoire
         projectiles.removeIf(Projectile::aFiniTrajectoire);
-
         nbTour++;
     }
 
@@ -265,9 +263,27 @@ public class Environnement {
         this.piece.set(getPiece() - piece);
     }
 
-    public int getCHEMIN() {
-        return CHEMIN;
+    public static Environnement getGetInstance() {
+        return getInstance;
     }
 
+    public static void mettreEnvInstanceNull() {
+        Environnement.getInstance = null;
+    }
 
+    public int getNbEnemies() {
+        return nbEnemies.get();
+    }
+
+    public IntegerProperty nbEnemiesProperty() {
+        return nbEnemies;
+    }
+
+    public void setNbEnemies(int nbEnemies) {
+        this.nbEnemies.set(nbEnemies);
+    }
+
+    public void decrementNbEnemies(int n) {
+        setNbEnemies(getNbEnemies()-n);
+    }
 }

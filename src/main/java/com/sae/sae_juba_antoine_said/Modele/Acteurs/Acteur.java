@@ -10,15 +10,14 @@ public abstract class Acteur {
     private int vitesse, range;
     private IntegerProperty x, y, pv;
     private IntegerProperty directionActeur;
-    private int dx, dy;// direction
     private String id;
     public static int compteur = 0;
-    private Environnement env;
+    protected Environnement env;
     private Deplacement deplacement;
 
 
 
-    public Acteur(int pv, int x, int y, int vitesse, int range, Environnement env,Deplacement deplacement) {
+    public Acteur(int pv, int x, int y, int vitesse, int range,Deplacement deplacement) {
         this.x = new SimpleIntegerProperty(x);
         this.y = new SimpleIntegerProperty(y);
         this.vitesse = vitesse;
@@ -27,7 +26,7 @@ public abstract class Acteur {
         this.pv = new SimpleIntegerProperty(pv);
         this.id = "A" + compteur;
         compteur++;
-        this.env = env;
+        this.env = Environnement.getEnvironnementInstance();
         this.deplacement=deplacement;
 
     }

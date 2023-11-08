@@ -14,10 +14,13 @@ public class VagueEnnemi {
     private TypeVague typeVague;
     int temp;
 
+    private IntegerProperty nbMort;
+
     public VagueEnnemi(Environnement env,TypeVague typeVague) {
         this.env = env;
         this.nbVague = new SimpleIntegerProperty(0);
         this.nbVagueBinding = new SimpleIntegerProperty(0);
+        this.nbMort= new SimpleIntegerProperty(0);
         this.typeVague = typeVague;
         temp = 0;
 
