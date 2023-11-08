@@ -5,8 +5,8 @@ import com.sae.sae_juba_antoine_said.Modele.Environnement.Environnement;
 public class Bandit extends Ennemi {
     int temp;
 
-    public Bandit(int x, int y, int vitesse) {
-        super(100, x, y, vitesse, 50);
+    public Bandit() {
+        super(100, 52*32, 24*32, 50);
         temp = 0;
     }
 

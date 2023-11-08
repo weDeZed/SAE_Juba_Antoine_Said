@@ -8,8 +8,8 @@ public abstract class Ennemi extends Acteur {
     private int indiceCheminActuel = 0;
     //private IntegerProperty directionActeur;
 
-    public Ennemi(int pv, int x, int y, int vitesse, int range) {
-        super(pv, x, y, vitesse, range,new DeplacementEnnemi());
+    public Ennemi(int pv, int x, int y, int range) {
+        super(pv, x, y, range,new DeplacementEnnemi());
     }
 
     @Override

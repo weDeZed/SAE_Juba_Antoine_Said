@@ -6,14 +6,12 @@ import java.util.Random;
 
 public class Guerrier extends Ally {
 
-    private int startX;
-    private int startY;
+
     int temps;
 
-    public Guerrier(int x, int y) {
-        super(100, x, y, 20, 50);
-        this.startX = x / 32;
-        this.startY = y / 32;
+    public Guerrier() {
+        super(100, 0, 0,  50);
+
         temps = 0;
     }
 

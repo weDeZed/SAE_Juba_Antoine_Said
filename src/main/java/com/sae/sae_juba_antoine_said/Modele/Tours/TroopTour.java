@@ -1,7 +1,6 @@
 package com.sae.sae_juba_antoine_said.Modele.Tours;
 
-import com.sae.sae_juba_antoine_said.Modele.Acteurs.DeplacementAlly;
-import com.sae.sae_juba_antoine_said.Modele.Acteurs.Guerrier;
+import com.sae.sae_juba_antoine_said.Modele.Acteurs.*;
 import com.sae.sae_juba_antoine_said.Modele.Environnement.Environnement;
 
 public class TroopTour extends Tour {
@@ -39,7 +38,11 @@ public class TroopTour extends Tour {
                     break;
                 }
                 placement += 1 + 1 / 2;
-                env.ajouterActeur(new Guerrier(x * 32, y * 32));
+                Acteur g = new FabriqueSimpleActeur().creerActeur("guerrier");
+                g.setX(x*32);
+                g.setY(y*32);
+                env.ajouterActeur(g);
+
             }
         }
 

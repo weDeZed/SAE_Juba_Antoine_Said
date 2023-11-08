@@ -9,6 +9,6 @@ public class TypeVagueDragon implements TypeVague{
     @Override
 
     public void ajouteEnnemis(Environnement env) {
-        env.ajouterActeur(new Dragon(52 * 32, 24 * 32, 0));
+
     }
 }

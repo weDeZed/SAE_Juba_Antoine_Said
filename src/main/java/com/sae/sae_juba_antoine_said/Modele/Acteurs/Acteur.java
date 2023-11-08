@@ -17,7 +17,7 @@ public abstract class Acteur {
 
 
 
-    public Acteur(int pv, int x, int y, int vitesse, int range,Deplacement deplacement) {
+    public Acteur(int pv, int x, int y,int range,Deplacement deplacement) {
         this.x = new SimpleIntegerProperty(x);
         this.y = new SimpleIntegerProperty(y);
         this.vitesse = vitesse;

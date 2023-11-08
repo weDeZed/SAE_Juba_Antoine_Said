@@ -4,8 +4,8 @@ import com.sae.sae_juba_antoine_said.Modele.Environnement.Environnement;
 
 public abstract class Ally extends Acteur {
 
-    public Ally(int pv, int x, int y, int vitesse, int range) {
-        super(pv,x,y,vitesse,range,new DeplacementAlly());
+    public Ally(int pv, int x, int y, int range) {
+        super(pv,x,y,range,new DeplacementAlly());
 
     }
 
