@@ -1,6 +1,5 @@
 package com.sae.sae_juba_antoine_said.Controlleur;
 
-import com.sae.sae_juba_antoine_said.Lanceur;
 import com.sae.sae_juba_antoine_said.Modele.Environnement.Environnement;
 import com.sae.sae_juba_antoine_said.Modele.Tours.*;
 import com.sae.sae_juba_antoine_said.Vue.Music;
@@ -13,7 +12,6 @@ import javafx.scene.input.TransferMode;
 import javafx.scene.layout.Pane;
 
 import java.io.FileInputStream;
-import java.net.URL;
 
 public class PoserTour {
 
@@ -24,10 +22,10 @@ public class PoserTour {
     public PoserTour(Environnement environnement, Pane pane, ToggleButton tourB1, ToggleButton tourB2, ToggleButton tourB3, ToggleButton tourB4) {
         this.environnement = environnement;
         this.placeDeTour = 200;
-        MettreEnPlaceTourDeplacable(tourB1, TroopTour.class, envoiImage(0), 150);
-        MettreEnPlaceTourDeplacable(tourB2, FoudreTour.class, envoiImage(1), 20);
-        MettreEnPlaceTourDeplacable(tourB3, FlecheTour.class, envoiImage(2), 30);
-        MettreEnPlaceTourDeplacable(tourB4, LaserTour.class, envoiImage(3), 50);
+        MettreEnPlaceTourDeplacable(tourB1, TourASoldat.class, envoiImage(0), 150);
+        MettreEnPlaceTourDeplacable(tourB2, TourAFoudre.class, envoiImage(1), 20);
+        MettreEnPlaceTourDeplacable(tourB3, TourAFleche.class, envoiImage(2), 30);
+        MettreEnPlaceTourDeplacable(tourB4, TourALaser.class, envoiImage(3), 50);
         MettreEnPlaceZoneDepot(pane);
 
 

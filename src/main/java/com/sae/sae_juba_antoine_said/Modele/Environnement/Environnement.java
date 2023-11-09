@@ -3,6 +3,7 @@ package com.sae.sae_juba_antoine_said.Modele.Environnement;
 import com.sae.sae_juba_antoine_said.Modele.Acteurs.*;
 import com.sae.sae_juba_antoine_said.Modele.BFS.BFS;
 import com.sae.sae_juba_antoine_said.Modele.BFS.Sommet;
+import com.sae.sae_juba_antoine_said.Modele.Projectiles.Projectile;
 import com.sae.sae_juba_antoine_said.Modele.Tours.*;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;

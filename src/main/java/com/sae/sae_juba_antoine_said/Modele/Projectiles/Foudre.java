@@ -1,4 +1,4 @@
-package com.sae.sae_juba_antoine_said.Modele.Tours;
+package com.sae.sae_juba_antoine_said.Modele.Projectiles;
 
 import com.sae.sae_juba_antoine_said.Modele.Acteurs.Acteur;
 import com.sae.sae_juba_antoine_said.Modele.Environnement.Environnement;

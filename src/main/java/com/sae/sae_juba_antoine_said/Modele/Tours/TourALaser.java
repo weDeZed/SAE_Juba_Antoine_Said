@@ -2,11 +2,13 @@ package com.sae.sae_juba_antoine_said.Modele.Tours;
 
 import com.sae.sae_juba_antoine_said.Modele.Acteurs.Acteur;
 import com.sae.sae_juba_antoine_said.Modele.Environnement.Environnement;
+import com.sae.sae_juba_antoine_said.Modele.Projectiles.Laser;
+import com.sae.sae_juba_antoine_said.Modele.Projectiles.Projectile;
 
-public class LaserTour extends TourAProjectile {
+public class TourALaser extends TourAProjectile {
 
 
-    public LaserTour(int x, int y, int range, Environnement environnement) {
+    public TourALaser(int x, int y, int range, Environnement environnement) {
 
         super(x, y, range, environnement);
 

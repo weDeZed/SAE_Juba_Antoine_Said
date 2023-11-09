@@ -1,9 +1,9 @@
 package com.sae.sae_juba_antoine_said.Vue;
 
-import com.sae.sae_juba_antoine_said.Modele.Tours.Fleche;
-import com.sae.sae_juba_antoine_said.Modele.Tours.Foudre;
-import com.sae.sae_juba_antoine_said.Modele.Tours.Laser;
-import com.sae.sae_juba_antoine_said.Modele.Tours.Projectile;
+import com.sae.sae_juba_antoine_said.Modele.Projectiles.Fleche;
+import com.sae.sae_juba_antoine_said.Modele.Projectiles.Foudre;
+import com.sae.sae_juba_antoine_said.Modele.Projectiles.Laser;
+import com.sae.sae_juba_antoine_said.Modele.Projectiles.Projectile;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;

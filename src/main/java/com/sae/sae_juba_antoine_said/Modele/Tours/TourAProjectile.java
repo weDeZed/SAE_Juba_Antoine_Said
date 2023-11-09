@@ -1,13 +1,7 @@
 package com.sae.sae_juba_antoine_said.Modele.Tours;
 
-import com.sae.sae_juba_antoine_said.Modele.Acteurs.Acteur;
 import com.sae.sae_juba_antoine_said.Modele.Environnement.Environnement;
-import com.sae.sae_juba_antoine_said.Modele.Tours.Projectile;
-import com.sae.sae_juba_antoine_said.Modele.Tours.Tour;
-import javafx.collections.ObservableList;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.sae.sae_juba_antoine_said.Modele.Projectiles.Projectile;
 
 public abstract class TourAProjectile extends Tour {
     private int tour;

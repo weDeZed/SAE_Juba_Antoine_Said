@@ -2,7 +2,7 @@ package com.sae.sae_juba_antoine_said.Controlleur;
 
 
 
-import  com.sae.sae_juba_antoine_said.Modele.Tours.Projectile;
+import com.sae.sae_juba_antoine_said.Modele.Projectiles.Projectile;
 import com.sae.sae_juba_antoine_said.Vue.VueProjectile;
 import javafx.collections.ListChangeListener;
 import javafx.scene.layout.Pane;

@@ -3,11 +3,11 @@ package com.sae.sae_juba_antoine_said.Modele.Tours;
 import com.sae.sae_juba_antoine_said.Modele.Acteurs.Guerrier;
 import com.sae.sae_juba_antoine_said.Modele.Environnement.Environnement;
 
-public class TroopTour extends Tour {
+public class TourASoldat extends Tour {
     private int chemin;
     private int temp;
 
-    public TroopTour(int x, int y, int range, Environnement environnement) {
+    public TourASoldat(int x, int y, int range, Environnement environnement) {
         super(x, y, 150, range, environnement);
         chemin = 230;
         temp = 0;
