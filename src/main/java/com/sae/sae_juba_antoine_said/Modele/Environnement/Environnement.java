@@ -113,10 +113,7 @@ public class Environnement {
 
 
         if (getNbEnemies() == 0) { // Il crée une vague lorsqu'il n'y a plus d'ennemis sur le terrain
-            System.out.println("creatoin de vague "+ getNbEnemies());
             vagueEnnemi.creeVague();
-
-            System.out.println("apresc creatoin de vague "+ getNbEnemies());
         }
 
         if (nbTour % 10 == 0) {
