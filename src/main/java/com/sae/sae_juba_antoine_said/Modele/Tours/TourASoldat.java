@@ -1,5 +1,7 @@
 package com.sae.sae_juba_antoine_said.Modele.Tours;
 
+import com.sae.sae_juba_antoine_said.Modele.Acteurs.Acteur;
+import com.sae.sae_juba_antoine_said.Modele.Acteurs.FabriqueSimpleActeur;
 import com.sae.sae_juba_antoine_said.Modele.Acteurs.Guerrier;
 import com.sae.sae_juba_antoine_said.Modele.Environnement.Environnement;
 
@@ -39,7 +41,10 @@ public class TourASoldat extends Tour {
                     break;
                 }
                 placement += 1 + 1 / 2;
-                env.ajouterActeur(new Guerrier(x * 32, y * 32, env));
+                Acteur a = new FabriqueSimpleActeur().creerActeur("guerrier");
+                a.setX(x*32);
+                a.setY(y*32);
+                env.ajouterActeur(a);
             }
         }
 
