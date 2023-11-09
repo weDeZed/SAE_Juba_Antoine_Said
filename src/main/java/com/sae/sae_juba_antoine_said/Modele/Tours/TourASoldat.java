@@ -1,14 +1,14 @@
 package com.sae.sae_juba_antoine_said.Modele.Tours;
 
-import com.sae.sae_juba_antoine_said.Modele.Acteurs.*;
+import com.sae.sae_juba_antoine_said.Modele.Acteurs.Guerrier;
 import com.sae.sae_juba_antoine_said.Modele.Environnement.Environnement;
 
-public class TroopTour extends Tour {
+public class TourASoldat extends Tour {
     private int chemin;
     private int temp;
 
-    public TroopTour(int x, int y, int range, Environnement environnement) {
-        super(x, y, 20, range, environnement);
+    public TourASoldat(int x, int y, int range, Environnement environnement) {
+        super(x, y, 150, range, environnement);
         chemin = 230;
         temp = 0;
     }
@@ -18,6 +18,7 @@ public class TroopTour extends Tour {
         temp++;
         //System.out.println("nbTour "+nbTour);
         if (temp % 12 == 0) {
+
             int placement = 0;
             for (int i = 0; i < 1; i++) {
                 int x = getX() / 32;
@@ -38,11 +39,7 @@ public class TroopTour extends Tour {
                     break;
                 }
                 placement += 1 + 1 / 2;
-                Acteur g = new FabriqueSimpleActeur().creerActeur("guerrier");
-                g.setX(x*32);
-                g.setY(y*32);
-                env.ajouterActeur(g);
-
+                env.ajouterActeur(new Guerrier(x * 32, y * 32, env));
             }
         }
 

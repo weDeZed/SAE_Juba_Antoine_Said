@@ -2,16 +2,18 @@ package com.sae.sae_juba_antoine_said.Modele.Tours;
 
 import com.sae.sae_juba_antoine_said.Modele.Acteurs.Acteur;
 import com.sae.sae_juba_antoine_said.Modele.Environnement.Environnement;
+import com.sae.sae_juba_antoine_said.Modele.Projectiles.Fleche;
+import com.sae.sae_juba_antoine_said.Modele.Projectiles.Projectile;
 
-public class FlecheTour extends TourAProjectile{
+public class TourAFleche extends TourAProjectile{
 
 
-    public FlecheTour(int x, int y,  int range, Environnement env) {
+    public TourAFleche(int x, int y, int range, Environnement env) {
         super(x, y, range, env);
     }
 
     @Override
-    public  Projectile creeProjectile() {
+    public Projectile creeProjectile() {
         Acteur act=this.ennemiPlusProche();
         Projectile pro = new Fleche(this.getX() + 10, this.getY() - 30,act, env);
         this.env.ajouterProjectile(pro);

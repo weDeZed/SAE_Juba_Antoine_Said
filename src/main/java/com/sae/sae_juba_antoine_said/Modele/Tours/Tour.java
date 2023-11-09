@@ -13,7 +13,7 @@ public abstract class Tour {
     IntegerProperty x, y;
     int degatsParSeconde, range;
     Environnement env;
-    private  int prix;
+    private int prix;
 
 
     public Tour(int x, int y, int prix, int range, Environnement env) {
@@ -21,7 +21,7 @@ public abstract class Tour {
         this.y = new SimpleIntegerProperty(y);
         this.range = range;
         this.env = env;
-        this.prix=prix;
+        this.prix = prix;
     }
 
     public abstract void attaqueEnnemi();
@@ -87,6 +87,7 @@ public abstract class Tour {
     public void setRange(int range) {
         this.range = range;
     }
+
     public Environnement getEnvironment() {
         return env;
     }

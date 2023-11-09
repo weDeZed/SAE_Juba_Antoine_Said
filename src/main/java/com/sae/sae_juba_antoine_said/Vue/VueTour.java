@@ -1,16 +1,10 @@
 package com.sae.sae_juba_antoine_said.Vue;
 
 import com.sae.sae_juba_antoine_said.Modele.Tours.*;
-import javafx.animation.Animation;
-import javafx.animation.KeyFrame;
-import javafx.animation.KeyValue;
-import javafx.animation.Timeline;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Line;
-import javafx.scene.transform.Rotate;
-import javafx.util.Duration;
 
 import java.io.FileInputStream;
 
@@ -29,17 +23,17 @@ public class VueTour {
 
         FileInputStream fichierTour = null;
 
-        if (tour instanceof TroopTour) {
+        if (tour instanceof TourASoldat) {
            this.image=envoiImage(0);
 
         }
-        if (tour instanceof FoudreTour) {
+        if (tour instanceof TourAFoudre) {
             this.image=envoiImage(1);
         }
-        if (tour instanceof FlecheTour) {
+        if (tour instanceof TourAFleche) {
             this.image=envoiImage(2);
         }
-        if (tour instanceof LaserTour) {
+        if (tour instanceof TourALaser) {
             this.image=envoiImage(3);
         }
         int decalageH = ((int) image.getHeight())/2;

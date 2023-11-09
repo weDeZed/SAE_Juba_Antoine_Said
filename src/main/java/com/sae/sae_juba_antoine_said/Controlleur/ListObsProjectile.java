@@ -2,7 +2,7 @@ package com.sae.sae_juba_antoine_said.Controlleur;
 
 
 
-import  com.sae.sae_juba_antoine_said.Modele.Tours.Projectile;
+import com.sae.sae_juba_antoine_said.Modele.Projectiles.Projectile;
 import com.sae.sae_juba_antoine_said.Vue.VueProjectile;
 import javafx.collections.ListChangeListener;
 import javafx.scene.layout.Pane;
@@ -18,10 +18,10 @@ public class ListObsProjectile implements ListChangeListener<Projectile> {
 
     @Override
     public void onChanged(Change<? extends Projectile> p) {
+        System.out.println("dans class dans obs projectile");
 
         while (p.next()) {
             for (Projectile proj : p.getAddedSubList()) {
-
                 VueProjectile vueProjectile = new VueProjectile(panneauDeJeu, proj);
 
             }
