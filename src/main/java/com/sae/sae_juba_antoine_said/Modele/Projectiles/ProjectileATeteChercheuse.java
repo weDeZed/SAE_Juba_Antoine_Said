@@ -13,11 +13,9 @@ public class ProjectileATeteChercheuse extends Projectile {
 
     public void lancerProjectile() {
 
-        System.out.println("Les coordonnées du projectile "+ this + "X : " + this.getX() + " Y : " + this.getY() );
 
         double distanceX = a.getX() - this.getX();
         double distanceY = a.getY() - this.getY();
-        System.out.println("Coordonée de l'acteur " + a +  " X : "  + a.getX() + " Y : " + a.getY());
 
 
         // Calcule la distance total
@@ -35,7 +33,6 @@ public class ProjectileATeteChercheuse extends Projectile {
         this.setX((int) newposX);
         this.setY((int) newposY);
 
-        System.out.println("Les coordonnées du projectile a la fin du code est : "+ this + "X : " + this.getX() + " Y : " + this.getY() );
 
 
         if (atteintActeur() == true) {
@@ -45,6 +42,7 @@ public class ProjectileATeteChercheuse extends Projectile {
 
         if (a.getPv() <= 0) {
             env.ajoutePiece(10);
+            env.decrementNbEnemies(1);
             env.suppActeur(a);
         }
 

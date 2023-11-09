@@ -28,8 +28,7 @@ public class VagueEnnemi {
 
     public void creeVague() {
         try {
-            //sleep(1000);
-            System.out.println("dans creevague");
+
             typeVague.ajouteEnnemis(env);
 
         }catch (Exception ex) {

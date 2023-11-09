@@ -5,6 +5,7 @@ import com.sae.sae_juba_antoine_said.Modele.BFS.BFS;
 import com.sae.sae_juba_antoine_said.Modele.BFS.Sommet;
 import com.sae.sae_juba_antoine_said.Modele.Projectiles.Projectile;
 import com.sae.sae_juba_antoine_said.Modele.Tours.Tour;
+import com.sae.sae_juba_antoine_said.Modele.vague.CompositeVague;
 import com.sae.sae_juba_antoine_said.Modele.vague.TypeVagueAleatoire;
 import com.sae.sae_juba_antoine_said.Modele.vague.VagueEnnemi;
 import javafx.beans.property.IntegerProperty;
@@ -60,7 +61,7 @@ public class Environnement {
             this.piece = new SimpleIntegerProperty(170);
             this.vie = new SimpleIntegerProperty(100);
             this.nbTour = 0;
-            vagueEnnemi = new VagueEnnemi(this, new TypeVagueAleatoire());
+            vagueEnnemi = new VagueEnnemi(this, new CompositeVague());
             indexActeur = 0;
         } catch (IOException e) {
             e.printStackTrace();
@@ -112,15 +113,17 @@ public class Environnement {
 
 
         if (getNbEnemies() == 0) { // Il crée une vague lorsqu'il n'y a plus d'ennemis sur le terrain
+            System.out.println("creatoin de vague "+ getNbEnemies());
             vagueEnnemi.creeVague();
 
+            System.out.println("apresc creatoin de vague "+ getNbEnemies());
         }
 
         if (nbTour % 10 == 0) {
-           if(acteursEnnemies.size()!=0){
-               ajouterActeur(acteursEnnemies.get(0));
-               acteursEnnemies.remove(0);
-           }
+            if (acteursEnnemies.size() != 0) {
+                ajouterActeur(acteursEnnemies.get(0));
+                acteursEnnemies.remove(0);
+            }
         }
 
 
@@ -284,6 +287,6 @@ public class Environnement {
     }
 
     public void decrementNbEnemies(int n) {
-        setNbEnemies(getNbEnemies()-n);
+        setNbEnemies(getNbEnemies() - n);
     }
 }

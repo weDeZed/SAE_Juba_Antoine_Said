@@ -10,7 +10,7 @@ public class TypeVagueAleatoire implements TypeVague{
     @Override
     public void ajouteEnnemis(Environnement env) {
         FabriqueSimpleActeur fabriqueSimpleActeur = new FabriqueSimpleActeur();
-        int nbEmmenies=10;
+        int nbEmmenies=5;
         env.setNbEnemies(nbEmmenies);
         for (int i=0; i<nbEmmenies; i++){
                 int type = (int) (Math.random() * 2); //  soit bandit et soit Dragon

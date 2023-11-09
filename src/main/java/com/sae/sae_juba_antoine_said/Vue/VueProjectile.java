@@ -29,7 +29,6 @@ public class VueProjectile {
         FileInputStream fichierGuerrier = null;
 
         if(projectile instanceof Laser){
-            System.out.println("dans class vue lasser ");
             try {
                 fichierGuerrier = new FileInputStream("src/main/java/com/sae/sae_juba_antoine_said/Ressources/projectilleImg/laser.png");
             } catch (Exception e) {
@@ -58,7 +57,6 @@ public class VueProjectile {
         this.image = new Image(fichierGuerrier);
         this.imageView = new ImageView(image);
         this.imageView.setId(projectile.getId());
-        System.out.println("dans la vue projectille "+projectile.getId() + "x    "+projectile.getX() + "   y  "+projectile.getY());
         imageView.xProperty().bind(projectile.xProperty());
         imageView.yProperty().bind(projectile.yProperty());
         this.pane.getChildren().add(imageView);
