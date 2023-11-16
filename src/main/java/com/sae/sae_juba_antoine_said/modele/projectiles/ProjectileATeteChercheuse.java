@@ -1,7 +1,7 @@
-package com.sae.sae_juba_antoine_said.modele.projectiles;
+package com.sae.sae_juba_antoine_said.Modele.Projectiles;
 
-import com.sae.sae_juba_antoine_said.modele.acteurs.Acteur;
-import com.sae.sae_juba_antoine_said.modele.environnement.Environnement;
+import com.sae.sae_juba_antoine_said.Modele.Acteurs.Acteur;
+import com.sae.sae_juba_antoine_said.Modele.Environnement.Environnement;
 
 public class ProjectileATeteChercheuse extends Projectile {
 
@@ -34,7 +34,6 @@ public class ProjectileATeteChercheuse extends Projectile {
         this.setY((int) newposY);
 
 
-
         if (atteintActeur() == true) {
 
             a.decrementationPv(getDegat());
@@ -42,7 +41,6 @@ public class ProjectileATeteChercheuse extends Projectile {
 
         if (a.getPv() <= 0) {
             env.ajoutePiece(10);
-            env.decrementNbEnemies(1);
             env.suppActeur(a);
         }
 

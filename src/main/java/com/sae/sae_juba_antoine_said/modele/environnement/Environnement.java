@@ -129,7 +129,6 @@ public class Environnement {
             acteur.agir();
         }
 
-
         // Les tours attaquent tous les 7 tours
         if (nbTour % 7 == 0) {
             for (Tour t : getTours()) {
@@ -138,12 +137,14 @@ public class Environnement {
         }
 
         // Lancer les projectiles
+        // Lancer les projectiles
         for (Projectile p : getProjectiles()) {
             p.lancerProjectile();
         }
 
         // Supprimer les projectiles qui ont terminé leur trajectoire
         projectiles.removeIf(Projectile::aFiniTrajectoire);
+
         nbTour++;
     }
 
@@ -285,5 +286,12 @@ public class Environnement {
 
     public void decrementNbEnemies(int n) {
         setNbEnemies(getNbEnemies() - n);
+    }
+
+    public VagueEnnemi getVagueEnnemi() {
+        return vagueEnnemi;
+    }
+    public void setActeurs(ObservableList<Acteur> acteurs) {
+        this.acteurs = acteurs;
     }
 }
