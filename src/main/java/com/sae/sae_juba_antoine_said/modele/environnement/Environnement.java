@@ -108,7 +108,6 @@ public class Environnement {
 
     }
 
-
     public void unTour() {
 
 
@@ -123,7 +122,6 @@ public class Environnement {
             }
         }
 
-
         /********les acteurs agir ********/
         for (Acteur acteur : getActeurs()) {
             acteur.agir();
@@ -136,7 +134,6 @@ public class Environnement {
             }
         }
 
-        // Lancer les projectiles
         // Lancer les projectiles
         for (Projectile p : getProjectiles()) {
             p.lancerProjectile();
@@ -218,7 +215,6 @@ public class Environnement {
         this.tours.add(t);
     }
 
-
     public void ajouterProjectile(Projectile p) {
         this.projectiles.add(p);
     }
@@ -226,7 +222,6 @@ public class Environnement {
     public ObservableList<Projectile> getProjectiles() {
         return projectiles;
     }
-
 
     public void removeProjectile(Projectile p) {
         this.projectiles.remove(p);
@@ -286,12 +281,5 @@ public class Environnement {
 
     public void decrementNbEnemies(int n) {
         setNbEnemies(getNbEnemies() - n);
-    }
-
-    public VagueEnnemi getVagueEnnemi() {
-        return vagueEnnemi;
-    }
-    public void setActeurs(ObservableList<Acteur> acteurs) {
-        this.acteurs = acteurs;
     }
 }

@@ -1,10 +1,8 @@
-package com.sae.sae_juba_antoine_said.Modele.Projectiles;
+package com.sae.sae_juba_antoine_said.modele.projectiles;
 
-import com.sae.sae_juba_antoine_said.Modele.Environnement.Environnement;
+import com.sae.sae_juba_antoine_said.modele.environnement.Environnement;
 
-
-
-import com.sae.sae_juba_antoine_said.Modele.Acteurs.Acteur;
+import com.sae.sae_juba_antoine_said.modele.acteurs.Acteur;
 
 public class ProjectileDirect extends Projectile {
 

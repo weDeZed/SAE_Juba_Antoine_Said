@@ -1,7 +1,7 @@
-package com.sae.sae_juba_antoine_said.Modele.Projectiles;
+package com.sae.sae_juba_antoine_said.modele.projectiles;
 
-import com.sae.sae_juba_antoine_said.Modele.Acteurs.Acteur;
-import com.sae.sae_juba_antoine_said.Modele.Environnement.Environnement;
+import com.sae.sae_juba_antoine_said.modele.acteurs.Acteur;
+import com.sae.sae_juba_antoine_said.modele.environnement.Environnement;
 
 public class ProjectileATeteChercheuse extends Projectile {
 
