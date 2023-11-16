@@ -21,8 +21,7 @@ import java.util.*;
 
 public class Environnement {
 
-    BFS bfs;
-
+    private BFS bfs;
     private IntegerProperty vie;
     private int x, y;
     private int[][] map;
@@ -34,13 +33,8 @@ public class Environnement {
     private ArrayList<Sommet> chemin;
     private IntegerProperty piece;
     private int nbTour;
-    private final int CHEMIN = 230;
-    private final int TERRAIN = 164;
-
     private VagueEnnemi vagueEnnemi;
-    private int indexActeur;
     private static Environnement getInstance = null;
-    static int count = 0;
 
     private Environnement() {
 
@@ -52,9 +46,7 @@ public class Environnement {
             this.tours = FXCollections.observableArrayList();
             this.projectiles = FXCollections.observableArrayList();
             this.acteursEnnemies = FXCollections.observableArrayList();
-
             nbEnemies = new SimpleIntegerProperty();
-
             readMap();
             bfs = new BFS(this);
             chemin = bfs.cheminVersSource();
@@ -62,7 +54,6 @@ public class Environnement {
             this.vie = new SimpleIntegerProperty(100);
             this.nbTour = 0;
             vagueEnnemi = new VagueEnnemi(this, new CompositeVague());
-            indexActeur = 0;
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -182,10 +173,6 @@ public class Environnement {
         return this.piece;
     }
 
-    public void decrementationPiece(int piece) {
-        this.piece.subtract(piece);
-    }
-
     public void ajoutePiece(int piece) {
         this.piece.setValue(this.piece.getValue() + piece);
     }
@@ -223,24 +210,12 @@ public class Environnement {
         return projectiles;
     }
 
-    public void removeProjectile(Projectile p) {
-        this.projectiles.remove(p);
-    }
-
     public int getVie() {
         return vie.get();
     }
 
     public IntegerProperty vieProperty() {
         return vie;
-    }
-
-    public void setVie(int vie) {
-        this.vie.set(vie);
-    }
-
-    public BFS getBfs() {
-        return bfs;
     }
 
     public void decrementerVie(double v) {

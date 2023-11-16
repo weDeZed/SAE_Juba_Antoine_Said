@@ -153,17 +153,4 @@ public class BFS {
         Collections.reverse(chemin);
         return chemin;
     }
-
-
-    public Sommet getCible() {
-        return cible;
-    }
-
-    public Map<Sommet, Set<Sommet>> getListeAdj() {
-        return listeAdj;
-    }
-
-    public ObservableList<Sommet> getObstacles() {
-        return obstacles;
-    }
 }

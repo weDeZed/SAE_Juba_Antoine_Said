@@ -17,9 +17,7 @@ public class Sommet {
     public double getPoids() {
         return this.poids;
     }
-    public void setPoids(double poids) {
-        this.poids = poids;
-    }
+
     @Override
     public String toString(){
         return "Sommet{" +

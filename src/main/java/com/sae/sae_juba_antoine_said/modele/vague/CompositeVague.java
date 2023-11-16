@@ -30,7 +30,4 @@ public class CompositeVague implements TypeVague{
         compteurVague++;
 
     }
-    public void  ajouteVague(TypeVague vague){
-        lesVagues.add(vague);
-    }
 }

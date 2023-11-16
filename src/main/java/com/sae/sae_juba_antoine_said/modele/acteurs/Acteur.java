@@ -7,7 +7,7 @@ import javafx.beans.property.SimpleIntegerProperty;
 
 public abstract class Acteur {
     private final int CHEMIN = 230;
-    private int vitesse, range;
+    private int range;
     private IntegerProperty x, y, pv;
     private IntegerProperty directionActeur;
     private String id;
@@ -15,12 +15,9 @@ public abstract class Acteur {
     protected Environnement env;
     private Deplacement deplacement;
 
-
-
     public Acteur(int pv, int x, int y,int range,Deplacement deplacement) {
         this.x = new SimpleIntegerProperty(x);
         this.y = new SimpleIntegerProperty(y);
-        this.vitesse = vitesse;
         this.range = range;
         directionActeur = new SimpleIntegerProperty(0);
         this.pv = new SimpleIntegerProperty(pv);
@@ -28,8 +25,8 @@ public abstract class Acteur {
         compteur++;
         this.env = Environnement.getEnvironnementInstance();
         this.deplacement=deplacement;
-
     }
+
     public void seRaprocher(Acteur a) {
         int dx, dy;
         int distanceX, distanceY;
@@ -51,13 +48,12 @@ public abstract class Acteur {
             } else {
                 dy = 0;
             }
-            int newposX = this.getX() + (this.getVitesse() * dx);
-            int newposY = this.getY() + (this.getVitesse() * dy);
 
-            //if (newposX >= 0 && newposX < env.getMap().length && newposY >= 0 && newposY < env.getMap()[0].length && env.getMap()[newposX][newposY] == env.getCHEMIN()) {
-                this.setX(newposX);
-                this.setY(newposY);
-            //}
+            int newposX = this.getX() + dx;
+            int newposY = this.getY() + dy;
+
+            this.setX(newposX);
+            this.setY(newposY);
 
             // Calculez la distance entre le Bandit et l'Acteur
             double distance = Math.sqrt(Math.pow((this.getX() - a.getX()), 2) + Math.pow((this.getY() - a.getY()), 2));
@@ -72,10 +68,6 @@ public abstract class Acteur {
 
     public int getCHEMIN() {
         return CHEMIN;
-    }
-
-    public int getDirectionActeur() {
-        return directionActeur.get();
     }
 
     public IntegerProperty directionActeurProperty() {
@@ -133,7 +125,6 @@ public abstract class Acteur {
         return env;
     }
 
-
     public boolean estVivant() {
         return this.pv.getValue() > 0;
     }
@@ -149,12 +140,6 @@ public abstract class Acteur {
     public IntegerProperty getPvProperty() {
         return this.pv;
     }
-
-    public int getVitesse() {
-        return this.vitesse;
-    }
-
-
 
     public int getRange() {
         return this.range;
