@@ -4,7 +4,6 @@ public abstract class Ally extends Acteur {
 
     public Ally(int pv, int x, int y, int range) {
         super(pv,x,y,range,new DeplacementAlly());
-
     }
 
     @Override

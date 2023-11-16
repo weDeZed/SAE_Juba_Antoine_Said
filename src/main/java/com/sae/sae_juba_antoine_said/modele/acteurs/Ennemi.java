@@ -3,9 +3,6 @@ package com.sae.sae_juba_antoine_said.modele.acteurs;
 
 public abstract class Ennemi extends Acteur {
 
-    private int indiceCheminActuel = 0;
-    //private IntegerProperty directionActeur;
-
     public Ennemi(int pv, int x, int y, int range) {
         super(pv, x, y, range,new DeplacementEnnemi());
     }

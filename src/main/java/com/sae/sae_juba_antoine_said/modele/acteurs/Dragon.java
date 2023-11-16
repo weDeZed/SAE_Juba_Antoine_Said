@@ -8,7 +8,6 @@ public class Dragon extends Ennemi {
         nb = 0;
     }
 
-
     @Override
     public void agir() {
         nb++;
