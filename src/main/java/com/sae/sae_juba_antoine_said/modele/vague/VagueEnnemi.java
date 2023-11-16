@@ -27,14 +27,7 @@ public class VagueEnnemi {
     }
 
     public void creeVague() {
-        try {
-
-            typeVague.ajouteEnnemis(env);
-
-        }catch (Exception ex) {
-            System.out.println("Erreur 404");
-        }
-
+        typeVague.ajouteEnnemis(env);
     }
 
     public IntegerProperty nbVagueProperty() {
