@@ -1,6 +1,6 @@
 package com.sae.sae_juba_antoine_said;
 
-import com.sae.sae_juba_antoine_said.Vue.Music;
+import com.sae.sae_juba_antoine_said.vue.Music;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -8,7 +8,6 @@ import javafx.stage.Stage;
 
 
 import java.io.IOException;
-import java.net.URL;
 
 public class Lanceur extends Application {
 
