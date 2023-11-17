@@ -2,6 +2,7 @@ package com.sae.sae_juba_antoine_said.modele.bdd;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class Connect {
@@ -29,5 +30,18 @@ public class Connect {
 
     public Connection getConnection() {
         return connection;
+    }
+
+    public void creerUtilisateur(String nom, String mdp) {
+        String sql = "INSERT INTO sae_dev.utilisateur (pseudo,mot_de_passe) VALUES (?,?)";
+        try {
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, nom);
+            statement.setString(2, mdp);
+            statement.executeUpdate();
+            System.out.println("Utilisateur créer avec succès.");
+        } catch (SQLException e) {
+            System.out.println("Erreur lors de la requête : " + e.getMessage());
+        }
     }
 }
