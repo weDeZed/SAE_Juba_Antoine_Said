@@ -14,7 +14,7 @@
         </ImageView>
         <Button fx:id="lancerButton" layoutX="302.0" layoutY="631.0" onAction="#lancerButtonAction" prefHeight="70.0" prefWidth="140.0" text="Invité" />
         <Button fx:id="quitterButton" layoutX="482.0" layoutY="635.0" onAction="#quitterButtonAction" prefHeight="70.0" prefWidth="140.0" text="Quitter" />
-        <Button fx:id="creeCompte" layoutX="675.0" layoutY="632.0" onAction="#creerCompteActioin" prefHeight="70.0" prefWidth="200.0" text="Creer Compte" />
+        <Button fx:id="creeCompte" layoutX="675.0" layoutY="632.0" onAction="#creerCompteAction" prefHeight="70.0" prefWidth="200.0" text="Creer Compte" />
         <Button fx:id="connexion" layoutX="935.0" layoutY="630.0" onAction="#conexionAction" prefHeight="70.0" prefWidth="200.0" text="Conexion" />
     </children>
 </AnchorPane>
