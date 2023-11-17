@@ -46,4 +46,13 @@ public class ControlleurMenu {
         Platform.exit();
         System.exit(0);
     }
+    @FXML
+    public void creerCompteActioin(ActionEvent action){
+
+    }
+
+    @FXML
+    public void conexionAction(ActionEvent action){
+
+    }
 }

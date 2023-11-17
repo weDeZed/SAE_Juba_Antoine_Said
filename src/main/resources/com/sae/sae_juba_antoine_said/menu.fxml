@@ -1,22 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.image.Image?>
-<AnchorPane fx:id="anchorPaneIdM" stylesheets="@css/menuStyle.css" prefHeight="800.0" prefWidth="1400.0"
-            xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.sae.sae_juba_antoine_said.controlleur.ControlleurMenu">
+<AnchorPane fx:id="anchorPaneIdM" prefHeight="800.0" prefWidth="1400.0" stylesheets="@css/menuStyle.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sae.sae_juba_antoine_said.controlleur.ControlleurMenu">
     <children>
-        <ImageView fitWidth="${anchorPaneIdM.prefWidth}" fitHeight="${anchorPaneIdM.prefHeight}">
+        <ImageView fitHeight="${anchorPaneIdM.prefHeight}" fitWidth="${anchorPaneIdM.prefWidth}">
             <image>
-                <Image url="@images/imageMenu.png"/>
+                <Image url="@images/imageMenu.png" />
             </image>
         </ImageView>
-        <Button fx:id="lancerButton" layoutX="450.0" layoutY="630.0" onAction="#lancerButtonAction" prefHeight="70.0"
-                prefWidth="140.0" text="Lancer"/>
-        <Button fx:id="quitterButton" layoutX="750.0" layoutY="630.0" onAction="#quitterButtonAction" prefHeight="70.0"
-                prefWidth="140.0" text="Quitter"/>
+        <Button fx:id="lancerButton" layoutX="302.0" layoutY="631.0" onAction="#lancerButtonAction" prefHeight="70.0" prefWidth="140.0" text="Invité" />
+        <Button fx:id="quitterButton" layoutX="482.0" layoutY="635.0" onAction="#quitterButtonAction" prefHeight="70.0" prefWidth="140.0" text="Quitter" />
+        <Button fx:id="creeCompte" layoutX="675.0" layoutY="632.0" onAction="#creerCompteActioin" prefHeight="70.0" prefWidth="200.0" text="Creer Compte" />
+        <Button fx:id="connexion" layoutX="935.0" layoutY="630.0" onAction="#conexionAction" prefHeight="70.0" prefWidth="200.0" text="Conexion" />
     </children>
 </AnchorPane>
