@@ -40,7 +40,6 @@ public class Connect {
                 System.out.println("Utilisateur créer avec succès.");
             } catch (SQLException e) {
                 System.out.println("Erreur lors de la requête : " + e.getMessage());
-
             }
         }
     }
