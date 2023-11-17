@@ -1,9 +1,6 @@
 package com.sae.sae_juba_antoine_said.modele.bdd;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class Connect {
     private static Connect getInstance = null;
@@ -33,15 +30,33 @@ public class Connect {
     }
 
     public void creerUtilisateur(String nom, String mdp) {
-        String sql = "INSERT INTO sae_dev.utilisateur (pseudo,mot_de_passe) VALUES (?,?)";
+        if(verifUtilisateur(nom,mdp)) {
+            try {
+                String sql = "INSERT INTO sae_dev.utilisateur (pseudo,mot_de_passe) VALUES (?,?)";
+                PreparedStatement statement = connection.prepareStatement(sql);
+                statement.setString(1, nom);
+                statement.setString(2, mdp);
+                statement.executeUpdate();
+                System.out.println("Utilisateur créer avec succès.");
+            } catch (SQLException e) {
+                System.out.println("Erreur lors de la requête : " + e.getMessage());
+
+            }
+        }
+    }
+
+    public boolean verifUtilisateur(String nom,String mdp) {
+        String sql = "SELECT * FROM sae_dev.utilisateur WHERE pseudo = ? AND mot_de_passe = ?";
         try {
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, nom);
             statement.setString(2, mdp);
-            statement.executeUpdate();
-            System.out.println("Utilisateur créer avec succès.");
+            ResultSet resultSet = statement.executeQuery();
+            return resultSet.next();
         } catch (SQLException e) {
             System.out.println("Erreur lors de la requête : " + e.getMessage());
+            return false;
         }
     }
+
 }
