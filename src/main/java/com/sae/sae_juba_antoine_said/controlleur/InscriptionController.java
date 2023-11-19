@@ -1,6 +1,6 @@
 package com.sae.sae_juba_antoine_said.controlleur;
 
-import com.sae.sae_juba_antoine_said.modele.bdd.Connect;
+import com.sae.sae_juba_antoine_said.bdd.Connect;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;

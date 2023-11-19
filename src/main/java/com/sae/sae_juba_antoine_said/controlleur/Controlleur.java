@@ -1,5 +1,6 @@
 package com.sae.sae_juba_antoine_said.controlleur;
 
+import com.sae.sae_juba_antoine_said.bdd.Connect;
 import com.sae.sae_juba_antoine_said.modele.environnement.Environnement;
 import com.sae.sae_juba_antoine_said.vue.Music;
 import com.sae.sae_juba_antoine_said.vue.*;
@@ -142,14 +143,24 @@ public class Controlleur implements Initializable {
                     }
 
                     if (environnement.getVie() <= 0) {
+                        Connect connect = Connect.getConnectionInstance();
+                        connect.insertPartie();
+                        connect.insertFeedback();
+                        int score = (environnement.getNbEnemies()*5)+(environnement.getVagueEnnemi().getNbVague()*10);
+                        connect.insertEnvoyer_jouer(
+                                score,
+                                    environnement.getVagueEnnemi().getNbVague(),
+                                        environnement.getNbEnemies()
+                        );
                         gameLoop.stop();
                         environnement.mettreEnvInstanceNull();
                         vueEnvironnementMap.afficherGameOverScene();
-
                     }
 
                     if (environnement.getVagueEnnemi().getNbVague() == 10) { // après dix vague on gagne le jeu
+                        Connect connect = Connect.getConnectionInstance();
                         gameLoop.stop();
+                        environnement.mettreEnvInstanceNull();
                         vueEnvironnementMap.afficherGameWinScene();
                     }
 

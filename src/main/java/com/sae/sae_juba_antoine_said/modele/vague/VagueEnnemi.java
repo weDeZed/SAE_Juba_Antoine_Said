@@ -22,7 +22,6 @@ public class VagueEnnemi {
         this.nbMort= new SimpleIntegerProperty(0);
         this.typeVague = typeVague;
         temp = 0;
-
     }
 
     public void creeVague() {

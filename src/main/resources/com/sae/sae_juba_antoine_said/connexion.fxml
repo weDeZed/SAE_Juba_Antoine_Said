@@ -16,7 +16,7 @@
                 <Label style="-fx-font-size: 24px; -fx-text-fill: #ffffff;" text="Se connecter" />
                 <TextField fx:id="identifiant" maxWidth="300.0" promptText="Identifiant" />
                 <TextField fx:id="motDePasse" maxWidth="300.0" promptText="Mot de passe" />
-                <Button fx:id="ajouter" onAction="#inserer" styleClass="primaryButton" text="Ajouter" />
+                <Button fx:id="ajouter" onAction="#inserer" styleClass="primaryButton" text="Valider" />
                 <Label fx:id="messageLabel" style="-fx-text-fill: red;" />
             </children>
             <VBox.margin>

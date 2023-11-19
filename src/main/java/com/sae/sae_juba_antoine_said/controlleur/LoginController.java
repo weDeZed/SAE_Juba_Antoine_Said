@@ -1,7 +1,7 @@
 package com.sae.sae_juba_antoine_said.controlleur;
 
-import com.dlsc.formsfx.model.structure.PasswordField;
-import com.sae.sae_juba_antoine_said.modele.bdd.Connect;
+import com.sae.sae_juba_antoine_said.bdd.Connect;
+import com.sae.sae_juba_antoine_said.bdd.SessionUtilisateur;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -39,6 +39,7 @@ public class LoginController implements Initializable {
     public void inserer(ActionEvent actionEvent) throws IOException {
         Connect connect = Connect.getConnectionInstance();
         if(connect.verifConnexion(identifiant.getText(),motDePasse.getText())) {
+            SessionUtilisateur.connecterUtilisateur(identifiant.getText());
             redirectionConnecter(actionEvent);
         }else {
             messageLabel.setText("Login échoué. Veuillez réessayer.");
@@ -54,6 +55,7 @@ public class LoginController implements Initializable {
         primaryStage.setResizable(false);
         primaryStage.setScene(scene);
         primaryStage.show();
+        System.out.println(SessionUtilisateur.estConnecte());
     }
 
     public void retourButtonAction(ActionEvent event) throws IOException {
