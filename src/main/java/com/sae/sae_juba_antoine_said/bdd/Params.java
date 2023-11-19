@@ -5,7 +5,7 @@ public class Params {
     /*
     public static String dsn = "jdbc:postgresql://database-etudiants.iut.univ-paris8.fr/lxiang";
     public static String login = "lxiang";
-    public static String password = "Lucxiang0109?";
+    public static String password = "?";
      */
 
     public static String dsn = "jdbc:postgresql://localhost/luc";
