@@ -1,6 +1,7 @@
 package com.sae.sae_juba_antoine_said.controlleur;
 
 import com.dlsc.formsfx.model.structure.PasswordField;
+import com.sae.sae_juba_antoine_said.modele.bdd.Connect;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -34,5 +35,9 @@ public class LoginController implements Initializable {
         System.out.println("dans controlleur loginController pour ajouter les user");
         System.out.println("identifiant "+identifiant.getText());
         System.out.println("mot de pass "+motDePasse.getText());
+        Connect connect = Connect.getConnectionInstance();
+        if(!connect.verifUtilisateur(identifiant.getText())) {
+            connect.creerUtilisateur(identifiant.getText(),motDePasse.getText());
+        }
     }
 }

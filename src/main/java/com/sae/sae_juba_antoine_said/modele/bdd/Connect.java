@@ -30,26 +30,24 @@ public class Connect {
     }
 
     public void creerUtilisateur(String nom, String mdp) {
-        if(verifUtilisateur(nom,mdp)) {
-            try {
-                String sql = "INSERT INTO sae_dev.utilisateur (pseudo,mot_de_passe) VALUES (?,?)";
-                PreparedStatement statement = connection.prepareStatement(sql);
-                statement.setString(1, nom);
-                statement.setString(2, mdp);
-                statement.executeUpdate();
-                System.out.println("Utilisateur créer avec succès.");
-            } catch (SQLException e) {
-                System.out.println("Erreur lors de la requête : " + e.getMessage());
-            }
-        }
-    }
 
-    public boolean verifUtilisateur(String nom,String mdp) {
-        String sql = "SELECT * FROM sae_dev.utilisateur WHERE pseudo = ? AND mot_de_passe = ?";
         try {
+            String sql = "INSERT INTO sae_dev.utilisateur (pseudo,mot_de_passe) VALUES (?,?)";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, nom);
             statement.setString(2, mdp);
+            statement.executeUpdate();
+            System.out.println("Utilisateur créer avec succès.");
+        } catch (SQLException e) {
+            System.out.println("Erreur lors de la requête : " + e.getMessage());
+        }
+    }
+
+    public boolean verifUtilisateur(String nom) {
+        String sql = "SELECT * FROM sae_dev.utilisateur WHERE pseudo = ?";
+        try {
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, nom);
             ResultSet resultSet = statement.executeQuery();
             return resultSet.next();
         } catch (SQLException e) {
