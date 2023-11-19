@@ -1,5 +1,6 @@
 package com.sae.sae_juba_antoine_said.controlleur;
 
+import com.sae.sae_juba_antoine_said.bdd.Connect;
 import com.sae.sae_juba_antoine_said.bdd.SessionUtilisateur;
 import com.sae.sae_juba_antoine_said.vue.Music;
 import javafx.application.Platform;
@@ -69,6 +70,6 @@ public class ControlleurFinDeJeu implements Initializable {
     }
     public void envoyerFeedbackAction(ActionEvent event) {
         String message = feedbackTextArea.getText();
-
+        Connect.getConnectionInstance().updateFeedback(message);
     }
 }

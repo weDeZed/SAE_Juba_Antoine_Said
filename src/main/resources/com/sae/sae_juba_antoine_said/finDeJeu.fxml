@@ -17,8 +17,8 @@
     </ImageView>
 
     <VBox fx:id="feedbackForm" layoutX="620.0" layoutY="500.0" spacing="10">
-        <Label text="Feedback" style="-fx-font-size: 18; -fx-font-weight: bold;" />
-        <TextArea prefWidth="300.0" prefHeight="100.0" promptText="Écrivez votre feedback ici..." />
+        <Label text="Feedback" style="-fx-font-size: 18; -fx-font-weight: bold; -fx-text-fill: white;" />
+        <TextArea fx:id="feedbackTextArea" prefWidth="300.0" prefHeight="100.0" promptText="Écrivez votre feedback ici..." />
         <Button text="Envoyer" onAction="#envoyerFeedbackAction" />
     </VBox>
 

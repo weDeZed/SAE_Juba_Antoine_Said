@@ -156,4 +156,16 @@ public class Connect {
             System.out.println("Erreur lors de l'insertion : " + e.getMessage());
         }
     }
+
+    public void updateFeedback(String message) {
+        String sql = "UPDATE sae_dev.feedback SET message = ? WHERE id_feedback = ?";
+        try {
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1,message);
+            statement.setInt(2,countFeedback());
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("Erreur lors de l'insertion : " + e.getMessage());
+        }
+    }
 }

@@ -51,7 +51,7 @@ public class Environnement {
             bfs = new BFS(this);
             chemin = bfs.cheminVersSource();
             this.piece = new SimpleIntegerProperty(170);
-            this.vie = new SimpleIntegerProperty(100);
+            this.vie = new SimpleIntegerProperty(0);
             this.nbTour = 0;
             vagueEnnemi = new VagueEnnemi(this, new CompositeVague());
         } catch (IOException e) {
