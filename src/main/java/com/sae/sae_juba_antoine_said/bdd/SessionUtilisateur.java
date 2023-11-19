@@ -4,8 +4,8 @@ public class SessionUtilisateur {
     private static String identifiant;
     private static boolean estConnecte = false;
 
-    public static void connecterUtilisateur(String identifiant) {
-        identifiant = identifiant;
+    public static void connecterUtilisateur(String pseudoCourrant) {
+        identifiant = pseudoCourrant;
         estConnecte = true;
     }
 

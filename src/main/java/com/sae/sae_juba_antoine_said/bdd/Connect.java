@@ -71,7 +71,7 @@ public class Connect {
     }
 
     public int getIdUtilisateur() {
-        String sql = "SELECT id FROM sae_dev.utilisateur WHERE pseudo = ?";
+        String sql = "SELECT id_utilisateur FROM sae_dev.utilisateur WHERE pseudo = ?";
         if(SessionUtilisateur.estConnecte()) {
             try {
                 PreparedStatement statement = connection.prepareStatement(sql);
@@ -104,7 +104,7 @@ public class Connect {
         String sql = "INSERT INTO sae_dev.feedback(message) VALUES(?)";
         try {
             PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setString(1,null);
+            statement.setString(1," ");
             statement.executeUpdate();
         } catch (SQLException e) {
             System.out.println("Erreur lors de l'insertion : " + e.getMessage());

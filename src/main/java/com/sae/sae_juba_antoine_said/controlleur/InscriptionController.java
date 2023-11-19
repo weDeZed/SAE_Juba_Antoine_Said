@@ -42,6 +42,7 @@ public class InscriptionController implements Initializable {
             messageLabel.setStyle("-fx-text-fill: green;");
             messageLabel.setText("Inscription valide ! Veuillez vous connecter pour jouer.");
         }else {
+            messageLabel.setStyle("-fx-text-fill: red;");
             messageLabel.setText("Inscription échoué. L'utilisateur existe déjà, veuillez réesayer.");
         }
     }
