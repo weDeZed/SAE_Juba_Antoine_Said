@@ -55,7 +55,6 @@ public class LoginController implements Initializable {
         primaryStage.setResizable(false);
         primaryStage.setScene(scene);
         primaryStage.show();
-        System.out.println(SessionUtilisateur.estConnecte());
     }
 
     public void retourButtonAction(ActionEvent event) throws IOException {
