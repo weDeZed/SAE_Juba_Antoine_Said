@@ -1,6 +1,5 @@
 package com.sae.sae_juba_antoine_said.controlleur;
 
-import com.dlsc.formsfx.model.structure.PasswordField;
 import com.sae.sae_juba_antoine_said.modele.bdd.Connect;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -18,7 +17,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class LoginController implements Initializable {
+public class InscriptionController implements Initializable {
     @FXML
     TextField identifiant;
 
@@ -38,10 +37,12 @@ public class LoginController implements Initializable {
     @FXML
     public void inserer(ActionEvent actionEvent) throws IOException {
         Connect connect = Connect.getConnectionInstance();
-        if(connect.verifConnexion(identifiant.getText(),motDePasse.getText())) {
-            redirectionConnecter(actionEvent);
+        if(!connect.verifUtilisateur(identifiant.getText())) {
+            connect.creerUtilisateur(identifiant.getText(),motDePasse.getText());
+            messageLabel.setStyle("-fx-text-fill: green;");
+            messageLabel.setText("Inscription valide ! Veuillez vous connecter pour jouer.");
         }else {
-            messageLabel.setText("Login échoué. Veuillez réessayer.");
+            messageLabel.setText("Inscription échoué. L'utilisateur existe déjà, veuillez réesayer.");
         }
     }
 
@@ -64,4 +65,5 @@ public class LoginController implements Initializable {
         stage.setScene(menuScene);
         stage.show();
     }
+
 }

@@ -48,10 +48,9 @@ public class ControlleurMenu {
     }
     @FXML
     public void creerCompteAction(ActionEvent event) throws IOException {
-
         Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         FXMLLoader fxmlLoader = new FXMLLoader();
-        URL resource = getClass().getResource("/com/sae/sae_juba_antoine_said/connexion.fxml");
+        URL resource = getClass().getResource("/com/sae/sae_juba_antoine_said/inscription.fxml");
         Parent root = fxmlLoader.load(resource);
         Scene scene = new Scene(root, 1440, 800);
         primaryStage.setResizable(false);
@@ -61,7 +60,15 @@ public class ControlleurMenu {
     }
 
     @FXML
-    public void conexionAction(ActionEvent action){
-
+    public void conexionAction(ActionEvent event) throws IOException {
+        Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        URL resource = getClass().getResource("/com/sae/sae_juba_antoine_said/connexion.fxml");
+        Parent root = fxmlLoader.load(resource);
+        Scene scene = new Scene(root, 1440, 800);
+        primaryStage.setResizable(false);
+        primaryStage.setTitle(" Connexion  ");
+        primaryStage.setScene(scene);
+        primaryStage.show();
     }
 }

@@ -56,4 +56,17 @@ public class Connect {
         }
     }
 
+    public boolean verifConnexion(String nom,String mdp) {
+        String sql = "SELECT * FROM sae_dev.utilisateur WHERE pseudo = ? AND mot_de_passe = ?";
+        try {
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, nom);
+            statement.setString(2, mdp);
+            ResultSet resultSet = statement.executeQuery();
+            return resultSet.next();
+        } catch (SQLException e) {
+            System.out.println("Erreur lors de la requête : " + e.getMessage());
+            return false;
+        }
+    }
 }

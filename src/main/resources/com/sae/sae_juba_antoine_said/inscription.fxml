@@ -9,14 +9,14 @@
 <?import javafx.scene.layout.VBox?>
 
 <?import javafx.scene.layout.HBox?>
-<BorderPane fx:id="loginBorderPane" prefHeight="800.0" prefWidth="1400.0" style="-fx-background-color: #407de3" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sae.sae_juba_antoine_said.controlleur.LoginController">
+<BorderPane fx:id="loginBorderPane" prefHeight="800.0" prefWidth="1400.0" style="-fx-background-color: #407de3" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sae.sae_juba_antoine_said.controlleur.InscriptionController">
     <center>
         <VBox alignment="CENTER" spacing="20" BorderPane.alignment="CENTER">
             <children>
-                <Label style="-fx-font-size: 24px; -fx-text-fill: #ffffff;" text="Se connecter" />
+                <Label style="-fx-font-size: 24px; -fx-text-fill: #ffffff;" text="S'inscrire" />
                 <TextField fx:id="identifiant" maxWidth="300.0" promptText="Identifiant" />
                 <TextField fx:id="motDePasse" maxWidth="300.0" promptText="Mot de passe" />
-                <Button fx:id="ajouter" onAction="#inserer" styleClass="primaryButton" text="Ajouter" />
+                <Button fx:id="ajouter" onAction="#inserer" styleClass="primaryButton" text="Valider" />
                 <Label fx:id="messageLabel" style="-fx-text-fill: red;" />
             </children>
             <VBox.margin>
