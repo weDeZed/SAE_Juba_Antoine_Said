@@ -5,12 +5,23 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+
 <AnchorPane fx:id="anchorPaneId" stylesheets="@css/finDeJeu.css" prefHeight="800.0" prefWidth="1400.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sae.sae_juba_antoine_said.controlleur.ControlleurFinDeJeu">
     <ImageView fitWidth="${anchorPaneId.prefWidth}" fitHeight="${anchorPaneId.prefHeight}">
         <image>
             <Image url="@images/gameOver.jpg" />
         </image>
     </ImageView>
+
+    <VBox fx:id="feedbackForm" layoutX="620.0" layoutY="500.0" spacing="10">
+        <Label text="Feedback" style="-fx-font-size: 18; -fx-font-weight: bold;" />
+        <TextArea prefWidth="300.0" prefHeight="100.0" promptText="Écrivez votre feedback ici..." />
+        <Button text="Envoyer" onAction="#envoyerFeedbackAction" />
+    </VBox>
+
     <Button fx:id="relancerButton" onAction="#relancerJeu" layoutX="620.0" layoutY="700.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="100.0" text="Relancer" />
     <Button fx:id="quitButton"  onAction="#quitJeu" layoutX="730.0" layoutY="700.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="100.0" text="Quitter" />
 
