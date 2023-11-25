@@ -30,3 +30,15 @@
     -fx-alignment: center;
     -fx-padding: 2px;
 }
+
+#nbVague {
+    -fx-background-color: #407de3;
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 20px;
+    -fx-border-color: #ffffff;
+    -fx-border-width: 2px;
+    -fx-border-radius: 5px;
+    -fx-alignment: center;
+    -fx-padding: 2px;
+}
+

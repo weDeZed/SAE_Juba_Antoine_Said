@@ -10,15 +10,12 @@ public class VagueEnnemi {
 
     Environnement env;
     private IntegerProperty nbVague;
-    private IntegerProperty nbVagueBinding;// cette variable pour bindé avec nb de vague dans controlleur
     private TypeVague typeVague;
     int temp;
     private IntegerProperty nbMort;
 
     public VagueEnnemi(Environnement env,TypeVague typeVague) {
         this.env = env;
-        this.nbVague = new SimpleIntegerProperty(0);
-        this.nbVagueBinding = new SimpleIntegerProperty(0);
         this.nbMort= new SimpleIntegerProperty(0);
         this.typeVague = typeVague;
         temp = 0;
@@ -26,19 +23,9 @@ public class VagueEnnemi {
 
     public void creeVague() {
         typeVague.ajouteEnnemis(env);
+        env.setNbVague();
     }
 
-    public IntegerProperty nbVagueProperty() {
-        return nbVague;
-    }
-
-    public int getNbVague() {
-        return nbVague.get();
-    }
-
-    public IntegerProperty nbVagueBindingProperty() {
-        return nbVagueBinding;
-    }
 }
 
 

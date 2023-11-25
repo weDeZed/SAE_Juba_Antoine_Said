@@ -1,6 +1,7 @@
 package com.sae.sae_juba_antoine_said.vue;
 
 import com.sae.sae_juba_antoine_said.modele.environnement.Environnement;
+import javafx.beans.binding.Bindings;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Node;
@@ -32,17 +33,24 @@ public class VueEnvironnement {
     private final int LARGEUR = 32;
     private final int HAUTEUR = 32;
     private Label labelEnvPieces;
+
+    private Label labelNbVague;
     private Pane pane;
     Music music;
 
-    public VueEnvironnement(Environnement env, TilePane tileP, ProgressBar progressBar, Pane pane, Label labelEnvPieces) throws FileNotFoundException {
+    public VueEnvironnement(Environnement env, TilePane tileP, ProgressBar progressBar, Pane pane, Label labelEnvPieces,Label labelNbVague) throws FileNotFoundException {
         this.env = env;
         this.tilePane = tileP;
         this.progressBar = progressBar;
         this.labelEnvPieces = labelEnvPieces;
+        this.labelNbVague=labelNbVague;
         this.pane = pane;
 
         labelEnvPieces.textProperty().bind(env.getPieceProperty().asString());
+
+        labelNbVague.textProperty().bind(Bindings.concat("Vague: ", env.nbVagueProperty().asString()));
+
+
         iniTerrain();
         mettreImagePieceDansBar();
 
@@ -51,7 +59,7 @@ public class VueEnvironnement {
 
     void iniTerrain() {
 
-        FileInputStream fichierTileSet = null;
+       FileInputStream fichierTileSet = null;
         try {
             fichierTileSet = new FileInputStream("src/main/java/com/sae/sae_juba_antoine_said/Ressources/tuileblock.jpg");
         } catch (Exception e) {
@@ -146,4 +154,5 @@ public class VueEnvironnement {
         music.stopMusicFond();
         music.playMusicVictoire();
     }
+
 }

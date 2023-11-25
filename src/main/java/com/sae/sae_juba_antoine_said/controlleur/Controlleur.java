@@ -39,6 +39,8 @@ public class Controlleur implements Initializable {
 
     @FXML
     private Label labelEnvPieces;
+    @FXML
+    private Label nbVague;
     private VueEnvironnement vueEnvironnementMap;
 
 
@@ -80,7 +82,7 @@ public class Controlleur implements Initializable {
 
         /**************** class vague ***************/
 
-        environnement.getVagueEnnemi().nbVagueProperty().bind(environnement.getVagueEnnemi().nbVagueBindingProperty());
+        //environnement.nbVagueProperty().bind(environnement.nbVagueProperty());
 
 
         this.tilePane.setMinSize(environnement.getX() * LARGEUR, environnement.getY() * HAUTEUR);
@@ -116,7 +118,7 @@ public class Controlleur implements Initializable {
 
     public void gameLaunche() {
         try {
-            this.vueEnvironnementMap = new VueEnvironnement(environnement, tilePane, progressBar, pane, labelEnvPieces);
+            this.vueEnvironnementMap = new VueEnvironnement(environnement, tilePane, progressBar, pane, labelEnvPieces,nbVague);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -148,10 +150,10 @@ public class Controlleur implements Initializable {
                             Connect connect = Connect.getConnectionInstance();
                             connect.insertPartie();
                             connect.insertFeedback();
-                            int score = (environnement.getNbEnemies() * 5) + (environnement.getVagueEnnemi().getNbVague() * 10);
+                            int score = (environnement.getNbEnemies() * 5) + (environnement.getNbVague() * 10);
                             connect.insertEnvoyer_jouer(
                                     score,
-                                    environnement.getVagueEnnemi().getNbVague(),
+                                    environnement.getNbVague(),
                                     environnement.getNbEnemies()
                             );
                         }
@@ -160,7 +162,7 @@ public class Controlleur implements Initializable {
                         vueEnvironnementMap.afficherGameOverScene();
                     }
 
-                    if (environnement.getVagueEnnemi().getNbVague() == 10) { // après dix vague on gagne le jeu
+                    if (environnement.getNbVague() == 10) { // après dix vague on gagne le jeu
                         Connect connect = Connect.getConnectionInstance();
                         gameLoop.stop();
                         environnement.mettreEnvInstanceNull();

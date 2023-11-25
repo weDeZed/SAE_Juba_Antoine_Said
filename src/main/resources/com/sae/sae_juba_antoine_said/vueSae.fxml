@@ -12,8 +12,7 @@
 <?import javafx.scene.layout.TilePane?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1400.0" style="-fx-background-color: #407de3" styleClass="body" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1"
-            stylesheets="@css/fichierCSS.css" fx:controller="com.sae.sae_juba_antoine_said.controlleur.Controlleur">
+<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1400.0" style="-fx-background-color: #407de3" styleClass="body" stylesheets="@css/fichierCSS.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sae.sae_juba_antoine_said.controlleur.Controlleur">
     <children>
         <Pane fx:id="pane" style="-fx-background-color: #129d0c">
             <children>
@@ -82,10 +81,11 @@
         </ProgressBar>
     </center>
    <right>
-      <HBox prefHeight="50.0" prefWidth="150.0" BorderPane.alignment="CENTER">
+      <HBox prefHeight="593.0" prefWidth="300.0" BorderPane.alignment="CENTER">
          <children>
-             <Label fx:id="labelEnvPieces" alignment="CENTER" prefHeight="10.0" prefWidth="221.0" text="0">
+             <Label fx:id="labelEnvPieces" alignment="TOP_RIGHT" prefHeight="34.0" prefWidth="220.0" text="0">
              </Label>
+             <Label fx:id="nbVague" text="Vagues: 0" alignment="TOP_LEFT" prefHeight="55.0" prefWidth="114.0" style="-fx-font-size: 16px;"/>
          </children>
       </HBox>
    </right>

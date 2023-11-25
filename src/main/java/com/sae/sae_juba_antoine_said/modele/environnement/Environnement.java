@@ -34,6 +34,8 @@ public class Environnement {
     private IntegerProperty piece;
     private int nbTour;
     private VagueEnnemi vagueEnnemi;
+
+    private IntegerProperty nbVague;
     private static Environnement getInstance = null;
 
     private Environnement() {
@@ -53,7 +55,9 @@ public class Environnement {
             this.piece = new SimpleIntegerProperty(170);
             this.vie = new SimpleIntegerProperty(100);
             this.nbTour = 0;
-            vagueEnnemi = new VagueEnnemi(this, new CompositeVague());
+            this.vagueEnnemi = new VagueEnnemi(this, new CompositeVague());
+            this.nbVague = new SimpleIntegerProperty(0);
+
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -100,8 +104,6 @@ public class Environnement {
     }
 
     public void unTour() {
-
-
         if (getNbEnemies() == 0) { // Il crée une vague lorsqu'il n'y a plus d'ennemis sur le terrain
             vagueEnnemi.creeVague();
         }
@@ -257,4 +259,15 @@ public class Environnement {
     public void decrementNbEnemies(int n) {
         setNbEnemies(getNbEnemies() - n);
     }
+    public IntegerProperty nbVagueProperty() {
+        return nbVague;
+    }
+
+    public int getNbVague() {
+        return nbVague.get();
+    }
+    public void setNbVague() {
+        this.nbVague.set(getNbVague()+1);
+    }
+
 }
